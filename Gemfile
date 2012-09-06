@@ -8,6 +8,7 @@ gem 'rails', '3.2.8'
 gem 'thin'
 
 #gem 'sqlite3'
+
 gem 'pg'
 
 gem 'activeadmin'
