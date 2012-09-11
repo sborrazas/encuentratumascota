@@ -1,0 +1,81 @@
+var montevideo = new google.maps.LatLng(-34.90649, -56.16348);
+
+var neighborhoods = [
+    new google.maps.LatLng(-34.90774, -56.17355),
+    new google.maps.LatLng(-34.91170, -56.16460),
+    new google.maps.LatLng(-34.90000, -56.16060),
+    new google.maps.LatLng(-34.90600, -56.16190),
+    new google.maps.LatLng(-34.91170, -56.17460),
+    new google.maps.LatLng(-34.905674,-56.186829),
+    new google.maps.LatLng(-34.919434, -56.163912),
+    new google.maps.LatLng(-34.914543, -56.167560),
+    new google.maps.LatLng(-34.898283,-56.158419),
+
+];
+
+var bounds = new google.maps.LatLngBounds ();
+
+var markers = [];
+var iterator = 0;
+var map;
+
+
+
+function initialize() {
+    
+    var center = montevideo;
+    
+    var mapOptions = {
+        zoom: 14,
+        center: center,
+        zoomControl: false,
+        mapTypeControl: false,
+        scaleControl: false,
+        streetViewControl: true,
+        overviewMapControl: false,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    
+    map = new google.maps.Map(document.getElementById('map_canvas'),
+    mapOptions);
+    
+    drop();
+    map.fitBounds (bounds);
+    
+
+    google.maps.event.addListener(map, 'click', function() {
+
+    });
+}
+
+function drop() {
+    for (var i = 0; i < neighborhoods.length; i++) {
+        bounds.extend (neighborhoods[i]);
+        setTimeout(function() {
+            addMarker();
+        }, i * 200);
+    }
+}
+
+function addMarker() {
+    var lost = '<%= asset_path("lost.png") %>';
+    var found = '<%= asset_path("found.png") %>';
+    var images = new Array();
+    images[0]=lost;
+    images[1]=found;
+    
+    var marker =new google.maps.Marker({
+        position: neighborhoods[iterator],
+        map: map,
+        draggable: false,
+        animation: google.maps.Animation.DROP,
+        icon:images[Math.floor((Math.random()*2))]
+    });
+    markers.push(marker);
+    
+    google.maps.event.addListener(marker, 'click', function() {
+        map.panTo(marker.getPosition()); 
+    });
+
+    iterator++;
+}

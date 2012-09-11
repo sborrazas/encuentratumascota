@@ -1,14 +1,52 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Encuentratumascota</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
+  	<title>Encuentratumascota</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<%= stylesheet_link_tag    "application", :media => "all" %>
+
+ 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKL_F0m5ZTEeQpvyUk3_UGhnlD75k-x_w&sensor=false"></script>
+  	<%= javascript_include_tag "application" %>
+  	<%= csrf_meta_tags %>
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+	<script type="text/javascript"  >
+	$(document).ready(function()
+	{
+		$('#map_canvas').height($('#side-panel').height());
+		initialize();
+	});
+	</script>
 </head>
 <body>
 
-<%= yield %>
+	<section class="side-panel z-80" id="side-panel">
+		
+		<div class="logo" id="logo">
+			Logo!
+		</div>
+
+		<div class="pet-selector" id="pet-selector">
+			Pets				
+		</div>
+
+	</section>
+
+	<section class="main-panel" id="main-panel">
+		<%= yield %>
+	</section>
+	
+		<footer class="footer z-90" id="footer">
+			<a href="#" class="footer-link">¿Qué es PetFinder?</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">¿Cómo funciona?</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Términos de Uso</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Apoyo</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Facebook</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Twitter</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Contacto</a>
+
+		</footer>
+	
 
 </body>
 </html>
