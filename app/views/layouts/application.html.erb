@@ -9,12 +9,12 @@
   	<%= javascript_include_tag "application" %>
   	<%= csrf_meta_tags %>
 	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
 
 	<script type="text/javascript"  >
 	$(document).ready(function()
 	{
-		$('#map_canvas').height($('#side-panel').height());
-		initialize();
+		Petfinder.initMap();		
 	});
 	</script>
 </head>
@@ -22,13 +22,25 @@
 
 	<section class="side-panel z-80" id="side-panel">
 		
-		<div class="logo" id="logo">
-			Logo!
+			<div class="logo" id="logo">
+				<img src="<%= asset_path 'logo.png' %>" alt="" class="logo-img" id="logo-img">
+
+				<h1 class="site-title"><span class="bold">Pet</span>Finder</h1>
+
+				<span class="tagline" id="tagline">
+					La manera más fácil y rápida 
+					de conectar mascotas con sus dueños
+				</span>
+
+			</div>
+		<div class="sidebar-options arrow_box" id="sidebar-options">
+			<ul>
+				<li><input id="options-perdidos" type="checkbox"> <label for="options-perdidos">Perdidos</label></li>
+				<li><input id="options-encontrados" type="checkbox"> <label for="options-encontrados">Encontrados</label></li>
+				<li><input id="options-adopcion" type="checkbox"> <label for="options-adopcion">En Adopción</label></li>
+			</ul>
 		</div>
 
-		<div class="pet-selector" id="pet-selector">
-			Pets				
-		</div>
 
 	</section>
 
@@ -36,17 +48,17 @@
 		<%= yield %>
 	</section>
 	
-		<footer class="footer z-90" id="footer">
-			<a href="#" class="footer-link">¿Qué es PetFinder?</a> <span class="footer-separator">|</span>
-			<a href="#" class="footer-link">¿Cómo funciona?</a> <span class="footer-separator">|</span>
-			<a href="#" class="footer-link">Términos de Uso</a> <span class="footer-separator">|</span>
-			<a href="#" class="footer-link">Apoyo</a> <span class="footer-separator">|</span>
-			<a href="#" class="footer-link">Facebook</a> <span class="footer-separator">|</span>
-			<a href="#" class="footer-link">Twitter</a> <span class="footer-separator">|</span>
-			<a href="#" class="footer-link">Contacto</a>
 
-		</footer>
-	
+
+	<footer class="footer z-90" id="footer">
+		<a href="#" class="footer-link">¿Qué es PetFinder?</a> <span class="footer-separator">|</span>
+		<a href="#" class="footer-link">¿Cómo funciona?</a> <span class="footer-separator">|</span>
+		<a href="#" class="footer-link">Términos de Uso</a> <span class="footer-separator">|</span>
+		<a href="#" class="footer-link">Apoyo</a> <span class="footer-separator">|</span>
+		<a href="#" class="footer-link">Facebook</a> <span class="footer-separator">|</span>
+		<a href="#" class="footer-link">Twitter</a> <span class="footer-separator">|</span>
+		<a href="#" class="footer-link">Contacto</a>
+	</footer>
 
 </body>
 </html>

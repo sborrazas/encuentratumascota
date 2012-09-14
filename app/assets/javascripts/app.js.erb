@@ -4,14 +4,17 @@ var Petfinder = (function () {
     return {
 
         map : null,
+		imageLost:'<%= asset_path "lost.png" %>',
+		imageFound:'<%= asset_path "found.png" %>',
+		imageAdoption:'<%= asset_path "other.png" %>',
 
         initMap: function(){
 
             this.map = new GMaps({
-                div: '#map_canvas',
+                div: '#main-panel',
                 lat: -34.90649,
                 lng: -56.16348,
-                zoom: 14
+                zoom: 14,
             });
 
         this.populateMarkers();
@@ -26,7 +29,6 @@ var Petfinder = (function () {
                         {lat: -34.92600,  lng: -56.16590},
                         {lat: -34.90600,  lng: -56.16391},
                         {lat: -34.90600,  lng: -56.16392},
-                        {lat: -34.97600,  lng: -56.16820},
                         {lat: -34.914543, lng: -56.167560}];
 
             for (var i = 0; i < pins.length; i++) {
@@ -34,12 +36,18 @@ var Petfinder = (function () {
                 this.map.addMarker({
                     lat: pins[i].lat,
                     lng: pins[i].lng,
-                    icon: i % 3 === 0 ? '"<%= asset_path "lost.png" %>' : '"<%= asset_path "found.png" %>'
-                });   
+                    icon: i % 3 === 0 ? this.imageLost :this.imageFound,
+				 infoWindow: {
+				          content: '<p>HTML Content</p>'
+				        }
+                });
+                
             }
+
+
         }
+    
+
     }; //end Module
 
 })();
-
-
