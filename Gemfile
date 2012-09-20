@@ -7,9 +7,9 @@ gem 'rails', '3.2.8'
 
 gem 'thin'
 
-#gem 'sqlite3'
+gem 'sqlite3'
 
-gem 'pg'
+#gem 'pg'
 
 gem 'activeadmin'
 gem "meta_search",    '>= 1.1.0.pre'
