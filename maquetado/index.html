@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>EncuentraTuMascota | Inicio</title>
+			<meta name="description" content="">
+			<meta name="author" content="">
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<link rel="stylesheet" href="css/bootstrap.css">
+			<link rel="stylesheet" href="css/base.css">
+			<link rel="stylesheet" href="css/main.css">
+			<link rel="shortcut icon" href="img/favicon.png" type="image/png" />
+			<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	</head>
+	
+	<body>
+
+		<section class="side-panel z-80" id="side-panel">
+			
+			<div class="sidebar-section logo" id="logo">
+				<img src="img/logo.png" alt="" class="logo-img" id="logo-img">
+
+				<h1 class="site-title"><span class="bold">Encuentra</span><br/>Tu Mascota</h1>
+
+				<span class="tagline" id="tagline">
+					La manera más fácil y rápida 
+					de conectar mascotas con sus dueños
+				</span>
+
+			</div>
+
+			<div class="sidebar-section sidebar-login" >
+				
+				<button class="btn-login btn btn-large btn-block" id="btn-login">Iniciar sesión</button>
+				
+				<p>¿No tienes usuario? <a href="#" class="link-register" id="link-register">Regístrate</a>. </p>
+
+				
+				<a href="#modal-publish" class="btn-publish btn btn-large btn-success btn-block" id="btn-publish" data-toggle="modal">Publicar mascota</a>
+				<p>
+					Mascotas perdidas, encontradas o en adopción. Prohibida la venta.
+				</p>
+
+			</div>
+
+			<div class="sidebar-section-wide sidebar-options arrow_box" id="sidebar-options">
+				<ul>
+					<li>
+						<input id="options-perdidos" type="checkbox"> 
+						<label class="paws lost" for="options-perdidos">Perdidos</label>
+					</li>
+					<li>
+						<input id="options-encontrados" type="checkbox"> 
+						<label class="paws found" for="options-encontrados">Encontrados</label>
+					</li>
+					<li>
+						<input id="options-adopcion" type="checkbox"> 
+						<label class="paws adoption" for="options-adopcion">En Adopción</label>
+					</li>
+				</ul>
+			</div>
+
+			<div class="sidebar-sponsors" id="sidebar-sponsors">
+				
+				<h3 class="sponsors-title">Apoya:</h3>
+
+				<div class="sponsor-img" id="sponsor-img">
+					<img src="img/pedigree.png" alt="">
+				</div>
+
+			</div>
+
+		</section>
+
+		<section class="main-panel" id="main-panel">
+			
+		</section>
+
+		<-- Modal -->
+		<div class="modal modal-publish hide fade" data-backdrop="false" id="modal-publish" tabindex="-1" role="dialog" aria-labelledby="modal-publish-label" aria-hidden="true">
+			<div class="modal-header">
+		    	<h3 id="modal-publish-label" class="modal-publish-label">Publicar mascota</h3>
+		  	</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+
+					<div class="control-group">
+				    	<label class="control-label" for="publish-estado">Estado (*)</label>
+				    	<div class="controls">
+				      		<select class="span2">
+				      			<option value="Encontrado">Encontrado</option>
+				      			<option value="Encontrado">Perdido</option>
+				      			<option value="Encontrado">En Adopción</option>
+							</select>
+				    	</div>
+				  	</div>
+				  	<div class="control-group">
+				    	<label class="control-label" for="publish-images">Imágenes (*)</label>
+				    	<div class="controls">
+				      		<button id="publish-images" class="btn">+ Agregar imágenes</button>
+				    	</div>
+				  	</div>
+				  	<div class="control-group">
+					    <label class="control-label" for="publish-name">Nombre</label>
+					    <div class="controls">
+					      <input type="text" id="publish-name" placeholder="Nombre de la mascota">
+					    </div>
+					</div>
+					<div class="control-group">
+				    	<label class="control-label" for="publish-race">Raza (*)</label>
+				    	<div class="controls">
+				      		<select id="publish-race" class="span2">
+				      			<option value="1">Alaskan Husky</option>
+				      			<option value="2">Alaskan Malamute</option>
+				      			<option value="3">American Foxhound</option>
+				      			<option value="3">Basset Hound</option>
+				      			<option value="4">Desconocido/Cruza</option>
+							</select>
+				    	</div>
+				  	</div>
+				  	<div class="control-group">
+				    	<label class="control-label" for="publish-estado">Descripción (*)</label>
+				    	<div class="controls">
+				      		<textarea rows="3" placeholder="Edad, tamaño, rasgos, detalles, etc."></textarea>
+				    	</div>
+				  	</div>
+
+				  	<div class="control-group">
+				    	<label class="control-label" for="publish-lost-date">Perdido el (*)</label>
+				    	<div class="controls">
+				      		<input type="text" id="publish-lost-date" placeholder="Día / Mes / Año">
+				    	</div>
+				  	</div>
+
+				  	<div class="control-group">
+				    	<label class="control-label" for="publish-lost-where">En (*)</label>
+				    	<div class="controls">
+				      		<input type="text" id="publish-lost-where" placeholder="Esquina, plaza, barrio">
+				    	</div>
+				  	</div>
+
+				  	<div class="control-group">
+				    	<label class="control-label" for="publish-reward">Recompensa</label>
+				    	<div class="controls">
+				      		<input type="text" id="publish-reward" placeholder="En pesos uruguayos">
+				    	</div>
+				  	</div>
+
+				  	<div class="control-group">
+				    	<label class="control-label" for="publish-contact">Contacto (*)</label>
+				    	<div class="controls">
+				      		<input type="text" id="publish-contact" placeholder="Teléfono, e-mail">
+				    	</div>
+				  	</div>
+				  	
+				</form>
+			</div>
+		  	<div class="modal-footer">
+		  		<div class="modal-publish-buttons">
+		    		<button id="btn-publish-modal" class="btn btn-success btn-large btn-publish-modal">Publicar</button>
+		    		<button id="btn-cancel-publish" class="btn btn-large btn-cancel-publish" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+		    	</div>
+		    	<p class="publish-disclaimer">
+		    		La publicación necesita aprobación de un administrador. <br/>
+					Prohibida la venta de animales. Recibirás un mail cuando se publique.
+		    	</p>		
+		  	</div>
+		</div>
+		<!-- End/Modals -->
+
+		<footer class="footer z-90" id="footer">
+			<a href="#" class="footer-link">¿Qué es EncuentraTuMascota?</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">¿Cómo funciona?</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Términos de Uso</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Apoyo</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Facebook</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Twitter</a> <span class="footer-separator">|</span>
+			<a href="#" class="footer-link">Contacto</a>
+
+		</footer>
+		
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
+  	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
+  	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+    <script src="js/libs/gmaps.js" ></script>
+    <script src="js/libs/bootstrap.js" ></script>
+	<script src="js/app.js"></script>
+	</body>
+</html>
