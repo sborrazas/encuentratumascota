@@ -14,8 +14,22 @@
 	<script type="text/javascript"  >
 	$(document).ready(function()
 	{
-		Petfinder.initMap();		
+		var pins = <%= @publications.to_json.html_safe %>
+		Petfinder.initMap();
+		/*var pins = [{lat: -34.90774,  lng: -56.17355},
+                        {lat: -34.91170,  lng: -56.16460},
+                        {lat: -34.90600,  lng: -56.16190},
+                        {lat: -34.92600,  lng: -56.16590},
+                        {lat: -34.90600,  lng: -56.16391},
+                        {lat: -34.90600,  lng: -56.16392},
+                        {lat: -34.914543, lng: -56.167560}];	
+*/
+        Petfinder.addPins(pins);
+		Petfinder.geoLocate();
+	
 	});
+
+
 	</script>
 </head>
 <body>
@@ -25,7 +39,7 @@
 			<div class="logo" id="logo">
 				<img src="<%= asset_path 'logo.png' %>" alt="" class="logo-img" id="logo-img">
 
-				<h1 class="site-title"><span class="bold">Pet</span>Finder</h1>
+				<h1 class="site-title"><span class="bold">Encuentra tu Mascota</span></h1>
 
 				<span class="tagline" id="tagline">
 					La manera más fácil y rápida 
@@ -51,7 +65,7 @@
 
 
 	<footer class="footer z-90" id="footer">
-		<a href="#" class="footer-link">¿Qué es PetFinder?</a> <span class="footer-separator">|</span>
+		<a href="#" class="footer-link">¿Qué es EncuentraTuMascota?</a> <span class="footer-separator">|</span>
 		<a href="#" class="footer-link">¿Cómo funciona?</a> <span class="footer-separator">|</span>
 		<a href="#" class="footer-link">Términos de Uso</a> <span class="footer-separator">|</span>
 		<a href="#" class="footer-link">Apoyo</a> <span class="footer-separator">|</span>

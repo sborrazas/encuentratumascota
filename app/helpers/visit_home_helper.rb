@@ -1,0 +1,2 @@
+module VisitHomeHelper
+end

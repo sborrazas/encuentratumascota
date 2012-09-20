@@ -6,6 +6,11 @@ Encuentratumascota::Application.routes.draw do
   resources :publications
   
   root :to => 'publications#index'
+  
+  match 'visit_add/' => 'visit_home#add'
+
+  match 'visit/view' => 'visit_home#view_visits'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

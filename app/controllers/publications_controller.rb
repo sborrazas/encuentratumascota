@@ -5,7 +5,8 @@ class PublicationsController < ApplicationController
   end
   
   def index
-    render 'publications/map'
+    @publications = Publication.all
+    puts @publications.to_json
   end
   
 end
