@@ -1,4 +1,5 @@
 class Publication < ActiveRecord::Base
+
   belongs_to :pet
   belongs_to :city
 
