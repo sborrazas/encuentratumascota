@@ -31,9 +31,9 @@
 
 			<div class="sidebar-section sidebar-login" >
 				
-				<button class="btn-login btn btn-large btn-block" id="btn-login">Iniciar sesión</button>
+				<a href="#modal-log-in" data-toggle="modal" class="btn-login btn btn-large btn-block" id="btn-login">Iniciar sesión</a>
 				
-				<p>¿No tienes usuario? <a href="#modal-create-account" class="link-register" id="link-register" data-toggle="modal">Regístrate</a>. </p>
+				<p>¿No tienes usuario? <a href="#modal-create-account" class="link-register" id="link-create-account" data-toggle="modal">Regístrate</a>. </p>
 
 				
 				<a href="#modal-publish" class="btn-publish btn btn-large btn-success btn-block" id="btn-publish" data-toggle="modal">Publicar mascota</a>
@@ -169,7 +169,7 @@
 
 		<!-- Modal Create account -->
 
-		<div class="modal modal-create-account fade hide" data-backdrop="true" id="modal-create-account" tabindex="-1" role="dialog" aria-hidden="true">
+		<div class="modal modal-create-account modal-account fade hide" data-backdrop="true" id="modal-create-account" tabindex="-1" role="dialog" aria-hidden="true">
 			
 			<div class="modal-body">
 				<form class="">
@@ -193,7 +193,36 @@
 		    		<a id="btn-create-account-twitter" class="btn-auth btn-twitter" href="#"><b>Twitter</b></a>
 		    	</div>
 
-		    	<p>¿Ya eres usuario? <a href="#">Iniciar Sesión</a></p>
+		    	<p>¿Ya eres usuario? <a href="#modal-log-in" data-toggle="modal">Iniciar Sesión</a></p>
+
+		  	</div>
+		</div>
+
+		<!-- Modal Log in -->
+
+		<div class="modal modal-log-in fade hide modal-account" data-backdrop="true" id="modal-log-in" tabindex="-1" role="dialog" aria-hidden="true">
+			
+			<div class="modal-body">
+				<form class="">
+				  	
+				  	<input type="text" id="log-in-username" placeholder="E-mail o nombre de usuario">
+
+				  	<input type="text" id="log-in-password" placeholder="Password">
+					
+				  	<button id="btn-log-in" class="btn btn-golden btn-block btn-large btn-log-in">Iniciar sesión</button>
+				  	
+				</form>
+			</div>
+		  	<div class="modal-footer">		  		
+		    	
+		    	<p class="sign-up-alternative">o ingresa con</p>
+
+		    	<div class="social-log-in-buttons">
+		    		<a id="btn-create-account-facebook" class="btn-auth btn-facebook" href="#"><b>Facebook</b></a>
+		    		<a id="btn-create-account-twitter" class="btn-auth btn-twitter" href="#"><b>Twitter</b></a>
+		    	</div>
+
+		    	<p>¿No tienes usuario? <a class="link-create-account" href="#modal-create-account" data-toggle="modal">Regístrate</a></p>
 
 		  	</div>
 		</div>

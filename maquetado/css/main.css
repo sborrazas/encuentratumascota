@@ -306,15 +306,15 @@ body{
 
 /* Modal Create account */
 
-.modal-create-account{
+.modal-account, .modal-log-in{
 	width: 300px;
 }
 
-.modal-create-account input[type="text"]{
+.modal-account input[type="text"]{
 	width: 256px;
 }
 
-.modal-create-account .modal-footer{
+.modal-account .modal-footer{
 	text-align: center;
 }
 
@@ -322,11 +322,11 @@ body{
 	margin-bottom: 15px;
 }
 
-.btn-create-account{
+.btn-create-account, .btn-log-in{
 	font-weight: bold;
 }
 
-.modal-create-account .modal-footer{
+.modal-account .modal-footer{
 	font-size: 12px;
 }
 

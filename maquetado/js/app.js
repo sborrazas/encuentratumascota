@@ -69,6 +69,20 @@ PetFinder.prototype.populateMarkers = function(){
 
 };
 
+//Binds common app events
+PetFinder.prototype.bindEvents = fuction = function(){
+
+  //Avoid overlapping log-in/create-account modals.
+  $('#modal-log-in').on('show', function () {
+    $('#modal-create-account').modal('hide');
+  });
+
+  $('#modal-create-account').on('show', function () {
+    $('#modal-log-in').modal('hide');
+  });
+
+};
+
 
 $(document).ready(function($) {
 
@@ -76,5 +90,6 @@ $(document).ready(function($) {
 
   p.initMap();
   p.geoLocate();
+  p.bindEvents();
 
 });
