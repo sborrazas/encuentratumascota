@@ -1,3 +1,4 @@
 class Pet < ActiveRecord::Base
-  attr_accessible :name
+  belongs_to :breed
+  has_many :publications, dependent: :destroy
 end

@@ -1,5 +1,19 @@
 class Publication < ActiveRecord::Base
+
   belongs_to :pet
   belongs_to :city
-  attr_accessible :publicationType_id,:age, :date, :description, :email, :lat, :lng, :name, :phone, :reward, :status,:pet_id,:city_id
+
+  scope :has_publication_type, lambda {|*ptype| where(publication_type: ptype) }
+
+  def adoption?
+    publication_type == 'adoption'
+  end
+
+  def lost?
+    publication_type == 'lost'
+  end
+
+  def found?
+    publication_type == 'found'
+  end
 end

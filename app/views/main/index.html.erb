@@ -1,0 +1,7 @@
+<% content_for :javascript do %>
+  require(['require', 'app/main/index'], function (require) {
+    require(['app/main/index'], function (view) {
+      view.init([]);
+    });
+  });
+<% end %>
