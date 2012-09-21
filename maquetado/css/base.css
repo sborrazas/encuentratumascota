@@ -61,7 +61,7 @@ hr 			{ border: solid #ddd; border-width: 1px 0 0; clear: both; margin: 10px 0 3
 		color: #0478ed; text-decoration: none; outline: 0;
 		font-weight: bold;
 	}
-	a:hover, a:active, a:visited { color: #3e9bf8; }
+	a:hover, a:active { color: #3e9bf8; }
 
 blockquote{
 	padding-left: 10px;
