@@ -1,28 +1,19 @@
-/*!
- * GMaps.js v0.2.13
- * http://hpneo.github.com/gmaps/
- *
- * Copyright 2012, Gustavo Leon
- * Released under the MIT License.
- */
+define(['jquery', 'google_maps_api'], function ($) {
+  /*!
+   * GMaps.js v0.2.13
+   * http://hpneo.github.com/gmaps/
+   *
+   * Copyright 2012, Gustavo Leon
+   * Released under the MIT License.
+   */
 
-if(window.google && window.google.maps){
-
-  var GMaps = (function(global) {
-    "use strict";
-
+  var GMaps = (function () {
     var doc = document;
-    var getElementById = function(id, context) {
-      var ele
-      if('jQuery' in global && context){
-        ele = $("#"+id.replace('#', ''), context)[0]
-      }else{
-        ele = doc.getElementById(id.replace('#', ''));
-      };
-      return ele;
+    var getElementById = function (id, context) {
+      return $("#"+id.replace('#', ''), context)[0];
     };
 
-    var GMaps = function(options) {
+    var GMaps = function (options) {
       var self = this;
       window.context_menu = {};
 
@@ -110,7 +101,7 @@ if(window.google && window.google.maps){
           }
 
           if(!getElementById('gmaps_context_menu')) return;
-          
+
           var context_menu_element = getElementById('gmaps_context_menu');
           context_menu_element.innerHTML = html;
 
@@ -223,7 +214,7 @@ if(window.google && window.google.maps){
           google.maps.event.addListener(object, name, function(e){
             if(e == undefined)
               e = this;
-            
+
             if (options[name])
               options[name].apply(this, [e]);
           });
@@ -465,7 +456,7 @@ if(window.google && window.google.maps){
 
       this.removeMarkers = function(collection) {
         var collection = (collection || this.markers);
-          
+
         for(var i=0;i < this.markers.length; i++){
           if(this.markers[i] === collection[i])
             this.markers[i].setMap(null);
@@ -671,7 +662,7 @@ if(window.google && window.google.maps){
 
         return polygon;
       };
-      
+
       this.drawRectangle = function(options) {
         options = extend_object({
           map: this.map
@@ -681,7 +672,7 @@ if(window.google && window.google.maps){
           new google.maps.LatLng(options.bounds[0][0], options.bounds[0][1]),
           new google.maps.LatLng(options.bounds[1][0], options.bounds[1][1])
         );
-        
+
         options.bounds = latLngBounds;
 
         var polygon = new google.maps.Rectangle(options);
@@ -1047,19 +1038,19 @@ if(window.google && window.google.maps){
         //var default_layers = ['weather', 'clouds', 'traffic', 'transit', 'bicycling', 'panoramio', 'places'];
         options = options || {};
         var layer;
-          
+
         switch(layerName) {
-          case 'weather': this.singleLayers.weather = layer = new google.maps.weather.WeatherLayer(); 
+          case 'weather': this.singleLayers.weather = layer = new google.maps.weather.WeatherLayer();
             break;
-          case 'clouds': this.singleLayers.clouds = layer = new google.maps.weather.CloudLayer(); 
+          case 'clouds': this.singleLayers.clouds = layer = new google.maps.weather.CloudLayer();
             break;
-          case 'traffic': this.singleLayers.traffic = layer = new google.maps.TrafficLayer(); 
+          case 'traffic': this.singleLayers.traffic = layer = new google.maps.TrafficLayer();
             break;
-          case 'transit': this.singleLayers.transit = layer = new google.maps.TransitLayer(); 
+          case 'transit': this.singleLayers.transit = layer = new google.maps.TransitLayer();
             break;
-          case 'bicycling': this.singleLayers.bicycling = layer = new google.maps.BicyclingLayer(); 
+          case 'bicycling': this.singleLayers.bicycling = layer = new google.maps.BicyclingLayer();
             break;
-          case 'panoramio': 
+          case 'panoramio':
               this.singleLayers.panoramio = layer = new google.maps.panoramio.PanoramioLayer();
               layer.setTag(options.filter);
               delete options.filter;
@@ -1072,7 +1063,7 @@ if(window.google && window.google.maps){
                 });
               }
             break;
-            case 'places': 
+            case 'places':
               this.singleLayers.places = layer = new google.maps.places.PlacesService(this.map);
 
               //search and  nearbySearch callback, Both are the same
@@ -1104,7 +1095,7 @@ if(window.google && window.google.maps){
                   query : options.query || null,
                   radius : options.radius || null
                 };
-                
+
                 layer.textSearch(textSearchRequest, options.textSearch);
               }
             break;
@@ -1155,7 +1146,7 @@ if(window.google && window.google.maps){
           static_map_options['polyline']['strokeOpacity'] = polyline.strokeOpacity
           static_map_options['polyline']['strokeWeight'] = polyline.strokeWeight
         }
-        
+
         return GMaps.staticMapURL(static_map_options);
       };
 
@@ -1471,7 +1462,7 @@ if(window.google && window.google.maps){
     };
 
     return GMaps;
-  }(this));
+  }());
 
   var arrayToLatLng = function(coords) {
     return new google.maps.LatLng(coords[0], coords[1]);
@@ -1503,13 +1494,14 @@ if(window.google && window.google.maps){
     }
   }
 
-}
+  /*Extension: Styled map*/
+  GMaps.prototype.addStyle = function(options){
+    var styledMapType = new google.maps.StyledMapType(options.styles, options.styledMapName);
+    this.map.mapTypes.set(options.mapTypeId, styledMapType);
+  };
+  GMaps.prototype.setStyle = function(mapTypeId){
+    this.map.setMapTypeId(mapTypeId);
+  };
 
-/*Extension: Styled map*/
-GMaps.prototype.addStyle = function(options){       
-  var styledMapType = new google.maps.StyledMapType(options.styles, options.styledMapName);
-  this.map.mapTypes.set(options.mapTypeId, styledMapType);
-};
-GMaps.prototype.setStyle = function(mapTypeId){     
-  this.map.setMapTypeId(mapTypeId);
-};
+  return GMaps;
+});

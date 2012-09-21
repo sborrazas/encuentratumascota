@@ -1,78 +1,70 @@
 <!DOCTYPE html>
 <html>
 <head>
-  	<title>Encuentratumascota</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-  	<%= stylesheet_link_tag    "application", :media => "all" %>
+  <title>Encuentratumascota</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  <script type="text/javascript" data-main="/assets/config.js" src="/assets/require.js"></script>
+  <script type="text/javascript">
+    // IE fix
+    if (typeof window.console === 'undefined') {
+      // hax
+      window.console = {
+        log: function () {}
+      };
+    }
 
- 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCKL_F0m5ZTEeQpvyUk3_UGhnlD75k-x_w&sensor=false"></script>
-  	<%= javascript_include_tag "application" %>
-  	<%= csrf_meta_tags %>
-	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-  	<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-
-	<script type="text/javascript"  >
-	$(document).ready(function()
-	{
-		var pins = <%= @publications.to_json.html_safe %>
-		Petfinder.initMap();
-		/*var pins = [{lat: -34.90774,  lng: -56.17355},
-                        {lat: -34.91170,  lng: -56.16460},
-                        {lat: -34.90600,  lng: -56.16190},
-                        {lat: -34.92600,  lng: -56.16590},
-                        {lat: -34.90600,  lng: -56.16391},
-                        {lat: -34.90600,  lng: -56.16392},
-                        {lat: -34.914543, lng: -56.167560}];	
-*/
-        Petfinder.addPins(pins);
-		Petfinder.geoLocate();
-	
-	});
-
-
-	</script>
+    // Debug constant
+    var _DEBUG = <%= Rails.env.development? %>;
+  </script>
 </head>
 <body>
 
-	<section class="side-panel z-80" id="side-panel">
-		
-			<div class="logo" id="logo">
-				<img src="<%= asset_path 'logo.png' %>" alt="" class="logo-img" id="logo-img">
+  <section class="side-panel z-80" id="side-panel">
+    <div class="logo" id="logo">
+      <%= image_tag 'logo.png', class: 'logo-img', id: 'logo-img' %>
 
-				<h1 class="site-title"><span class="bold">Encuentra tu Mascota</span></h1>
+      <h1 class="site-title"><span class="bold">Encuentra tu Mascota</span></h1>
 
-				<span class="tagline" id="tagline">
-					La manera más fácil y rápida 
-					de conectar mascotas con sus dueños
-				</span>
+      <span class="tagline" id="tagline">
+        La manera m&aacute;s f&aacute;cil y r&aacute;pida
+        de conectar mascotas con sus dueños
+      </span>
+    </div>
+    <div class="sidebar-options arrow_box" id="sidebar-options">
+      <ul>
+        <li><input id="options-perdidos" type="checkbox"> <label for="options-perdidos">Perdidos</label></li>
+        <li><input id="options-encontrados" type="checkbox"> <label for="options-encontrados">Encontrados</label></li>
+        <li><input id="options-adopcion" type="checkbox"> <label for="options-adopcion">En Adopción</label></li>
+      </ul>
+    </div>
+  </section>
 
-			</div>
-		<div class="sidebar-options arrow_box" id="sidebar-options">
-			<ul>
-				<li><input id="options-perdidos" type="checkbox"> <label for="options-perdidos">Perdidos</label></li>
-				<li><input id="options-encontrados" type="checkbox"> <label for="options-encontrados">Encontrados</label></li>
-				<li><input id="options-adopcion" type="checkbox"> <label for="options-adopcion">En Adopción</label></li>
-			</ul>
-		</div>
+  <section class="main-panel" id="main-panel">
+    <%= yield %>
+  </section>
 
+  <footer class="footer z-90" id="footer">
+    <a href="#" class="footer-link">¿Qué es EncuentraTuMascota?</a> <span class="footer-separator">|</span>
+    <a href="#" class="footer-link">¿Cómo funciona?</a> <span class="footer-separator">|</span>
+    <a href="#" class="footer-link">Términos de Uso</a> <span class="footer-separator">|</span>
+    <a href="#" class="footer-link">Apoyo</a> <span class="footer-separator">|</span>
+    <a href="#" class="footer-link">Facebook</a> <span class="footer-separator">|</span>
+    <a href="#" class="footer-link">Twitter</a> <span class="footer-separator">|</span>
+    <a href="#" class="footer-link">Contacto</a>
+  </footer>
 
-	</section>
-
-	<section class="main-panel" id="main-panel">
-		<%= yield %>
-	</section>
-	
-
-
-	<footer class="footer z-90" id="footer">
-		<a href="#" class="footer-link">¿Qué es EncuentraTuMascota?</a> <span class="footer-separator">|</span>
-		<a href="#" class="footer-link">¿Cómo funciona?</a> <span class="footer-separator">|</span>
-		<a href="#" class="footer-link">Términos de Uso</a> <span class="footer-separator">|</span>
-		<a href="#" class="footer-link">Apoyo</a> <span class="footer-separator">|</span>
-		<a href="#" class="footer-link">Facebook</a> <span class="footer-separator">|</span>
-		<a href="#" class="footer-link">Twitter</a> <span class="footer-separator">|</span>
-		<a href="#" class="footer-link">Contacto</a>
-	</footer>
-
+  <script type="text/javascript">
+    require(['require', 'application'], function (require) {
+      require(['application'], function (view) {
+        view.init({
+          // Application view data..
+        });
+      });
+    });
+    <%= yield :javascript %>
+  </script>
 </body>
 </html>
