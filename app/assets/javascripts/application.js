@@ -14,3 +14,4 @@
 //= require jquery_ujs
 //= require gmaps
 //= require app
+//= require bootstrap
