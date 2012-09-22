@@ -37,17 +37,6 @@ define(['jquery', 'lib/gmaps'], function ($, GMaps) {
       lng: lng,
       icon: 'http://google-maps-icons.googlecode.com/files/home.png'
     });
-
-    $.ajax({
-      url:  "visit_add/",
-      cache: false,
-      type: "POST",
-      data: { lat: lat, lng: lng },
-      dataType: "json",
-      success: function (response) {
-        console.log(response);
-      }
-    });
   };
 
   PetFinder.prototype.populateMarkers = function() {
