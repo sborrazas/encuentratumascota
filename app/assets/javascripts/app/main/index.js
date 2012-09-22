@@ -1,4 +1,4 @@
-define(['jquery', 'PetFinder'], function ($, PetFinder) {
+define(['jquery', 'PetFinder', 'bootstrap'], function ($, PetFinder) {
 
   return {
     init: function (pins) {
