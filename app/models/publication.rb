@@ -2,6 +2,7 @@ class Publication < ActiveRecord::Base
 
   belongs_to :pet
   belongs_to :city
+  belongs_to :user
 
   scope :has_publication_type, lambda {|*ptype| where(publication_type: ptype) }
 
