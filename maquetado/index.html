@@ -81,11 +81,17 @@
 		<div class="modal modal-publish hide fade" data-backdrop="false" id="modal-publish" tabindex="-1" role="dialog" aria-labelledby="modal-publish-label" aria-hidden="true">
 			<div class="modal-header">
 		    	<h3 id="modal-publish-label" class="modal-publish-label">Publicar mascota</h3>
-		  	</div>
+		  </div>
 			<div class="modal-body">
+				<div class="modal-publish-alerts">
+					<div class="alert alert-error fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Hey!</strong>, ocurrió un error en la validación!
+          </div>
+				</div>
 				<form class="form-horizontal">
 
-					<div class="control-group">
+					<div class="control-group error">
 				    	<label class="control-label" for="publish-estado">Estado (*)</label>
 				    	<div class="controls">
 				      		<select class="span2">
