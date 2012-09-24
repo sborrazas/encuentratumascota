@@ -260,6 +260,41 @@ footer li {
   }
 }
 
+/* Modal Create account */
+#modal-sign-in,
+#modal-sign-up {
+  width: 300px;
+
+  input[type="text"] {
+    width: 96%;
+    padding: 2%;
+  }
+
+  #btn-create-account {
+    width: 100%;
+  }
+
+  .modal-footer {
+    text-align: center;
+    font-size: 1em;
+
+    .sign-in-alternative {
+      display: block;
+      margin-top: -25px;
+      margin-bottom: 10px;
+      background: #FFF;
+      text-align: center;
+      width: 100px;
+      margin-left: 80px;
+    }
+  }
+
+  .btn-auth {
+    width: 102px;
+    margin-bottom: 15px;
+  }
+}
+
 /* REFACTOR PENDING FROM HERE ********************************************************/
 /* ***********************************************************************************/
 /* ***********************************************************************************/
@@ -270,6 +305,7 @@ footer li {
   color: #8c8c8c;
   padding: 20px;
   outline-style: none;
+  z-index: 90;
 }
 
 .modal-publish {
@@ -338,38 +374,6 @@ footer li {
 .btn-cancel-publish {
   width: 35%;
 }
-
-/* Modal Create account */
-.modal-create-account {
-  width: 300px;
-}
-
-.modal-create-account input[type="text"] {
-  width: 256px;
-}
-
-.modal-create-account .modal-footer {
-  text-align: center;
-}
-
-.social-log-in-buttons {
-  margin-bottom: 15px;
-}
-
-.btn-create-account {
-  font-weight: bold;
-}
-
-.modal-create-account .modal-footer {
-  font-size: 12px;
-}
-
-.social-log-in-buttons .btn-auth {
-  width: 102px;
-}
-
-/* End Modals */
-
 
 /* Forms */
 
