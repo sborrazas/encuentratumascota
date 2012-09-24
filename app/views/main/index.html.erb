@@ -2,7 +2,7 @@
   require(['require', 'app/main/index'], function (require) {
     require(['app/main/index'], function (view) {
       view.init(<%= {
-        userSignedIn: user_signed_in?,
+        userSignedIn: false, # user_signed_in?,
         publications: @publications
       }.to_json.html_safe %>);
     });
