@@ -13,41 +13,41 @@ body{
 
 /* Custom buttons */
 
-.btn-golden { 
-	text-shadow: 0px 1px 0px #ffff8a; 
-	color: #333; 
-	background-color: #FFD34E; 
-	background-image: -moz-linear-gradient(top, #fff16c, #e1b530); 
-	background-image: -ms-linear-gradient(top, #fff16c, #e1b530); 
-	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff16c), to(#e1b530)); 
-	background-image: -webkit-linear-gradient(top, #fff16c, #e1b530); 
-	background-image: -o-linear-gradient(top, #fff16c, #e1b530); 
-	background-image: linear-gradient(top, #fff16c, #e1b530); 
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff16c', endColorstr='#e1b530', GradientType=0); 
-	border-color: #FFD34E #e1b530 #e1b530 #FFD34E; 
-	border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); 
+.btn-golden {
+	text-shadow: 0px 1px 0px #ffff8a;
+	color: #333;
+	background-color: #FFD34E;
+	background-image: -moz-linear-gradient(top, #fff16c, #e1b530);
+	background-image: -ms-linear-gradient(top, #fff16c, #e1b530);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fff16c), to(#e1b530));
+	background-image: -webkit-linear-gradient(top, #fff16c, #e1b530);
+	background-image: -o-linear-gradient(top, #fff16c, #e1b530);
+	background-image: linear-gradient(top, #fff16c, #e1b530);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff16c', endColorstr='#e1b530', GradientType=0);
+	border-color: #FFD34E #e1b530 #e1b530 #FFD34E;
+	border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25);
 }
-.btn-golden:hover, .btn-honey-pot-3:active, .btn-golden.active, .btn-golden.disabled, .btn-golden[disabled] { 
-	background-color: #e1b530; 
+.btn-golden:hover, .btn-honey-pot-3:active, .btn-golden.active, .btn-golden.disabled, .btn-golden[disabled] {
+	background-color: #e1b530;
 }
-.btn-golden:hover { 
-	color: #333; 
-	text-shadow: 0px 1px 0px #ffff8a; 
+.btn-golden:hover {
+	color: #333;
+	text-shadow: 0px 1px 0px #ffff8a;
 }
-.btn-golden:focus { 
-	color: #333; 
-	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); 
-	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); 
-	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); 
-	border-color: #FFD34E #e1b530 #e1b530 #FFD34E; 
-	border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25); 
+.btn-golden:focus {
+	color: #333;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	border-color: #FFD34E #e1b530 #e1b530 #FFD34E;
+	border-color: rgba(0, 0, 0, 0.25) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.35) rgba(0, 0, 0, 0.25);
 }
-.btn-golden.active, .btn-golden:active { 
-	background-image: none; 
-	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); 
-	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); 
-	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05); 
-	color: #333; 
+.btn-golden.active, .btn-golden:active {
+	background-image: none;
+	-webkit-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	-moz-box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15), 0 1px 2px rgba(0, 0, 0, 0.05);
+	color: #333;
 }
 
 /* z- index */
@@ -66,11 +66,11 @@ body{
 	width: 250px;
 	min-height: 720px;
 	background-color: white;
-	
+
 	border-right: 1px solid #ffcb05;
 
 	box-shadow: 3px -1px 13px #999;
-	
+
 
 	/* Gradient */
 
@@ -88,7 +88,7 @@ body{
 }
 
 .sidebar-options{
-	
+
 	width: 251px;
 
 	background-color: #3A3A3A;
@@ -117,7 +117,7 @@ body{
 
 .paws{
 	background: url('../img/paws.png') no-repeat 0 0;
-	
+
 	height: 21px;
 }
 
@@ -188,7 +188,7 @@ body{
 
 .sidebar-login p{
 	font-size: 11px;
-	
+
 	color: #393939;
 	font-shadow: 1px 1px 1px #FFEE6E;
 	line-height: 14px;
@@ -622,7 +622,7 @@ form label{
 .btn-twitter:hover,
 .btn-twitter:focus,
 .btn-twitter:active {
-    color: #327695;    
+    color: #327695;
     border-color: #8dc2e4;
     background-color: #cadde9;
 }
@@ -648,3 +648,73 @@ form label{
 
 
 /* End Auth Icons */
+
+
+/* Publication infoView bubble */
+.infoview-separator{
+  border-bottom: 1px solid #EEF0F2;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.publication-details{
+  max-width: 300px;
+}
+
+.publication-details dt{
+  text-transform: uppercase;
+  width: 120px;
+  color: #8C8C8C;
+  font-weight: bold;
+}
+
+.publication-details dd{
+  margin-left: 130px;
+}
+
+.btn-request-contact-info{
+  margin-bottom: 15px;
+}
+
+.publication-details dd.reward{
+  color: #30C329;
+  font-weight: bold;
+}
+
+.publication-details dd.status{
+  text-transform: uppercase;
+}
+
+.publication-details .status-lost{
+  color: #F75943;
+  font-weight: bold;
+}
+
+
+/* Fix Google maps CSS and Bootstrap issue */
+
+#main-panel img {
+  max-width: none;
+  width: auto;
+  display:inline;
+
+}
+
+#main-panel .publication-images img{
+  width: 290px;
+  margin: 5px;
+  border: 8px solid #FFF;
+  -moz-box-shadow:    0px 0px 4px 1px #ccc;
+  -webkit-box-shadow: 0px 0px 4px 1px #ccc;
+  box-shadow:         0px 0px 4px 1px #ccc;
+}
+
+.publication-images{
+  padding: 5px;
+  border: 1px solid #EEF0F2;
+  margin-bottom: 15px;
+}
+
+.publication-infowindow{
+  margin-top: 10px;
+}

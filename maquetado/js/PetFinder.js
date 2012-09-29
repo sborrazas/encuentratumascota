@@ -7,6 +7,7 @@ console.log('Petfinder module loaded!');
     this.imageLost = 'img/lost.png';
     this.imageFound = 'img/found.png';
     this.imageAdoption = 'img/other.png';
+    this.infoWindow = $('#infoWindow').html();
 
     this.initMap();
     this.geoLocate();
@@ -66,14 +67,16 @@ console.log('Petfinder module loaded!');
 
     for (var i = 0; i < pins.length; i++) {
 
-        this.map.addMarker({
-            lat: pins[i].lat,
-            lng: pins[i].lng,
-            icon: i % 3 === 0 ? this.imageLost : this.imageFound,
-            infoWindow: {
-              content: '<p>HTML Content</p>'
-            }
-        });
+
+      this.map.addMarker({
+          lat: pins[i].lat,
+          lng: pins[i].lng,
+          icon: i % 3 === 0 ? this.imageLost : this.imageFound,
+          infoWindow: {
+            content: this.infoWindow,
+            maxWidth: 360
+          }
+      });
     }
 
   };
