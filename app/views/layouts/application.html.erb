@@ -31,8 +31,13 @@
     </header>
 
     <nav class="sidebar-section">
-      <p><a href="#" class="btn btn-sign-in">Iniciar sesi&oacute;n</a></p>
-      <p>¿No tienes usuario? <a href="#" class="link-sign-up">Reg&iacute;strate</a>.</p>
+      <div id="logged-out-nav">
+        <p><a href="#" class="btn btn-sign-in">Iniciar sesi&oacute;n</a></p>
+        <p>¿No tienes usuario? <a href="#" class="btn-sign-up">Reg&iacute;strate</a>.</p>
+      </div>
+
+      <div id="logged-in-nav">
+      </div>
 
       <p><a href="#" class="btn bnt-publish">Publicar mascota</a></p>
       <p>Mascotas perdidas, encontradas o en adopci&oacute;n. Prohibida la venta.</p>
@@ -77,7 +82,7 @@
     </ul>
   </footer>
 
-  <%= render partial: 'shared/new_publication' %>
+  <%#= render partial: 'shared/new_publication' %>
   <%= render partial: 'shared/sign_in' %>
   <%#= render partial: 'shared/sign_up' %>
 
