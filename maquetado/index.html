@@ -11,31 +11,32 @@
 			<link rel="stylesheet" href="css/main.css">
 			<link rel="shortcut icon" href="img/favicon.png" type="image/png" />
 			<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+			<script data-main="js/config.js" src="js/require.js"></script>
 	</head>
-	
+
 	<body>
 
 		<section class="side-panel z-80" id="side-panel">
-			
+
 			<div class="sidebar-section logo" id="logo">
 				<img src="img/logo.png" alt="" class="logo-img" id="logo-img">
 
 				<h1 class="site-title"><span class="bold">Encuentra</span><br/>Tu Mascota</h1>
 
 				<span class="tagline" id="tagline">
-					La manera más fácil y rápida 
+					La manera más fácil y rápida
 					de conectar mascotas con sus dueños
 				</span>
 
 			</div>
 
 			<div class="sidebar-section sidebar-login" >
-				
-				<button class="btn-login btn btn-large btn-block" id="btn-login">Iniciar sesión</button>
-				
-				<p>¿No tienes usuario? <a href="#modal-create-account" class="link-register" id="link-register" data-toggle="modal">Regístrate</a>. </p>
 
-				
+				<a href="#modal-log-in" data-toggle="modal" class="btn-login btn btn-large btn-block" id="btn-login">Iniciar sesión</a>
+
+				<p>¿No tienes usuario? <a href="#modal-create-account" class="link-register" id="link-create-account" data-toggle="modal">Reg&iacute;strate</a>. </p>
+
+
 				<a href="#modal-publish" class="btn-publish btn btn-large btn-success btn-block" id="btn-publish" data-toggle="modal">Publicar mascota</a>
 				<p>
 					Mascotas perdidas, encontradas o en adopción. Prohibida la venta.
@@ -46,22 +47,22 @@
 			<div class="sidebar-section-wide sidebar-options arrow_box" id="sidebar-options">
 				<ul>
 					<li>
-						<input id="options-perdidos" type="checkbox"> 
+						<input id="options-perdidos" type="checkbox">
 						<label class="paws lost" for="options-perdidos">Perdidos</label>
 					</li>
 					<li>
-						<input id="options-encontrados" type="checkbox"> 
+						<input id="options-encontrados" type="checkbox">
 						<label class="paws found" for="options-encontrados">Encontrados</label>
 					</li>
 					<li>
-						<input id="options-adopcion" type="checkbox"> 
+						<input id="options-adopcion" type="checkbox">
 						<label class="paws adoption" for="options-adopcion">En Adopción</label>
 					</li>
 				</ul>
 			</div>
 
 			<div class="sidebar-sponsors" id="sidebar-sponsors">
-				
+
 				<h3 class="sponsors-title">Apoya:</h3>
 
 				<div class="sponsor-img" id="sponsor-img">
@@ -73,18 +74,24 @@
 		</section>
 
 		<section class="main-panel" id="main-panel">
-			
+
 		</section>
 
 		<-- Modal -->
 		<div class="modal modal-publish hide fade" data-backdrop="false" id="modal-publish" tabindex="-1" role="dialog" aria-labelledby="modal-publish-label" aria-hidden="true">
 			<div class="modal-header">
 		    	<h3 id="modal-publish-label" class="modal-publish-label">Publicar mascota</h3>
-		  	</div>
+		  </div>
 			<div class="modal-body">
+				<div class="modal-publish-alerts">
+					<div class="alert alert-error fade in">
+            <button type="button" class="close" data-dismiss="alert">×</button>
+            <strong>Hey!</strong>, ocurrió un error en la validación!
+          </div>
+				</div>
 				<form class="form-horizontal">
 
-					<div class="control-group">
+					<div class="control-group error">
 				    	<label class="control-label" for="publish-estado">Estado (*)</label>
 				    	<div class="controls">
 				      		<select class="span2">
@@ -152,7 +159,7 @@
 				      		<input type="text" id="publish-contact" placeholder="Teléfono, e-mail">
 				    	</div>
 				  	</div>
-				  	
+
 				</form>
 			</div>
 		  	<div class="modal-footer">
@@ -163,29 +170,29 @@
 		    	<p class="publish-disclaimer">
 		    		La publicación necesita aprobación de un administrador. <br/>
 					Prohibida la venta de animales. Recibirás un mail cuando se publique.
-		    	</p>		
+		    	</p>
 		  	</div>
 		</div>
 
 		<!-- Modal Create account -->
 
-		<div class="modal modal-create-account fade hide" data-backdrop="true" id="modal-create-account" tabindex="-1" role="dialog" aria-hidden="true">
-			
+		<div class="modal modal-create-account modal-account fade hide" data-backdrop="true" id="modal-create-account" tabindex="-1" role="dialog" aria-hidden="true">
+
 			<div class="modal-body">
 				<form class="">
-				  	
+
 				  	<input type="text" id="create-account-email" placeholder="E-mail">
 
 				  	<input type="text" id="create-account-username" placeholder="Nombre de usuario">
 
 				  	<input type="text" id="create-account-password" placeholder="Password">
-					
+
 				  	<button id="btn-create-account" class="btn btn-golden btn-block btn-large btn-create-account">Crear cuenta</button>
-				  	
+
 				</form>
 			</div>
-		  	<div class="modal-footer">		  		
-		    	
+		  	<div class="modal-footer">
+
 		    	<p class="sign-up-alternative">o ingresa con</p>
 
 		    	<div class="social-log-in-buttons">
@@ -193,10 +200,74 @@
 		    		<a id="btn-create-account-twitter" class="btn-auth btn-twitter" href="#"><b>Twitter</b></a>
 		    	</div>
 
-		    	<p>¿Ya eres usuario? <a href="#">Iniciar Sesión</a></p>
+		    	<p>¿Ya eres usuario? <a href="#modal-log-in" data-toggle="modal">Iniciar Sesión</a></p>
 
 		  	</div>
 		</div>
+
+		<!-- Modal Log in -->
+
+		<div class="modal modal-log-in fade hide modal-account" data-backdrop="true" id="modal-log-in" tabindex="-1" role="dialog" aria-hidden="true">
+
+			<div class="modal-body">
+				<form class="">
+
+				  	<input type="text" id="log-in-username" placeholder="E-mail o nombre de usuario">
+
+				  	<input type="text" id="log-in-password" placeholder="Password">
+
+				  	<button id="btn-log-in" class="btn btn-golden btn-block btn-large btn-log-in">Iniciar sesión</button>
+
+				</form>
+			</div>
+		  	<div class="modal-footer">
+
+		    	<p class="sign-up-alternative">o ingresa con</p>
+
+		    	<div class="social-log-in-buttons">
+		    		<a id="btn-create-account-facebook" class="btn-auth btn-facebook" href="#"><b>Facebook</b></a>
+		    		<a id="btn-create-account-twitter" class="btn-auth btn-twitter" href="#"><b>Twitter</b></a>
+		    	</div>
+
+		    	<p>¿No tienes usuario? <a class="link-create-account" href="#modal-create-account" data-toggle="modal">Reg&iacute;strate</a></p>
+
+		  	</div>
+		</div>
+
+		<!-- InfoWindow -->
+
+		<script type="text/template" id="infoWindow">
+
+			<div class="publication-infowindow" >
+				<div class="publication-images">
+		        <img src="img/dog1.jpg" alt="" title="This is a dog" />
+			  </div>
+
+			  <div class="publication-details">
+			  	<dl class="dl-horizontal">
+					  <dt>Estado</dt>
+					  <dd class="status status-lost">Perdido</dd>
+					  <dt>Nombre</dt>
+					  <dd>Rocko</dd>
+					  <dt>Raza</dt>
+					  <dd>Caniche</dd>
+					  <dt>Descripcion</dt>
+					  <dd>4 años, tamaño mediano, 20kg.</dd>
+					  <dt>Recompensa</dt>
+					  <dd class="reward">$150.00</dd>
+					</dl>
+
+					<div class="infoview-separator"></div>
+
+					<button class="btn btn-golden btn-block btn-request-contact-info">Solicitar informaci&oacute;n de contacto</button>
+
+					[Share - Tweet - Email]
+
+			  </div>
+
+			</div>
+
+		</script>
 
 
 		<!-- End/Modals -->
@@ -211,13 +282,16 @@
 			<a href="#" class="footer-link">Contacto</a>
 
 		</footer>
-		
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
-	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=true"></script>
-  	<script>window.jQuery || document.write('<script src="js/libs/jquery-1.7.2.min.js"><\/script>')</script>
-  	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-    <script src="js/libs/gmaps.js" ></script>
-    <script src="js/libs/bootstrap.js" ></script>
-	<script src="js/app.js"></script>
+
+		<script type="text/javascript">
+	    require(['require', 'application'], function (require) {
+	      require(['app/main/index'], function (view) {
+	        view.init({
+	          // Application view data..
+	        });
+	      });
+	    });
+
+  	</script>
 	</body>
 </html>
