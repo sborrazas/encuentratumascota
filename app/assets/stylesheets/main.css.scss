@@ -1,3 +1,647 @@
-// Place all the styles related to the main controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+/* Buttons */
+@mixin basic-btn {
+  display: block;
+  padding: 0.7em;
+  font-size: 1.4em;
+  text-align: center;
+  text-shadow: 0px 2px 2px rgba(255, 255, 255, 0.8);
+  border: 1px solid #c69b00;
+  color: #3b3100;
+
+  @include box-shadow(inset 0px 0px 0px 1px rgba(255, 255, 255, 0.2), 0 0px 0px #333333);
+  @include linear-gradient(top, #fff284 0%, #f5ce04 100%);
+  @include border-radius(2px);
+
+  &:hover:not(.disabled) {
+    @include linear-gradient(top, #dec20a 0%, #ffdb1e 100%);
+    color: #1e1900;
+  }
+  &:active:not(.disabled) {
+    @include box-shadow(inset 0 1px 3px rgba(0, 0, 0, 0.6), 0 0px 0px #000);
+  }
+}
+
+.btn {
+  @include basic-btn;
+
+  // Green
+  &.secondary {
+    @include linear-gradient(top, #9acf5c 0%, #67b731 100%);
+    border-color: #70a32e;
+    &:hover:not(.disabled) {
+      @include linear-gradient(top, #8bc950 0%, #508f26 100%);
+    }
+  }
+  // Blue
+  &.thirdary {
+    @include linear-gradient(top, #1b80df 0%, #014c91 100%);
+    border-color: #004d93;
+    &:hover:not(.disabled) {
+      @include linear-gradient(top, #02498c 0%, #0458a8 100%);
+    }
+  }
+  // Gray
+  &.fourthrary {
+    @include linear-gradient(top, #c1c1c1 0%, #7e7e80 100%);
+    border-color: #7a7a7c;
+    &:hover:not(.disabled) {
+      @include linear-gradient(top, #52565d 0%, #818387 100%);
+    }
+  }
+  // Red
+  &.danger {
+    @include linear-gradient(top, #ff5b5b 0%, #c80909 100%);
+    border-color: #981e1e;
+    &:hover:not(.disabled) {
+      @include linear-gradient(top, #ff5b5b 0%, #731111 100%);
+    }
+  }
+
+  &.big {
+    line-height: 30px;
+    font-size: 24px;
+    @include border-radius(5px);
+  }
+}
+
+input.btn {
+  padding: 0.5em 1em;
+  font-size: 1em;
+}
+
+/* Sidebar **********************************************************************/
+.side-panel {
+  position: absolute;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 250px;
+  min-height: 720px;
+  background-color: white;
+
+  border-right: 1px solid #ffcb05;
+
+  box-shadow: 3px -1px 13px #999;
+
+  /* Gradient */
+  background: #ffec00; /* Old browsers */
+
+  /* IE9 SVG, needs conditional override of 'filter' to 'none' */
+  background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZWMwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZGJhMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+  background: -moz-linear-gradient(top,  #ffec00 0%, #fdba00 100%); /* FF3.6+ */
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffec00), color-stop(100%,#fdba00)); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(top,  #ffec00 0%,#fdba00 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #ffec00 0%,#fdba00 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #ffec00 0%,#fdba00 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #ffec00 0%,#fdba00 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffec00', endColorstr='#fdba00',GradientType=0 ); /* IE6-8 */
+
+  .sidebar-section {
+    margin-left: 35px;
+    margin-bottom: 20px;
+    margin-right: 35px;
+  }
+
+  header {
+    margin-top: 50px;
+    h1 {
+      font-size: 2em;
+      font-family: Museo-500;
+      font-weight: normal;
+      color: #585858;
+      text-shadow: 1px 1px 1px #FFEE6E;
+      padding: 7px 0;
+      line-height: 1.2em;
+      .main-title {
+        font-weight: bold;
+      }
+    }
+
+    h2 {
+      text-shadow: 1px 1px 1px #FFEE6E;
+      font-family: Museo-500;
+      font-size: 0.9em;
+      font-weight: normal;
+      line-height: 1.9em;
+      color: #515050;
+    }
+  }
+
+  .sidebar-options {
+    position: relative;
+
+    width: 251px;
+    background-color: #3A3A3A;
+    margin-left: 0;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    background-image: linear-gradient(bottom, #424242 0%, #525252 51%);
+    background-image: -o-linear-gradient(bottom, #424242 0%, #525252 51%);
+    background-image: -moz-linear-gradient(bottom, #424242 0%, #525252 51%);
+    background-image: -webkit-linear-gradient(bottom, #424242 0%, #525252 51%);
+    background-image: -ms-linear-gradient(bottom, #424242 0%, #525252 51%);
+    background-image: -webkit-gradient(
+      linear,
+      left bottom,
+      left top,
+      color-stop(0, #424242),
+      color-stop(0.51, #525252)
+    );
+
+    color: #FFF;
+    font-family: Museo-500;
+
+    label {
+      padding-left: 25px;
+      line-height: 30px;
+      display: inline-block;
+    }
+
+    input {
+      vertical-align: middle;
+    }
+
+    .paws {
+      background: url(/assets/paws.png) no-repeat 0 0;
+      height: 21px;
+      &.lost {
+        background-position: 0 0;
+      }
+      &.found {
+        background-position: 0 -35px;
+      }
+      &.adoption {
+        background-position: -1px -69px;
+      }
+    }
+
+    &:after {
+      left: 100%;
+      border: solid transparent;
+      content: " ";
+      height: 0;
+      width: 0;
+      position: absolute;
+      pointer-events: none;
+      border-color: rgba(82, 82, 82, 0);
+      border-left-color: #525252;
+      border-width: 6px;
+      top: 52%;
+      margin-top: -6px;
+    }
+
+    ul {
+      margin-left: 30px;
+      li {
+        font-weight: bold;
+        font-size: 13px;
+        line-height: 30px;
+        width: 100%;
+      }
+    }
+  }
+
+  .sponsor-title {
+    font-size: 0.8em;
+    font-weight: normal;
+    color: #393939;
+    font-shadow: 1px 1px 1px #FFEE6E;
+  }
+
+  .sponsor-img {
+    margin: 20px;
+  }
+
+  .btn {
+    margin-top: 15px;
+  }
+
+  p {
+    font-size: 11px;
+    color: #393939;
+    font-shadow: 1px 1px 1px #FFEE6E;
+    line-height: 14px;
+    margin: 7px 0;
+  }
+
+  .logo {
+    margin-top: 50px;
+  }
+}
+
+/* Footer **************************************************************/
+footer {
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  z-index: 90;
+  color: #FFF;
+  padding-left: 25px;
+  @include linear-gradient(top, #3e3e3e 0%, #1e1e1e 100%);
+}
+
+footer li {
+  display: inline-block;
+  font-weight: bold;
+  margin-top: 15px;
+
+  &:nth-child(n+2) {
+    border-left: 2px solid #777;
+    padding-left: 10px;
+    margin-left: 10px;
+  }
+
+  a {
+    color: #FFF;
+    font-size: 1em;
+  }
+}
+
+/* Modal Create account */
+#modal-sign-in,
+#modal-sign-up {
+  width: 300px;
+
+  input[type="text"] {
+    width: 96%;
+    padding: 2%;
+  }
+
+  #btn-create-account {
+    width: 100%;
+  }
+
+  .modal-footer {
+    text-align: center;
+    font-size: 1em;
+
+    .sign-in-alternative {
+      display: block;
+      margin-top: -25px;
+      margin-bottom: 10px;
+      background: #FFF;
+      text-align: center;
+      width: 100px;
+      margin-left: 80px;
+    }
+  }
+
+  .btn-auth {
+    width: 102px;
+    margin-bottom: 15px;
+  }
+}
+
+/* REFACTOR PENDING FROM HERE ********************************************************/
+/* ***********************************************************************************/
+/* ***********************************************************************************/
+
+
+/* Modals ****************************************************************************/
+.modal {
+  color: #8c8c8c;
+  padding: 20px;
+  outline-style: none;
+  z-index: 90;
+}
+
+.modal-publish {
+  width: 395px;
+  display: none;
+}
+
+.modal-publish .form-horizontal .control-label {
+  width: 120px;
+}
+
+.modal-publish .form-horizontal .controls {
+  margin-left: 130px;
+}
+
+.modal-publish.fade.in {
+  top: 35%;
+}
+
+.modal-publish .form-horizontal .control-group {
+  margin-bottom: 10px
+}
+
+.modal-publish .modal-body {
+  max-height: none;
+}
+
+.modal-publish-buttons {
+  text-align: center;
+}
+
+.modal-footer {
+  background-color: #FFF;
+  border-top: 1px solid #eef0f2;
+}
+
+.modal-publish-label {
+  color: #8c8c8c;
+  font-size: 30px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eef0f2;
+}
+
+.modal-disclaimer {
+  color: #a5a5a5;
+  font-size: 10px;
+}
+
+.publish-disclaimer {
+  text-align: left;
+  font-size: 11px;
+  color: #a5a5a5;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.modal-publish .modal-footer {
+  text-align: left;
+}
+
+.btn-publish-modal {
+  width: 55%;
+}
+
+.btn-cancel-publish {
+  width: 35%;
+}
+
+/* Forms */
+
+form label{
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.main-panel{
+  background-color: #ccc;
+
+  position: absolute;
+  top: 0;
+  bottom: 15px;
+  width: 100%;
+
+}
+
+
+/***** Auth Icons *****/
+/* http://nicolasgallagher.com/lab/css3-social-signin-buttons/#button */
+
+/*
+ * Button Object
+ */
+
+/*
+ * 1. Corrects inability to style clickable 'input' types in iOS
+ * 2. Remove excess padding in IE6/7
+ * 3. IE6/7 inline-block hack for native block-level elements
+ */
+
+.btn-auth {
+    position: relative;
+    display: inline-block;
+    height: 22px;
+    padding: 0 1em;
+    border: 1px solid #999;
+    border-radius: 2px;
+    margin: 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    line-height: 22px;
+    white-space: nowrap;
+    cursor: pointer;
+    color: #222;
+    background: #fff;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    /* iOS */
+    -webkit-appearance: none; /* 1 */
+    /* IE6/7 hacks */
+    *overflow: visible;  /* 2 */
+    *display: inline; /* 3 */
+    *zoom: 1; /* 3 */
+}
+
+.btn-auth:hover,
+.btn-auth:focus,
+.btn-auth:active {
+    color: #222;
+    text-decoration: none;
+}
+
+.btn-auth:before {
+    content: "";
+    float: left;
+    width: 22px;
+    height: 22px;
+    background: url(/assets/auth-icons.png) no-repeat 99px 99px;
+}
+
+/*
+ * 36px
+ */
+
+.btn-auth.large {
+    height: 36px;
+    line-height: 36px;
+    font-size: 20px;
+}
+
+.btn-auth.large:before {
+    width: 36px;
+    height: 36px;
+}
+
+/*
+ * Remove excess padding and border in FF3+
+ */
+
+.btn-auth::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+
+/* Facebook (extends .btn-auth)
+   ========================================================================== */
+
+.btn-facebook {
+    border-color: #29447e;
+    border-bottom-color: #1a356e;
+    color: #fff;
+    background-color: #5872a7;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#637bad), to(#5872a7));
+    background-image: -webkit-linear-gradient(#637bad, #5872a7);
+    background-image: -moz-linear-gradient(#637bad, #5872a7);
+    background-image: -ms-linear-gradient(#637bad, #5872a7);
+    background-image: -o-linear-gradient(#637bad, #5872a7);
+    background-image: linear-gradient(#637bad, #5872a7);
+    -webkit-box-shadow: inset 0 1px 0 #879ac0;
+    box-shadow: inset 0 1px 0 #879ac0;
+}
+
+.btn-facebook:hover,
+.btn-facebook:focus {
+    color: #fff;
+    background-color: #3b5998;
+}
+
+.btn-facebook:active {
+    color: #fff;
+    background: #4f6aa3;
+    -webkit-box-shadow: inset 0 1px 0 #45619d;
+    box-shadow: inset 0 1px 0 #45619d;
+}
+
+/*
+ * Icon
+ */
+
+.btn-facebook:before {
+    border-right: 1px solid #465f94;
+    margin: 0 1em 0 -1em;
+    background-position: 0 0;
+}
+
+.btn-facebook.large:before {
+    background-position: 0 -22px;
+}
+
+/* Google
+   ========================================================================== */
+
+.btn-google {
+    border-color: #3079ed;
+    color: #fff;
+    background: #4787ed;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#4787ed));
+    background-image: -webkit-linear-gradient(#4d90fe, #4787ed);
+    background-image: -moz-linear-gradient(#4d90fe, #4787ed);
+    background-image: -ms-linear-gradient(#4d90fe, #4787ed);
+    background-image: -o-linear-gradient(#4d90fe, #4787ed);
+    background-image: linear-gradient(#4d90fe, #4787ed);
+}
+
+.btn-google:hover,
+.btn-google:focus,
+.btn-google:active {
+    color: #fff;
+    background-color: #357ae8;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#4d90fe), to(#357ae8));
+    background-image: -webkit-linear-gradient(#4d90fe, #357ae8);
+    background-image: -moz-linear-gradient(#4d90fe, #357ae8);
+    background-image: -ms-linear-gradient(#4d90fe, #357ae8);
+    background-image: -o-linear-gradient(#4d90fe, #357ae8);
+    background-image: linear-gradient(#4d90fe, #357ae8);
+}
+
+.btn-google:active {
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.3);
+}
+
+/*
+ * Icon
+ */
+
+.btn-google:before {
+    margin: 0 1em 0 -1em;
+    background-position: -88px 0;
+    background-color: #e6e6e6;
+}
+
+.btn-google.large:before {
+    background-position: -144px -22px;
+}
+
+
+/* Open ID
+   ========================================================================== */
+
+.btn-openid:hover,
+.btn-openid:focus {
+    border-color: #777;
+    background: #fcfcfc;
+}
+
+.btn-openid:active {
+    background: #f5f5f5;
+}
+
+/*
+ * Icon
+ */
+
+.btn-openid:before {
+    margin: 0 0.6em 0 -0.6em;
+    background-position: -154px 0;
+}
+
+.btn-openid.large:before {
+    background-position: -252px -22px;
+}
+
+
+/* Twitter
+   ========================================================================== */
+
+.btn-twitter {
+    border-color: #a6cde6;
+    color: #327695;
+    background: #cfe4f0;
+    /* css3 */
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#f1f5f7), to(rgba(255,255,255,0)));
+    background-image: -webkit-linear-gradient(#f1f5f7, rgba(255,255,255,0));
+    background-image: -moz-linear-gradient(#f1f5f7, rgba(255,255,255,0));
+    background-image: -ms-linear-gradient(#f1f5f7, rgba(255,255,255,0));
+    background-image: -o-linear-gradient(#f1f5f7, rgba(255,255,255,0));
+    background-image: linear-gradient(#f1f5f7, rgba(255,255,255,0));
+    -webkit-box-shadow: inset 0 1px 0 #fff;
+    box-shadow: inset 0 1px 0 #fff;
+}
+
+.btn-twitter:hover,
+.btn-twitter:focus,
+.btn-twitter:active {
+    color: #327695;
+    border-color: #8dc2e4;
+    background-color: #cadde9;
+}
+
+.btn-twitter:active {
+    background: #cadde9;
+    -webkit-box-shadow: inset 0 1px 0 #bbd6e7;
+    box-shadow: inset 0 1px 0 #bbd6e7;
+}
+
+/*
+ * Icon
+ */
+
+.btn-twitter:before {
+    margin: 0 0.6em 0 -0.6em;
+    background-position: -22px 0;
+}
+
+.btn-twitter.large:before {
+    background-position: -36px -22px;
+}
+
+
+/* End Auth Icons */

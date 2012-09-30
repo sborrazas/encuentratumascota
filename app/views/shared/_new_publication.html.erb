@@ -1,0 +1,87 @@
+<div class="modal modal-publish hide fade" data-backdrop="false" id="modal-publish" tabindex="-1" role="dialog" aria-labelledby="modal-publish-label" aria-hidden="true">
+  <div class="modal-header">
+    <h3 id="modal-publish-label" class="modal-publish-label">Publicar mascota</h3>
+  </div>
+  <div class="modal-body">
+    <form class="form-horizontal">
+      <div class="control-group">
+        <label class="control-label" for="publish-estado">Estado (*)</label>
+        <div class="controls">
+          <select class="span2">
+            <option value="Encontrado">Encontrado</option>
+            <option value="Encontrado">Perdido</option>
+            <option value="Encontrado">En Adopción</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="publish-images">Imágenes (*)</label>
+        <div class="controls">
+            <button id="publish-images" class="btn">+ Agregar imágenes</button>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="publish-name">Nombre</label>
+        <div class="controls">
+          <input type="text" id="publish-name" placeholder="Nombre de la mascota">
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="publish-race">Raza (*)</label>
+        <div class="controls">
+          <select id="publish-race" class="span2">
+            <option value="1">Alaskan Husky</option>
+            <option value="2">Alaskan Malamute</option>
+            <option value="3">American Foxhound</option>
+            <option value="3">Basset Hound</option>
+            <option value="4">Desconocido/Cruza</option>
+          </select>
+        </div>
+      </div>
+      <div class="control-group">
+        <label class="control-label" for="publish-estado">Descripción (*)</label>
+        <div class="controls">
+          <textarea rows="3" placeholder="Edad, tamaño, rasgos, detalles, etc."></textarea>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="publish-lost-date">Perdido el (*)</label>
+        <div class="controls">
+          <input type="text" id="publish-lost-date" placeholder="Día / Mes / Año">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="publish-lost-where">En (*)</label>
+        <div class="controls">
+          <input type="text" id="publish-lost-where" placeholder="Esquina, plaza, barrio">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="publish-reward">Recompensa</label>
+        <div class="controls">
+          <input type="text" id="publish-reward" placeholder="En pesos uruguayos">
+        </div>
+      </div>
+
+      <div class="control-group">
+        <label class="control-label" for="publish-contact">Contacto (*)</label>
+        <div class="controls">
+          <input type="text" id="publish-contact" placeholder="Teléfono, e-mail">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="modal-publish-buttons">
+      <button id="btn-publish-modal" class="btn btn-success btn-large btn-publish-modal">Publicar</button>
+      <button id="btn-cancel-publish" class="btn btn-large btn-cancel-publish" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    </div>
+    <p class="publish-disclaimer">
+      La publicación necesita aprobación de un administrador. <br/>
+      Prohibida la venta de animales. Recibirás un mail cuando se publique.
+    </p>
+  </div>
+</div>

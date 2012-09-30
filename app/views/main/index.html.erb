@@ -1,7 +1,10 @@
 <% content_for :javascript do %>
   require(['require', 'app/main/index'], function (require) {
     require(['app/main/index'], function (view) {
-      view.init([]);
+      view.init(<%= {
+        userSignedIn: false, # user_signed_in?,
+        publications: @publications
+      }.to_json.html_safe %>);
     });
   });
 <% end %>
