@@ -1,18 +1,21 @@
 <div class="modal" id="modal-sign-in" tabindex="-1" role="dialog" data-show="false" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
-
   <div class="modal-body">
-    <form class="">
-      <input type="text" id="create-account-email" placeholder="E-mail">
-      <input type="text" id="create-account-password" placeholder="Password">
-      <button id="btn-create-account" class="btn btn-golden btn-block btn-large btn-create-account">Crear cuenta</button>
-    </form>
+    <%= form_for @user, url: session_path(@user, format: :json) do |f| %>
+      <p class="field">
+        <%= f.label :email, 'Your Email' %>
+        <%= f.text_field :email, placeholder: 'Email' %>
+      </p>
+
+      <p class="field">
+        <%= f.label :password, 'Create Password' %>
+        <%= f.password_field :password, autocomplete: 'off' %>
+      </p>
+
+      <p><%= f.submit 'Iniciar sesión', class: 'btn btn-golden btn-block btn-large' %></p>
+    <% end %>
   </div>
   <div class="modal-footer">
-    <p>
-      <span class="sign-in-alternative">o ingresa con</span>
-      <a class="btn-auth facebook" href="#">Facebook</a>
-      <a class="btn-auth twitter" href="#">Twitter</a>
-    </p>
-    <p>¿Ya eres usuario? <a href="#" class="btn-sign-in">Iniciar Sesi&oacute;n</a></p>
+    <%= render partial: 'shared/auth_footer' %>
+    <p>¿No eres usuario? <a href="#" class="btn-sign-up">Reg&iacute;strate</a></p>
   </div>
 </div>

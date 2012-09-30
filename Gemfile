@@ -8,9 +8,14 @@ gem 'activeadmin'
 gem 'meta_search', '>= 1.1.0.pre'
 
 gem 'devise'
+gem 'omniauth'
+gem 'oauth2'
+gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 group :development do
   gem 'thin'
+  gem 'pry'
   # gem 'sqlite3'
 end
 
