@@ -1,18 +1,21 @@
-<div class="modal modal-create-account fade hide" data-backdrop="true" id="modal-create-account" tabindex="-1" role="dialog" aria-hidden="true">
+<div class="modal" id="modal-sign-up" tabindex="-1" role="dialog" data-show="false" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
   <div class="modal-body">
-    <form class="">
-      <input type="text" id="create-account-email" placeholder="E-mail">
-      <input type="text" id="create-account-username" placeholder="Nombre de usuario">
-      <input type="text" id="create-account-password" placeholder="Password">
-      <button id="btn-create-account" class="btn btn-golden btn-block btn-large btn-create-account">Crear cuenta</button>
-    </form>
+    <%= form_for @user, url: registration_path(@user, format: :json) do |f| %>
+      <p class="field">
+        <%= f.label :email, 'Your Email' %>
+        <%= f.text_field :email, placeholder: 'Email' %>
+      </p>
+
+      <p class="field">
+        <%= f.label :password, 'Password' %>
+        <%= f.password_field :password, autocomplete: 'off' %>
+      </p>
+
+      <p><%= f.submit 'Crear Cuenta', class: 'btn btn-golden btn-block btn-large' %></p>
+    <% end %>
   </div>
   <div class="modal-footer">
-    <p class="sign-up-alternative">o ingresa con</p>
-    <div class="social-log-in-buttons">
-      <a id="btn-create-account-facebook" class="btn-auth btn-facebook" href="#"><b>Facebook</b></a>
-      <a id="btn-create-account-twitter" class="btn-auth btn-twitter" href="#"><b>Twitter</b></a>
-    </div>
-    <p>¿Ya eres usuario? <a href="#">Iniciar Sesión</a></p>
+    <%= render partial: 'shared/auth_footer' %>
+    <p>¿Ya eres usuario? <a href="#" class="btn-sign-in">Iniciar Sesi&oacute;n</a></p>
   </div>
 </div>

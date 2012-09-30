@@ -1,5 +1,5 @@
-define(['jquery', 'PetFinder', 'app/main/ajax_signup', 'app/main/publication_handler'],
-  function ($,    PetFinder,   AjaxSignUp,             PublicationHandler) {
+define(['jquery', 'PetFinder', 'app/main/ajax_signup', 'app/main/publication_handler', 'app/flash_display'],
+  function ($,    PetFinder,   AjaxSignUp,             PublicationHandler,              FlashDisplay) {
 
   var petFinder, ajaxSignup, publicationHandler
     , config = {};
@@ -8,10 +8,14 @@ define(['jquery', 'PetFinder', 'app/main/ajax_signup', 'app/main/publication_han
     init: function (settings) {
       config = settings;
 
+      // Flash messages
+      flash = new FlashDisplay(config.flash);
+
       // Ajax signup
       ajaxSignup = new AjaxSignUp({
         userSignedIn: config.userSignedIn,
         successCallback: function () {
+          flash.displayMessage('success', 'Logueado correctamente!');
         }
       });
 

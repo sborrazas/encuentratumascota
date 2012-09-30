@@ -2,8 +2,9 @@
   require(['require', 'app/main/index'], function (require) {
     require(['app/main/index'], function (view) {
       view.init(<%= {
-        userSignedIn: false, # user_signed_in?,
-        publications: @publications
+        userSignedIn: user_signed_in?,
+        publications: @publications,
+        flash: @flash_messages
       }.to_json.html_safe %>);
     });
   });

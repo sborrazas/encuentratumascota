@@ -1,4 +1,4 @@
-define(['jquery', 'bootstrap'], function ($) {
+define(['jquery', 'app/form_errors', 'bootstrap'], function ($, formErrors) {
 
   /**
    *
@@ -11,22 +11,26 @@ define(['jquery', 'bootstrap'], function ($) {
     $('.btn-sign-in').live('click', function (event) {
       event.preventDefault();
       if (!this.userSignedIn) {
-        this.signUp();
+        this.signIn();
       }
     }.bind(this));
 
     $('.btn-sign-up').live('click', function (event) {
       event.preventDefault();
       if (!this.userSignedIn) {
-        this.signIn();
+        this.signUp();
       }
     }.bind(this));
+
+    this.bindFormSubmit();
   };
 
   /**
    *
    */
   AjaxSignup.prototype.loginSuccessfulAction = function () {
+    $('#modal-sign-in').modal('hide');
+    $('#modal-sign-up').modal('hide');
     if (typeof this.successCallback === 'function') {
       this.successCallback();
     }
@@ -36,38 +40,51 @@ define(['jquery', 'bootstrap'], function ($) {
    *
    */
   AjaxSignup.prototype.bindFormSubmit = function () {
-    var userForm = $('#new_user, #user_new');
+    var userForm = $('#new_user, #user_new')
+      , self = this;
 
     userForm.submit(function (event) {
-      var url, params;
+      var url, params, $form;
 
       event.preventDefault();
 
-      url = userForm.attr('action') + '.json';
-      params = $(this).serialize();
+      $form = $(this);
+      url = userForm.attr('action');
+      params = $form.serialize();
 
-      $.post(url, params, function (content) {
-        if (content.status === 'error') {
-          $('#cboxContent .messages').displayMessage('flash-error', content.errors);
+      $.ajax({
+        type: "POST",
+        url: url,
+        data: params,
+        dataType: 'json',
+        success: function (content) {
+          self.loginSuccessfulAction();
+        },
+        error: function (jqXHR) {
+          var errors = $.parseJSON(jqXHR.responseText).errors;
+          formErrors.display({
+            form: $form,
+            errors: errors,
+            namespace: 'user'
+          });
         }
-        else if (content.status === 'success') {
-          this.loginSuccessfulAction();
-        }
-      }.bind(this));
-    }.bind(this));
+      });
+    });
   }
 
   /**
    *
    */
   AjaxSignup.prototype.signUp = function () {
-    $('#modal-sign-in').modal('show').show(300);
+    $('#modal-sign-in').modal('hide');
+    $('#modal-sign-up').modal('show').show(300);
   };
 
   /**
    *
    */
   AjaxSignup.prototype.signIn = function () {
+    $('#modal-sign-up').modal('hide');
     $('#modal-sign-in').modal('show').show(300);
   };
 
