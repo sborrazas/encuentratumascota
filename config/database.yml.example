@@ -1,0 +1,7 @@
+development: &default
+  adapter: postgresql
+  database: encuentratumascota_development
+  pool: 5
+  timeout: 5000
+  host: localhost
+  password: root

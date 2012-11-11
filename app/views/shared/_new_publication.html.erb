@@ -1,0 +1,64 @@
+<div id="publication-modal" class="modal" data-show="true" tabindex="-1" role="dialog">
+  <div class="modal-header">
+    <h3>Publicar mascota</h3>
+  </div>
+  <div class="modal-body">
+    <%= form_for @new_publication, url: '#', html: { class: 'form-horizontal', id: 'publication-form' } do |f| %>
+      <div class="control-group">
+        <%= f.label :publication_type, 'Estado', class: 'control-label required' %>
+        <div class="controls">
+          <%= f.select :publication_type, Publication::STATUS %>
+        </div>
+      </div>
+      <!--
+        <%#= :attachments do |af| %>
+          <div class="control-group">
+            <%#= af.label :image_url, 'Imagen', class: 'control-label' %>
+            <div class="controls">
+              <%#= af.file_field :image_url %>
+            </div>
+          </div>
+        <%# end %>
+      -->
+      <div class="control-group">
+        <%= f.label :pet_name, 'Nombre de la Mascota', class: 'control-label required' %>
+        <div class="controls">
+          <%= f.text_field :pet_name %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :breed_id, 'Raza', class: 'control-label required' %>
+        <div class="controls">
+          <%= f.select :breed_id, Breed.all.map {|b| [b.name, b.id] } %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :description, 'Descripción', class: 'control-label required' %>
+        <div class="controls">
+          <%= f.text_area :description, rows: 3 %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :lost_on, 'Perdido el', class: 'control-label required' %>
+        <div class="controls">
+          <%= f.text_field :lost_on %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :reward, 'Recompensa', class: 'control-label required' %>
+        <div class="controls">
+          <%= f.text_field :reward %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.submit 'Publicar', class: 'btn btn-success btn-large', id: 'publication-submit' %>
+        <button id="btn-cancel-publication" class="btn btn-large btn-cancel-publication" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="modal-footer">
+    La publicaci&oacute;n necesita aprobaci&oacute;n de un administrador.
+    Prohibida la venta de animales. Recibir&aacute;s un mail cuando se publique.
+  </div>
+</div>
