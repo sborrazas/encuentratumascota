@@ -29,10 +29,9 @@ class SessionsController < ApplicationController
   private
   def create_user_with_omniauth(auth)
     User.create({
-      name: auth.extra.raw_info.name,
       provider: auth.provider,
       uid: auth.uid,
-      email: auth.info.email
+      email: auth.info.email || ''
     })
   end
 
