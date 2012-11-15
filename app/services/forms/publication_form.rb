@@ -9,6 +9,7 @@ module Forms
       errors[:lng] << 'is invalid' if is_empty_string?(params[:lng])
       errors[:publication_type] << 'is invalid' unless Publication::STATUS.include?(params[:publication_type])
       errors[:breed_id] << 'does not exist' unless Breed.find_by_id(params[:breed_id])
+      errors[:lost_on] << 'can\'t be blank' unless params[:lost_on] && (Date.parse(params[:lost_on]) rescue false)
 
       errors
     end

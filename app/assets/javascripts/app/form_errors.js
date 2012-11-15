@@ -9,16 +9,26 @@ define(['jquery'], function ($) {
       errors += '<p>' + fieldErrors[i] + '</p>';
     }
     return '<div class="error-message">' + errors + '</div>';
-  }
+  };
+
+  /**
+   *
+   */
+  var clearErrors = function (options) {
+    var form = options.form;
+
+    form.find('.error-message').remove();
+    form.find('.error').removeClass('error');
+  };
 
   return {
+    clearErrors: clearErrors,
     display: function (options) {
       var errors = options.errors || []
         , form = options.form
         , namespace = options.namespace;
 
-      form.find('.error-message').remove();
-      form.find('.error').removeClass('error');
+      clearErrors({ form: form });
 
       $.each(errors, function (field, fieldErrors) {
         var fieldName = namespace + "[" + field + "]";

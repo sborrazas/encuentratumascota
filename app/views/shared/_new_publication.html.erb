@@ -33,7 +33,7 @@
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :description, 'Descripción', class: 'control-label required' %>
+        <%= f.label :description, 'Descripción', class: 'control-label' %>
         <div class="controls">
           <%= f.text_area :description, rows: 3 %>
         </div>
@@ -45,7 +45,13 @@
         </div>
       </div>
       <div class="control-group">
-        <%= f.label :reward, 'Recompensa', class: 'control-label required' %>
+        <%= f.label :reward, 'Recompensa', class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :reward %>
+        </div>
+      </div>
+      <div class="control-group">
+        <%= f.label :contact, 'Contacto', class: 'control-label required' %>
         <div class="controls">
           <%= f.text_field :reward %>
         </div>

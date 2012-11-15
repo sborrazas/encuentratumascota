@@ -1,4 +1,5 @@
-# Admin users
-%w(snt.aln@gmail.com seba.borrazas@gmail.com mdaguerre@gmail.com).each do |admin_user_email|
-  AdminUser.create!(email: admin_user_email, password: 'lareputamadre') unless AdminUser.where(email: admin_user_email).exists?
+# Creating default breeds
+%w(Labrador Beagle Otra).each do |breed_name|
+  puts "Find or create `#{breed_name}`"
+  Breed.find_or_create_by_name(breed_name)
 end

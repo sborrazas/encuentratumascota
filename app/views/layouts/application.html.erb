@@ -39,13 +39,14 @@
     </header>
 
     <nav class="sidebar-section">
-      <div id="logged-out-nav">
-        <p><a href="#" class="btn btn-sign-in">Iniciar sesi&oacute;n</a></p>
-        <p>¿No tienes usuario? <a href="#" class="btn-sign-up">Reg&iacute;strate</a>.</p>
-      </div>
+      <% unless current_user %>
+        <div id="logged-out-nav">
+          <p><a href="#" class="btn btn-sign-in">Iniciar sesi&oacute;n</a></p>
+          <p>¿No tienes usuario? <a href="#" class="btn-sign-up">Reg&iacute;strate</a>.</p>
+        </div>
+      <% end %>
 
-      <div id="logged-in-nav">
-      </div>
+      <div id="logged-in-nav"></div>
 
       <p><a href="#" id="publication-new" class="btn bnt-publish">Publicar mascota</a></p>
       <p>Mascotas perdidas, encontradas o en adopci&oacute;n. Prohibida la venta.</p>

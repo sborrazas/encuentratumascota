@@ -1,5 +1,5 @@
 define(['jquery', 'app/main/ajax_signup', 'app/main/publication_handler', 'app/flash_display', 'app/main/publication_form'],
-  function ($,    AjaxSignUp,             PublicationHandler,             FlashDisplay,        PublicationForm) {
+  function ($,    AjaxSignUp,             PublicationHandler,             flashDisplay,        PublicationForm) {
 
   var config = {}
     , petFinder, ajaxSignup, publicationHandler, publicationForm;
@@ -9,7 +9,7 @@ define(['jquery', 'app/main/ajax_signup', 'app/main/publication_handler', 'app/f
       config = settings;
 
       // Flash messages
-      flash = new FlashDisplay(config.flash);
+      flashDisplay.displayMessages(config.flash);
 
       // Ajax signup
       ajaxSignup = new AjaxSignUp({
@@ -31,7 +31,7 @@ define(['jquery', 'app/main/ajax_signup', 'app/main/publication_handler', 'app/f
 
       // Publications form handler
       publicationForm = new PublicationForm({
-
+        handler: publicationHandler
       });
     }
   };

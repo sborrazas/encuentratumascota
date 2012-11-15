@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121111145029) do
+ActiveRecord::Schema.define(:version => 20121115192708) do
 
   create_table "breeds", :force => true do |t|
     t.string "name", :null => false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 20121111145029) do
     t.integer  "breed_id",                         :null => false
     t.date     "lost_on",                          :null => false
     t.datetime "created_at",                       :null => false
+    t.string   "contact",          :default => "", :null => false
   end
 
   create_table "users", :force => true do |t|
