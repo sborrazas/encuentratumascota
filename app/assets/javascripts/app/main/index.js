@@ -26,7 +26,7 @@ define(['jquery', 'app/main/ajax_signup', 'app/main/publication_handler', 'app/f
 
       // Publications & GMaps handler
       publicationHandler = new PublicationHandler({
-
+        publications: settings.publications
       });
 
       // Publications form handler

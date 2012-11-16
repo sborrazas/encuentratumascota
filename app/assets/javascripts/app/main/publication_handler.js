@@ -3,7 +3,7 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
   /**
    *
    */
-  var PublicationHandler = function () {
+  var PublicationHandler = function (settings) {
     this.map = new GMaps({
       div: "#main-panel",
       lat: -34.90649,
@@ -24,6 +24,14 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
       other: 'assets/other.png',
       home: 'assets/home.png'
     };
+
+    this.publications = settings.publications;
+    // Checking 'Lost' as default label
+    $('.sidebar-options #filter-lost').prop('checked', true);
+    this.displayPublications();
+
+    // Bind click event to refresh publications
+    $('.sidebar-options input').change(this.displayPublications.bind(this));
   };
 
   /**
@@ -52,10 +60,23 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
   /**
    *
    */
-  PublicationHandler.prototype.displayPublications = function (publications) {
-    publications.forEach(function (publication) {
-      this.displayPublication(publication);
+  PublicationHandler.prototype.displayPublications = function () {
+    var publicationTypes = [];
+
+    // Grab filters
+    $('.sidebar-options input:checked').each(function (index, element) {
+      publicationTypes.push(element.value);
     });
+
+    // Remove previous markers
+    this.map.removeMarkers();
+
+    // Filter publications and display valid ones
+    this.publications.forEach(function (publication) {
+      if (publicationTypes.indexOf(publication.publication_type) !== -1) {
+        this.displayPublication(publication);
+      }
+    }.bind(this));
   };
 
   /**
@@ -67,7 +88,7 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
       lng: publication.lng,
       icon: this.images[publication.status],
       infoWindow: {
-        content: '<h4>' + publication.name + '</h4><p>' + publication.description + '</p>'
+        content: '<h4>' + publication.pet_name + '</h4><p>' + publication.description + '</p>'
       }
     });
   };
@@ -77,7 +98,7 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
    */
   PublicationHandler.prototype.addMarkerNewPublication = function (location) {
     if (this.currentMarker) {
-      this.currentMarker.setVisible(false);
+      this.clearPlacedMarker();
     }
     this.currentMarker = this.map.addMarker({
       lat: location.lat,
@@ -105,6 +126,14 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
         lng: this.currentMarker.position.Za
       };
     }
+  };
+
+  /**
+   *
+   */
+  PublicationHandler.prototype.clearPlacedMarker = function () {
+    this.currentMarker.setVisible(false); // FIXME Couldn't find a way to remove it :(
+    this.currentMarker = null;
   };
 
   return PublicationHandler;
