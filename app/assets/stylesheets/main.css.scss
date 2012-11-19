@@ -303,6 +303,28 @@
     }
   }
 
+  /* Modal Sing in/ Sign Up *******************************************************************************************/
+  #modal-sign-in {
+    .facebook-btn, 
+    .twitter-btn {
+      background: transparent url(facebook.png) no-repeat left top;
+      width: 127px;
+      height: 32px;
+      display: block;
+      color: transparent;
+      float: left;
+    }
+    .twitter-btn {
+      background-image: url(twitter.png);
+      margin-left: 10px;
+    }
+    p.register {
+      padding-top: 15px;
+      display: block;
+      clear: both;
+    }
+  }
+
   /* Forms *******************************************************************************************/
   form label {
     text-transform: uppercase;
