@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 
 gem 'pg'
+gem 'thin'
 gem 'unicorn'
 
 gem 'shield'
@@ -11,7 +12,6 @@ gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
 group :development do
-  gem 'thin'
   gem 'pry'
 end
 
