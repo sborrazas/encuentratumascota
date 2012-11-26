@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= render partial: 'shared/head' %>
+</head>
+<body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}" %>">
+  <%= yield %>
+
+  <script type="text/javascript">
+    require(['require', 'admin'], function (require) {
+      require(['admin'], function (view) {
+        view.init({
+          // Admin general view data..
+        });
+      });
+    });
+    <%= yield :javascript %>
+  </script>
+</body>
+</html>

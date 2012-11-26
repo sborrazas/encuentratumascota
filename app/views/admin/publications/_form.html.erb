@@ -1,0 +1,37 @@
+
+<%= form.label :pet_name %>
+<%= form.text_field :pet_name %>
+
+<%= form.label :age %>
+<%= form.text_field :age %>
+
+<%= form.label :description %>
+<%= form.text_area :description %>
+
+<%= form.label :phone %>
+<%= form.text_area :phone %>
+
+<%= form.label :status %>
+<%= form.select :status, Publication::STATUSES %>
+
+<!-- TODO Display map (with lat and lng) -->
+
+<%= form.label :reward %>
+<%= form.text_field :reward %>
+
+<%= form.label :publication_type %>
+<%= form.select :publication_type, Publication::PUBLICATION_TYPES %>
+
+<%= form.label :user %>
+<%= form.select :user, User.all %>
+
+<%= form.label :breed %>
+<%= form.select :breed, Breed.all %>
+
+<%= form.label :lost_on %>
+<%= form.text_field :lost_on %><!-- TODO Datepicker -->
+
+<%= form.label :contact %>
+<%= form.text_field :contact %>
+
+<!-- TODO Images -->

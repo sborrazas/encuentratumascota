@@ -7,6 +7,7 @@ gem 'thin'
 gem 'unicorn'
 
 gem 'shield'
+gem 'cancan'
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'

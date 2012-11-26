@@ -1,0 +1,26 @@
+<title>Encuentratumascota</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<%= stylesheet_link_tag 'application', media: 'all' %>
+<%= csrf_meta_tags %>
+
+<% if Rails.env.development? %>
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="-1">
+  <meta http-equiv="cache-control" content="no-store">
+  <meta http-equiv="cache-control" content="no-cache">
+<% end %>
+
+<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+<script type="text/javascript" data-main="/assets/config.js" src="/assets/require.js"></script>
+<script type="text/javascript">
+  // IE fix
+  if (typeof window.console === 'undefined') {
+    // hax
+    window.console = {
+      log: function () {}
+    };
+  }
+
+  // Debug constant
+  var _DEBUG = <%= Rails.env.development? %>;
+</script>

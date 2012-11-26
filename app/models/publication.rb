@@ -17,7 +17,8 @@ class Publication < ActiveRecord::Base
   belongs_to :user
   belongs_to :breed
 
-  STATUS = %w(adoption lost found)
+  PUBLICATION_TYPES = %w(adoption lost found)
+  STATUSES = %w(active inactive closed)
 
   scope :has_publication_type, lambda {|*ptype| where(publication_type: ptype) }
   scope :has_status, lambda {|*statuses| where(status: statuses) }

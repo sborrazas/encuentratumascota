@@ -1,0 +1,7 @@
+<h1>Admin::Publications#new</h1>
+
+<%= form_for @publication, url: admin_publications_path do |form| %>
+  <%= render partial: 'admin/publications/form', locals: { form: form } %>
+
+  <%= form.submit 'Create' %>
+<% end %>

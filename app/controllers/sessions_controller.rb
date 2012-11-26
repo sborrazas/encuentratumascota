@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
 
+  authorize_resource
   respond_to :json
 
   def create

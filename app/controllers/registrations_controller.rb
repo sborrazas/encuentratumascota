@@ -1,5 +1,6 @@
 class RegistrationsController < ApplicationController
 
+  authorize_resource
   respond_to :json
 
   def create
@@ -12,6 +13,8 @@ class RegistrationsController < ApplicationController
       render json: { errors: user_validator.errors }, status: :unprocessable_entity
     end
   end
+
+  private
 
   def user_params
     return {} unless params[:user].kind_of?(Hash)
