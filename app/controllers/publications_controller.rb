@@ -1,6 +1,6 @@
 class PublicationsController < ApplicationController
 
-  authorize_resource
+  before_filter :require_current_user
   respond_to :json
 
   def create

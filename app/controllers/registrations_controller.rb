@@ -1,6 +1,6 @@
 class RegistrationsController < ApplicationController
 
-  authorize_resource
+  before_filter :require_guest
   respond_to :json
 
   def create

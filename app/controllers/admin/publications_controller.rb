@@ -1,6 +1,6 @@
 class Admin::PublicationsController < ApplicationController
 
-  authorize_resource
+  before_filter :require_admin
   layout 'admin'
 
   def index
