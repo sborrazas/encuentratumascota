@@ -20,7 +20,7 @@ class SessionsController < ApplicationController
     user = User.where(provider: auth.provider, uid: auth.uid).first || create_user_with_omniauth(auth)
     sign_user_in(user)
 
-    redirect_to root_path, flash: { success: "Logged in with #{auth.provider} successfully!" }
+    redirect_to user.is_admin? ? admin_publications_path : root_path, flash: { success: "Logged in with #{auth.provider} successfully!" }
   end
 
   def failure

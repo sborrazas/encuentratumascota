@@ -11,6 +11,7 @@ Encuentratumascota::Application.routes.draw do
   match '/auth/failure', to: 'sessions#failure'
 
   # Admin
+  get 'admin', to: 'admin/publications#index'
   namespace :admin do
     resources :publications, only: %w(index new create edit update)
   end
