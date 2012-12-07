@@ -14,5 +14,6 @@ Encuentratumascota::Application.routes.draw do
   get 'admin', to: 'admin/publications#index'
   namespace :admin do
     resources :publications, only: %w(index new create edit update)
+    resources :users, only: %w(index edit update)
   end
 end
