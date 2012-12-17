@@ -3,7 +3,16 @@
     require(['app/main/index'], function (view) {
       view.init(<%= {
         userSignedIn: !! current_user,
-        publications: @publications,
+        publications: @publications.map do |publication|
+          {
+            publication_type: publication.publication_type,
+            pet_name: publication.pet_name,
+            attachments: [],
+            description: publication.description,
+            lat: publication.lat,
+            lng: publication.lng
+          }
+        end,
         flash: @flash_messages
       }.to_json.html_safe %>);
     });

@@ -4,7 +4,7 @@
   <%= render partial: 'shared/head' %>
 </head>
 <body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}" %>">
-  <section class="side-panel">
+  <section id="main-navigation">
     <header class="sidebar-section">
       <%= image_tag 'logo.png', class: 'logo-img', id: 'logo-img' %>
       <hgroup>
@@ -26,22 +26,19 @@
       <p><a href="#" id="publication-new" class="btn bnt-publish">Publicar mascota</a></p>
       <p>Mascotas perdidas, encontradas o en adopci&oacute;n. Prohibida la venta.</p>
     </nav>
+  </section>
 
-    <div class="sidebar-section sidebar-options">
-      <ul>
-        <li>
-          <input id="filter-lost" type="checkbox" value="lost">
-          <label class="paws lost" for="filter-lost">Perdidos</label>
-        </li>
-        <li>
-          <input id="filter-found" type="checkbox" value="found">
-          <label class="paws found" for="filter-found">Encontrados</label>
-        </li>
-        <li>
-          <input id="filter-adoption" type="checkbox" value="adoption">
-          <label class="paws adoption" for="filter-adoption">En Adopci&oacute;n</label>
-        </li>
-      </ul>
+  <section id="main-sidebar">
+    <div class="btn-group sidebar-options">
+      <button data-publication-type="all">Todos</button>
+      <button data-publication-type="lost">Perdidos</button>
+      <button data-publication-type="found">Encontrados</button>
+      <button data-publication-type="adoption">En Adopci&oacute;n</button>
+    </div>
+
+    <ul id="publication-list"></ul>
+    <div id="new-publication-container">
+      <%= render partial: 'shared/new_publication' %>
     </div>
   </section>
 
@@ -61,7 +58,7 @@
     </ul>
   </footer>
 
-  <%= render partial: 'shared/new_publication' %>
+  <%= render partial: 'shared/publication_template' %>
   <%= render partial: 'shared/sign_in' %>
   <%= render partial: 'shared/sign_up' %>
 

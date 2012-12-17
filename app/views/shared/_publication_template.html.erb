@@ -1,0 +1,12 @@
+<script type="text/x-jQuery-tmpl" id="publication-template">
+  <li>
+    <h1>
+      ${publication.pet_name}
+      <span class="${publication.publication_type}">${publication.publication_type}</span>
+    </h1>
+    {{if publication.attachments.length > 0}}
+      <img src="${publication.attachments[0]}" alt="${publication.pet_name}" />
+    {{/if}}
+    <p>${publication.description}</p>
+  </li>
+</script>

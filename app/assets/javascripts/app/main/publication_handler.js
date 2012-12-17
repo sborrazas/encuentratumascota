@@ -1,4 +1,4 @@
-define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
+define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstrap, GMaps) {
 
   /**
    *
@@ -26,12 +26,32 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
     };
 
     this.publications = settings.publications;
-    // Checking 'Lost' as default label
-    $('.sidebar-options #filter-lost').prop('checked', true);
-    this.displayPublications();
+
+    // Publications list view setup
+    this.$publicationList = $('#publication-list');
+    this.publicationTemplate = $('#publication-template').template();
+    $('#new-publication-container').hide();
+
+    // Using 'all' as default filter
+    $('#main-sidebar .sidebar-options button').first().addClass('active');
+    this.displayPublications({ publication_type: 'all' });
 
     // Bind click event to refresh publications
-    $('.sidebar-options input').change(this.displayPublications.bind(this));
+    $('#main-sidebar .sidebar-options button').click(function (event) {
+      var clickedElement = $(event.target);
+
+      event.preventDefault();
+
+      // Marks selected element as 'active'
+      $('#main-sidebar .sidebar-options button').removeClass('active');
+      clickedElement.addClass('active');
+
+      // Hide publications form and display publications list
+      $('#new-publication-container').hide();
+      this.$publicationList.show();
+
+      this.displayPublications({ publication_type: clickedElement.data('publication-type') });
+    }.bind(this));
   };
 
   /**
@@ -60,21 +80,20 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
   /**
    *
    */
-  PublicationHandler.prototype.displayPublications = function () {
-    var publicationTypes = [];
-
-    // Grab filters
-    $('.sidebar-options input:checked').each(function (index, element) {
-      publicationTypes.push(element.value);
-    });
+  PublicationHandler.prototype.displayPublications = function (filters) {
+    var publicationType = filters.publication_type;
 
     // Remove previous markers
     this.map.removeMarkers();
 
+    // Clear publications list
+    this.$publicationList.empty();
+
     // Filter publications and display valid ones
     this.publications.forEach(function (publication) {
-      if (publicationTypes.indexOf(publication.publication_type) !== -1) {
-        this.displayPublication(publication);
+      if (publicationType === 'all' || publicationType === publication.publication_type) {
+        this.displayPublicationOnMap(publication);
+        this.displayPublicationOnSidebar(publication);
       }
     }.bind(this));
   };
@@ -82,7 +101,7 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
   /**
    *
    */
-  PublicationHandler.prototype.displayPublication = function (publication) {
+  PublicationHandler.prototype.displayPublicationOnMap = function (publication) {
     this.map.addMarker({
       lat: publication.lat,
       lng: publication.lng,
@@ -91,6 +110,15 @@ define(["jquery", "bootstrap", "lib/gmaps"], function ($, bootstrap, GMaps) {
         content: '<h4>' + publication.pet_name + '</h4><p>' + publication.description + '</p>'
       }
     });
+  };
+
+  /**
+   *
+   */
+  PublicationHandler.prototype.displayPublicationOnSidebar = function (publication) {
+    var content = $.tmpl(this.publicationTemplate, { publication: publication });
+
+    this.$publicationList.append(content);
   };
 
   /**

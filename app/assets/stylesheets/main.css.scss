@@ -1,7 +1,7 @@
 .main-index {
 
   /* Sidebar **********************************************************************/
-  .side-panel {
+  #main-sidebar {
     position: absolute;
     z-index: 10;
     left: 0;
@@ -305,7 +305,7 @@
 
   /* Modal Sing in/ Sign Up *******************************************************************************************/
   #modal-sign-in {
-    .facebook-btn, 
+    .facebook-btn,
     .twitter-btn {
       background: transparent url(facebook.png) no-repeat left top;
       width: 127px;
