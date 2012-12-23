@@ -16,3 +16,5 @@
 .DS_Store
 
 *.yml
+
+/config/development_settings.rb

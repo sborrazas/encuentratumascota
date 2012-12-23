@@ -11,7 +11,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121223134357) do
+ActiveRecord::Schema.define(:version => 20121223135523) do
+
+  create_table "attachments", :force => true do |t|
+    t.integer "publication_id", :null => false
+    t.string  "image",          :null => false
+  end
 
   create_table "breeds", :force => true do |t|
     t.string "name", :null => false

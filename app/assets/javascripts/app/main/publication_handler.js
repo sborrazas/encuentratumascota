@@ -42,6 +42,10 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
 
       event.preventDefault();
 
+      // Hide publication form and display publication list
+      $("#new-publication-container").hide();
+      $("#publication-list").show();
+
       // Marks selected element as 'active'
       $('#main-sidebar .sidebar-options button').removeClass('active');
       clickedElement.addClass('active');
@@ -148,12 +152,19 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
    *
    */
   PublicationHandler.prototype.placedCoords = function () {
-    if (this.currentMarker) {
+    if (this.isCoordsPlaced()) {
       return {
         lat: this.currentMarker.position.Ya,
         lng: this.currentMarker.position.Za
       };
     }
+  };
+
+  /**
+   *
+   */
+  PublicationHandler.prototype.isCoordsPlaced = function () {
+    return !! this.currentMarker;
   };
 
   /**
