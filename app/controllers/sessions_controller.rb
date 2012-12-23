@@ -32,7 +32,8 @@ class SessionsController < ApplicationController
     User.create({
       provider: auth.provider,
       uid: auth.uid,
-      email: auth.info.email || ''
+      email: auth.info.email || '',
+      provider_username: auth.info.nickname || ''
     })
   end
 
