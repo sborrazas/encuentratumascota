@@ -12,13 +12,11 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
   PublicationForm.prototype.bindEvents = function () {
     $("#publication-new").click(function (event) {
       event.preventDefault();
-      if (this.publicationHandler.placedCoords()) {
-        this.showPublishForm();
-      }
-      else {
+      if (typeof this.publicationHandler.placedCoords() === 'undefined') {
         // TODO I18n
         flashDisplay.displayMessage('info', 'Click on the map');
       }
+      this.showPublishForm();
     }.bind(this));
 
     this.form.find("#publication-submit").click(function (event) {
@@ -35,7 +33,8 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
    *
    */
   PublicationForm.prototype.showPublishForm = function () {
-    $("#publication-modal").modal("show").show(300);
+    $("#new-publication-container").show();
+    $("#publication-list").hide();
   };
 
   /**
