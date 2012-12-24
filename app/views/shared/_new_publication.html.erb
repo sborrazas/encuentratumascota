@@ -1,22 +1,17 @@
 <h3>Publicar mascota</h3>
 
-<%= form_for @new_publication, url: '#', html: { class: 'form-horizontal', id: 'publication-form' } do |f| %>
+<%= form_for @new_publication, url: '#', html: { id: 'publication-form', multipart: true } do |f| %>
   <div class="control-group">
     <%= f.label :publication_type, 'Estado', class: 'control-label required' %>
     <div class="controls">
       <%= f.select :publication_type, Publication::PUBLICATION_TYPES %>
     </div>
   </div>
-  <!--
-    <%#= :attachments do |af| %>
-      <div class="control-group">
-        <%#= af.label :image_url, 'Imagen', class: 'control-label' %>
-        <div class="controls">
-          <%#= af.file_field :image_url %>
-        </div>
-      </div>
-    <%# end %>
-  -->
+  <div id="image-upload-fields" class="control-group">
+    <span class="control-label">Imagen</span>
+    <ul class="controls"></ul>
+    <button class="btn">Agregar imagen</button>
+  </div>
   <div class="control-group">
     <%= f.label :pet_name, 'Nombre de la Mascota', class: 'control-label required' %>
     <div class="controls">
@@ -63,3 +58,10 @@
   La publicaci&oacute;n necesita aprobaci&oacute;n de un administrador.
   Prohibida la venta de animales. Recibir&aacute;s un mail cuando se publique.
 </div>
+
+<script type="text/x-jquery-tmpl" id="attachment-template">
+  <li>
+    <label for="publication_attachment_${id}" class="upload-label">Add a new image</label>
+    <input id="publication_attachment_${id}" type="file" name="publication[attachment][${name}]" />
+  </li>
+</script>

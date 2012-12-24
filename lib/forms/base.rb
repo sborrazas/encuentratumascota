@@ -1,7 +1,9 @@
 module Forms
+
   class Base
-    def initialize(params)
+    def initialize(params, options = {})
       @params = params
+      @options = options
     end
 
     def valid?
@@ -9,7 +11,11 @@ module Forms
     end
 
     def errors
-      @errors ||= process_errors(@params)
+      @errors ||= process_errors(@params, @options)
+    end
+
+    def get_resource
+      self.build_resource(@params, @options)
     end
 
     def default_errors_hash

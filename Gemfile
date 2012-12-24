@@ -11,6 +11,10 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-twitter'
 
+gem 'carrierwave'
+gem 'fog', '~> 1.3.1'
+gem 'rmagick'
+
 group :development do
   gem 'pry'
 end

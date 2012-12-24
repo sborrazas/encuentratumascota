@@ -7,7 +7,7 @@
           {
             publication_type: publication.publication_type,
             pet_name: publication.pet_name,
-            attachments: [],
+            attachments: publication.attachments.map {|a| a.image.url },
             description: publication.description,
             lat: publication.lat,
             lng: publication.lng
