@@ -24,15 +24,4 @@ class Publication < ActiveRecord::Base
   scope :has_publication_type, lambda {|*ptype| where(publication_type: ptype) }
   scope :has_status, lambda {|*statuses| where(status: statuses) }
 
-  def adoption?
-    publication_type == 'adoption'
-  end
-
-  def lost?
-    publication_type == 'lost'
-  end
-
-  def found?
-    publication_type == 'found'
-  end
 end

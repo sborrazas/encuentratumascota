@@ -139,9 +139,6 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
       icon: this.images.lost,
       animation: 'drop',
       draggable: true,
-      infoWindow: {
-        content: '<strong>My Content</strong>'
-      },
       dragend: function (event) {
         console.log(event);
       }
