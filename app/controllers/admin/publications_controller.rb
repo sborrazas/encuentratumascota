@@ -29,7 +29,10 @@ class Admin::PublicationsController < ApplicationController
 
   def update
     @publication = Publication.find(params[:id])
-    publication_validator = Forms::PublicationForm.new(publication_params, context: :admin, resource: @publication)
+    publication_validator = Forms::PublicationForm.new(publication_params, {
+      context: :admin,
+      resource: @publication
+    })
 
     if publication_validator.valid?
       @publication.update_attributes(publication_params)

@@ -16,6 +16,7 @@ class Publication < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :breed
+  has_many :attachments, dependent: :destroy
 
   PUBLICATION_TYPES = %w(adoption lost found)
   STATUSES = %w(active inactive closed)
