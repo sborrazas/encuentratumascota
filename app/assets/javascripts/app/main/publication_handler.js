@@ -97,7 +97,12 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
     this.publications.forEach(function (publication) {
       if (publicationType === 'all' || publicationType === publication.publication_type) {
         this.displayPublicationOnMap(publication);
-        this.displayPublicationOnSidebar(publication);
+        this.displayPublicationOnSidebar({
+          publication_type: publication.publication_type,
+          pet_name: publication.pet_name,
+          description: publication.description,
+          attachment: publication.attachments[0] || '/assets/default_dog.png'
+        });
       }
     }.bind(this));
   };
@@ -123,6 +128,7 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
     var content = $.tmpl(this.publicationTemplate, { publication: publication });
 
     this.$publicationList.append(content);
+    $('body').addClass('with-sidebar');
   };
 
   /**

@@ -1,6 +1,14 @@
-<h3>Publicar mascota</h3>
+<h3>Nueva Publicaci&oacute;n</h3>
+
+<div class="separator"></div>
 
 <%= form_for @new_publication, url: '#', html: { id: 'publication-form', multipart: true } do |f| %>
+  <div class="control-group">
+    <%= f.label :pet_name, 'Titulo', class: 'control-label required' %>
+    <div class="controls">
+      <%= f.text_field :pet_name, placeholder: 'Titulo o nombre de la mascota' %>
+    </div>
+  </div>
   <div class="control-group">
     <%= f.label :publication_type, 'Estado', class: 'control-label required' %>
     <div class="controls">
@@ -8,15 +16,8 @@
     </div>
   </div>
   <div id="image-upload-fields" class="control-group">
-    <span class="control-label">Imagen</span>
+    <span class="control-label">Im&aacute;genes</span>
     <ul class="controls"></ul>
-    <button class="btn">Agregar imagen</button>
-  </div>
-  <div class="control-group">
-    <%= f.label :pet_name, 'Nombre de la Mascota', class: 'control-label required' %>
-    <div class="controls">
-      <%= f.text_field :pet_name %>
-    </div>
   </div>
   <div class="control-group">
     <%= f.label :breed_id, 'Raza', class: 'control-label required' %>
@@ -27,30 +28,31 @@
   <div class="control-group">
     <%= f.label :description, 'Descripción', class: 'control-label' %>
     <div class="controls">
-      <%= f.text_area :description, rows: 3 %>
+      <%= f.text_area :description, rows: 3, placeholder: 'Descripción general de la mascota' %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :lost_on, 'Perdido el', class: 'control-label required' %>
     <div class="controls">
-      <%= f.text_field :lost_on %>
+      <%= f.text_field :lost_on, placeholder: '01/01/2000' %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :reward, 'Recompensa', class: 'control-label' %>
     <div class="controls">
-      <%= f.text_field :reward %>
+      <%= f.text_field :reward, placeholder: '(opcional)' %>
     </div>
   </div>
   <div class="control-group">
     <%= f.label :contact, 'Contacto', class: 'control-label required' %>
     <div class="controls">
-      <%= f.text_field :contact %>
+      <%= f.text_field :contact, placeholder: 'Telefono de contacto' %>
     </div>
   </div>
+  <div class="separator"></div>
   <div class="control-group">
     <%= f.submit 'Publicar', class: 'btn btn-success btn-large', id: 'publication-submit' %>
-    <button id="btn-cancel-publication" class="btn btn-large btn-cancel-publication">Cancelar</button>
+    <button id="cancel-publication" class="btn btn-large btn-cancel-publication">Cancelar</button>
   </div>
 <% end %>
 
@@ -61,7 +63,7 @@
 
 <script type="text/x-jquery-tmpl" id="attachment-template">
   <li>
-    <label for="publication_attachment_${id}" class="upload-label">Add a new image</label>
+    <label for="publication_attachment_${id}" class="hidden">Add a new image</label>
     <input id="publication_attachment_${id}" type="file" name="publication[attachment][${name}]" />
   </li>
 </script>
