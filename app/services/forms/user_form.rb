@@ -1,6 +1,6 @@
 module Forms
   class UserForm < Forms::Base
-    def process_errors(params)
+    def process_errors(params, options)
       errors = default_errors_hash
 
       if params[:email].blank? || /\A[\w.%+-]+@[\w.-]+\.[a-z]+\z/i !~ params[:email]
