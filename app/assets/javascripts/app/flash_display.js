@@ -22,7 +22,7 @@ define(['jquery', 'bootstrap'], function ($) {
    *
    */
   FlashDisplay.prototype.displayMessage = function (type, message) {
-    $('<div class="message ' + type + '">' + message + '</div>').appendTo('body').alert();
+    $('<div class="message ' + type + '">' + message + '</div>').appendTo('#main-panel').alert();
   };
 
   return new FlashDisplay();
