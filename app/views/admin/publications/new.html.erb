@@ -4,12 +4,13 @@
     <li><%= link_to current_user.is_admin? ? 'Publicaciones' : 'Mis publicaciones', admin_publications_path %><span class="separator"> &gt; </span></li>
     <li class="active">Nueva Publicaci&oacute;n %></li>
   </ul>
-  <%= title @publication, { last_element: 'Nueva publicacion' } %>
+  <%= title 'Nueva publicacion' %>
 </header>
 
-<%= display_flash %>
-
 <%= form_for @publication, url: admin_publications_path, html: { class: 'form-horizontal' } do |form| %>
+
+  <%= display_errors(@errors) if @errors %>
+
   <%= render partial: 'admin/publications/form', locals: { form: form } %>
 
   <div class="form-actions">

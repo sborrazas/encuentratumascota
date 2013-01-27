@@ -205,19 +205,21 @@ body.main {
       clear: both;
     }
   }
-}
 
-.main-header {
-  float: left;
-  display: block;
-  width: 100%;
-  margin: 0 0 20px 0;
-  h1 {
-    float: left;
-  }
-  .btn {
-    float: right;
-    margin-left: 1em;
+  /* Messages *******************************************************/
+  .message {
+    position: absolute;
+    margin: 2%;
+    width: 93%;
+    padding: 1% 1.5%;
+    border: 1px solid #000;
+    @include border-radius(5px);
+
+    &.info {
+      background: rgba(87, 87, 255, 0.9);
+      border-color: #0000B5;
+      color: #000;
+    }
   }
 }
 

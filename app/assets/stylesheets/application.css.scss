@@ -59,7 +59,10 @@ body {
   .publication-new-btn {
     float: right;
     line-height: 80px;
-    margin-right: 30px;
+    padding-right: 30px;
+    margin-right: 10px;
+    border-right-width: 1px;
+    @include border-image(linear-gradient(top, rgba(255,255,255,0) 20%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 80%) 1 100%);
 
     a {
       text-decoration: none;
@@ -132,22 +135,6 @@ body {
         }
       }
     }
-  }
-}
-
-/* Messages *******************************************************/
-.message {
-  position: absolute;
-  margin: 2%;
-  width: 93%;
-  padding: 1% 1.5%;
-  border: 1px solid #000;
-  @include border-radius(5px);
-
-  &.info {
-    background: rgba(87, 87, 255, 0.9);
-    border-color: #0000B5;
-    color: #000;
   }
 }
 

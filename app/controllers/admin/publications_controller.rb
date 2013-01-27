@@ -39,6 +39,7 @@ class Admin::PublicationsController < ApplicationController
       redirect_to admin_publications_path, flash: { success: 'Publication updated successfully' }
     else
       @publication.assign_attributes(publication_params)
+      @errors = publication_validator.errors
       render :edit
     end
   end

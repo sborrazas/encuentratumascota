@@ -1,11 +1,19 @@
 body.admin-publications,
 body.admin-users {
 
-  header,
+  .main-header,
   table,
   form {
     margin: 0 4%;
     width: 92%;
+  }
+
+  .main-header {
+    margin-top: 20px;
+  }
+
+  .alert {
+    clear: both;
   }
 
   form {

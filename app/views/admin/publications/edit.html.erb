@@ -2,14 +2,16 @@
   <ul class="breadcrumb">
     <li><%= link_to 'Encuentra tu Mascota', root_url %><span class="separator"> &gt; </span></li>
     <li><%= link_to current_user.is_admin? ? 'Publicaciones' : 'Mis publicaciones', admin_publications_path %><span class="separator"> &gt; </span></li>
-    <li class="active"><%= @publication.pet_name %></li>
+    <li class="active"><%= @publication.pet_name_was %></li>
   </ul>
-  <%= title @publication %>
+  <%= title @publication.pet_name_was %>
 </header>
 
-<%= display_flash %>
 
 <%= form_for @publication, url: admin_publication_path(@publication), html: { class: 'form-horizontal' } do |form| %>
+
+  <%= display_errors(@errors) if @errors %>
+
   <%= render partial: 'admin/publications/form', locals: { form: form } %>
 
   <div class="form-actions">

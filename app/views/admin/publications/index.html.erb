@@ -27,7 +27,9 @@
       <td><%= publication.publication_type %></td>
       <td><%= publication.created_at.strftime('%d/%m/%Y') %></td>
       <td>
-        <%= link_to 'Edit', edit_admin_publication_path(publication) %>
+        <%= link_to 'Ver', admin_publication_path(publication) %>
+        <%= link_to 'Editar', edit_admin_publication_path(publication) %>
+        <!-- <%= link_to 'Eliminar', edit_admin_publication_path(publication) %> -->
       </td>
     </tr>
   <% end %>
