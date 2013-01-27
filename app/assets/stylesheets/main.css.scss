@@ -154,5 +154,56 @@ body.main {
       }
     }
   }
+
+  /* MODALS *****************************************************/
+  .modal {
+    width: 370px;
+    margin-left: -185px; /* - width / 2 */
+    top: 60%;
+
+    .modal-body {
+      padding-top: 28px;
+
+      label {
+        display: none;
+      }
+      input {
+        width: 87%;
+        margin: 1% 5%;
+      }
+      .btn {
+        width: 90%;
+      }
+    }
+
+    .sign-up-alternative {
+      text-align: center;
+      margin-top: -25px;
+      background: rgba(255, 255, 255, 0.5);
+    }
+
+    .social-log-in-buttons {
+      margin: 0 11%;
+
+      .facebook-btn,
+      .twitter-btn {
+        background: transparent url(facebook.png) no-repeat left top;
+        width: 127px;
+        height: 32px;
+        display: block;
+        color: transparent;
+        float: left;
+      }
+      .twitter-btn {
+        background-image: url(twitter.png);
+        margin-left: 10px;
+      }
+    }
+    p.register {
+      padding-top: 15px;
+      display: block;
+      clear: both;
+    }
+  }
 }
 

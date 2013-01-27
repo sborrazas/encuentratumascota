@@ -36,6 +36,14 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
     $('#main-sidebar .sidebar-options button').first().addClass('active');
     this.displayPublications({ publication_type: 'all' });
 
+    // When clickin on a new publication reset filters
+    $("#publication-new").click(function (event) {
+      event.preventDefault();
+
+      $('#main-sidebar .sidebar-options button').removeClass('active');
+      this.displayPublications({ publication_type: 'all' });
+    }.bind(this));
+
     // Bind click event to refresh publications
     $('#main-sidebar .sidebar-options button').click(function (event) {
       var clickedElement = $(event.target);
@@ -101,6 +109,8 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
           publication_type: publication.publication_type,
           pet_name: publication.pet_name,
           description: publication.description,
+          lost_on: publication.lost_on,
+          breed: publication.breed,
           attachment: publication.attachments[0] || '/assets/default_dog.png'
         });
       }

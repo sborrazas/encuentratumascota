@@ -14,14 +14,25 @@
     </header>
 
     <nav>
-      <!--
-      <div id="logged-out-nav">
-        <p><a href="#" class="btn btn-sign-in">Iniciar sesi&oacute;n</a></p>
-        <p>¿No tienes usuario? <a href="#" class="btn-sign-up">Reg&iacute;strate</a>.</p>
+      <% unless current_user %>
+        <div id="logged-out-nav">
+          <a href="#" class="btn-sign-in">Iniciar sesi&oacute;n</a>
+        </div>
+      <% end %>
+
+      <div id="logged-in-nav">
+        <a class="dropdown-toggle active" href="#">
+          <span id="username"><%= current_user.provider_username if current_user %></span>
+          <span class="dropdown-caret"></span>
+        </a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="/admin/publications">Mis Publicaciones</a></li>
+          <li><a href="/admin/publications">Configuraci&oacute;n</a></li>
+          <li><a href="/sessions/destroy">Cerrar sesi&oacute;n</a></li>
+        </ul>
       </div>
-      -->
-      <div id="logged-in-nav"></div>
-      <p><a href="#" id="publication-new">Publicar mascota</a></p>
+
+      <p class="publication-new-btn"><a href="#" id="publication-new">Publicar mascota</a></p>
     </nav>
   </section>
 
