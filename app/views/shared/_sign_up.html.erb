@@ -8,7 +8,7 @@
 
       <p class="field">
         <%= f.label :password, 'Contrase;a' %>
-        <%= f.password_field :password, autocomplete: 'off' %>
+        <%= f.password_field :password, autocomplete: 'off', placeholder: 'Contraseña' %>
       </p>
 
       <p><%= f.submit 'Crear Cuenta', class: 'btn btn-golden btn-block btn-large' %></p>
@@ -16,6 +16,6 @@
   </div>
   <div class="modal-footer">
     <%= render partial: 'shared/auth_footer' %>
-    <p>¿Ya eres usuario? <a href="#" class="btn-sign-in">Iniciar Sesi&oacute;n</a></p>
+    <p class="register">¿Ya eres usuario? <a href="#" class="btn-sign-in">Iniciar Sesi&oacute;n</a></p>
   </div>
 </div>

@@ -3,64 +3,40 @@
 <head>
   <%= render partial: 'shared/head' %>
 </head>
-<body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}" %>">
+<body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}".gsub('/', '-') %>">
   <section id="main-navigation">
-    <header class="sidebar-section">
+    <header>
       <%= image_tag 'logo.png', class: 'logo-img', id: 'logo-img' %>
       <hgroup>
-        <h1 class="hide">Encuentra tu Mascota</h1>
+        <h1>Encuentra tu Mascota</h1>
         <h2>La manera m&aacute;s f&aacute;cil y r&aacute;pida de conectar mascotas con sus dueños</h2>
       </hgroup>
     </header>
 
-    <nav class="sidebar-section">
+    <nav>
       <% unless current_user %>
         <div id="logged-out-nav">
-          <p><a href="#" class="btn btn-sign-in">Iniciar sesi&oacute;n</a></p>
-          <p>¿No tienes usuario? <a href="#" class="btn-sign-up">Reg&iacute;strate</a>.</p>
+          <a href="#" class="btn-sign-in">Iniciar sesi&oacute;n</a>
         </div>
       <% end %>
 
-      <div id="logged-in-nav"></div>
+      <div id="logged-in-nav">
+        <a class="dropdown-toggle" href="#">
+          <span id="username"><%= current_user.display if current_user %></span>
+          <span class="dropdown-caret"></span>
+        </a>
+        <ul class="nav-dropdown-menu">
+          <li><a href="/admin/publications">Mis Publicaciones</a></li>
+          <!-- <li><a href="/admin/publications">Configuraci&oacute;n</a></li> -->
+          <li><a href="/sessions/logout">Cerrar sesi&oacute;n</a></li>
+        </ul>
+      </div>
 
-      <p><a href="#" id="publication-new" class="btn bnt-publish">Publicar mascota</a></p>
-      <p>Mascotas perdidas, encontradas o en adopci&oacute;n. Prohibida la venta.</p>
+      <p class="publication-new-btn"><a href="#" id="publication-new">Publicar mascota</a></p>
     </nav>
   </section>
 
-  <section id="main-sidebar">
-    <div class="btn-group sidebar-options">
-      <button class="btn" data-publication-type="all">Todos</button>
-      <button class="btn" data-publication-type="lost">Perdidos</button>
-      <button class="btn" data-publication-type="found">Encontrados</button>
-      <button class="btn" data-publication-type="adoption">En Adopci&oacute;n</button>
-    </div>
-
-    <ul id="publication-list"></ul>
-    <div id="new-publication-container">
-      <%= render partial: 'shared/new_publication' %>
-    </div>
-  </section>
-
-  <section class="main-panel" id="main-panel">
-    <%= yield %>
-  </section>
-
-  <footer>
-    <ul>
-      <li><a href="#">¿Qu&eacute; es EncuentraTuMascota?</a></li>
-      <li><a href="#">¿C&oacute;mo funciona?</a></li>
-      <li><a href="#">T&eacute;rminos de Uso</a></li>
-      <li><a href="#">Apoyo</a></li>
-      <li><a href="#">Facebook</a></li>
-      <li><a href="#">Twitter</a></li>
-      <li><a href="#">Contacto</a></li>
-    </ul>
-  </footer>
-
-  <%= render partial: 'shared/publication_template' %>
-  <%= render partial: 'shared/sign_in' %>
-  <%= render partial: 'shared/sign_up' %>
+  <%= yield %>
 
   <script type="text/javascript">
     require(['require', 'application'], function (require) {

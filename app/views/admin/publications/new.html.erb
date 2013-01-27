@@ -1,7 +1,20 @@
-<h1>Admin::Publications#new</h1>
+<header class="main-header">
+  <ul class="breadcrumb">
+    <li><%= link_to 'Encuentra tu Mascota', root_url %><span class="separator"> &gt; </span></li>
+    <li><%= link_to current_user.is_admin? ? 'Publicaciones' : 'Mis publicaciones', admin_publications_path %><span class="separator"> &gt; </span></li>
+    <li class="active">Nueva Publicaci&oacute;n %></li>
+  </ul>
+  <%= title 'Nueva publicacion' %>
+</header>
 
-<%= form_for @publication, url: admin_publications_path do |form| %>
+<%= form_for @publication, url: admin_publications_path, html: { class: 'form-horizontal' } do |form| %>
+
+  <%= display_errors(@errors) if @errors %>
+
   <%= render partial: 'admin/publications/form', locals: { form: form } %>
 
-  <%= form.submit 'Create' %>
+  <div class="form-actions">
+    <%= form.submit 'Crear', class: 'btn btn-primary' %>
+    <%= link_to 'Cancelar', admin_publications_path, class: 'btn' %>
+  </div>
 <% end %>

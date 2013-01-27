@@ -1,3 +1,25 @@
+<%= title 'Encuentratumascota', visible: false %>
+
+<section id="main-sidebar">
+  <div class="btn-group sidebar-options">
+    <button class="btn" data-publication-type="all">Todos</button>
+    <button class="btn" data-publication-type="lost">Perdidos</button>
+    <button class="btn" data-publication-type="found">Encontrados</button>
+    <button class="btn" data-publication-type="adoption">En Adopci&oacute;n</button>
+  </div>
+
+  <ul id="publication-list"></ul>
+  <div id="new-publication-container">
+    <%= render partial: 'shared/new_publication' %>
+  </div>
+</section>
+
+<section id="main-panel"></section>
+
+<%= render partial: 'shared/publication_template' %>
+<%= render partial: 'shared/sign_in' %>
+<%= render partial: 'shared/sign_up' %>
+
 <% content_for :javascript do %>
   require(['require', 'app/main/index'], function (require) {
     require(['app/main/index'], function (view) {

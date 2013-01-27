@@ -28,12 +28,12 @@ define(['jquery', 'app/form_errors', 'bootstrap'], function ($, formErrors) {
   /**
    *
    */
-  AjaxSignup.prototype.loginSuccessfulAction = function () {
+  AjaxSignup.prototype.loginSuccessfulAction = function (userData) {
     $('#modal-sign-in').modal('hide');
     $('#modal-sign-up').modal('hide');
 
     if (typeof this.successCallback === 'function') {
-      this.successCallback();
+      this.successCallback(userData);
     }
   };
 
@@ -54,7 +54,7 @@ define(['jquery', 'app/form_errors', 'bootstrap'], function ($, formErrors) {
         data: params,
         dataType: 'json',
         success: function (content) {
-          this.loginSuccessfulAction();
+          this.loginSuccessfulAction(content);
         }.bind(this),
         error: function (jqXHR) {
           var errors = $.parseJSON(jqXHR.responseText).errors;

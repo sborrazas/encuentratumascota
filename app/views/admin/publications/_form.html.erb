@@ -1,37 +1,75 @@
+<div class="control-group">
+  <%= form.label :pet_name, 'Título', class: 'control-label' %>
+  <div class="controls">
+    <%= form.text_field :pet_name %>
+  </div>
+</div>
 
-<%= form.label :pet_name %>
-<%= form.text_field :pet_name %>
+<div class="control-group">
+  <%= form.label :age, 'Edad', class: 'control-label' %>
+  <div class="controls">
+    <%= form.text_field :age %>
+  </div>
+</div>
 
-<%= form.label :age %>
-<%= form.text_field :age %>
+<div class="control-group">
+  <%= form.label :description, 'Descripción', class: 'control-label' %>
+  <div class="controls">
+    <%= form.text_area :description, rows: 4 %>
+  </div>
+</div>
 
-<%= form.label :description %>
-<%= form.text_area :description %>
-
-<%= form.label :phone %>
-<%= form.text_area :phone %>
-
-<%= form.label :status %>
-<%= form.select :status, Publication::STATUSES %>
+<div class="control-group">
+  <%= form.label :phone, 'Teléfono', class: 'control-label' %>
+  <div class="controls">
+    <%= form.text_field :phone %>
+  </div>
+</div>
 
 <!-- TODO Display map (with lat and lng) -->
 
-<%= form.label :reward %>
-<%= form.text_field :reward %>
+<div class="control-group">
+  <%= form.label :reward, 'Recompensa (opcional)', class: 'control-label' %>
+  <div class="controls">
+    <%= form.text_field :reward %>
+  </div>
+</div>
 
-<%= form.label :publication_type %>
-<%= form.select :publication_type, Publication::PUBLICATION_TYPES %>
+<div class="control-group">
+  <%= form.label :publication_type, 'Tipo', class: 'control-label' %>
+  <div class="controls">
+    <%= form.select :publication_type, Publication::PUBLICATION_TYPES %>
+  </div>
+</div>
 
-<%= form.label :user %>
-<%= form.select :user, User.all %>
+<div class="control-group">
+  <%= form.label :breed, 'Raza', class: 'control-label' %>
+  <div class="controls">
+    <%= form.select :breed, Breed.all %>
+  </div>
+</div>
 
-<%= form.label :breed %>
-<%= form.select :breed, Breed.all %>
+<div class="control-group">
+  <%= form.label :lost_on, 'Perdido el', class: 'control-label' %>
+  <div class="controls">
+    <%= form.text_field :lost_on %><!-- TODO Datepicker -->
+  </div>
+</div>
 
-<%= form.label :lost_on %>
-<%= form.text_field :lost_on %><!-- TODO Datepicker -->
+<div class="control-group">
+  <%= form.label :contact, 'Contacto', class: 'control-label' %>
+  <div class="controls">
+    <%= form.text_field :contact %>
+  </div>
+</div>
 
-<%= form.label :contact %>
-<%= form.text_field :contact %>
+<% if current_user.is_admin? %>
+  <div class="control-group">
+    <%= form.label :status, 'Estado', class: 'control-label' %>
+    <div class="controls">
+      <%= form.select :status, Publication::STATUSES %>
+    </div>
+  </div>
+<% end %>
 
 <!-- TODO Images -->
