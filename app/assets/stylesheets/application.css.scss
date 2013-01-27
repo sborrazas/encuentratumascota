@@ -15,24 +15,14 @@
 
 /* Custom */
 @import "main";
+@import "admin";
+@import "admin/publications";
 
 body {
   font-family: 'PT Sans', sans-serif;
   font-size: 14px;
   line-height: 20px;
   color: $light_font_color;
-}
-
-/* Headers ********************************************************/
-h1 {
-  font-size: 1.5em;
-  line-height: 1.5em;
-  color: #FFF;
-}
-h2 {
-  font-size: 0.9em;
-  line-height: 0.9em;
-  color: #AAA;
 }
 
 /* Header *********************************************************/
@@ -42,10 +32,16 @@ h2 {
   @include linear-gradient(#363636, #171717);
 
   h1 {
+    font-size: 1.5em;
+    line-height: 1.5em;
+    color: #FFF;
     margin-top: 17px;
     margin-bottom: 0;
   }
   h2 {
+    font-size: 0.9em;
+    line-height: 0.9em;
+    color: #AAA;
     font-weight: normal;
     margin-top: 0;
   }
@@ -154,3 +150,18 @@ h2 {
     color: #000;
   }
 }
+
+/* Forms ***********************************************************/
+form {
+  .error-message {
+    display: none;
+  }
+  .error {
+    input,
+    select,
+    textarea {
+      border: 1px solid #FF0000;
+    }
+  }
+}
+

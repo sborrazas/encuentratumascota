@@ -207,3 +207,23 @@ body.main {
   }
 }
 
+.main-header {
+  float: left;
+  display: block;
+  width: 100%;
+  margin: 0 0 20px 0;
+  h1 {
+    float: left;
+  }
+  .btn {
+    float: right;
+    margin-left: 1em;
+  }
+}
+
+/* GMaps fixes **********************************************************/
+#main-panel {
+  img {
+    max-width: inherit;
+  }
+}

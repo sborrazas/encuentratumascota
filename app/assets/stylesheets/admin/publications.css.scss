@@ -1,3 +1,12 @@
-// Place all the styles related to the Admin::Publications controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body.admin-publications {
+
+  table {
+    span.status {
+      font-weight: bold;
+      float: right;
+      &.active { color: #00FF00; }
+      &.inactive { color: #0000FF; }
+      &.closed { color: #FF0000; }
+    }
+  }
+}

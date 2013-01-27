@@ -1,0 +1,16 @@
+body.admin-publications,
+body.admin-users {
+
+  header,
+  table,
+  form {
+    margin: 0 4%;
+    width: 92%;
+  }
+
+  form {
+    .control-group {
+      clear: both;
+    }
+  }
+}

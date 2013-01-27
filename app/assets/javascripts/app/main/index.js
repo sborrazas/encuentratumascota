@@ -11,12 +11,23 @@ define(['jquery', 'app/main/ajax_signup', 'app/main/publication_handler', 'app/f
       // Flash messages
       flashDisplay.displayMessages(config.flash);
 
+      if (config.userSignedIn) {
+        $('#logged-out-nav').hide();
+        $('#logged-in-nav').show();
+      }
+      else {
+        $('#logged-out-nav').show();
+        $('#logged-in-nav').hide();
+      }
+
       // Ajax signup
       ajaxSignup = new AjaxSignUp({
         userSignedIn: config.userSignedIn,
-        successCallback: function () {
+        successCallback: function (userData) {
           flash.displayMessage('success', 'Logueado correctamente!');
           $('#logged-out-nav').hide();
+          $('#logged-in-nav').show();
+          $('#username').html(userData.display);
         }
       });
 

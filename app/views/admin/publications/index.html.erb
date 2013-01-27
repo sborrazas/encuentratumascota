@@ -1,15 +1,31 @@
-<h1>Admin::Publications#index</h1>
+<header class="main-header">
+  <ul class="breadcrumb">
+    <li><%= link_to 'Encuentra tu Mascota', root_url %><span class="separator"> &gt; </span></li>
+    <li><%= current_user.is_admin? ? 'Publicaciones' : 'Mis publicaciones' %></li>
+  </ul>
+  <%= title current_user.is_admin? ? 'Publicaciones' : 'Mis Publicaciones' %>
+  <% if current_user.is_admin? %>
+    <%= link_to 'Nueva publicacion', new_publicacion_path, class: 'btn btn-primary' %>
+  <% end %>
+</header>
 
-<p><%= link_to 'Create publication', new_admin_publication_path %>
-
-<table>
+<table class="table table-striped table-bordered table-hover">
   <tr>
     <th>Pet name</th>
+    <th>Descripci&oacute;n</th>
+    <th>Estado</th>
+    <th>Fecha publicaci&oacute;n</th>
     <th>Actions</th>
   </tr>
   <% @publications.each do |publication| %>
     <tr>
-      <td><%= publication.pet_name %></td>
+      <td>
+        <%= publication.pet_name %>
+        <span class="status <%= publication.status %>"><%= publication.status %></span>
+      </td>
+      <td><%= truncate(publication.description, length: 50, separator: ' ') %></td>
+      <td><%= publication.publication_type %></td>
+      <td><%= publication.created_at.strftime('%d/%m/%Y') %></td>
       <td>
         <%= link_to 'Edit', edit_admin_publication_path(publication) %>
       </td>

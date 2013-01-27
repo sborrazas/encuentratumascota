@@ -1,7 +1,19 @@
-<h1>Admin::Publications#edit</h1>
+<header class="main-header">
+  <ul class="breadcrumb">
+    <li><%= link_to 'Encuentra tu Mascota', root_url %><span class="separator"> &gt; </span></li>
+    <li><%= link_to current_user.is_admin? ? 'Publicaciones' : 'Mis publicaciones', admin_publications_path %><span class="separator"> &gt; </span></li>
+    <li class="active"><%= @publication.pet_name %></li>
+  </ul>
+  <%= title @publication %>
+</header>
 
-<%= form_for @publication, url: admin_publication_path do |form| %>
+<%= display_flash %>
+
+<%= form_for @publication, url: admin_publication_path(@publication), html: { class: 'form-horizontal' } do |form| %>
   <%= render partial: 'admin/publications/form', locals: { form: form } %>
 
-  <%= form.submit 'Update' %>
+  <div class="form-actions">
+    <%= form.submit 'Modificar', class: 'btn btn-primary' %>
+    <%= link_to 'Cancelar', admin_publications_path, class: 'btn' %>
+  </div>
 <% end %>

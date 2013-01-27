@@ -3,7 +3,7 @@
 <head>
   <%= render partial: 'shared/head' %>
 </head>
-<body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}" %>">
+<body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}".gsub('/', '-') %>">
   <section id="main-navigation">
     <header>
       <%= image_tag 'logo.png', class: 'logo-img', id: 'logo-img' %>
@@ -21,14 +21,14 @@
       <% end %>
 
       <div id="logged-in-nav">
-        <a class="dropdown-toggle active" href="#">
-          <span id="username"><%= current_user.provider_username if current_user %></span>
+        <a class="dropdown-toggle" href="#">
+          <span id="username"><%= current_user.display if current_user %></span>
           <span class="dropdown-caret"></span>
         </a>
         <ul class="nav-dropdown-menu">
           <li><a href="/admin/publications">Mis Publicaciones</a></li>
-          <li><a href="/admin/publications">Configuraci&oacute;n</a></li>
-          <li><a href="/sessions/destroy">Cerrar sesi&oacute;n</a></li>
+          <!-- <li><a href="/admin/publications">Configuraci&oacute;n</a></li> -->
+          <li><a href="/sessions/logout">Cerrar sesi&oacute;n</a></li>
         </ul>
       </div>
 
