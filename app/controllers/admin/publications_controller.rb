@@ -1,7 +1,7 @@
 class Admin::PublicationsController < ApplicationController
 
-  before_filter :require_admin
-  layout 'admin'
+  before_filter :require_current_user
+  before_filter :require_admin, only: [:new, :create]
 
   def index
     @publications = Publication.all

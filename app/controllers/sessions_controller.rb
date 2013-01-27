@@ -1,13 +1,13 @@
 class SessionsController < ApplicationController
 
-  before_filter :require_guest
+  before_filter :require_guest, except: [:logout]
   respond_to :json
 
   def create
     user = User.authenticate(user_params[:email], user_params[:password])
     if user
       sign_user_in(user)
-      render json: user.attributes.slice(:email, :created_at, :provider), status_code: :created
+      render json: user.attributes.slice(*%w(display)), status_code: :created
     else
       render json: {
         errors: { email: ['is invalid'], password: ['is invalid'] }
@@ -24,7 +24,13 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    redirect_to root_path, flash: { error: "An error occurred while trying to sign in with Omniauth" }
+    redirect_to root_path, flash: { error: 'An error occurred while trying to sign in with Omniauth' }
+  end
+
+  def logout
+    require_user
+    session.delete(:user)
+    redirect_to root_path, flash: { error: 'Sesión cerrada correctamete..' }
   end
 
   private

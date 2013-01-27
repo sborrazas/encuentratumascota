@@ -4,13 +4,14 @@ class RegistrationsController < ApplicationController
   respond_to :json
 
   def create
-    user_validator = Validators::UserValidator.new(user_params)
+    user_form = Forms::UserForm.new(user_params)
 
-    if user_validator.valid?
+    if user_form.valid?
       @user = User.create(user_params)
-      render json: @user.attributes.slice(:email, :created_at, :provider), status: :created
+      session[:user] = @user.id
+      render json: @user.attributes.slice(*%w(display)), status: :created
     else
-      render json: { errors: user_validator.errors }, status: :unprocessable_entity
+      render json: { errors: user_form.errors }, status: :unprocessable_entity
     end
   end
 
