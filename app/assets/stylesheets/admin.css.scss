@@ -10,6 +10,14 @@ body.admin-users {
 
   .main-header {
     margin-top: 20px;
+    h1 {
+      float: left;
+      margin: 0;
+    }
+    .new {
+      float: right;
+      margin-top: 10px;
+    }
   }
 
   .alert {

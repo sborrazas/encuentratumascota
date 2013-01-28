@@ -5,7 +5,7 @@
   </ul>
   <%= title current_user.is_admin? ? 'Publicaciones' : 'Mis Publicaciones' %>
   <% if current_user.is_admin? %>
-    <%= link_to 'Nueva publicacion', new_publicacion_path, class: 'btn btn-primary' %>
+    <p class="new"><%= link_to 'Nueva publicación', new_admin_publication_path, class: 'btn btn-primary' %></p>
   <% end %>
 </header>
 

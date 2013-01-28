@@ -6,11 +6,13 @@
 <body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}".gsub('/', '-') %>">
   <section id="main-navigation">
     <header>
-      <%= image_tag 'logo.png', class: 'logo-img', id: 'logo-img' %>
-      <hgroup>
-        <h1>Encuentra tu Mascota</h1>
-        <h2>La manera m&aacute;s f&aacute;cil y r&aacute;pida de conectar mascotas con sus dueños</h2>
-      </hgroup>
+      <%= link_to root_path, title: 'Encuentra tu Mascota' do %>
+        <%= image_tag 'logo.png', class: 'logo-img', id: 'logo-img' %>
+        <hgroup>
+          <h1>Encuentra tu Mascota</h1>
+          <h2>La manera m&aacute;s f&aacute;cil y r&aacute;pida de conectar mascotas con sus dueños</h2>
+        </hgroup>
+      <% end %>
     </header>
 
     <nav>

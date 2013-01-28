@@ -37,79 +37,78 @@ body.main {
       }
     }
 
-    /* PUBLICATION LIST **************************************************/
-    ul#publication-list {
+    .sidebar-item {
       margin: 0;
       position: absolute;
-      width: 100%;
+      width: 96%;
+      padding: 0 2%;
       bottom: 0;
       overflow: auto;
       top: 60px;
-      > li {
-        display: block;
-        clear: both;
-        overflow: auto;
-        cursor: pointer;
-        background-color: #FFF;
-        margin: 12px;
-        position: relative;
-        &:hover {
-          background-color: #F5F5F5;
-        }
-        .type-indicator {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          width: 8px;
+    }
 
-          &.lost { background-color: $lost; }
-          &.found { background-color: $found; }
-          &.adoption { background-color: $adoption; }
-        }
-        .publication-info {
-          float: left;
-          margin-left: 10px;
-          margin-top: 15px;
-          h1 {
-            color: $dark_font_color;
-            font-size: 1.1em;
-            line-height: 1.1em;
-            margin: 0;
-            .ptype {
-              text-transform: uppercase;
-              font-size: 0.7em;
-              &.lost { color: $lost; }
-              &.found { color: $found; }
-              &.adoption { color: $adoption; }
-            }
+    /* PUBLICATION LIST **************************************************/
+    ul#publication-list > li {
+      display: block;
+      clear: both;
+      overflow: auto;
+      cursor: pointer;
+      background-color: #FFF;
+      margin: 12px;
+      position: relative;
+      &:hover {
+        background-color: fuchsia;
+      }
+      .type-indicator {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 8px;
+
+        &.lost { background-color: $lost; }
+        &.found { background-color: $found; }
+        &.adoption { background-color: $adoption; }
+      }
+      .publication-info {
+        float: left;
+        margin-left: 10px;
+        margin-top: 15px;
+        h1 {
+          color: $dark_font_color;
+          font-size: 1.1em;
+          line-height: 1.1em;
+          margin: 0;
+          .ptype {
+            text-transform: uppercase;
+            font-size: 0.7em;
+            &.lost { color: $lost; }
+            &.found { color: $found; }
+            &.adoption { color: $adoption; }
           }
-          p {
-            font-size: 0.8em;
-          }
         }
-        img {
-          width: 75px;
-          float: left;
-          margin: 10px 10px 10px 18px;
-          @include border-radius(5px);
+        p {
+          font-size: 0.8em;
         }
+        ul.publication-details {
+          background: fuchsia;
+        }
+      }
+      img {
+        width: 75px;
+        float: left;
+        margin: 10px 10px 10px 18px;
+        @include border-radius(5px);
       }
     }
 
     /* NEW FORM ***********************************************************/
     #new-publication-container {
-      margin: 0;
-      position: absolute;
-      bottom: 0;
-      overflow: auto;
-      top: 65px;
-      padding: 0 20px;
-
       h3 {
         font-size: 1.4em;
         color: $lighter_font_color;
         margin-left: 23px;
         margin-bottom: 0;
+        margin-top: 23px;
         line-height: 1.5em;
       }
 
@@ -143,6 +142,9 @@ body.main {
         }
         #cancel-publication {
           width: 30%;
+        }
+        .form-buttons {
+          text-align: center;
         }
       }
 
