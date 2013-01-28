@@ -1,0 +1,43 @@
+<script type="text/x-jQuery-tmpl" id="publication-list-template">
+  <li>
+    <div class="type-indicator ${publication.publication_type}"></div>
+    <img src="${publication.attachment}" alt="${publication.pet_name}" />
+    <div class="publication-info">
+      <h1>
+        ${publication.pet_name}
+        <span class="ptype ${publication.publication_type}">${publication.publication_type}</span>
+      </h1>
+      <p>${publication.description}</p>
+      <ul class="publication-details">
+        <li class="breed">${publication.breed}</li>
+        <li class="date">${publication.lost_on}</li>
+      </ul>
+    </div>
+  </li>
+</script>
+
+<script type="text/x-jQuery-tmpl" id="publication-detail-template">
+  <ul class="image-carousel">
+    <li>
+      <img src="${publication.attachment}" alt="${publication.pet_name}" />
+    </li>
+  </ul>
+
+  <h3>
+    ${publication.pet_name}
+    <span class="ptype ${publication.publication_type}">${publication.publication_type}</span>
+  </h3>
+  <p>
+    ${publication.description}
+  </p>
+  <dl class="lil-details">
+    <dt>Raza:</dt>
+    <dd>${publication.breed}</dd>
+    <dt>Fecha:</dt>
+    <dd>${publication.lost_on}</dd>
+    {{if publication.reward}}
+      <dt>Recompensa:</dt>
+      <dd>${publication.reward}</dd>
+    {{/if}}
+  </dl>
+</script>

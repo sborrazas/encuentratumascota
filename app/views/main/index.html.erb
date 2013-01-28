@@ -8,15 +8,25 @@
     <button class="btn" data-publication-type="adoption">En Adopci&oacute;n</button>
   </div>
 
-  <ul id="publication-list"></ul>
-  <div id="new-publication-container">
+  <!-- 1. Publication list -->
+  <ul id="publication-list" class="sidebar-item"></ul>
+  <!-- 2. Publication form -->
+  <div id="new-publication-container" class="sidebar-item">
     <%= render partial: 'shared/new_publication' %>
+  </div>
+  <!-- 3. Publication detail -->
+  <div id="publication-detail-container" class="sidebar-item">
+    <p class="detail-nav"><a href="#" class="go-back"><span class="arrow"></span>Regresar</a></p>
+    <div class="publication-detail-info"></div>
+    <div class="contact">
+      <button class="btn btn-success">Solicitar informaci&oacute;n de contacto</button>
+    </div>
   </div>
 </section>
 
 <section id="main-panel"></section>
 
-<%= render partial: 'shared/publication_template' %>
+<%= render partial: 'shared/publication_templates' %>
 <%= render partial: 'shared/sign_in' %>
 <%= render partial: 'shared/sign_up' %>
 

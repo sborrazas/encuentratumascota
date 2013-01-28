@@ -153,6 +153,85 @@ body.main {
         margin: 10px 0;
       }
     }
+    /* PUBLICATION DETAIL **************************************************/
+    #publication-detail-container {
+      .detail-nav {
+        line-height: 30px;
+        margin: 7px 12px;
+        .go-back {
+          color: $lighter_font_color;
+          text-decoration: none;
+          .arrow {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: fuchsia;
+          }
+        }
+      }
+      .publication-detail-info {
+        padding: 0 6%;
+        width: 88%;
+        ul.image-carousel {
+          margin: 4px 0;
+          li {
+            text-align: center;
+            background: #000;
+            img {
+              max-height: 200px;
+            }
+          }
+        }
+        h3 {
+          color: $dark_font_color;
+          .ptype {
+            text-transform: uppercase;
+            font-size: 0.7em;
+            &.lost { color: $lost; }
+            &.found { color: $found; }
+            &.adoption { color: $adoption; }
+          }
+        }
+        dl.lil-details {
+          margin: 20px 0;
+          overflow: auto;
+          height: 0.9em;
+          dt,
+          dd {
+            float: left;
+            font-size: 0.9em;
+            line-height: 0.9em;
+          }
+          dt {
+            text-transform: uppercase;
+            color: #777777;
+            font-weight: normal;
+            padding-left: 10px;
+            border-left: 1px solid #BBB;
+            margin-left: 10px;
+
+            &:first-child {
+              padding: 0;
+              margin: 0;
+              border: 0;
+            }
+          }
+          dd {
+            text-transform: uppercase;
+            font-weight: bold;
+            color: $lighter_font_color;
+          }
+        }
+      }
+      .contact {
+        text-align: center;
+        .btn {
+          width: 90%;
+          height: 40px;
+          margin-bottom: 10px;
+        }
+      }
+    }
   }
 
   /* MODALS *****************************************************/
@@ -216,7 +295,7 @@ body.main {
     @include border-radius(5px);
 
     &.info {
-      background: rgba(87, 87, 255, 0.9);
+      background: fuchsia;
       border-color: #0000B5;
       color: #000;
     }

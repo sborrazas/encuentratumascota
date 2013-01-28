@@ -26,11 +26,11 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
     };
 
     this.publications = settings.publications;
+    this.publicationListTemplate = $('#publication-list-template').template();
+    this.publicationDetailTemplate = $('#publication-detail-template').template();
 
     // Publications list view setup
     this.$publicationList = $('#publication-list');
-    this.publicationTemplate = $('#publication-template').template();
-    $('#new-publication-container').hide();
 
     // Using 'all' as default filter
     $('#main-sidebar .sidebar-options button').first().addClass('active');
@@ -50,10 +50,6 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
 
       event.preventDefault();
 
-      // Hide publication form and display publication list
-      $("#new-publication-container").hide();
-      $("#publication-list").show();
-
       // Marks selected element as 'active'
       $('#main-sidebar .sidebar-options button').removeClass('active');
       clickedElement.addClass('active');
@@ -64,6 +60,15 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
 
       this.displayPublications({ publication_type: clickedElement.data('publication-type') });
     }.bind(this));
+
+    // Bind click to publication 'go back' detail button
+    $("#publication-detail-container .go-back").click(function (event) {
+      event.preventDefault();
+
+      // Hide sidebar items and display publication list
+      $("#main-sidebar .sidebar-item").hide();
+      $("#publication-list").show();
+    });
   };
 
   /**
@@ -94,6 +99,10 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
    */
   PublicationHandler.prototype.displayPublications = function (filters) {
     var publicationType = filters.publication_type;
+
+    // Hide sidebar items and display publication list
+    $("#main-sidebar .sidebar-item").hide();
+    $("#publication-list").show();
 
     // Remove previous markers
     this.map.removeMarkers();
@@ -135,10 +144,34 @@ define(["jquery", "bootstrap", "lib/gmaps", "jquery_tmpl"], function ($, bootstr
    *
    */
   PublicationHandler.prototype.displayPublicationOnSidebar = function (publication) {
-    var content = $.tmpl(this.publicationTemplate, { publication: publication });
+    var content = $.tmpl(this.publicationListTemplate, { publication: publication })
+      , $content = $(content);
 
-    this.$publicationList.append(content);
-    $('body').addClass('with-sidebar');
+    $content.click(function (event) {
+      event.preventDefault();
+
+      this.showPublicationDetail(publication);
+    }.bind(this));
+
+    this.$publicationList.append($content);
+
+    $("body").addClass("with-sidebar");
+  };
+
+  /**
+   *
+   */
+  PublicationHandler.prototype.showPublicationDetail = function (publication) {
+    var publicationDetailContainer = $("#publication-detail-container")
+      , publicationInfo = publicationDetailContainer.find('.publication-detail-info')
+      , content = $.tmpl(this.publicationDetailTemplate, { publication: publication });
+
+    $("#main-sidebar .sidebar-item").hide();
+
+    publicationInfo.empty();
+    publicationInfo.append(content);
+
+    publicationDetailContainer.show();
   };
 
   /**
