@@ -28,9 +28,9 @@ class SessionsController < ApplicationController
   end
 
   def logout
-    require_user
+    require_current_user
     session.delete(:user)
-    redirect_to root_path, flash: { error: 'Sesión cerrada correctamete..' }
+    redirect_to root_path, flash: { error: 'Sesion cerrada correctamete..' }
   end
 
   private

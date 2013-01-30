@@ -97,7 +97,7 @@ body.main {
         width: 75px;
         float: left;
         margin: 10px 10px 10px 18px;
-        @include border-radius(5px);
+        border-radius: 5px;
       }
     }
 
@@ -294,7 +294,7 @@ body.main {
     width: 93%;
     padding: 1% 1.5%;
     border: 1px solid #000;
-    @include border-radius(5px);
+    border-radius: 5px;
 
     &.info {
       background: fuchsia;
