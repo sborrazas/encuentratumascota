@@ -15,6 +15,8 @@ gem 'carrierwave'
 gem 'fog', '~> 1.3.1'
 gem 'rmagick'
 
+gem 'rb-readline'
+
 group :development do
   gem 'pry'
 end
