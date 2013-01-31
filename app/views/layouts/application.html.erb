@@ -7,7 +7,7 @@
   <section id="main-navigation">
     <header>
       <%= link_to root_path, title: 'Encuentra tu Mascota' do %>
-        <%= image_tag 'logo.png', class: 'logo-img', id: 'logo-img' %>
+        <%= image_tag 'logo1.png', class: 'logo-img', id: 'logo-img' %>
         <hgroup>
           <h1>Encuentra tu Mascota</h1>
           <h2>La manera m&aacute;s f&aacute;cil y r&aacute;pida de conectar mascotas con sus dueños</h2>
@@ -25,7 +25,7 @@
       <div id="logged-in-nav">
         <a class="dropdown-toggle" href="#">
           <span id="username"><%= current_user.display if current_user %></span>
-          <span class="dropdown-caret"></span>
+          <span class="icon dropdown-caret"></span>
         </a>
         <ul class="nav-dropdown-menu">
           <li><a href="/admin/publications">Mis Publicaciones</a></li>

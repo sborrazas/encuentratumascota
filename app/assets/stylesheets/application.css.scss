@@ -31,28 +31,14 @@ body {
   background: #000;
   @include linear-gradient(#363636, #171717);
 
-  h1 {
-    font-size: 1.5em;
-    line-height: 1.5em;
-    color: #FFF;
-    margin-top: 17px;
-    margin-bottom: 0;
-  }
+  h1,
   h2 {
-    font-size: 0.9em;
-    line-height: 0.9em;
-    color: #AAA;
-    font-weight: normal;
-    margin-top: 0;
+    display: none;
   }
-
   img {
-    width: 55px;
     float: left;
     margin: 15px 20px 0 40px;
-    background: fuchsia;
   }
-
   hgroup {
     float: left;
   }
@@ -77,7 +63,7 @@ body {
     a.btn-sign-in {
       float: right;
       line-height: 80px;
-      margin-right: 30px;
+      margin: 0 30px;
 
       text-decoration: none;
       color: #FFF;
@@ -103,13 +89,6 @@ body {
 
       &.active {
         background: #111;
-      }
-
-      .dropdown-caret {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        background-color: fuchsia;
       }
     }
 
@@ -137,6 +116,20 @@ body {
       }
     }
   }
+}
+
+/* Icons ***********************************************************/
+.icon {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url(/assets/icons.png);
+  background-repeat: no-repeat;
+
+  &.dropdown-caret { background-position: -48px 3px; }
+  &.breed-tag { background-position: 3px 3px; }
+  &.time { background-position: -24px 2px; }
+  &.back { background-position: -68px 2px; }
 }
 
 /* Forms ***********************************************************/
