@@ -181,9 +181,8 @@ body.main {
         }
         .form-buttons {
           text-align: center;
-          .btn {
-            height: 47px;
-          }
+          a.btn { height: 20px; }
+          button.btn { height: 48px; }
         }
 
       }
