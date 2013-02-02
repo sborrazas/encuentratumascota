@@ -132,6 +132,14 @@ body {
   &.back { background-position: -68px 2px; }
 }
 
+.big-icon {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  background-image: url(/assets/icons.png);
+  background-repeat: no-repeat;
+}
+
 /* Forms ***********************************************************/
 form {
   .error-message {

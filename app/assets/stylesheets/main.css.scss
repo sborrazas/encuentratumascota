@@ -45,65 +45,85 @@ body.main {
       bottom: 0;
       overflow: auto;
       top: 60px;
+      display: none;
     }
 
     /* PUBLICATION LIST **************************************************/
-    ul#publication-list > li {
-      display: block;
-      clear: both;
-      overflow: auto;
-      cursor: pointer;
-      background-color: #FFF;
-      margin: 12px;
-      position: relative;
-      &:hover {
-        background-color: fuchsia;
+    #publication-list {
+      .empty-state {
+        display: none;
+        text-align: center;
+        width: 50%;
+        font-size: 1.2em;
+        color: $lighter_font_color;
+        margin: 20% 25%;
+        .big-icon {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+        }
       }
-      .type-indicator {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 8px;
-
-        &.lost { background-color: $lost; }
-        &.found { background-color: $found; }
-        &.adoption { background-color: $adoption; }
-      }
-      img {
-        width: 22%;
-        float: left;
-        margin: 2%;
-        border-radius: 5px;
-      }
-      .publication-info {
-        float: left;
-        margin: 15px 2%;
-        width: 60%;
-        h1 {
-          color: $dark_font_color;
-          font-size: 1.1em;
-          line-height: 1.1em;
-          margin: 0;
-          .ptype {
-            text-transform: uppercase;
-            font-size: 0.7em;
-            &.lost { color: $lost; }
-            &.found { color: $found; }
-            &.adoption { color: $adoption; }
+      > ul {
+        margin: 0;
+        > li {
+          display: block;
+          clear: both;
+          overflow: auto;
+          cursor: pointer;
+          background-color: #FFF;
+          margin: 3%;
+          position: relative;
+          border: 1px solid transparent;
+          &:hover {
+            border: 1px solid #DDD;
           }
-        }
-        p {
-          font-size: 0.8em;
-        }
-        ul.publication-details {
-          li {
+          .type-indicator {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 8px;
+
+            &.lost { background-color: $lost; }
+            &.found { background-color: $found; }
+            &.adoption { background-color: $adoption; }
+          }
+          img {
+            width: 22%;
             float: left;
-            color: #999;
-            font-size: 0.9em;
-            margin-right: 10px;
-            .icon {
-              margin-right: 4px;
-              float: left;
+            margin: 2% 2% 2% 4%;
+            border-radius: 5px;
+          }
+          .publication-info {
+            float: left;
+            margin: 15px 2%;
+            width: 60%;
+            h1 {
+              color: $dark_font_color;
+              font-size: 1.1em;
+              line-height: 1.1em;
+              margin: 0;
+              .ptype {
+                text-transform: uppercase;
+                font-size: 0.7em;
+                &.lost { color: $lost; }
+                &.found { color: $found; }
+                &.adoption { color: $adoption; }
+              }
+            }
+            p {
+              font-size: 0.8em;
+            }
+            ul.publication-details {
+              li {
+                float: left;
+                color: #999;
+                font-size: 0.9em;
+                margin-right: 10px;
+                .icon {
+                  margin-right: 4px;
+                  float: left;
+                }
+              }
             }
           }
         }
@@ -243,12 +263,22 @@ body.main {
           }
         }
       }
+      .contact-info {
+        display: none;
+        margin: 0 6%;
+        width: 82%;
+        border: 1px solid #CCC;
+        padding: 3%;
+        border-radius: 5px;
+        background: #EEE;
+      }
       .contact {
         text-align: center;
         .btn {
           width: 90%;
           height: 40px;
           margin-bottom: 10px;
+          display: none;
         }
       }
     }
