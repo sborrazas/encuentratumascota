@@ -1,4 +1,4 @@
-define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function ($, formErrors, flashDisplay) {
+define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function ($, formErrors, flash) {
 
   var config = {
     MAX_ATTACHMENTS: 4
@@ -7,10 +7,13 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
   /**
    *
    */
-  var PublicationForm = function (options) {
+  var PublicationForm = function (settings) {
+    this.$el = $("#new-publication-container");
     this.$form = $("#publication-form");
+
+    this.map = settings.map;
+
     this.bindEvents();
-    this.publicationHandler = options.handler;
     this.attachmentTemplate = $("#attachment-template").template();
     this.attachmentCount = 0;
   };
@@ -18,27 +21,43 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
   /**
    *
    */
-  PublicationForm.prototype.bindEvents = function () {
-    // When clicking on 'New publication' button
-    $("#publication-new").click(function (event) {
-      event.preventDefault();
-      if (!this.publicationHandler.isCoordsPlaced()) {
-        // TODO I18n
-        flashDisplay.displayMessage("info", "Click on the map");
-      }
-      this.showPublishForm();
-      formErrors.clearErrors({ form: this.$form });
-    }.bind(this));
+  PublicationForm.prototype.activate = function () {
+    this.active = true;
 
+    if (!this.map.isCoordsPlaced()) {
+      // TODO I18n
+      flash.displayMessage("info", "Click on the map");
+    }
+    // Display image upload attachment field if none is visible
+    if (this.$form.find("#image-upload-fields input").length === 0) {
+      this.addAttachmentField();
+    }
+
+    formErrors.clearErrors({ form: this.$form });
+  };
+
+  /**
+   *
+   */
+  PublicationForm.prototype.deactivate = function () {
+    this.map.clearPlacedMarker();
+    flash.clearMessages();
+    this.active = false;
+  }
+
+  /**
+   *
+   */
+  PublicationForm.prototype.bindEvents = function () {
     // When submitting publication
     this.$form.find("#publication-submit").click(function (event) {
       event.preventDefault();
 
-      if (this.publicationHandler.isCoordsPlaced()) {
+      if (this.map.isCoordsPlaced()) {
         this.createPublication();
       }
       else {
-        flashDisplay.displayMessage("info", "You need to select the location where you lost the pet first");
+        flash.displayMessage("info", "You need to select the location where you lost the pet first.");
       }
     }.bind(this));
 
@@ -47,19 +66,6 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
       event.preventDefault();
       this.addAttachmentField();
     }.bind(this));
-  };
-
-  /**
-   *
-   */
-  PublicationForm.prototype.showPublishForm = function () {
-    $("#new-publication-container").show();
-    $("#publication-list").hide();
-
-    // Display image upload attachment field if none is visible
-    if (this.$form.find("#image-upload-fields input").length === 0) {
-      this.addAttachmentField();
-    }
   };
 
   /**
@@ -91,7 +97,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
    */
   PublicationForm.prototype.createPublication = function () {
     var publicationData = new FormData(this.$form.get(0))
-      , currentCoords = this.publicationHandler.placedCoords();
+      , currentCoords = this.map.placedCoords();
 
     publicationData.append("lat", currentCoords.lat);
     publicationData.append("lng", currentCoords.lng);
@@ -111,13 +117,17 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
    *
    */
   PublicationForm.prototype.successfulPublication = function (publication) {
-    this.publicationHandler.displayPublication(publication);
-    this.publicationHandler.clearPlacedMarker();
+    this.map.displayPublication(publication);
+    this.map.clearPlacedMarker();
     this.$form.find("#image-upload-fields input").remove(); // Clear images
     this.$form.find("input, textarea").val(""); // Clear fields
     this.attachmentCount = 0; // Reset attachmentCount
     // Display 'Add Attachment' button (in case it was hidden)
     this.$form.find("#image-upload-fields button").show();
+
+    document.location.hash = "";
+    // TODO I18n
+    flash.displayMessage("success", "Publication created successfully!");
   };
 
   /**

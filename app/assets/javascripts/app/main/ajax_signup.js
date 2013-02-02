@@ -1,11 +1,19 @@
-define(['jquery', 'app/form_errors', 'bootstrap'], function ($, formErrors) {
+define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function ($, formErrors, flash) {
 
   /**
    *
    */
   var AjaxSignup = function (settings) {
-    this.successCallback = settings.successCallback;
     this.userSignedIn = settings.userSignedIn;
+
+    if (this.userSignedIn) {
+      $('#logged-out-nav').hide();
+      $('#logged-in-nav').show();
+    }
+    else {
+      $('#logged-out-nav').show();
+      $('#logged-in-nav').hide();
+    }
 
     // Sign in/up links event binding
     $('.btn-sign-in').live('click', function (event) {
@@ -33,7 +41,10 @@ define(['jquery', 'app/form_errors', 'bootstrap'], function ($, formErrors) {
     $('#modal-sign-up').modal('hide');
 
     if (typeof this.successCallback === 'function') {
-      this.successCallback(userData);
+      flash.displayMessage('success', 'Logueado correctamente!');
+      $('#logged-out-nav').hide();
+      $('#logged-in-nav').show();
+      $('#username').html(userData.display);
     }
   };
 

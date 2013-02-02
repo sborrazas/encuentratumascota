@@ -25,6 +25,10 @@ define(['jquery', 'bootstrap'], function ($) {
     $('<div class="alert ' + type + '">' + message + '</div>').appendTo('#main-panel').alert();
   };
 
+  FlashDisplay.prototype.clearMessages = function () {
+    $("#main-panel .alert").remove();
+  };
+
   return new FlashDisplay();
 
 });

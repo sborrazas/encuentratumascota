@@ -9,7 +9,15 @@
   </div>
 
   <!-- 1. Publication list -->
-  <ul id="publication-list" class="sidebar-item"></ul>
+  <div id="publication-list" class="sidebar-item">
+    <ul></ul>
+    <div class="empty-state">
+      <p>
+        <span class="big-icon empty-publication-list"></span>
+        Actualmente no hay mascotas que coincidan con este filtro.
+      </p>
+    </div>
+  </div>
   <!-- 2. Publication form -->
   <div id="new-publication-container" class="sidebar-item">
     <%= render partial: 'shared/new_publication' %>
@@ -18,6 +26,9 @@
   <div id="publication-detail-container" class="sidebar-item">
     <p class="detail-nav"><a href="#" class="go-back"><span class="icon back"></span>Regresar</a></p>
     <div class="publication-detail-info"></div>
+    <div class="contact-info">
+      <p><strong>Informaci&oacute;n de contacto:</strong> <span class="content"></span></p>
+    </div>
     <div class="contact">
       <button class="btn btn-success">Solicitar informaci&oacute;n de contacto</button>
     </div>
@@ -37,6 +48,7 @@
         userSignedIn: !! current_user,
         publications: @publications.map do |publication|
           {
+            id: publication.id.to_s,
             publication_type: publication.publication_type,
             pet_name: publication.pet_name,
             attachments: publication.attachments.map {|a| a.image.url },
