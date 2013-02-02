@@ -2,7 +2,7 @@ Encuentratumascota::Application.routes.draw do
 
   root to: 'main#index'
 
-  resources :publications, only: %w(create)
+  resources :publications, only: %w(create show)
 
   # Authentication
   resource :sessions, only: %w(create) do

@@ -17,9 +17,23 @@ class PublicationsController < ApplicationController
     end
   end
 
+  def show
+    @publication = Publication.has_status(:active).includes(:breed, :attachments).find(params[:id])
+
+    if @publication
+      render json: @publication.attributes.slice(*private_publication_attribute_keys), status: :ok
+    else
+      render blank: true, status: :not_found
+    end
+  end
+
   private
 
   def publication_attribute_keys
-    [:pet_name, :contact, :lost_on, :description, :phone, :lat, :lng, :reward, :publication_type, :breed_id]
+    %w(pet_name lost_on description phone lat lng reward publication_type breed_id)
+  end
+
+  def private_publication_attribute_keys
+    publication_attribute_keys + %w(contact)
   end
 end
