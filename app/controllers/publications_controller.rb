@@ -21,6 +21,7 @@ class PublicationsController < ApplicationController
     @publication = Publication.has_status(:active).includes(:breed, :attachments).find(params[:id])
 
     if @publication
+      current_user.create_inquiry(@publication)
       render json: @publication.attributes.slice(*private_publication_attribute_keys), status: :ok
     else
       render blank: true, status: :not_found

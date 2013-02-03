@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203124909) do
+ActiveRecord::Schema.define(:version => 20130203220146) do
 
   create_table "attachments", :force => true do |t|
     t.integer "publication_id", :null => false
@@ -20,6 +20,12 @@ ActiveRecord::Schema.define(:version => 20130203124909) do
 
   create_table "breeds", :force => true do |t|
     t.string "name", :null => false
+  end
+
+  create_table "contact_info_inquiries", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "publication_id"
+    t.datetime "created_at"
   end
 
   create_table "publications", :force => true do |t|
