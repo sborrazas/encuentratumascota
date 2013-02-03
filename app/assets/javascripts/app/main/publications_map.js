@@ -51,6 +51,7 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
    */
   PublicationsMap.prototype.displayPublications = function (publications) {
     this.map.removeMarkers();
+    this.highlightedPublication = null;
     this.markers = {};
     publications.forEach(function (publication) {
       this.markers[publication.id] = this.map.addMarker({
@@ -115,9 +116,19 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
    */
   PublicationsMap.prototype.highlightPublication = function (publication) {
     var marker = this.markers[publication.id]
-      , position = marker.getPosition();
+      , position = marker.getPosition()
+      , highlighted = this.highlightedPublication;
 
-    marker.setIcon(this.images.highlighted);
+    if (highlighted) {
+      highlighted.marker.setIcon(this.images[highlighted.publication.publication_type]);
+    }
+
+    this.highlightedPublication = {
+      marker: marker,
+      publication: publication
+    };
+
+    marker.setIcon(this.images[publication.publication_type + '_big']);
     this.map.setCenter(position.Ya, position.Za);
   };
 
