@@ -71,9 +71,6 @@ body {
     border-radius: 2px;
     padding: 10px 25px;
     margin-top: 20px;
-
-    border-right-width: 1px;
-    @include border-image(linear-gradient(top, rgba(255,255,255,0) 20%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 80%) 1 100%);
   }
 
   #logged-out-nav {
@@ -97,6 +94,7 @@ body {
 
     #username {
       float: left;
+      margin-right: 10px;
     }
 
     #user-image {

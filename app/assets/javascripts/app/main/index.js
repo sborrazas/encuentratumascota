@@ -89,8 +89,13 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       publicationForm.deactivate();
 
       if (newHash === "#publication-new") {
-        publicationForm.activate();
-        this.displaySidebarElement(publicationForm);
+        if (config.userSignedIn) {
+          publicationForm.activate();
+          this.displaySidebarElement(publicationForm);
+        }
+        else {
+          ajaxSignup.signIn();
+        }
       }
       else if (hashMatch = newHash.match(/publication-(\d+)/)) {
         for (i = 0, len = publications.length; i < len; i++) {
