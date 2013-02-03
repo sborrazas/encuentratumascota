@@ -24,6 +24,7 @@
 
       <div id="logged-in-nav">
         <a class="dropdown-toggle" href="#">
+          <span id="user-image"><%= current_user_image if current_user %></span>
           <span id="username"><%= current_user.display if current_user %></span>
           <span class="icon dropdown-caret"></span>
         </a>

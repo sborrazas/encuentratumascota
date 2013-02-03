@@ -9,7 +9,7 @@ class RegistrationsController < ApplicationController
     if user_form.valid?
       @user = User.create(user_params)
       session[:user] = @user.id
-      render json: @user.attributes.slice(*%w(display)), status: :created
+      render json: @user.attributes.slice(*%w(display image_url)), status: :created
     else
       render json: { errors: user_form.errors }, status: :unprocessable_entity
     end

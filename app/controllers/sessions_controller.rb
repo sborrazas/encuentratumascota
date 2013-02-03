@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     user = User.authenticate(user_params[:email], user_params[:password])
     if user
       sign_user_in(user)
-      render json: user.attributes.slice(*%w(display)), status_code: :created
+      render json: user.attributes.slice(*%w(display image_url)), status_code: :created
     else
       render json: {
         errors: { email: ['is invalid'], password: ['is invalid'] }
@@ -39,7 +39,8 @@ class SessionsController < ApplicationController
       provider: auth.provider,
       uid: auth.uid,
       email: auth.info.email || '',
-      provider_username: auth.info.nickname || ''
+      provider_username: auth.info.nickname || '',
+      image_url: auth.info.image || ''
     })
   end
 

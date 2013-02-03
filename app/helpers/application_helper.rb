@@ -18,4 +18,9 @@ module ApplicationHelper
       </div>
     }.html_safe
   end
+
+  def current_user_image
+    url = current_user.image_url.empty? ? '/assets/default_user.png' : current_user.image_url
+    image_tag url, alt: current_user.display
+  end
 end

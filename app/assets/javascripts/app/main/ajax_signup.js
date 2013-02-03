@@ -37,14 +37,18 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
    *
    */
   AjaxSignup.prototype.loginSuccessfulAction = function (userData) {
-    $('#modal-sign-in').modal('hide');
-    $('#modal-sign-up').modal('hide');
+    var userImage = userData.image_url.length > 0 ? userData.image_url : "/assets/default_user.png"
 
-    if (typeof this.successCallback === 'function') {
-      flash.displayMessage('success', 'Logueado correctamente!');
-      $('#logged-out-nav').hide();
-      $('#logged-in-nav').show();
-      $('#username').html(userData.display);
+    $("#modal-sign-in").modal("hide");
+    $("#modal-sign-up").modal("hide");
+
+    if (typeof this.successCallback === "function") {
+      flash.displayMessage("success", "Logueado correctamente!");
+      $("#logged-out-nav").hide();
+      $("#logged-in-nav").show();
+      $("#username").html(userData.display);
+
+      $("#user-image").html("<img src=\"" + userImage + "\" alt=\"" + userData.display + "\" />");
     }
   };
 
