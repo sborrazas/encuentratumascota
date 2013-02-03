@@ -1,0 +1,4 @@
+Beagle,Boxer,Collie,Bichón Maltés,Bull Terrier,Bulldog,Bulldog Francés,
+Caniche,Chihuahua,Chow chow,Cocker,Dalmata,Dóberman,Dogo,Galgo,Golden Retriever,
+Siberiano,Fox Terrier,Labrador Retriever,Pastor Alemán,Pitbull,Pug,Rottweiler,
+San Bernardo,Yorkshire Terrier,Otro

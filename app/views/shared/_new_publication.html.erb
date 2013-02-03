@@ -22,7 +22,7 @@
   <div class="control-group">
     <%= f.label :breed_id, 'Raza', class: 'control-label required' %>
     <div class="controls">
-      <%= f.select :breed_id, Breed.all.map {|b| [b.name, b.id] } %>
+      <%= f.select :breed_id, Breed.sorted.all.map {|b| [b.name, b.id] } %>
     </div>
   </div>
   <div class="control-group">
