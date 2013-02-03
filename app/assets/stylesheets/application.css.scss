@@ -35,7 +35,7 @@ body {
   h2 {
     display: none;
   }
-  img {
+  img.logo {
     float: left;
     margin: 15px 20px 0 40px;
   }
@@ -43,20 +43,37 @@ body {
     float: left;
   }
 
-  .publication-new-btn {
-    float: right;
+  .info-nav {
+    float: left;
+  }
+
+  .main-nav-item {
     line-height: 80px;
-    padding-right: 30px;
+    color: #FFF;
+    float: left;
+    padding: 0 20px;
+    font-weight: bold;
+    font-size: 1.2em;
+    text-decoration: none;
+
+    &:hover,
+    &.active {
+      background: #111;
+    }
+  }
+
+  #publication-new {
+    float: right;
     margin-right: 10px;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #FFF;
+    border-radius: 2px;
+    padding: 10px 25px;
+    margin-top: 20px;
+
     border-right-width: 1px;
     @include border-image(linear-gradient(top, rgba(255,255,255,0) 20%, rgba(255,255,255,0.5) 50%, rgba(255,255,255,0) 80%) 1 100%);
-
-    a {
-      text-decoration: none;
-      color: #FFF;
-      font-weight: bold;
-      font-size: 1.4em;
-    }
   }
 
   #logged-out-nav {
@@ -78,17 +95,19 @@ body {
     margin-right: 20px;
     height: 80px;
 
-    a.dropdown-toggle {
-      line-height: 80px;
-      color: #FFF;
+    #username {
       float: left;
-      padding: 0 20px;
-      font-weight: bold;
-      font-size: 1.2em;
-      text-decoration: none;
+    }
 
-      &.active {
-        background: #111;
+    #user-image {
+      display: inline-block;
+      width: 20px;
+      float: left;
+      height: 20px;
+      margin-top: 30px;
+      margin-right: 10px;
+      img {
+        float: left;
       }
     }
 

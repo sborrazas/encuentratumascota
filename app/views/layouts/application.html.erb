@@ -7,7 +7,7 @@
   <section id="main-navigation">
     <header>
       <%= link_to root_path, title: 'Encuentra tu Mascota' do %>
-        <%= image_tag 'logo1.png', class: 'logo-img', id: 'logo-img' %>
+        <%= image_tag 'logo1.png', class: 'logo' %>
         <hgroup>
           <h1>Encuentra tu Mascota</h1>
           <h2>La manera m&aacute;s f&aacute;cil y r&aacute;pida de conectar mascotas con sus dueños</h2>
@@ -16,6 +16,10 @@
     </header>
 
     <nav>
+      <div class="info-nav">
+        <a href="#how-it-works" class="main-nav-item">&iquest;C&oacute;mo funciona?</a>
+        <a href="#contact" class="main-nav-item">Contacto</a>
+      </div>
       <% unless current_user %>
         <div id="logged-out-nav">
           <a href="#" class="btn-sign-in">Iniciar sesi&oacute;n</a>
@@ -23,7 +27,7 @@
       <% end %>
 
       <div id="logged-in-nav">
-        <a class="dropdown-toggle" href="#">
+        <a class="dropdown-toggle main-nav-item" href="#">
           <span id="user-image"><%= current_user_image if current_user %></span>
           <span id="username"><%= current_user.display if current_user %></span>
           <span class="icon dropdown-caret"></span>
@@ -35,7 +39,7 @@
         </ul>
       </div>
 
-      <p class="publication-new-btn"><a href="#publication-new" id="publication-new">Publicar mascota</a></p>
+      <a class="btn btn-warning" href="#publication-new" id="publication-new">Publicar mascota</a>
     </nav>
   </section>
 
