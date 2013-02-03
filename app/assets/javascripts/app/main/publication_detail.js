@@ -3,7 +3,8 @@ define(["jquery", "app/flash_display", "bootstrap", "jquery_tmpl"], function ($,
   /**
    *
    */
-  var PublicationDetail = function () {
+  var PublicationDetail = function (ajaxSignup) {
+    this.config = { ajaxSignup: ajaxSignup };
     this.publicationDetailTemplate = $("#publication-detail-template").template();
     this.$el = $("#publication-detail-container");
     this.$publicationInfo = this.$el.find(".publication-detail-info");
@@ -14,6 +15,10 @@ define(["jquery", "app/flash_display", "bootstrap", "jquery_tmpl"], function ($,
       if (this.loading) {
         return;
       }
+      if (!this.config.ajaxSignup.userSignedIn) {
+        ajaxSignup.signIn();
+        return;
+      }
       this.loading = true;
       $.ajax({
         url: "/publications/" + this.currentPublicationId,
@@ -21,15 +26,14 @@ define(["jquery", "app/flash_display", "bootstrap", "jquery_tmpl"], function ($,
         success: this.displayContactInfo.bind(this),
         error: function (jqXHR) {
           if (jqXHR.status === 401) { // Unauthorized
-            // TODO I18n
-            flash.displayMessage("error", "Debes estar logueado para acceder a la informacion de contacto.");
+            this.config.ajaxSignup.signIn();
           }
           else {
             // TODO I18n
             flash.displayMessage("error", "Esta publicacion se ha eliminado.");
           }
           this.loading = false;
-        }
+        }.bind(this)
       });
     }.bind(this));
   };

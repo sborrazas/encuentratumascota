@@ -29,7 +29,7 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       });
 
       // Publication detail
-      publicationDetail = new PublicationDetail();
+      publicationDetail = new PublicationDetail(ajaxSignup);
 
       publicationsMap.displayPublications(config.publications);
       $(window).bind("hashchange", this.hashChanged.bind(this));
