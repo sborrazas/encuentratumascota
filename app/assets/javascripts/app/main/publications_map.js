@@ -37,12 +37,20 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
   PublicationsMap.prototype.geoLocate = function () {
     GMaps.geolocate({
       success: function (position) {
-        this.map.addMarker({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-          icon: this.images.home
-        });
+        this.home = position;
+        this.displayHome();
       }.bind(this)
+    });
+  };
+
+  /**
+   *
+   */
+  PublicationsMap.prototype.displayHome = function () {
+    this.map.addMarker({
+      lat: this.home.latitude,
+      lng: this.home.longitude,
+      icon: this.images.home
     });
   };
 
