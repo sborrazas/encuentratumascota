@@ -17,7 +17,11 @@ class SessionsController < ApplicationController
 
   def create_with_omniauth
     auth = request.env['omniauth.auth']
-    user = User.where(provider: auth.provider, uid: auth.uid).first || create_user_with_omniauth(auth)
+    if user = User.where(provider: auth.provider, uid: auth.uid).first
+      update_user_with_omniauth(user, auth)
+    else
+      user = create_user_with_omniauth(auth)
+    end
     sign_user_in(user)
 
     redirect_to user.is_admin? ? admin_publications_path : root_path, flash: { success: "Logged in with #{auth.provider} successfully!" }
@@ -41,6 +45,14 @@ class SessionsController < ApplicationController
       email: auth.info.email || '',
       provider_username: auth.info.nickname || '',
       image_url: auth.info.image || ''
+    })
+  end
+
+  def update_user_with_omniauth(user, auth)
+    user.update_attributes({
+      provider_username: auth.info.nickname.blank? ? user.provider_username : auth.info.nickname,
+      email: auth.info.email.blank? ? user.email : auth.info.email,
+      image_url: auth.info.image.blank? ? user.image_url : auth.info.image
     })
   end
 
