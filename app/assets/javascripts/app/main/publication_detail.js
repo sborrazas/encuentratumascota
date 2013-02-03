@@ -48,6 +48,8 @@ define(["jquery", "app/flash_display", "bootstrap", "jquery_tmpl"], function ($,
 
     $publicationInfo.empty();
     $publicationInfo.append(content);
+
+    this.displayShareThis(publication);
   };
 
   /**
@@ -58,6 +60,43 @@ define(["jquery", "app/flash_display", "bootstrap", "jquery_tmpl"], function ($,
     this.$contactInfo.fadeIn(400);
     this.$el.find("button.btn-success").fadeOut(400);
     this.loading = false;
+  };
+
+  /**
+   *
+   */
+  PublicationDetail.prototype.displayShareThis = function (publication) {
+    var $shareThis = this.$publicationInfo
+      , $twitter = $shareThis.find(".twitter")
+      , $facebook = $shareThis.find(".facebook")
+      , $email = $shareThis.find(".email")
+      , options = {
+        url: "http://encuentratumascota.org/#publication-" + publication.id, // TODO hardcoded :(
+        title: publication.pet_name + " " + publication.publication_type,
+        type: "hcount"
+      };
+
+    // Can't specify it on options ..
+    $shareThis.find("span").attr("st_via", "etmuruguay");
+
+    if (publication.attachments[0]) {
+      options.image = "http://encuentratumascota.org/" + publication.attachments[0];
+    }
+
+    stWidget.addEntry($.extend({
+      service: "twitter",
+      element: $twitter.get(0)
+    }, options), { button: true });
+
+    stWidget.addEntry($.extend({
+      service: "facebook",
+      element: $facebook.get(0)
+    }, options));
+
+    stWidget.addEntry($.extend({
+      service: "email",
+      element: $email.get(0)
+    }, options));
   };
 
   return PublicationDetail;
