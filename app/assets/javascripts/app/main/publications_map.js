@@ -21,8 +21,9 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
       lost: 'assets/lost.png',
       found: 'assets/found.png',
       adoption: 'assets/adoption.png',
-      other: 'assets/other.png',
-      home: 'assets/home.png'
+      other: 'assets/other.png', // TODO
+      home: 'assets/home.png',
+      highlighted: '/assets/found.png' // TODO
     };
   };
 
@@ -54,13 +55,14 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
    */
   PublicationsMap.prototype.displayPublications = function (publications) {
     this.map.removeMarkers();
+    this.markers = {};
     publications.forEach(function (publication) {
-      this.map.addMarker({
+      this.markers[publication.id] = this.map.addMarker({
         lat: publication.lat,
         lng: publication.lng,
-        icon: this.images[publication.status],
-        infoWindow: {
-          content: '<h4>' + publication.pet_name + '</h4><p>' + publication.description + '</p>'
+        icon: this.images[publication.publication_type],
+        click: function (event) {
+          document.location.hash = 'publication-' + publication.id;
         }
       });
     }.bind(this));
@@ -114,6 +116,17 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
     }
     this.currentMarker.setVisible(false); // FIXME Couldn't find a way to remove it :(
     this.currentMarker = null;
+  };
+
+  /**
+   *
+   */
+  PublicationsMap.prototype.highlightPublication = function (publication) {
+    var marker = this.markers[publication.id]
+      , position = marker.getPosition();
+
+    marker.setIcon(this.images.highlighted);
+    this.map.setCenter(position.Ya, position.Za);
   };
 
   return PublicationsMap;

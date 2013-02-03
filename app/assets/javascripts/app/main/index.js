@@ -31,6 +31,7 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       // Publication detail
       publicationDetail = new PublicationDetail();
 
+      publicationsMap.displayPublications(config.publications);
       $(window).bind("hashchange", this.hashChanged.bind(this));
 
       // Bind click event to refresh publications
@@ -57,7 +58,7 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
         this.displaySidebarElement(publicationsList);
       }.bind(this));
 
-      this.hashChanged.call(this);
+      this.hashChanged();
     },
     getFilteredPublications: function (publicationType) {
       var publications = [];
@@ -96,6 +97,7 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
           if (publications[i].id === hashMatch[1]) {
             publicationDetail.showPublication(publications[i]);
             this.displaySidebarElement(publicationDetail);
+            publicationsMap.highlightPublication(publications[i]);
             break;
           }
         }
