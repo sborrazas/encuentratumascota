@@ -23,6 +23,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
    */
   PublicationForm.prototype.activate = function () {
     this.active = true;
+    this.map.active = true;
 
     if (!this.map.isCoordsPlaced()) {
       // TODO I18n
@@ -43,6 +44,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
     this.map.clearPlacedMarker();
     flash.clearMessages();
     this.active = false;
+    this.map.active = false;
   }
 
   /**

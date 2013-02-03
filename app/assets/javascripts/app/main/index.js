@@ -42,6 +42,7 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
         event.preventDefault();
         if (history.replaceState) {
           history.replaceState(null, null, '#');
+          publicationForm.deactivate();
         }
         else {
           document.location.href = '/';

@@ -10,10 +10,12 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
       lng: -56.16348,
       zoom: 14,
       click: function (event) {
-        this.addMarkerNewPublication({
-          lat: event.latLng.Ya,
-          lng: event.latLng.Za
-        });
+        if (this.active) {
+          this.addMarkerNewPublication({
+            lat: event.latLng.Ya,
+            lng: event.latLng.Za
+          });
+        }
       }.bind(this)
     });
 
