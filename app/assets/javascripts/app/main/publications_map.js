@@ -18,12 +18,14 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
     });
 
     this.images = {
-      lost: 'assets/lost.png',
-      found: 'assets/found.png',
-      adoption: 'assets/adoption.png',
-      other: 'assets/other.png', // TODO
-      home: 'assets/home.png',
-      highlighted: '/assets/found.png' // TODO
+      lost: '/assets/lost-small.png',
+      found: '/assets/found-small.png',
+      adoption: '/assets/adoption-small.png',
+      lost_big: '/assets/lost-big.png',
+      found_big: '/assets/found-big.png',
+      adoption_big: '/assets/adoption-big.png',
+      other: '/assets/my-pet-big.png',
+      home: '/assets/home.png'
     };
 
     this.geoLocate();
