@@ -25,6 +25,8 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
       home: 'assets/home.png',
       highlighted: '/assets/found.png' // TODO
     };
+
+    this.geoLocate();
   };
 
   /**
@@ -33,20 +35,12 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
   PublicationsMap.prototype.geoLocate = function () {
     GMaps.geolocate({
       success: function (position) {
-        this.setHome(position.coords.latitude, position.coords.longitude);
+        this.map.addMarker({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          icon: this.images.home
+        });
       }.bind(this)
-    });
-  };
-
-  /**
-   *
-   */
-  PublicationsMap.prototype.setHome = function (lat, lng) {
-    this.map.setCenter(lat, lng);
-    this.map.addMarker({
-      lat: lat,
-      lng: lng,
-      icon: this.images.home
     });
   };
 
@@ -78,13 +72,9 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
     this.currentMarker = this.map.addMarker({
       lat: location.lat,
       lng: location.lng,
-      title: 'My Title',
-      icon: this.images.lost,
+      icon: this.images.lost, // TODO
       animation: 'drop',
-      draggable: true,
-      dragend: function (event) {
-        console.log(event);
-      }
+      draggable: true
     });
   };
 
