@@ -24,7 +24,7 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
       lost_big: '/assets/lost-big.png',
       found_big: '/assets/found-big.png',
       adoption_big: '/assets/adoption-big.png',
-      other: '/assets/my-pet-big.png',
+      myPet: '/assets/my-pet-big.png',
       home: '/assets/home.png'
     };
 
@@ -63,6 +63,7 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
         }
       });
     }.bind(this));
+    this.geoLocate();
   };
 
   /**
@@ -75,10 +76,11 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
     this.currentMarker = this.map.addMarker({
       lat: location.lat,
       lng: location.lng,
-      icon: this.images.lost, // TODO
+      icon: this.images.myPet,
       animation: 'drop',
       draggable: true
     });
+    this.map.setCenter(location.lat, location.lng);
   };
 
   /**
