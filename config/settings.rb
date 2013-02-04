@@ -9,5 +9,10 @@ module Encuentratumascota
     S3_SECRET ||= ENV['S3_SECRET']
     S3_BUCKET ||= ENV['S3_BUCKET']
 
+    FACEBOOK_KEY ||= ENV['FACEBOOK_KEY']
+    FACEBOOK_SECRET ||= ENV['FACEBOOK_SECRET']
+
+    TWITTER_KEY ||= ENV['TWITTER_KEY']
+    TWITTER_SECRET ||= ENV['TWITTER_SECRET']
   end
 end
