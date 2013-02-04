@@ -65,10 +65,10 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
     }.bind(this));
 
     // When adding a new image
-    this.$form.find("#image-upload-fields button").click(function (event) {
-      event.preventDefault();
-      this.addAttachmentField();
-    }.bind(this));
+    // this.$form.find("#image-upload-fields button").click(function (event) {
+    //   event.preventDefault();
+    //   this.addAttachmentField();
+    // }.bind(this));
   };
 
   /**
@@ -76,7 +76,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
    */
   PublicationForm.prototype.addAttachmentField = function () {
     var container
-      , content;
+      , $content;
 
     if (this.attachmentCount < config.MAX_ATTACHMENTS) {
       container = this.$form.find("#image-upload-fields ul");
@@ -84,9 +84,19 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
         id: "attachment-" + this.attachmentCount,
         name: "publication[attachments][" + this.attachmentCount + "]"
       });
+      $content = $(content);
 
       this.attachmentCount += 1;
-      container.append(content);
+      container.append($content);
+
+      // Adding a new image (other temp approach)
+      $content.find("input").change(function (event) {
+        var $element = $(event.target);
+
+        if ($element.val()) {
+          this.addAttachmentField();
+        }
+      }.bind(this));
     }
 
     if (this.attachmentCount >= config.MAX_ATTACHMENTS) {

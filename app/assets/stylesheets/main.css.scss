@@ -89,7 +89,7 @@ body.main {
           img {
             width: 22%;
             float: left;
-            margin: 2% 2% 2% 4%;
+            margin: 3% 2% 2% 5%;
             border-radius: 5px;
           }
           .publication-info {
@@ -162,10 +162,11 @@ body.main {
           }
 
           .controls {
+            margin-left: 36%;
             textarea,
             input,
             select {
-              width: 56%;
+              width: 88%;
               margin: 0;
             }
           }
