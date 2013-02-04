@@ -17,4 +17,4 @@
 
 *.yml
 
-/config/development_settings.rb
+/config/settings.json

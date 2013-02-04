@@ -1,0 +1,9 @@
+{
+  "s3_key": "...",
+  "s3_secret": "...",
+  "s3_bucket": "...",
+  "facebook_key": "...",
+  "facebook_secret": "...",
+  "twitter_key": "...",
+  "twitter_secret": "..."
+}

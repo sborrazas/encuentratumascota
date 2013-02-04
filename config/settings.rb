@@ -1,18 +1,20 @@
 module Encuentratumascota
   module Config
-    # Important, DO NOT use ||= on constants that can have false as value, use
-    # something like:
-    # DEBUG = false unless defined?(DEBUG) && DEBUG
+    filename = File.join(File.dirname(__FILE__), 'settings.json')
+    config = if File.exists?(filename)
+      config = ActiveSupport::JSON.decode(File.open(filename).read)
+    else
+      {}
+    end
 
-    # S3
-    S3_KEY ||= ENV['S3_KEY']
-    S3_SECRET ||= ENV['S3_SECRET']
-    S3_BUCKET ||= ENV['S3_BUCKET']
+    S3_KEY = config['s3_key']
+    S3_SECRET = config['s3_secret']
+    S3_BUCKET = config['s3_bucket']
 
-    FACEBOOK_KEY ||= ENV['FACEBOOK_KEY']
-    FACEBOOK_SECRET ||= ENV['FACEBOOK_SECRET']
+    FACEBOOK_KEY = config['facebook_key']
+    FACEBOOK_SECRET = config['facebook_secret']
 
-    TWITTER_KEY ||= ENV['TWITTER_KEY']
-    TWITTER_SECRET ||= ENV['TWITTER_SECRET']
+    TWITTER_KEY = config['twitter_key']
+    TWITTER_SECRET = config['twitter_secret']
   end
 end
