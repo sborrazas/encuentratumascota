@@ -49,7 +49,7 @@ module Forms
     private
 
     def param_keys
-      [:pet_name, :description, :phone, :lat, :lng, :reward, :publication_type, :breed_id]
+      [:pet_name, :contact, :description, :lat, :lng, :reward, :publication_type, :breed_id]
     end
 
     def is_empty_string?(str)
