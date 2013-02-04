@@ -84,7 +84,7 @@ define(["jquery", "app/flash_display", "bootstrap", "jquery_tmpl"], function ($,
     $shareThis.find("span").attr("st_via", "etmuruguay");
 
     if (publication.attachments[0]) {
-      options.image = "http://encuentratumascota.org/" + publication.attachments[0];
+      options.image = publication.attachments[0];
     }
 
     stWidget.addEntry($.extend({

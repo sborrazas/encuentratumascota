@@ -11,30 +11,21 @@ class PublicationsController < ApplicationController
       publication.assign_attributes(user: current_user, status: 'active')
       publication.save
 
-      render json: publication.attributes.slice(*publication_attribute_keys), status: :created
+      render json: Presenters::Publication.to_json_hash(publication), status: :created
     else
       render json: { errors: publication_form.errors }, status: :unprocessable_entity
     end
   end
 
   def show
-    @publication = Publication.has_status(:active).includes(:breed, :attachments).find(params[:id])
+    publication = Publication.has_status(:active).includes(:breed, :attachments).find(params[:id])
 
-    if @publication
-      current_user.create_inquiry(@publication)
-      render json: @publication.attributes.slice(*private_publication_attribute_keys), status: :ok
+    if publication
+      current_user.create_inquiry(publication)
+      publication_json = Presenters::Publication.to_json_hash(publication, { extra_attributes: %w(contact) })
+      render json: publication_json, status: :ok
     else
       render blank: true, status: :not_found
     end
-  end
-
-  private
-
-  def publication_attribute_keys
-    %w(pet_name lost_on description phone lat lng reward publication_type breed_id)
-  end
-
-  def private_publication_attribute_keys
-    publication_attribute_keys + %w(contact)
   end
 end

@@ -11,7 +11,7 @@ module Forms
       errors[:publication_type] << 'is invalid' unless Publication::PUBLICATION_TYPES.include?(params[:publication_type])
       errors[:breed_id] << 'does not exist' unless Breed.find_by_id(params[:breed_id])
       errors[:contact] << 'can\'t be blank' if is_empty_string?(params[:contact])
-      unless params[:lost_on] && (Date.parse(params[:lost_on]) rescue false)
+      unless params[:lost_on] && (Date.strptime(params[:lost_on], '%d/%m/%Y') rescue false)
         errors[:lost_on] << 'can\'t be blank'
       end
 
@@ -32,7 +32,9 @@ module Forms
         param_keys
       end
 
-      valid_params = params.slice(valid_keys)
+      valid_params = params.slice(*valid_keys)
+
+      valid_params[:lost_on] = Date.strptime(params[:lost_on], '%d/%m/%Y')
 
       if params[:attachments].kind_of?(Hash)
         # params[:attachments] is a Hash of the form { "0" => file1, "1" => file2 }
@@ -47,7 +49,7 @@ module Forms
     private
 
     def param_keys
-      [:pet_name, :age, :description, :phone, :lat, :lng, :reward, :publication_type, :breed_id]
+      [:pet_name, :description, :phone, :lat, :lng, :reward, :publication_type, :breed_id]
     end
 
     def is_empty_string?(str)

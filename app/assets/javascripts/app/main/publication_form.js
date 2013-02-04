@@ -12,6 +12,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
     this.$form = $("#publication-form");
 
     this.map = settings.map;
+    this.successCallback = settings.successCallback;
 
     this.bindEvents();
     this.attachmentTemplate = $("#attachment-template").template();
@@ -81,7 +82,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
       container = this.$form.find("#image-upload-fields ul");
       content = $.tmpl(this.attachmentTemplate, {
         id: "attachment-" + this.attachmentCount,
-        name: "attachments[" + this.attachmentCount + "]"
+        name: "publication[attachments][" + this.attachmentCount + "]"
       });
 
       this.attachmentCount += 1;
@@ -101,8 +102,8 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
     var publicationData = new FormData(this.$form.get(0))
       , currentCoords = this.map.placedCoords();
 
-    publicationData.append("lat", currentCoords.lat);
-    publicationData.append("lng", currentCoords.lng);
+    publicationData.append("publication[lat]", currentCoords.lat);
+    publicationData.append("publication[lng]", currentCoords.lng);
 
     $.ajax({
       url: "publications",
@@ -119,15 +120,19 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
    *
    */
   PublicationForm.prototype.successfulPublication = function (publication) {
-    this.map.displayPublication(publication);
     this.map.clearPlacedMarker();
+    this.map.displayPublication(publication);
+
     this.$form.find("#image-upload-fields input").remove(); // Clear images
     this.$form.find("input, textarea").val(""); // Clear fields
     this.attachmentCount = 0; // Reset attachmentCount
     // Display 'Add Attachment' button (in case it was hidden)
     this.$form.find("#image-upload-fields button").show();
 
+    this.successCallback(publication);
+
     document.location.hash = "";
+
     // TODO I18n
     flash.displayMessage("success", "Publication created successfully!");
   };

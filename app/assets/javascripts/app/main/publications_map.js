@@ -39,7 +39,7 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
   PublicationsMap.prototype.geoLocate = function () {
     GMaps.geolocate({
       success: function (position) {
-        this.home = position;
+        this.home = position.coords;
         this.displayHome();
       }.bind(this)
     });
@@ -63,17 +63,22 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
     this.map.removeMarkers();
     this.highlightedPublication = null;
     this.markers = {};
-    publications.forEach(function (publication) {
-      this.markers[publication.id] = this.map.addMarker({
-        lat: publication.lat,
-        lng: publication.lng,
-        icon: this.images[publication.publication_type],
-        click: function (event) {
-          document.location.hash = 'publication-' + publication.id;
-        }
-      });
-    }.bind(this));
+    publications.forEach(this.displayPublication.bind(this));
     this.geoLocate();
+  };
+
+  /**
+   *
+   */
+  PublicationsMap.prototype.displayPublication = function (publication) {
+    this.markers[publication.id] = this.map.addMarker({
+      lat: publication.lat,
+      lng: publication.lng,
+      icon: this.images[publication.publication_type],
+      click: function (event) {
+        document.location.hash = 'publication-' + publication.id;
+      }
+    });
   };
 
   /**

@@ -25,7 +25,10 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
 
       // Publications form handler
       publicationForm = new PublicationForm({
-        map: publicationsMap
+        map: publicationsMap,
+        successCallback: function (newPublication) {
+          config.publications.push(newPublication);
+        }
       });
 
       // Publication detail
