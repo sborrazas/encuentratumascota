@@ -1,64 +1,63 @@
-<h3>Nueva Publicaci&oacute;n</h3>
+<h3><%= t('main.index.new_publication_title') %></h3>
 
 <div class="separator"></div>
 
 <%= form_for @new_publication, url: '#', html: { id: 'publication-form', multipart: true } do |f| %>
   <div class="control-group">
-    <%= f.label :pet_name, 'Titulo', class: 'control-label required' %>
+    <%= f.label :pet_name, t('models.publication.pet_name.label'), class: 'control-label required' %>
     <div class="controls">
-      <%= f.text_field :pet_name, placeholder: 'Titulo o nombre de la mascota' %>
+      <%= f.text_field :pet_name, placeholder: t('models.publication.pet_name.placeholder') %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :publication_type, 'Tipo', class: 'control-label required' %>
+    <%= f.label :publication_type, t('models.publication.publication_type'), class: 'control-label required' %>
     <div class="controls">
       <%= f.select :publication_type, Publication::PUBLICATION_TYPES %>
     </div>
   </div>
   <div id="image-upload-fields" class="control-group">
-    <span class="control-label">Im&aacute;genes</span>
+    <span class="control-label"><%= t('models.publication.attachments') %></span>
     <ul class="controls"></ul>
   </div>
   <div class="control-group">
-    <%= f.label :breed_id, 'Raza', class: 'control-label required' %>
+    <%= f.label :breed_id, t('models.publication.breed'), class: 'control-label required' %>
     <div class="controls">
       <%= f.select :breed_id, Breed.sorted.all.map {|b| [b.name, b.id] } %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :description, 'Descripción', class: 'control-label' %>
+    <%= f.label :description, t('models.publication.description.label'), class: 'control-label' %>
     <div class="controls">
-      <%= f.text_area :description, rows: 3, placeholder: 'Descripción general de la mascota' %>
+      <%= f.text_area :description, rows: 3, placeholder: t('models.publication.description.placeholder') %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :lost_on, 'Perdido el', class: 'control-label required' %>
+    <%= f.label :lost_on, t('models.publication.lost_on'), class: 'control-label required' %>
     <div class="controls">
-      <%= f.text_field :lost_on, placeholder: '01/01/2000' %>
+      <%= f.text_field :lost_on, placeholder: '15/12/2010' %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :reward, 'Recompensa', class: 'control-label' %>
+    <%= f.label :reward, t('models.publication.reward.label'), class: 'control-label' %>
     <div class="controls">
-      <%= f.text_field :reward, placeholder: '(opcional)' %>
+      <%= f.text_field :reward, placeholder: t('models.publication.reward.placeholder') %>
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :contact, 'Contacto', class: 'control-label required' %>
+    <%= f.label :contact, t('models.publication.contact.label'), class: 'control-label required' %>
     <div class="controls">
-      <%= f.text_field :contact, placeholder: 'Telefono de contacto' %>
+      <%= f.text_field :contact, placeholder: t('models.publication.contact.placeholder') %>
     </div>
   </div>
   <div class="separator"></div>
   <div class="control-group form-buttons">
-    <%= f.submit 'Publicar', class: 'btn btn-success btn-large', id: 'publication-submit' %>
-    <a href="#" class="btn btn-large btn-cancel-publication">Cancelar</a>
+    <%= f.submit t('main.index.publication_submit'), class: 'btn btn-success btn-large', id: 'publication-submit' %>
+    <a href="#" class="btn btn-large btn-cancel-publication"><%= t('main.index.publication_cancel') %></a>
   </div>
 <% end %>
 
 <div class="note">
-  La publicaci&oacute;n necesita aprobaci&oacute;n de un administrador.
-  Prohibida la venta de animales.
+  <%= t('main.index.publication_disclaimer') %>
 </div>
 
 <script type="text/x-jquery-tmpl" id="attachment-template">

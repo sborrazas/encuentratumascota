@@ -2,20 +2,23 @@
   <div class="modal-body">
     <%= form_for @user, url: registrations_path(format: :json) do |f| %>
       <p class="field">
-        <%= f.label :email, 'Tu Email' %>
-        <%= f.text_field :email, placeholder: 'Email' %>
+        <%= f.label :email, t('models.user.email.label') %>
+        <%= f.text_field :email, placeholder: t('models.user.email.placeholder') %>
       </p>
 
       <p class="field">
-        <%= f.label :password, 'Contrase;a' %>
-        <%= f.password_field :password, autocomplete: 'off', placeholder: 'Contraseña' %>
+        <%= f.label :password, t('models.user.password.label') %>
+        <%= f.password_field :password, autocomplete: 'off', placeholder: t('models.user.password.placeholder') %>
       </p>
 
-      <p><%= f.submit 'Crear Cuenta', class: 'btn btn-golden btn-block btn-large' %></p>
+      <p><%= f.submit t('main.index.registration_form.submit'), class: 'btn btn-golden btn-block btn-large' %></p>
     <% end %>
   </div>
   <div class="modal-footer">
     <%= render partial: 'shared/auth_footer' %>
-    <p class="register">¿Ya eres usuario? <a href="#" class="btn-sign-in">Iniciar Sesi&oacute;n</a></p>
+    <p class="register">
+      <%= t('main.index.registration_form.sign_in_alternative') %>
+      <a href="#" class="btn-sign-in"><%= t('main.index.registration_form.sign_in') %></a>
+    </p>
   </div>
 </div>
