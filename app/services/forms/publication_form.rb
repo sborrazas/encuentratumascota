@@ -4,13 +4,13 @@ module Forms
       errors = default_errors_hash
       context = options.fetch(:context, :default)
 
-      # [:pet_name, :age, :description, :phone, :lat, :lng, :reward, :publication_type, :breed_id]
       errors[:pet_name] << 'is invalid' if is_empty_string?(params[:pet_name])
       errors[:lat] << 'is invalid' if is_empty_string?(params[:lat])
       errors[:lng] << 'is invalid' if is_empty_string?(params[:lng])
       errors[:publication_type] << 'is invalid' unless Publication::PUBLICATION_TYPES.include?(params[:publication_type])
       errors[:breed_id] << 'does not exist' unless Breed.find_by_id(params[:breed_id])
       errors[:contact] << 'can\'t be blank' if is_empty_string?(params[:contact])
+      errors[:sex] << 'is invalid' unless Publication::SEXES.include?(params[:sex])
       unless params[:lost_on] && (Date.strptime(params[:lost_on], '%d/%m/%Y') rescue false)
         errors[:lost_on] << 'can\'t be blank'
       end
@@ -49,7 +49,7 @@ module Forms
     private
 
     def param_keys
-      [:pet_name, :contact, :description, :lat, :lng, :reward, :publication_type, :breed_id]
+      [:pet_name, :sex, :contact, :description, :lat, :lng, :reward, :publication_type, :breed_id]
     end
 
     def is_empty_string?(str)

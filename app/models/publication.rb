@@ -21,6 +21,7 @@ class Publication < ActiveRecord::Base
 
   PUBLICATION_TYPES = %w(adoption lost found)
   STATUSES = %w(active inactive closed)
+  SEXES = %w(male female unknown)
 
   scope :has_publication_type, lambda {|*ptype| where(publication_type: ptype) }
   scope :has_status, lambda {|*statuses| where(status: statuses) }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203220146) do
+ActiveRecord::Schema.define(:version => 20130209145635) do
 
   create_table "attachments", :force => true do |t|
     t.integer "publication_id", :null => false
@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20130203220146) do
     t.date     "lost_on",                          :null => false
     t.datetime "created_at",                       :null => false
     t.string   "contact",          :default => "", :null => false
+    t.string   "sex",              :default => "unknown", :null => false
   end
 
   create_table "users", :force => true do |t|

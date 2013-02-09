@@ -9,6 +9,7 @@ es:
         label: Descipción
         placeholder: Descripción general de la mascota
       status: Estado
+      sex: Sexo
       lat: Latitud
       lng: Longitud
       reward:
@@ -25,6 +26,10 @@ es:
         found: Encontrado
         adoption: En adopción
         all: Todos
+      sexes:
+        male: Macho
+        female: Hembra
+        unknown: No sé
     user:
       email:
         label: Email

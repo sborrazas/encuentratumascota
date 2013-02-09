@@ -59,7 +59,7 @@ class Admin::PublicationsController < ApplicationController
   end
 
   def publication_attribute_keys
-    %w(pet_name contact lost_on description phone reward publication_type breed_id status user_id).map(&:to_sym)
+    %w(pet_name contact lost_on description sex reward publication_type breed_id status user_id).map(&:to_sym)
   end
 
   def user_publications_scope

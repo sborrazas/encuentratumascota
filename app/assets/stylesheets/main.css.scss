@@ -148,27 +148,38 @@ body.main {
 
       form {
         margin: 0;
-        .control-group {
-          .control-label {
-            float: left;
-            width: 20%;
-            padding: 0 8%;
-            color: $lighter_font_color;
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.9em;
-            margin: 0;
-            line-height: 2.3em;
-          }
+        .control-label {
+          float: left;
+          width: 20%;
+          padding: 0 8%;
+          color: $lighter_font_color;
+          font-weight: bold;
+          text-transform: uppercase;
+          font-size: 0.9em;
+          margin: 0;
+          line-height: 2.3em;
+        }
 
-          .controls {
-            margin-left: 36%;
-            textarea,
-            input,
-            select {
-              width: 88%;
-              margin: 0;
-            }
+        .controls {
+          margin-left: 36%;
+          textarea,
+          input,
+          select {
+            width: 88%;
+            margin: 0;
+          }
+        }
+
+        .sex-control {
+          overflow: auto;
+          label {
+            float: left;
+            display: inline-block;
+          }
+          input {
+            width: inherit;
+            float: left;
+            margin: 0 8px;
           }
         }
 
