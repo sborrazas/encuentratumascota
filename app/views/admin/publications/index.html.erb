@@ -4,10 +4,10 @@
     <li>
       <% if current_user.is_admin? %>
         <%= t('admin.publications.general.publications') %>
-        <% title_str = t('admin.publications.general.publications') %>
+        <% title_str = t('admin.general.publications') %>
       <% else %>
         <%= t('admin.publications.general.my_publications') %>
-        <% title_str = t('admin.publications.general.my_publications') %>
+        <% title_str = t('admin.general.my_publications') %>
       <% end %>
     </li>
   </ul>
