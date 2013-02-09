@@ -25,4 +25,14 @@ class ApplicationController < ActionController::Base
       format.html { redirect_to root_url, flash: { error: 'You are not authorized to access this page' } }
     end
   end
+
+  unless Rails.application.config.consider_all_requests_local
+    rescue_from Exception, with: :handle_exception
+  end
+
+  private
+  def handle_exception(exception)
+    # ErrorMailer.experror(exception, env).deliver
+    render file: 'public/500.html', status: 500, layout: false
+  end
 end
