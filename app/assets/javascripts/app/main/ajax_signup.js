@@ -42,14 +42,12 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
     $("#modal-sign-in").modal("hide");
     $("#modal-sign-up").modal("hide");
 
-    if (typeof this.successCallback === "function") {
-      flash.displayMessage("success", "Logueado correctamente!");
-      $("#logged-out-nav").hide();
-      $("#logged-in-nav").show();
-      $("#username").html(userData.display);
+    flash.displayMessage("success", "Logueado correctamente!");
+    $("#logged-out-nav").hide();
+    $("#logged-in-nav").show();
+    $("#username").html(userData.display);
 
-      $("#user-image").html("<img src=\"" + userImage + "\" alt=\"" + userData.display + "\" />");
-    }
+    $("#user-image").html("<img src=\"" + userImage + "\" alt=\"" + userData.display + "\" />");
   };
 
   /**

@@ -7,10 +7,10 @@ class SessionsController < ApplicationController
     user = User.authenticate(user_params[:email], user_params[:password])
     if user
       sign_user_in(user)
-      render json: user.attributes.slice(*%w(display image_url)), status_code: :created
+      render json: Presenters::User.to_json_hash(user), status: :created
     else
       render json: {
-        errors: { email: ['is invalid'], password: ['is invalid'] }
+        errors: { email: ['is invalid'], password: ['is invalid'] } # TODO I18n
       }, status: :unauthorized
     end
   end
