@@ -1,4 +1,5 @@
-define(["jquery", "app/flash_display", "bootstrap", "jquery_tmpl"], function ($, flash) {
+define(["jquery", "app/flash_display", "app/translations", "bootstrap", "jquery_tmpl"],
+  function ($, flash, t) {
 
   /**
    *
@@ -29,8 +30,7 @@ define(["jquery", "app/flash_display", "bootstrap", "jquery_tmpl"], function ($,
             this.config.ajaxSignup.signIn();
           }
           else {
-            // TODO I18n
-            flash.displayMessage("error", "Esta publicacion se ha eliminado.");
+            flash.displayMessage("error", t("publication_detail.deleted"));
           }
           this.loading = false;
         }.bind(this)

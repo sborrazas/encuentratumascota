@@ -23,4 +23,10 @@ module ApplicationHelper
     url = current_user.image_url.empty? ? '/assets/default_user.png' : current_user.image_url
     image_tag url, alt: current_user.display
   end
+
+  def publication_type_options
+    @publication_type_options ||= Publication::PUBLICATION_TYPES.map do |type|
+      [t("models.publication.publication_types.#{type}"), type]
+    end
+  end
 end

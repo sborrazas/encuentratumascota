@@ -1,0 +1,92 @@
+es:
+  models:
+    publication:
+      publication_type: Tipo
+      pet_name:
+        label: Título
+        placeholder: Título o nombre de la mascota
+      description:
+        label: Descipción
+        placeholder: Descripción general de la mascota
+      status: Estado
+      lat: Latitud
+      lng: Longitud
+      reward:
+        label: Recompensa
+        placeholder: (opcional)
+      lost_on: Perdido el
+      contact:
+        label: Contacto
+        placeholder: Teléfono de contacto
+      breed: Raza
+      attachments: Imágenes
+      publication_types:
+        lost: Perdido
+        found: Encontrado
+        adoption: En adopción
+        all: Todos
+    user:
+      email:
+        label: Email
+        placeholder: Tu Email
+      password:
+        label: Contraseña
+        placeholder: Contraseña
+      provider: Proveedor
+
+  main:
+    index:
+      empty_publication_list: Actualmente no hay mascotas que coincidan con este filtro.
+      contact_info: 'Información de contacto:'
+      request_contact_info: Solicitar información de contacto
+      log_in_alternative: o ingresá con
+      go_back: Regresar
+      new_publication_title: Nueva Publicación
+      publication_submit: Publicar
+      publication_cancel: Cancelar
+      publication_disclaimer:
+        La publicación necesita aprobación de un administrador.
+        Prohibida la venta de animales.
+      session_form:
+        submit: Iniciar Sesión
+        sign_up_alternative: ¿No eres usuario?
+        sign_up: Regístrate
+      registration_form:
+        submit: Crear Cuenta
+        sign_in_alternative: ¿Ya eres usuario?
+        sign_in: Iniciar Sesión
+      js:
+        ajax_signup:
+          logged_in_successfully: Logueado correctamente!
+        publication_detail:
+          deleted: Esta publicación se ha eliminado.
+        publication_form:
+          select_location: Debes seleccionar la ubicación donde encontraste/perdiste la mascota primero.
+          click_on_map: Debes clickear la ubicación donde encontraste/perdiste la mascota.
+          publication_created_successfully: Publicación creada correctamente!
+
+  general:
+    tagline: La manera mas fácil y rápida de conectar mascotas con sus dueños
+    nav:
+      how_it_works: ¿Cómo funciona?
+      contact: Contacto
+      sign_in: Iniciar sesión
+      sign_out: Cerrar sesión
+      new_publication: Publicar mascota
+
+  admin:
+    general:
+      publications: Publicaciones
+      my_publications: Mis Publicaciones
+    publications:
+      index:
+        new: Nueva Publicación
+        show: Ver
+        edit: Modificar
+        delete: Eliminar
+      new:
+        submit: Crear
+        cancel: Cancelar
+      edit:
+        submit: Modificar
+        cancel: Cancelar

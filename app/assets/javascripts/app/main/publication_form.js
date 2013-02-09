@@ -1,4 +1,5 @@
-define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function ($, formErrors, flash) {
+define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "bootstrap"],
+  function ($, formErrors, flash, t) {
 
   var config = {
     MAX_ATTACHMENTS: 4
@@ -27,8 +28,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
     this.map.active = true;
 
     if (!this.map.isCoordsPlaced()) {
-      // TODO I18n
-      flash.displayMessage("info", "Click on the map");
+      flash.displayMessage("info", t("publication_form.click_on_map"));
     }
     // Display image upload attachment field if none is visible
     if (this.$form.find("#image-upload-fields input").length === 0) {
@@ -60,7 +60,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
         this.createPublication();
       }
       else {
-        flash.displayMessage("info", "You need to select the location where you lost the pet first.");
+        flash.displayMessage("info", t("publication_form.select_location"));
       }
     }.bind(this));
 
@@ -143,8 +143,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
 
     document.location.hash = "";
 
-    // TODO I18n
-    flash.displayMessage("success", "Publication created successfully!");
+    flash.displayMessage("success", t("publication_form.publication_created_successfully"));
   };
 
   /**

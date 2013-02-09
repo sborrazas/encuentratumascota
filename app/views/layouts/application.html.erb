@@ -10,19 +10,19 @@
         <%= image_tag 'logo1.png', class: 'logo' %>
         <hgroup>
           <h1>Encuentra tu Mascota</h1>
-          <h2>La manera m&aacute;s f&aacute;cil y r&aacute;pida de conectar mascotas con sus dueños</h2>
+          <h2><%= t('general.tagline') %></h2>
         </hgroup>
       <% end %>
     </header>
 
     <nav>
       <div class="info-nav">
-        <a href="/#how-it-works" class="main-nav-item">&iquest;C&oacute;mo funciona?</a>
-        <a href="/#contact" class="main-nav-item">Contacto</a>
+        <a href="/#how-it-works" class="main-nav-item"><%= t('general.nav.how_it_works') %></a>
+        <a href="/#contact" class="main-nav-item"><%= t('general.nav.contact') %></a>
       </div>
       <% unless current_user %>
         <div id="logged-out-nav">
-          <a href="#" class="btn-sign-in">Iniciar sesi&oacute;n</a>
+          <a href="#" class="btn-sign-in"><%= t('general.nav.sign_in') %></a>
         </div>
       <% end %>
 
@@ -33,13 +33,13 @@
           <span class="icon dropdown-caret"></span>
         </a>
         <ul class="nav-dropdown-menu">
-          <li><a href="/admin/publications">Mis Publicaciones</a></li>
+          <li><a href="/admin/publications"><%= t('admin.general.my_publications') %></a></li>
           <!-- <li><a href="/admin/publications">Configuraci&oacute;n</a></li> -->
-          <li><a href="/sessions/logout">Cerrar sesi&oacute;n</a></li>
+          <li><a href="/sessions/logout"><%= t('general.nav.sign_out') %></a></li>
         </ul>
       </div>
 
-      <a class="btn btn-warning" href="/#publication-new" id="publication-new">Publicar mascota</a>
+      <a class="btn btn-warning" href="/#publication-new" id="publication-new"><%= t('general.nav.new_publication') %></a>
     </nav>
   </section>
 

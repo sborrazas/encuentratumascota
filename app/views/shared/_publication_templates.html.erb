@@ -33,12 +33,12 @@
     ${publication.description}
   </p>
   <dl class="lil-details">
-    <dt>Raza:</dt>
+    <dt><%= t('models.publication.breed') %>:</dt>
     <dd>${publication.breed}</dd>
-    <dt>Fecha:</dt>
+    <dt><%= t('models.publication.lost_on') %>:</dt>
     <dd>${publication.lost_on}</dd>
     {{if publication.reward}}
-      <dt>Recompensa:</dt>
+      <dt><%= t('models.publication.reward.label') %>:</dt>
       <dd>${publication.reward}</dd>
     {{/if}}
   </dl>
