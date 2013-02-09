@@ -57,7 +57,8 @@
         publications: @publications.map do |publication|
           Presenters::Publication.to_json_hash(publication)
         end,
-        flash: @flash_messages
+        flash: @flash_messages,
+        translations: t('.js')
       }.to_json.html_safe %>);
     });
   });

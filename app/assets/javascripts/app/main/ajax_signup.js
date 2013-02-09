@@ -1,4 +1,5 @@
-define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function ($, formErrors, flash) {
+define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "bootstrap"],
+  function ($, formErrors, flash, translations) {
 
   /**
    *
@@ -42,7 +43,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "bootstrap"], function
     $("#modal-sign-in").modal("hide");
     $("#modal-sign-up").modal("hide");
 
-    flash.displayMessage("success", "Logueado correctamente!");
+    flash.displayMessage("success", t("ajax_signup.logged_in_successfully"));
     $("#logged-out-nav").hide();
     $("#logged-in-nav").show();
     $("#username").html(userData.display);

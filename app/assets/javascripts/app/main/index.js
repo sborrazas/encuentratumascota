@@ -1,6 +1,6 @@
 define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main/publications_list",
-  "app/main/publication_detail", "app/main/publication_form", "app/flash_display"],
-  function ($, AjaxSignUp, PublicationsMap, PublicationsList, PublicationDetail, PublicationForm, flash) {
+  "app/main/publication_detail", "app/main/publication_form", "app/flash_display", "app/translations"],
+  function ($, AjaxSignUp, PublicationsMap, PublicationsList, PublicationDetail, PublicationForm, flash, translations) {
 
   var config = {}
     , petFinder, ajaxSignup, publicationsList, publicationsMap, publicationDetail, publicationForm;
@@ -8,6 +8,8 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
   return {
     init: function (settings) {
       config = settings;
+
+      translations.init(config.translations);
 
       // Flash messages
       flash.displayMessages(config.flash);
