@@ -17,8 +17,17 @@ class SessionsController < ApplicationController
 
   def create_with_omniauth
     auth = request.env['omniauth.auth']
+    email = auth.info.email
+
     if user = User.where(provider: auth.provider, uid: auth.uid).first
       update_user_with_omniauth(user, auth)
+    elsif email && !email.empty? && (user = User.where(email: email).first)
+      if user.provider
+        redirect_to root_path, flash: { error: t('sessions.create_with_omniauth.email_taken') }
+        return
+      else
+        update_user_with_omniauth(user)
+      end
     else
       user = create_user_with_omniauth(auth)
     end
@@ -50,6 +59,8 @@ class SessionsController < ApplicationController
 
   def update_user_with_omniauth(user, auth)
     user.update_attributes({
+      provider: auth.provider,
+      uid: auth.uid,
       provider_username: auth.info.nickname.blank? ? user.provider_username : auth.info.nickname,
       email: auth.info.email.blank? ? user.email : auth.info.email,
       image_url: auth.info.image.blank? ? user.image_url : auth.info.image

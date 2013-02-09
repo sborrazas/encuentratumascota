@@ -65,6 +65,10 @@ es:
           click_on_map: Debes clickear la ubicación donde encontraste/perdiste la mascota.
           publication_created_successfully: Publicación creada correctamente!
 
+  sessions:
+    create_with_omniauth:
+      email_taken: El email de este usuario ya fue tomado.
+
   general:
     tagline: La manera mas fácil y rápida de conectar mascotas con sus dueños
     nav:
