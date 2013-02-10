@@ -30,6 +30,17 @@ es:
         male: Macho
         female: Hembra
         unknown: No sé
+      errors:
+        blank_pet_name: Debe ingresar un titulo
+        blank_coords: Las coordenadas son invalidas #
+        invalid_publication_type: El tipo de publicacion es invalido #
+        missing_breed_id: La raza seleccionada no existe
+        blank_contact: Debe ingresar un contacto
+        invalid_sex: El sexo es invalido #
+        invalid_lost_on: Debe ingresar la fecha de cuando lo perdio/encontro #
+        blank_user_id: Debe seleccionar un usuario
+        invalid_status: El status es invalido #
+
     user:
       email:
         label: Email
@@ -38,6 +49,10 @@ es:
         label: Contraseña
         placeholder: Contraseña
       provider: Proveedor
+      errors:
+        invalid_email: es invalido #
+        invalid_password: es invalido #
+        already_used_email: ya fue usado
 
   main:
     index:
@@ -73,6 +88,11 @@ es:
   sessions:
     create_with_omniauth:
       email_taken: El email de este usuario ya fue tomado.
+      logged_in_successfully: Logueado correctamente con %{provider}!
+    failure:
+      omniauth_error: 'Ha ocurrido un error al intentar loguearse, por favor, intente nuevamente'
+    logout:
+      success: 'Sesion terminada correctamete..'
 
   general:
     tagline: La manera mas fácil y rápida de conectar mascotas con sus dueños

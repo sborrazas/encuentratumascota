@@ -3,21 +3,28 @@ module Forms
     def process_errors(params, options)
       errors = default_errors_hash
       context = options.fetch(:context, :default)
+      resource = options.fetch(:resource, nil)
 
-      errors[:pet_name] << 'is invalid' if is_empty_string?(params[:pet_name])
-      errors[:lat] << 'is invalid' if is_empty_string?(params[:lat])
-      errors[:lng] << 'is invalid' if is_empty_string?(params[:lng])
-      errors[:publication_type] << 'is invalid' unless Publication::PUBLICATION_TYPES.include?(params[:publication_type])
-      errors[:breed_id] << 'does not exist' unless Breed.find_by_id(params[:breed_id])
-      errors[:contact] << 'can\'t be blank' if is_empty_string?(params[:contact])
-      errors[:sex] << 'is invalid' unless Publication::SEXES.include?(params[:sex])
+      translations = I18n.t('models.publication.errors')
+
+      errors[:pet_name] << translations[:blank_pet_name] if is_empty_string?(params[:pet_name])
+      if is_empty_string?(params[:lat]) || is_empty_string?(params[:lng])
+        errors[:lat] << translations[:blank_coords]
+        errors[:lng] << translations[:blank_coords]
+      end
+      unless Publication::PUBLICATION_TYPES.include?(params[:publication_type])
+        errors[:publication_type] << translations[:invalid_publication_type]
+      end
+      errors[:breed_id] << translations[:missing_breed_id] unless Breed.find_by_id(params[:breed_id])
+      errors[:contact] << translations[:blank_contact] if is_empty_string?(params[:contact])
+      errors[:sex] << translations[:invalid_sex] unless Publication::SEXES.include?(params[:sex])
       unless params[:lost_on] && (Date.strptime(params[:lost_on], '%d/%m/%Y') rescue false)
-        errors[:lost_on] << 'can\'t be blank'
+        errors[:lost_on] << translations[:invalid_lost_on]
       end
 
       if context == :admin
-        errors[:user_id] << 'is invalid' if is_empty_string?(params[:user_id])
-        errors[:status] << 'is invalid' unless Publication::STATUSES.include?(params[:status])
+        errors[:user_id] << translations[:blank_user_id] if is_empty_string?(params[:user_id])
+        errors[:status] << translations[:invalid_status] unless Publication::STATUSES.include?(params[:status])
       end
 
       errors
