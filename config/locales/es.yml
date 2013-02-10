@@ -113,6 +113,8 @@ es:
         show: Ver
         edit: Modificar
         delete: Eliminar
+      form:
+        map: Mapa
       new:
         submit: Crear
         cancel: Cancelar

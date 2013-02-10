@@ -22,7 +22,12 @@
   </div>
 </div>
 
-<!-- TODO Display map (with lat and lng) -->
+<div class="control-group">
+  <span class="control-label"><%= t('admin.publications.form.map') %></span>
+  <div id="map"></div>
+  <%= form.hidden_field :lat %>
+  <%= form.hidden_field :lng %>
+</div>
 
 <div class="control-group">
   <%= form.label :reward, t('models.publication.reward.label'), class: 'control-label' %>
@@ -47,8 +52,11 @@
 
 <div class="control-group">
   <%= form.label :lost_on, t('models.publication.lost_on'), class: 'control-label' %>
-  <div class="controls">
-    <%= form.text_field :lost_on %><!-- TODO Datepicker -->
+  <div class="controls datepicker">
+    <%= form.text_field :lost_on, value: @publication.lost_on.strftime('%d/%m/%Y') %>
+  </div>
+</div>
+
   </div>
 </div>
 
@@ -69,3 +77,11 @@
 <% end %>
 
 <!-- TODO Images -->
+
+<% content_for :javascript do %>
+  require(['require', 'app/admin/publication_form'], function (require) {
+    require(['app/admin/publication_form'], function (PublicationForm) {
+      new PublicationForm();
+    });
+  });
+<% end %>

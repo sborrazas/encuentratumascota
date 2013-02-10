@@ -1,4 +1,4 @@
-define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "bootstrap"],
+define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "bootstrap_datepicker"],
   function ($, formErrors, flash, t) {
 
   var config = {
@@ -11,6 +11,11 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
   var PublicationForm = function (settings) {
     this.$el = $("#new-publication-container");
     this.$form = $("#publication-form");
+
+    // Datepicker
+    this.$form.find(".datepicker input").datepicker({
+      format: "dd/mm/yyyy"
+    });
 
     this.map = settings.map;
     this.successCallback = settings.successCallback;

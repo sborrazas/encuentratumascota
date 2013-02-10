@@ -15,7 +15,7 @@
 </header>
 
 
-<%= form_for @publication, url: admin_publication_path(@publication), html: { class: 'form-horizontal' } do |form| %>
+<%= form_for @publication, url: admin_publication_path(@publication), html: { class: 'form-horizontal publication-form' } do |form| %>
 
   <%= display_errors(@errors) if @errors %>
 
