@@ -8,6 +8,12 @@ define(["jquery", "bootstrap", "jquery_tmpl"], function ($) {
     this.$el = $("#publication-list");
     this.$publicationList = this.$el.children("ul");
     this.publicationListTemplate = $("#publication-list-template").template();
+
+    this.publicationClicked = function (event) {
+      var $li = $(event.target).parents(".publication-item");
+
+      document.location.hash = "#publication-" + $li.data('publication-id');
+    }.bind(this);
   };
 
   /**
@@ -45,6 +51,8 @@ define(["jquery", "bootstrap", "jquery_tmpl"], function ($) {
       , $content = $(content);
 
     this.$publicationList.append($content);
+
+    $content.click(this.publicationClicked);
 
     $("body").addClass("with-sidebar");
   };

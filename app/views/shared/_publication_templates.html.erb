@@ -1,20 +1,18 @@
 <script type="text/x-jQuery-tmpl" id="publication-list-template">
-  <li>
-    <a href="#publication-${publication.id}">
-      <div class="type-indicator ${publication.publication_type}"></div>
-      <img src="${publication.attachment}" alt="${publication.pet_name}" />
-      <div class="publication-info">
-        <h1>
-          ${publication.pet_name}
-          <span class="ptype ${publication.publication_type}">${publication.publication_type}</span>
-        </h1>
-        <p>${publication.description}</p>
-        <ul class="publication-details">
-          <li><span class="icon breed-tag"></span>${publication.breed}</li>
-          <li><span class="icon time"></span>${publication.lost_on}</li>
-        </ul>
-      </div>
-    </a>
+  <li class="publication-item" data-publication-id="${publication.id}">
+    <div class="type-indicator ${publication.publication_type}"></div>
+    <img src="${publication.attachment}" alt="${publication.pet_name}" />
+    <div class="publication-info">
+      <h1>
+        ${publication.pet_name}
+        <span class="ptype ${publication.publication_type}">${publication.publication_type}</span>
+      </h1>
+      <p>${publication.description}</p>
+      <ul class="publication-details">
+        <li><span class="icon breed-tag"></span>${publication.breed}</li>
+        <li><span class="icon time"></span>${publication.lost_on}</li>
+      </ul>
+    </div>
   </li>
 </script>
 
