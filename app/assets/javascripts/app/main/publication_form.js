@@ -12,6 +12,12 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
     this.$el = $("#new-publication-container");
     this.$form = $("#publication-form");
 
+    this.$form.submit(function (event) {
+      event.preventDefault();
+
+      this.createPublication();
+    }.bind(this));
+
     // Datepicker
     this.$form.find(".datepicker input").datepicker({
       format: "dd/mm/yyyy"
