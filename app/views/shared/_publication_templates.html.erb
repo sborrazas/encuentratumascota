@@ -20,9 +20,17 @@
 
 <script type="text/x-jQuery-tmpl" id="publication-detail-template">
   <ul class="image-carousel">
-    <li>
-      <img src="${publication.attachments[0] || "/assets/default_dog.png"}" alt="${publication.pet_name}" />
-    </li>
+    {{if publication.attachments.length === 0}}
+      <li>
+        <img src="/assets/default_dog.png" alt="${publication.pet_name}" />
+      </li>
+    {{else}}
+      {{each publication.attachments}}
+        <li>
+          <img src="${$value}" alt="${publication.pet_name}" />
+        </li>
+      {{/each}}
+    {{/if}}
   </ul>
 
   <h3>
