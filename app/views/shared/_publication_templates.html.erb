@@ -5,7 +5,7 @@
     <div class="publication-info">
       <h1>
         ${publication.pet_name}
-        <span class="ptype ${publication.publication_type}">${publication.publication_type}</span>
+        <span class="ptype ${publication.publication_type}">${publication.publication_type_str}</span>
       </h1>
       <p>${publication.description}</p>
       <ul class="publication-details">
@@ -33,7 +33,7 @@
 
   <h3>
     ${publication.pet_name}
-    <span class="ptype ${publication.publication_type}">${publication.publication_type}</span>
+    <span class="ptype ${publication.publication_type}">${publication.publication_type_str}</span>
   </h3>
   <p>
     ${publication.description}

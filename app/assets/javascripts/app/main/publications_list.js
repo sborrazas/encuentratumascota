@@ -1,4 +1,4 @@
-define(["jquery", "bootstrap", "jquery_tmpl"], function ($) {
+define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, t) {
 
   /**
    *
@@ -29,6 +29,7 @@ define(["jquery", "bootstrap", "jquery_tmpl"], function ($) {
         this.displayPublicationOnSidebar({
           id: publication.id,
           publication_type: publication.publication_type,
+          publication_type_str: t(publication.publication_type),
           pet_name: publication.pet_name,
           description: publication.description,
           lost_on: publication.lost_on,

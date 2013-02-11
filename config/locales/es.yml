@@ -84,6 +84,10 @@ es:
           select_location: Debes seleccionar la ubicación donde encontraste/perdiste la mascota primero.
           click_on_map: Debes clickear la ubicación donde encontraste/perdiste la mascota.
           publication_created_successfully: Publicación creada correctamente!
+        lost: Perdido
+        found: Encontrado
+        adoption: En adopción
+
 
   sessions:
     create_with_omniauth:

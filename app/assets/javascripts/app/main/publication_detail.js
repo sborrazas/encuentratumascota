@@ -43,7 +43,10 @@ define(["jquery", "app/carousel", "app/flash_display", "app/translations", "boot
    */
   PublicationDetail.prototype.showPublication = function (publication) {
     var $publicationInfo = this.$publicationInfo
-      , content = $.tmpl(this.publicationDetailTemplate, { publication: publication });
+      , extendedPublication = $.extend({
+          publication_type_str: t(publication.publication_type)
+        }, publication)
+      , content = $.tmpl(this.publicationDetailTemplate, { publication: extendedPublication });
 
     this.currentPublicationId = publication.id;
 
