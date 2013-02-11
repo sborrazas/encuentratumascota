@@ -34,19 +34,16 @@ class Admin::PublicationsController < ApplicationController
   end
 
   def update
-    @publication = user_publications_scope.find(params[:id])
-    return unauthorized_access unless @publication
-
     publication_form = Forms::PublicationForm.new(publication_params, {
       context: :admin,
-      resource: @publication
+      resource: user_publications_scope.find(params[:id])
     })
 
     if publication_form.valid?
       publication_form.get_resource.save
       redirect_to admin_publications_path, flash: { success: 'Publication updated successfully' }
     else
-      @publication.assign_attributes(publication_params)
+      @publication = publication_form.get_resource
       @errors = publication_form.errors
       render :edit
     end

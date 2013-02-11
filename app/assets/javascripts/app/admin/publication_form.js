@@ -26,8 +26,8 @@ define(["jquery", "lib/gmaps", "bootstrap_datepicker"], function ($, GMaps) {
     // Map
     this.map = new GMaps({
       div: "#map",
-      lat: $("#publication_lat").val(),
-      lng: $("#publication_lng").val(),
+      lat: ($("#publication_lat").val() || -34.90649),
+      lng: ($("#publication_lng").val() || -56.16348),
       zoom: 14,
       click: function (event) {
         var position = event.latLng;
@@ -42,8 +42,8 @@ define(["jquery", "lib/gmaps", "bootstrap_datepicker"], function ($, GMaps) {
     };
 
     this.currentMarker = this.map.addMarker({
-      lat: $("#publication_lat").val(),
-      lng: $("#publication_lng").val(),
+      lat: ($("#publication_lat").val() || -34.90649),
+      lng: ($("#publication_lng").val() || -56.16348),
       icon: this.images.myPet,
       animation: 'drop',
       draggable: true

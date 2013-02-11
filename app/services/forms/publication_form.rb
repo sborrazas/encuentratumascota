@@ -45,11 +45,14 @@ module Forms
       valid_params[:lost_on] = Date.strptime(params[:lost_on], '%d/%m/%Y')
 
       if params[:attachments].kind_of?(Hash)
-        # params[:attachments] is a Hash of the form { "0" => file1, "1" => file2 }
-        attachments_params = params[:attachments].values.reject(:blank?)[0..3]
+        # params[:attachments] is a Hash in the form of { "0" => file1, "1" => file2 }
+        attachments_params = params[:attachments].values.reject(&:blank?)
+        attachments_params = attachments_params.first(Publication::MAX_ATTACHMENTS)
+
         valid_params[:attachments] = attachments_params.map do |image|
           Attachment.new(image: image)
         end
+        valid_params[:attachments].concat(publication.attachments.last(Publication::MAX_ATTACHMENTS - attachments_params.count))
       end
 
       publication.assign_attributes(valid_params)
@@ -60,7 +63,7 @@ module Forms
     private
 
     def param_keys
-      [:pet_name, :sex, :contact, :description, :lat, :lng, :reward, :publication_type, :breed_id, :user_id]
+      [:pet_name, :sex, :contact, :description, :lat, :lng, :reward, :publication_type, :breed_id]
     end
 
     def is_empty_string?(str)

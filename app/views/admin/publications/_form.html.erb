@@ -16,6 +16,25 @@
 </div>
 
 <div class="control-group">
+  <span class="control-label"><%= t('models.publication.attachments') %></span>
+  <ul class="controls">
+    <% 4.times do |index| %>
+      <li>
+        <% if @publication.attachments[index] %>
+          <%= image_tag @publication.attachments[index].image, alt: "#{@publication.pet_name} #{index}" %>
+        <% end %>
+        <%= form.label :"attachment_#{index}", class: 'hide' %>
+        <input id="publication_attachment_<%= index %>" type="file" name="publication[attachments][<%= index %>]" />
+        <% if false %>
+          <input id="publication_attachment_<%= index %>_checked" type="checkbox" name="publication[attachments][<%= index %>][checked]" <% if @publication.attachments[index] %>checked="checked"<% end %> />
+          <%= form.label :"attachment_#{index}_checked", 'Delete' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="control-group">
   <%= form.label :description, t('models.publication.description.label'), class: 'control-label' %>
   <div class="controls">
     <%= form.text_area :description, rows: 4, placeholder: t('models.publication.description.placeholder') %>
@@ -53,7 +72,7 @@
 <div class="control-group">
   <%= form.label :lost_on, t('models.publication.lost_on'), class: 'control-label' %>
   <div class="controls datepicker">
-    <%= form.text_field :lost_on, value: @publication.lost_on.strftime('%d/%m/%Y') %>
+    <%= form.text_field :lost_on, value: (@publication.lost_on || Date.current).strftime('%d/%m/%Y') %>
   </div>
 </div>
 
