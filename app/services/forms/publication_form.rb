@@ -32,6 +32,7 @@ module Forms
 
     def build_resource(params, options)
       context = options.fetch(:context, :default)
+      publication = options.fetch(:resource) { Publication.new }
 
       valid_keys = if context == :admin
         param_keys + [:status, :user_id]
@@ -45,12 +46,15 @@ module Forms
 
       if params[:attachments].kind_of?(Hash)
         # params[:attachments] is a Hash of the form { "0" => file1, "1" => file2 }
-        valid_params[:attachments] = params[:attachments].values.map do |image|
+        attachments_params = params[:attachments].values.reject(:blank?)[0..3]
+        valid_params[:attachments] = attachments_params.map do |image|
           Attachment.new(image: image)
         end
       end
 
-      Publication.new(valid_params)
+      publication.assign_attributes(valid_params)
+
+      publication
     end
 
     private

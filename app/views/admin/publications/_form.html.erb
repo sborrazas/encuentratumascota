@@ -23,7 +23,7 @@
 </div>
 
 <div class="control-group">
-  <span class="control-label"><%= t('admin.publications.form.map') %></span>
+  <span class="control-label"><%= t('admin.publications.form.location') %></span>
   <div id="map"></div>
   <%= form.hidden_field :lat %>
   <%= form.hidden_field :lng %>
@@ -72,6 +72,13 @@
     <%= form.label :status, t('models.publication.status'), class: 'control-label' %>
     <div class="controls">
       <%= form.select :status, Publication::STATUSES %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= form.label :user_id, t('models.publication.user'), class: 'control-label' %>
+    <div class="controls">
+      <%= form.select :user_id, User.all.map {|u| [u.display, u.id] } %>
     </div>
   </div>
 <% end %>

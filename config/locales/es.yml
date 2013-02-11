@@ -114,7 +114,7 @@ es:
         edit: Modificar
         delete: Eliminar
       form:
-        map: Mapa
+        location: Ubicación
       new:
         submit: Crear
         cancel: Cancelar
