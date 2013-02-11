@@ -32,10 +32,12 @@ define(["jquery"], function($) {
 
     this.activeIndex = index;
 
-    this.$activeSlide = $($slides.get(this.activeIndex));
+    this.$activeSlide = $(this.$slides.get(this.activeIndex));
 
     this.$activeSlide.addClass("active");
-    this.$activeSlide.fadeIn($transition_time);
+    this.$activeSlide.fadeIn(this.transition_time);
   };
+
+  return ETMCarousel;
 
 });
