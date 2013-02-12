@@ -1,5 +1,5 @@
 define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "bootstrap"],
-  function ($, formErrors, flash, translations) {
+  function ($, formErrors, flash, t) {
 
   /**
    *
