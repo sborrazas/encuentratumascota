@@ -92,7 +92,9 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       $("#main-sidebar .sidebar-options button").removeClass("active");
       publicationsList.displayPublications(publications);
       // Deactivate form
-      publicationForm.deactivate();
+      if (publicationForm.active) {
+        publicationForm.deactivate();
+      }
 
       if (newHash === "#publication-new") {
         if (config.userSignedIn) {
@@ -104,7 +106,7 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
         }
       }
       else if (hashMatch = newHash.match(/publication-(\d+)/)) {
-        for (i = 0, len = publications.length; i < len; i++) {
+        for (i = 0, len = publications.length; i < len; i += 1) {
           if (publications[i].id === hashMatch[1]) {
             publicationDetail.showPublication(publications[i]);
             this.displaySidebarElement(publicationDetail);

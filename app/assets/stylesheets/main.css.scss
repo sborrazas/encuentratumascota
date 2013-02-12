@@ -34,6 +34,7 @@ body.main {
 
       button {
         width: 25%;
+        font-weight: normal;
       }
     }
 
@@ -186,6 +187,7 @@ body.main {
         #publication-submit {
           width: 54%;
           margin-right: 2%;
+          @include linear-gradient(50deg, #1CA901 0%, #21C100 100%);
         }
         #cancel-publication {
           width: 30%;
@@ -195,7 +197,6 @@ body.main {
           a.btn { height: 20px; }
           button.btn { height: 48px; }
         }
-
       }
 
       .note {
@@ -358,16 +359,8 @@ body.main {
   .alert {
     position: absolute;
     margin: 2%;
-    width: 93%;
-    padding: 1% 1.5%;
-    border: 1px solid #000;
-    border-radius: 5px;
-
-    &.info {
-      background: fuchsia;
-      border-color: #0000B5;
-      color: #000;
-    }
+    width: 90%;
+    z-index: 100;
   }
 }
 

@@ -4,8 +4,11 @@ define(['jquery'], function ($) {
    *
    */
   var errorHtml = function (fieldErrors) {
-    var errors = '';
-    for (i = 0; i < fieldErrors.length; i++) {
+    var errors = ''
+      , i = 0
+      , len = fieldErrors.length;
+
+    for (; i < len; i += 1) {
       errors += '<p>' + fieldErrors[i] + '</p>';
     }
     return '<div class="error-message">' + errors + '</div>';
