@@ -1,5 +1,6 @@
 Encuentratumascota::Application.routes.draw do
 
+=begin
   root to: 'main#index'
 
   resources :publications, only: %w(create show)
