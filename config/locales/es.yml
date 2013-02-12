@@ -32,14 +32,14 @@ es:
         unknown: No sé
       errors:
         blank_pet_name: Debe ingresar un titulo
-        blank_coords: Las coordenadas son invalidas #
-        invalid_publication_type: El tipo de publicacion es invalido #
+        blank_coords: Las coordenadas son inválidas
+        invalid_publication_type: El tipo de publicación es inválido
         missing_breed_id: La raza seleccionada no existe
         blank_contact: Debe ingresar un contacto
-        invalid_sex: El sexo es invalido #
-        invalid_lost_on: Debe ingresar la fecha de cuando lo perdio/encontro #
+        invalid_sex: El sexo es inválido
+        invalid_lost_on: Debe ingresar la fecha de cuando lo perdió/encontró
         blank_user_id: Debe seleccionar un usuario
-        invalid_status: El status es invalido #
+        invalid_status: El estado es inválido
 
     user:
       email:
@@ -50,9 +50,12 @@ es:
         placeholder: Contraseña
       provider: Proveedor
       errors:
-        invalid_email: es invalido #
-        invalid_password: es invalido #
+        invalid_email: es inválido
+        invalid_password: es inválido
         already_used_email: ya fue usado
+
+    newsletter_subscriber:
+      email: Email
 
   main:
     index:
@@ -87,7 +90,21 @@ es:
         lost: Perdido
         found: Encontrado
         adoption: En adopción
-
+    landing:
+      submit: Reservar mi lugar
+      features:
+        publish:
+          title: Publica tu mascota
+          desc: Si has perdido tu mascota, encontrado una o tienes para adoptar, podrás publicarla de una manera muy simple y rápida.
+        search:
+          title: Busca tu mascota
+          desc: Si has perdido tu mascota, otro usuario puede encontrarla y publicarla en el sitio, utiliza los filtros para hacer una búsqueda más rápida.
+        spread:
+          title: Difunde las publicaciones
+          desc: Las publicaciones pueden ser facilmente publicadas a Facebook y Twitter y via mail haciendo llegar a más gente la publicación.
+    submit_newsletter:
+      success: Subscripto correctamente! Te notificaremos con un mail cuando se lanze el sitio.
+      invalid_email: Email inválido. Por favor ingreselo nuevamente.
 
   sessions:
     create_with_omniauth:
@@ -99,7 +116,8 @@ es:
       success: 'Sesion terminada correctamete..'
 
   general:
-    tagline: La manera mas fácil y rápida de conectar mascotas con sus dueños
+    tagline: La manera mas fácil y rápida de conectar mascotas con sus dueños.
+    tagline_2: Mascotas perdidas, encontradas y en adopción en un solo lugar.
     nav:
       how_it_works: ¿Cómo funciona?
       contact: Contacto

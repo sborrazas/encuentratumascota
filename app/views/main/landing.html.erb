@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Encuentratumascota</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="description" content="Encuentra tu mascota es la forma más simple y rápida de publicar y encontrar mascotas perdidas, encontradas o en adopción en tu ciudad." />
+  <meta name="keywords" content="animales,animales perdidos,mascotas,perros perdidos,encontrados,adopcion,adoptar,perros,mascota perdida,uruguay" />
+  <meta http-equiv="Content-Language" content="es" />
+
+  <link href="/assets/favicon.png" rel="shortcut icon" type="image/png" />
+  <%= stylesheet_link_tag 'landing', media: 'all' %>
+  <%= csrf_meta_tags %>
+
+  <script type="text/javascript" src="/assets/lib/modernizr.min.js"></script>
+
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-38186461-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+</head>
+<body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}".gsub('/', '-') %>">
+  <section id="main-navigation">
+    <header>
+      <%= link_to root_path, title: 'Encuentra tu Mascota' do %>
+        <%= image_tag 'landing/logo-etm.png', alt: 'Encuentra tu Mascota' %>
+      <% end %>
+      <hgroup>
+        <h1>Encuentra tu Mascota</h1>
+        <h2><%= t('general.tagline') %></h2>
+        <h3><%= t('general.tagline_2') %></h3>
+      </hgroup>
+    </header>
+
+    <% flash.each do |type, message| %>
+      <div class="alert alert-<%= type %>">
+        <%= message %>
+      </div>
+    <% end %>
+
+    <%= form_for @newsletter_subscriber, url: submit_newsletter_path do |form| %>
+      <p>
+        <%= form.label :email, t('models.newsletter_subscriber.email') %>
+        <%= form.text_field :email, placeholder: t('models.newsletter_subscriber.email') %>
+        <%= form.submit t('.submit'), class: 'btn' %>
+      </p>
+    <% end %>
+  </section>
+
+  <section>
+    <div class="preview"></div>
+
+    <div class="features">
+      <ul>
+        <li class="publish">
+          <h4><%= t('.features.publish.title') %></h4>
+          <p><%= t('.features.publish.desc') %></p>
+        </li>
+        <li class="search">
+          <h4><%= t('.features.search.title') %></h4>
+          <p><%= t('.features.search.desc') %></p>
+        </li>
+        <li class="spread">
+          <h4><%= t('.features.spread.title') %></h4>
+          <p><%= t('.features.spread.desc') %></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    <p>Copyright &copy; 2013 Encuentra Tu Mascota</p>
+    <ul>
+      <li><a href="http://twitter.com/etmuruguay" target="_blank" class="twitter"><span class="text">Twitter</span></a></li>
+      <li><a href="http://facebook.com/etmuruguay" target="_blank" class="facebook"><span class="text">Facebook</span></a></li>
+      <li><a href="mailto:hola@encuentratumascota.org" target="_blank" class="email"><span class="text">Email</span></a></li>
+    </ul>
+  </footer>
+</body>
+</html>
