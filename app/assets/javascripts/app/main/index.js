@@ -121,6 +121,9 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
         publicationsMap.displayPublications(config.publications);
         this.displaySidebarElement(publicationsList);
       }
+
+      // TODO Implement toggle sidebar
+      $("body").addClass("with-sidebar");
     }
   };
 });

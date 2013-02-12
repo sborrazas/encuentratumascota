@@ -54,8 +54,6 @@ define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, 
     this.$publicationList.append($content);
 
     $content.click(this.publicationClicked);
-
-    $("body").addClass("with-sidebar");
   };
 
   return PublicationsList;
