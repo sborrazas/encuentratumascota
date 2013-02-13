@@ -116,7 +116,7 @@ es:
       success: 'Sesion terminada correctamete..'
 
   general:
-    tagline: La manera mas fácil y rápida de conectar mascotas con sus dueños.
+    tagline: La manera más fácil y rápida de conectar mascotas con sus dueños.
     tagline_2: Mascotas perdidas, encontradas y en adopción en un solo lugar.
     nav:
       how_it_works: ¿Cómo funciona?
