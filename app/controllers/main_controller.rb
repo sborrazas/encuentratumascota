@@ -20,7 +20,7 @@ class MainController < ApplicationController
 
   def submit_newsletter
     if EMAIL_REGEX =~ newsletter_params[:email].to_s
-      NewsletterSubscriber.where(email: newsletter_params[:email]) || \
+      NewsletterSubscriber.where(email: newsletter_params[:email]).first || \
         NewsletterSubscriber.create(email: newsletter_params[:email])
 
       redirect_to root_url, flash: { success: t('main.submit_newsletter.success') }
