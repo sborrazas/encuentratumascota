@@ -49,7 +49,7 @@ body {
 
   header {
     width: 50%;
-    margin: 50px 25%;
+    margin: 50px 25% 15px 25%;
   }
 
   form {
@@ -82,9 +82,10 @@ body {
 .alert {
   border-radius: 0;
   &.alert-success {
-    background-color: #999;
-    color: #000;
-    border: 1px solid #BBB;
+    background-color: #444;
+    color: #FFF;
+    text-shadow: none;
+    border: none;
   }
 }
 
