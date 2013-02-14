@@ -97,7 +97,7 @@ footer {
 
 .preview {
   height: 430px;
-  background: url(/assets/landing/preview.png) 0 0 no-repeat;
+  background: url(/assets/landing/preview.png) no-repeat center top;
   margin-top: 30px;
 }
 
@@ -120,9 +120,9 @@ footer {
     }
   }
 
-  li.publish { background: url(/assets/landing/feature-1.png) no-repeat center 0; }
-  li.search { background: url(/assets/landing/feature-2.png) no-repeat center 0; }
-  li.spread { background: url(/assets/landing/feature-3.png) no-repeat center 0; }
+  li.publish { background: url(/assets/landing/feature-1.png) no-repeat center top; }
+  li.search { background: url(/assets/landing/feature-2.png) no-repeat center top; }
+  li.spread { background: url(/assets/landing/feature-3.png) no-repeat center top; }
 }
 
 footer {
@@ -177,8 +177,11 @@ footer {
       margin-top: 10px;
     }
   }
+  .preview {
+    background-position: left top;
+  }
 }
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 800px) {
   #main-navigation {
     header {
       width: 96%;
