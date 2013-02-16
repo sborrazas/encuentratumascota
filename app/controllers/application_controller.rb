@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
 
   private
   def handle_exception(exception)
-    # ErrorMailer.experror(exception, env).deliver
+    NotificationMailer.send_error_email(exception, env).deliver!
     render file: 'public/500.html', status: 500, layout: false
   end
 end
