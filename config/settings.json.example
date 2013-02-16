@@ -6,4 +6,10 @@
   "facebook_secret": "...",
   "twitter_key": "...",
   "twitter_secret": "..."
+
+  "mail_username": "...",
+  "mail_password": "...",
+  "mail_domain": "...",
+  "mail_host": "...",
+  "mail_port": 0
 }
