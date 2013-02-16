@@ -1,4 +1,4 @@
-define(["jquery", "bootstrap", "jquery_tmpl"], function ($) {
+define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, t) {
 
   /**
    *
@@ -8,6 +8,12 @@ define(["jquery", "bootstrap", "jquery_tmpl"], function ($) {
     this.$el = $("#publication-list");
     this.$publicationList = this.$el.children("ul");
     this.publicationListTemplate = $("#publication-list-template").template();
+
+    this.publicationClicked = function (event) {
+      var $li = $(event.target).parents(".publication-item");
+
+      document.location.hash = "#publication-" + $li.data('publication-id');
+    }.bind(this);
   };
 
   /**
@@ -23,6 +29,7 @@ define(["jquery", "bootstrap", "jquery_tmpl"], function ($) {
         this.displayPublicationOnSidebar({
           id: publication.id,
           publication_type: publication.publication_type,
+          publication_type_str: t(publication.publication_type),
           pet_name: publication.pet_name,
           description: publication.description,
           lost_on: publication.lost_on,
@@ -46,7 +53,7 @@ define(["jquery", "bootstrap", "jquery_tmpl"], function ($) {
 
     this.$publicationList.append($content);
 
-    $("body").addClass("with-sidebar");
+    $content.click(this.publicationClicked);
   };
 
   return PublicationsList;

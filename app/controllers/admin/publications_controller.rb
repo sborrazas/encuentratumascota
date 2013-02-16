@@ -16,14 +16,14 @@ class Admin::PublicationsController < ApplicationController
   end
 
   def create
-    @publication = Publication.new(publication_params)
-    publication_validator = Forms::PublicationForm.new(publication_params, context: :admin)
+    publication_form = Forms::PublicationForm.new(publication_params, context: :admin)
+    @publication = publication_form.get_resource
 
-    if publication_validator.valid?
+    if publication_form.valid?
       @publication.save
       redirect_to admin_publications_path, flash: { success: 'Publication created successfully' }
     else
-      @errors = publication_validator.errors
+      @errors = publication_form.errors
       render :new
     end
   end
@@ -34,20 +34,17 @@ class Admin::PublicationsController < ApplicationController
   end
 
   def update
-    @publication = user_publications_scope.find(params[:id])
-    return unauthorized_access unless @publication
-
-    publication_validator = Forms::PublicationForm.new(publication_params, {
+    publication_form = Forms::PublicationForm.new(publication_params, {
       context: :admin,
-      resource: @publication
+      resource: user_publications_scope.find(params[:id])
     })
 
-    if publication_validator.valid?
-      @publication.update_attributes(publication_params)
+    if publication_form.valid?
+      publication_form.get_resource.save
       redirect_to admin_publications_path, flash: { success: 'Publication updated successfully' }
     else
-      @publication.assign_attributes(publication_params)
-      @errors = publication_validator.errors
+      @publication = publication_form.get_resource
+      @errors = publication_form.errors
       render :edit
     end
   end
@@ -55,11 +52,7 @@ class Admin::PublicationsController < ApplicationController
   private
 
   def publication_params
-    params[:publication].slice(*publication_attribute_keys)
-  end
-
-  def publication_attribute_keys
-    %w(pet_name contact lost_on description sex reward publication_type breed_id status user_id).map(&:to_sym)
+    params[:publication]
   end
 
   def user_publications_scope

@@ -1,6 +1,6 @@
-define(['jquery', 'bootstrap'], function ($) {
+define(["jquery", "bootstrap"], function ($) {
 
-  var MESSAGE_TYPES = ['success', 'info', 'error'];
+  var MESSAGE_TYPES = ["success", "info", "error"];
 
   /**
    *
@@ -22,7 +22,7 @@ define(['jquery', 'bootstrap'], function ($) {
    *
    */
   FlashDisplay.prototype.displayMessage = function (type, message) {
-    $('<div class="alert ' + type + '">' + message + '</div>').appendTo('#main-panel').alert();
+    $("<div class=\"alert alert-" + type + "\">" + message + "</div>").appendTo("#main-panel");
   };
 
   FlashDisplay.prototype.clearMessages = function () {

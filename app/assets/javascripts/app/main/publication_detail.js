@@ -1,5 +1,5 @@
-define(["jquery", "app/flash_display", "app/translations", "bootstrap", "jquery_tmpl"],
-  function ($, flash, t) {
+define(["jquery", "app/carousel", "app/flash_display", "app/translations", "bootstrap", "jquery_tmpl"],
+  function ($, Carousel, flash, t) {
 
   /**
    *
@@ -43,7 +43,10 @@ define(["jquery", "app/flash_display", "app/translations", "bootstrap", "jquery_
    */
   PublicationDetail.prototype.showPublication = function (publication) {
     var $publicationInfo = this.$publicationInfo
-      , content = $.tmpl(this.publicationDetailTemplate, { publication: publication });
+      , extendedPublication = $.extend({
+          publication_type_str: t(publication.publication_type)
+        }, publication)
+      , content = $.tmpl(this.publicationDetailTemplate, { publication: extendedPublication });
 
     this.currentPublicationId = publication.id;
 
@@ -52,6 +55,12 @@ define(["jquery", "app/flash_display", "app/translations", "bootstrap", "jquery_
 
     $publicationInfo.empty();
     $publicationInfo.append(content);
+
+    if (publication.attachments.length > 1) {
+      new Carousel({
+        element: $publicationInfo.find(".image-carousel")
+      });
+    }
 
     this.displayShareThis(publication);
   };

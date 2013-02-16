@@ -10,7 +10,10 @@ class SessionsController < ApplicationController
       render json: Presenters::User.to_json_hash(user), status: :created
     else
       render json: {
-        errors: { email: ['is invalid'], password: ['is invalid'] } # TODO I18n
+        errors: {
+          email: [t('models.user.errors.invalid_email')],
+          password: [t('models.user.errors.invalid_password')]
+        }
       }, status: :unauthorized
     end
   end
@@ -33,17 +36,19 @@ class SessionsController < ApplicationController
     end
     sign_user_in(user)
 
-    redirect_to user.is_admin? ? admin_publications_path : root_path, flash: { success: "Logged in with #{auth.provider} successfully!" }
+    redirect_to user.is_admin? ? admin_publications_path : root_path, flash: {
+      success: t('sessions.create_with_omniauth.logged_in_successfully', provider: auth.provider)
+    }
   end
 
   def failure
-    redirect_to root_path, flash: { error: 'An error occurred while trying to sign in with Omniauth' }
+    redirect_to root_path, flash: { error: t('sessions.failure.omniauth_error') }
   end
 
   def logout
     require_current_user
     session.delete(:user)
-    redirect_to root_path, flash: { error: 'Sesion cerrada correctamete..' }
+    redirect_to root_path, flash: { error: t('sessions.logout.success') }
   end
 
   private

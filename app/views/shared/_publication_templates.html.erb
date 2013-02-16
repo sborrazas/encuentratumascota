@@ -1,33 +1,39 @@
 <script type="text/x-jQuery-tmpl" id="publication-list-template">
-  <li>
-    <a href="#publication-${publication.id}">
-      <div class="type-indicator ${publication.publication_type}"></div>
-      <img src="${publication.attachment}" alt="${publication.pet_name}" />
-      <div class="publication-info">
-        <h1>
-          ${publication.pet_name}
-          <span class="ptype ${publication.publication_type}">${publication.publication_type}</span>
-        </h1>
-        <p>${publication.description}</p>
-        <ul class="publication-details">
-          <li><span class="icon breed-tag"></span>${publication.breed}</li>
-          <li><span class="icon time"></span>${publication.lost_on}</li>
-        </ul>
-      </div>
-    </a>
+  <li class="publication-item" data-publication-id="${publication.id}">
+    <div class="type-indicator ${publication.publication_type}"></div>
+    <img src="${publication.attachment}" alt="${publication.pet_name}" />
+    <div class="publication-info">
+      <h1>
+        ${publication.pet_name}
+        <span class="ptype ${publication.publication_type}">${publication.publication_type_str}</span>
+      </h1>
+      <p>${publication.description}</p>
+      <ul class="publication-details">
+        <li><span class="icon breed-tag"></span>${publication.breed}</li>
+        <li><span class="icon time"></span>${publication.lost_on}</li>
+      </ul>
+    </div>
   </li>
 </script>
 
 <script type="text/x-jQuery-tmpl" id="publication-detail-template">
   <ul class="image-carousel">
-    <li>
-      <img src="${publication.attachments[0] || "/assets/default_dog.png"}" alt="${publication.pet_name}" />
-    </li>
+    {{if publication.attachments.length === 0}}
+      <li>
+        <img src="/assets/default_dog.png" alt="${publication.pet_name}" />
+      </li>
+    {{else}}
+      {{each publication.attachments}}
+        <li>
+          <img src="${$value}" alt="${publication.pet_name}" />
+        </li>
+      {{/each}}
+    {{/if}}
   </ul>
 
   <h3>
     ${publication.pet_name}
-    <span class="ptype ${publication.publication_type}">${publication.publication_type}</span>
+    <span class="ptype ${publication.publication_type}">${publication.publication_type_str}</span>
   </h3>
   <p>
     ${publication.description}

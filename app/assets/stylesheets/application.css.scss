@@ -9,6 +9,7 @@
 @import "reset";
 @import "bootstrap.min";
 @import "bootstrap-responsive.min";
+@import "bootstrap-datepicker";
 
 /* Config */
 @import "config";
@@ -65,9 +66,7 @@ body {
   #publication-new {
     float: right;
     margin-right: 10px;
-    font-weight: bold;
     font-size: 1.1em;
-    color: #FFF;
     border-radius: 2px;
     padding: 10px 25px;
     margin-top: 20px;
@@ -171,5 +170,11 @@ form {
       border: 1px solid #FF0000;
     }
   }
+}
+
+/* Buttons **********************************************************/
+.btn {
+  font-weight: bold;
+  border-radius: 3px;
 }
 

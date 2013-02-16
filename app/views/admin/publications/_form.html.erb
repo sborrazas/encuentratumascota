@@ -16,13 +16,37 @@
 </div>
 
 <div class="control-group">
+  <span class="control-label"><%= t('models.publication.attachments') %></span>
+  <ul class="controls">
+    <% 4.times do |index| %>
+      <li>
+        <% if @publication.attachments[index] %>
+          <%= image_tag @publication.attachments[index].image, alt: "#{@publication.pet_name} #{index}" %>
+        <% end %>
+        <%= form.label :"attachment_#{index}", class: 'hide' %>
+        <input id="publication_attachment_<%= index %>" type="file" name="publication[attachments][<%= index %>]" />
+        <% if false %>
+          <input id="publication_attachment_<%= index %>_checked" type="checkbox" name="publication[attachments][<%= index %>][checked]" <% if @publication.attachments[index] %>checked="checked"<% end %> />
+          <%= form.label :"attachment_#{index}_checked", 'Delete' %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
+
+<div class="control-group">
   <%= form.label :description, t('models.publication.description.label'), class: 'control-label' %>
   <div class="controls">
     <%= form.text_area :description, rows: 4, placeholder: t('models.publication.description.placeholder') %>
   </div>
 </div>
 
-<!-- TODO Display map (with lat and lng) -->
+<div class="control-group">
+  <span class="control-label"><%= t('admin.publications.form.location') %></span>
+  <div id="map"></div>
+  <%= form.hidden_field :lat %>
+  <%= form.hidden_field :lng %>
+</div>
 
 <div class="control-group">
   <%= form.label :reward, t('models.publication.reward.label'), class: 'control-label' %>
@@ -47,8 +71,11 @@
 
 <div class="control-group">
   <%= form.label :lost_on, t('models.publication.lost_on'), class: 'control-label' %>
-  <div class="controls">
-    <%= form.text_field :lost_on %><!-- TODO Datepicker -->
+  <div class="controls datepicker">
+    <%= form.text_field :lost_on, value: (@publication.lost_on || Date.current).strftime('%d/%m/%Y') %>
+  </div>
+</div>
+
   </div>
 </div>
 
@@ -66,6 +93,21 @@
       <%= form.select :status, Publication::STATUSES %>
     </div>
   </div>
+
+  <div class="control-group">
+    <%= form.label :user_id, t('models.publication.user'), class: 'control-label' %>
+    <div class="controls">
+      <%= form.select :user_id, User.all.map {|u| [u.display, u.id] } %>
+    </div>
+  </div>
 <% end %>
 
 <!-- TODO Images -->
+
+<% content_for :javascript do %>
+  require(['require', 'app/admin/publication_form'], function (require) {
+    require(['app/admin/publication_form'], function (PublicationForm) {
+      new PublicationForm();
+    });
+  });
+<% end %>
