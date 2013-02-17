@@ -8,7 +8,7 @@ class PublicationsController < ApplicationController
 
     if publication_form.valid?
       publication = publication_form.get_resource
-      publication.assign_attributes(user: current_user, status: 'active')
+      publication.assign_attributes(user: current_user, status: 'inactive')
       publication.save
 
       render json: Presenters::Publication.to_json_hash(publication), status: :created

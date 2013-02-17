@@ -25,11 +25,14 @@ es:
         lost: Perdido
         found: Encontrado
         adoption: En adopción
-        all: Todos
       sexes:
         male: Macho
         female: Hembra
         unknown: No sé
+      statuses:
+        active: Activo
+        inactive: Pendiente
+        closed: Cerrado
       errors:
         blank_pet_name: Debe ingresar un titulo
         blank_coords: Las coordenadas son inválidas
@@ -78,6 +81,11 @@ es:
         submit: Crear Cuenta
         sign_in_alternative: ¿Ya eres usuario?
         sign_in: Iniciar Sesión
+      filters:
+        all: Todos
+        lost: Perdidos
+        found: Encontrados
+        adoption: En adopción
       js:
         ajax_signup:
           logged_in_successfully: Logueado correctamente!

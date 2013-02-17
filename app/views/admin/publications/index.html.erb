@@ -29,7 +29,9 @@
     <tr>
       <td>
         <%= publication.pet_name %>
-        <span class="status <%= publication.status %>"><%= publication.status %></span>
+        <span class="status <%= publication.status %>">
+          <%= t("models.publication.statuses.#{publication.status}") %>
+        </span>
       </td>
       <td><%= truncate(publication.description, length: 50, separator: ' ') %></td>
       <td><%= publication.publication_type %></td>
