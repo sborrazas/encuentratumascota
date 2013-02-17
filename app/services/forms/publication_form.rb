@@ -46,7 +46,7 @@ module Forms
 
       if params[:attachments].kind_of?(Hash)
         # params[:attachments] is a Hash in the form of { "0" => file1, "1" => file2 }
-        attachments_params = params[:attachments].values.reject(&:blank?)
+        attachments_params = params[:attachments].values.reject(&:blank?).select {|a| a.kind_of?(ActionDispatch::Http::UploadedFile) }
         attachments_params = attachments_params.first(Publication::MAX_ATTACHMENTS)
 
         valid_params[:attachments] = attachments_params.map do |image|
