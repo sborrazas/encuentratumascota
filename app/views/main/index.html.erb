@@ -1,19 +1,22 @@
-<%= title 'Encuentratumascota', visible: false %>
+<%= title 'Encuentra Tu Mascota', visible: false %>
 
 <section id="main-sidebar">
-  <div class="btn-group sidebar-options">
-    <button class="btn" data-publication-type="all">
-      <%= t('models.publication.publication_types.all') %>
-    </button>
-    <button class="btn" data-publication-type="lost">
-      <%= t('models.publication.publication_types.lost') %>
-    </button>
-    <button class="btn" data-publication-type="found">
-      <%= t('models.publication.publication_types.found') %>
-    </button>
-    <button class="btn" data-publication-type="adoption">
-      <%= t('models.publication.publication_types.adoption') %>
-    </button>
+  <div class="sidebar-options">
+    <div class="btn-group">
+      <button class="btn" data-publication-type="all">
+        <%= t('models.publication.publication_types.all') %>
+      </button>
+      <button class="btn" data-publication-type="lost">
+        <%= t('models.publication.publication_types.lost') %>
+      </button>
+      <button class="btn" data-publication-type="found">
+        <%= t('models.publication.publication_types.found') %>
+      </button>
+      <button class="btn" data-publication-type="adoption">
+        <%= t('models.publication.publication_types.adoption') %>
+      </button>
+    </div>
+    <a href="#" class="icon toggle-left sidebar-toggle off"></a>
   </div>
 
   <!-- 1. Publication list -->
@@ -44,6 +47,9 @@
 </section>
 
 <section id="main-panel"></section>
+<a class="sidebar-toggle on">
+  <span href="#" class="icon toggle-right"></span>
+</a>
 
 <%= render partial: 'shared/publication_templates' %>
 <%= render partial: 'shared/sign_in' %>

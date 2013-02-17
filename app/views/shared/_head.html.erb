@@ -1,4 +1,4 @@
-<title><%= yield(:title) %> - Encuentratumascota</title>
+<title><%= yield(:title).blank? ? "Encuentra Tu Mascota" : "#{yield(:title)} - Encuentra Tu Mascota" %></title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />

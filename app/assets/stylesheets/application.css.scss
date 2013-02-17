@@ -16,6 +16,7 @@
 
 /* Custom */
 @import "main";
+@import "how_it_works";
 @import "admin";
 @import "admin/publications";
 
@@ -24,10 +25,12 @@ body {
   font-size: 14px;
   line-height: 20px;
   color: $light_font_color;
+  padding: 0;
+  margin: 0;
 }
 
 /* Header *********************************************************/
-#main-navigation {
+.main-navigation {
   height: 80px;
   background: #000;
   @include linear-gradient(#363636, #171717);
@@ -146,6 +149,8 @@ body {
   &.breed-tag { background-position: 3px 3px; }
   &.time { background-position: -24px 2px; }
   &.back { background-position: -68px 2px; }
+  &.toggle-left { background-position: -68px 2px; }
+  &.toggle-right { background-position: -85px 2px; }
 }
 
 .big-icon {

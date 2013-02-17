@@ -90,8 +90,8 @@ es:
         lost: Perdido
         found: Encontrado
         adoption: En adopción
-    landing:
-      submit: Reservar mi lugar
+    how_it_works:
+      call_to_action: Ir a la aplicación
       features:
         publish:
           title: Publica tu mascota

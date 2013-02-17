@@ -1,0 +1,206 @@
+/*
+ *= require_self
+*/
+
+@import "config";
+
+body.main-how-it-works {
+  color: $light_font_color;
+  background: #222;
+
+  .main-header {
+    text-align: center;
+    margin-top: 80px;
+
+    h1 {
+      display: none;
+    }
+
+    h2,
+    h3 {
+      font-family: 'PT Sans', sans-serif;
+      font-weight: normal;
+    }
+
+    h2 {
+      font-size: 2em;
+      color: #FFF;
+      width: 74%;
+      margin: 20px 13% 10px 13%;
+    }
+    h3 {
+      font-size: 1.7em;
+      color: #999;
+    }
+
+    header {
+      width: 50%;
+      margin: 50px 25% 15px 25%;
+    }
+
+    .btn {
+      background: #F99E1C;
+      padding: 9px 24px;
+      border-radius: 2px;
+      color: #FFF;
+      text-shadow: none;
+      font-weight: bold;
+    }
+  }
+
+  .alert {
+    border-radius: 0;
+    &.alert-success {
+      background-color: #444;
+      color: #FFF;
+      text-shadow: none;
+      border: none;
+      line-height: 2em;
+    }
+  }
+
+  .preview,
+  .features ul,
+  footer {
+    width: 66%;
+    margin: 0 17%;
+  }
+
+  .preview {
+    height: 430px;
+    background: url(/assets/landing/preview.png) no-repeat center top;
+    margin-top: 30px;
+  }
+
+  .features {
+    background: #FFF;
+    overflow: auto;
+
+    li {
+      float: left;
+      width: 29%;
+      text-align: center;
+      margin: 50px 2%;
+
+      h4 {
+        color: #555;
+        margin-top: 220px;
+      }
+      p {
+        font-size: 0.9em;
+      }
+    }
+
+    li.publish { background: url(/assets/landing/feature-1.png) no-repeat center top; }
+    li.search { background: url(/assets/landing/feature-2.png) no-repeat center top; }
+    li.spread { background: url(/assets/landing/feature-3.png) no-repeat center top; }
+  }
+
+  footer {
+    p,
+    li {
+      height: 50px;
+      line-height: 50px;
+      margin: 50px 0;
+    }
+
+    p {
+      float: left;
+    }
+
+    a {
+      color: #FFF;
+      &:hover {
+        color: #FFF;
+      }
+    }
+
+    li {
+      float: right;
+      margin-left: 10px;
+      a {
+        display: inline-block;
+        height: 50px;
+        width: 50px;
+        opacity: 0.7;
+        background: url(/assets/landing/icons.png) no-repeat;
+
+        &.twitter { background-position: -129px 0; }
+        &.facebook { background-position: -66px 0; }
+        &.email { background-position: 0 0; }
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+      .text {
+        display: none;
+      }
+    }
+  }
+
+  @media screen and (max-width: 1000px) {
+    .features li.publish,
+    .features li.search,
+    .features li.spread {
+      background: none;
+      h4 {
+        margin-top: 10px;
+      }
+    }
+    .preview {
+      background-position: left top;
+    }
+  }
+  @media screen and (max-width: 800px) {
+    header.main-header {
+      width: 96%;
+      margin: 50px 2%;
+    }
+
+    .features li {
+      float: none;
+      width: 100%;
+      margin: 20px 0;
+    }
+
+    .preview {
+      display: none;
+    }
+
+    footer {
+      text-align: center;
+      width: 100%;
+      margin: 0;
+      p,
+      li {
+        margin: 0;
+        float: none;
+      }
+      li {
+        display: inline-block;
+      }
+    }
+  }
+
+  @media screen and (max-width: 500px) {
+    header.main-header {
+      margin: 50px 2% 10px 2%;
+      h3 {
+        display: none;
+      }
+    }
+
+    form .btn {
+      margin-top: 10px;
+    }
+
+    footer {
+      p,
+      ul {
+        margin: 8px 0;
+        clear: both;
+      }
+    }
+  }
+}

@@ -1,7 +1,8 @@
 Encuentratumascota::Application.routes.draw do
 
-=begin
-  root to: 'main#index'
+  root to: 'main#how_it_works'
+
+  get 'app', to: 'main#index', as: :app
 
   resources :publications, only: %w(create show)
 
@@ -21,8 +22,4 @@ Encuentratumascota::Application.routes.draw do
     resources :publications, only: %w(index new create edit update show)
     resources :users, only: %w(index edit update)
   end
-=end
-
-  root to: 'main#landing'
-  post 'submit_newsletter', to: 'main#submit_newsletter', as: :submit_newsletter
 end

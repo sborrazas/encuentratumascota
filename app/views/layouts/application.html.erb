@@ -3,8 +3,8 @@
 <head>
   <%= render partial: 'shared/head' %>
 </head>
-<body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}".gsub('/', '-') %>">
-  <section id="main-navigation">
+<body class="<%= "#{params[:controller]} #{params[:controller]}-#{params[:action]}".gsub(/[\/_]/, '-') %>">
+  <section class="main-navigation">
     <header>
       <%= link_to root_path, title: 'Encuentra tu Mascota' do %>
         <%= image_tag 'logo1.png', class: 'logo' %>
@@ -17,8 +17,10 @@
 
     <nav>
       <div class="info-nav">
-        <a href="/#how-it-works" class="main-nav-item"><%= t('general.nav.how_it_works') %></a>
-        <a href="/#contact" class="main-nav-item"><%= t('general.nav.contact') %></a>
+        <%= link_to t('general.nav.how_it_works'), root_path, class: 'main-nav-item' %>
+        <a href="mailto:encuentratumascotaorg@gmail.com" target="_blank" class="main-nav-item">
+          <%= t('general.nav.contact') %>
+        </a>
       </div>
       <% unless current_user %>
         <div id="logged-out-nav">
@@ -33,13 +35,13 @@
           <span class="icon dropdown-caret"></span>
         </a>
         <ul class="nav-dropdown-menu">
-          <li><a href="/admin/publications"><%= t('admin.general.my_publications') %></a></li>
+          <li><%= link_to t('admin.general.my_publications'), admin_publications_path %></li>
           <!-- <li><a href="/admin/publications">Configuraci&oacute;n</a></li> -->
-          <li><a href="/sessions/logout"><%= t('general.nav.sign_out') %></a></li>
+          <li><%= link_to t('general.nav.sign_out'), logout_sessions_path %></li>
         </ul>
       </div>
 
-      <a class="btn btn-warning" href="/#publication-new" id="publication-new"><%= t('general.nav.new_publication') %></a>
+      <%= link_to t('general.nav.new_publication'), app_path(anchor: 'publication-new'), id: 'publication-new', class: 'btn btn-warning' %>
     </nav>
   </section>
 

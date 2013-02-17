@@ -65,6 +65,13 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       }.bind(this));
 
       this.hashChanged();
+
+      // Bind sidebar toggle event
+      $(".sidebar-toggle").click(function (event) {
+        event.preventDefault();
+        $("body").toggleClass("with-sidebar");
+        publicationsMap.resize();
+      });
     },
     getFilteredPublications: function (publicationType) {
       var publications = [];

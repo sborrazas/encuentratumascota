@@ -1,19 +1,57 @@
 @import "config";
 
-body.main {
+body.main-index {
+  &.with-sidebar {
+    #main-panel {
+      width: 66%;
+      margin-left: 34%;
+      left: 0;
+    }
+    .sidebar-toggle.on {
+      display: none;
+    }
+    .sidebar-toggle.off {
+      position: relative;
+      top: inherit;
+      right: inherit;
+      margin: 5px 0 0 10px;
+    }
+    #main-sidebar {
+      display: block;
+    }
+  }
 
-  &.with-sidebar #main-panel {
-    width: 66%;
-    margin-left: 34%;
+  .sidebar-toggle.on {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    z-index: 100;
+    line-height: 0;
+    background: #FFF;
+    bottom: 0;
+    width: 2%;
+    cursor: pointer;
+    overflow: hidden;
+    @include box-shadow(1px 0 3px 0 rgba(00, 00, 00, 0.5));
+
+    span {
+      margin-top: 15px;
+      margin-left: 5px;
+    }
+  }
+
+  .sidebar-toggle.off {
+    display: inline-block;
   }
 
   /* Map panel *************************************************************/
   #main-panel {
-    width: 100%;
+    width: 98%;
     position: absolute;
     top: 80px;
     bottom: 0;
     z-index: 1;
+    left: 2%;
   }
 
   /* Form/listing/detail sidebar *******************************************/
@@ -23,18 +61,21 @@ body.main {
     width: 34%;
     top: 80px;
     bottom: 0;
+    display: none;
 
     background: #F5F5F5;
     border-right: 1px solid #BBB;
 
     .sidebar-options {
       background: #FFF;
-      padding: 15px 19px;
+      padding: 15px 0 15px 15px;
+      overflow: auto;
       @include box-shadow(0 0 4px 0 rgba(00, 00, 00, 0.5));
 
       button {
-        width: 25%;
+        width: 23%;
         font-weight: normal;
+        float: left;
       }
     }
 

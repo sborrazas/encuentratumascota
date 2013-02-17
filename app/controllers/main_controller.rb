@@ -13,7 +13,7 @@ class MainController < ApplicationController
     @user = User.new
   end
 
-  def landing
+  def how_it_works
     @newsletter_subscriber = NewsletterSubscriber.new
     render layout: false
   end

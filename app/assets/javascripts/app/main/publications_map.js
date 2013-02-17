@@ -149,5 +149,12 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
     this.map.setCenter(position.Ya, position.Za);
   };
 
+  /**
+   *
+   */
+  PublicationsMap.prototype.resize = function () {
+    this.map.refresh();
+  };
+
   return PublicationsMap;
 });
