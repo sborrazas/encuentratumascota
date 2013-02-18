@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   end
 
   def display
-    self.email.empty? ? self.provider_username : self.email
+    self.email.blank? ? self.provider_username : self.email
   end
 
   def create_inquiry(publication)

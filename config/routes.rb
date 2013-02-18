@@ -13,6 +13,7 @@ Encuentratumascota::Application.routes.draw do
     end
   end
   resource :registrations, only: %w(create)
+  resource :users, only: %w(update)
   match '/auth/:provider/callback', to: 'sessions#create_with_omniauth'
   match '/auth/failure', to: 'sessions#failure'
 

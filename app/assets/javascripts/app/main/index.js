@@ -1,9 +1,10 @@
 define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main/publications_list",
-  "app/main/publication_detail", "app/main/publication_form", "app/flash_display", "app/translations"],
-  function ($, AjaxSignUp, PublicationsMap, PublicationsList, PublicationDetail, PublicationForm, flash, translations) {
+  "app/main/publication_detail", "app/main/publication_form", "app/flash_display", "app/translations", "app/main/email_request"],
+  function ($, AjaxSignUp, PublicationsMap, PublicationsList, PublicationDetail, PublicationForm, flash, translations, EmailRequest) {
 
   var config = {}
-    , petFinder, ajaxSignup, publicationsList, publicationsMap, publicationDetail, publicationForm;
+    , petFinder, ajaxSignup, publicationsList, publicationsMap, publicationDetail, publicationForm
+    , emailRequest;
 
   return {
     init: function (settings) {
@@ -17,6 +18,12 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       // Ajax signup
       ajaxSignup = new AjaxSignUp({
         userSignedIn: config.userSignedIn
+      });
+
+      // Email Request
+      emailRequest = new EmailRequest({
+        userSignedIn: config.userSignedIn,
+        userHasEmail: config.userHasEmail
       });
 
       // Publications & GMaps handler

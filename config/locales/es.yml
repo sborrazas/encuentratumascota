@@ -47,7 +47,7 @@ es:
     user:
       email:
         label: Email
-        placeholder: Tu Email
+        placeholder: Tú Email
       password:
         label: Contraseña
         placeholder: Contraseña
@@ -81,6 +81,9 @@ es:
         submit: Crear Cuenta
         sign_in_alternative: ¿Ya eres usuario?
         sign_in: Iniciar Sesión
+      email_form:
+        email_explanation: Para completar el registro, agrega una dirección de correo para que podamos contactarte.
+        submit: Actualizar Email
       filters:
         all: Todos
         lost: Perdidos

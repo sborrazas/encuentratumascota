@@ -31,7 +31,7 @@
   </div>
   <!-- 2. Publication form -->
   <div id="new-publication-container" class="sidebar-item">
-    <%= render partial: 'shared/new_publication' %>
+    <%= render partial: 'main/extras/new_publication' %>
   </div>
   <!-- 3. Publication detail -->
   <div id="publication-detail-container" class="sidebar-item">
@@ -51,15 +51,17 @@
   <span href="#" class="icon toggle-right"></span>
 </a>
 
-<%= render partial: 'shared/publication_templates' %>
-<%= render partial: 'shared/sign_in' %>
-<%= render partial: 'shared/sign_up' %>
+<%= render partial: 'main/extras/publication_templates' %>
+<%= render partial: 'main/extras/sign_in' %>
+<%= render partial: 'main/extras/sign_up' %>
+<%= render partial: 'main/extras/email_modal' %>
 
 <% content_for :javascript do %>
   require(['require', 'app/main/index'], function (require) {
     require(['app/main/index'], function (view) {
       view.init(<%= {
         userSignedIn: !! current_user,
+        userHasEmail: ! current_user.try(:email).blank?,
         publications: @publications.map do |publication|
           Presenters::Publication.to_json_hash(publication)
         end,
