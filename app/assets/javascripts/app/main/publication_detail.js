@@ -56,7 +56,7 @@ define(["jquery", "app/carousel", "app/flash_display", "app/translations", "boot
     $publicationInfo.empty();
     $publicationInfo.append(content);
 
-    document.title = publication.pet_name + ' [' + t(publication.publication_type) + '] - Encuentra Tu Mascota';
+    document.title = publication.pet_name + ' [' + t(publication.publication_type).toUpperCase() + '] - Encuentra Tu Mascota';
 
     if (publication.attachments.length > 1) {
       new Carousel({
