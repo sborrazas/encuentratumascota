@@ -32,6 +32,7 @@ define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, 
           publication_type_str: t(publication.publication_type),
           pet_name: publication.pet_name,
           description: publication.description,
+          short_description: publication.short_description,
           lost_on: publication.lost_on,
           breed: publication.breed,
           attachment: publication.attachments[0] || "/assets/default_dog.png"

@@ -1,6 +1,8 @@
 module Presenters
   module Publication
 
+    extend ActionView::Helpers::TextHelper
+
     module_function
 
     def self.to_json_hash(publication, options = {})
@@ -10,6 +12,7 @@ module Presenters
         pet_name: publication.pet_name,
         attachments: publication.attachments.map {|a| a.image.url },
         description: publication.description,
+        short_description: truncate(publication.description, length: 100, separator: ' '),
         breed: publication.breed ? publication.breed.name : I18n.t('models.publication.blank_breed_text'),
         lost_on: publication.lost_on.strftime('%d/%m/%Y'),
         lat: publication.lat,

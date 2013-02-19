@@ -13,5 +13,6 @@ class Publication < ActiveRecord::Base
 
   scope :has_publication_type, lambda {|*ptype| where(publication_type: ptype) }
   scope :has_status, lambda {|*statuses| where(status: statuses) }
+  scope :sort_newest, order('publications.created_at DESC')
 
 end

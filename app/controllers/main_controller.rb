@@ -4,7 +4,7 @@ class MainController < ApplicationController
 
   def index
     @new_publication = Publication.new
-    @publications = Publication.has_status(:active).includes(:breed, :attachments).all
+    @publications = Publication.has_status(:active).includes(:breed, :attachments).sort_newest.all
 
     @flash_messages = {}.tap do |h|
       [:success, :info, :error].map {|e| h[e] = flash[e] }
