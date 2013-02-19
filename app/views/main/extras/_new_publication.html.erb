@@ -12,7 +12,7 @@
   <div class="control-group">
     <%= f.label :publication_type, t('models.publication.publication_type'), class: 'control-label required' %>
     <div class="controls">
-      <%= f.select :publication_type, Publication::PUBLICATION_TYPES %>
+      <%= f.select :publication_type, publication_type_options %>
     </div>
   </div>
   <div id="image-upload-fields" class="control-group">
@@ -31,7 +31,7 @@
   <div class="control-group">
     <%= f.label :breed_id, t('models.publication.breed'), class: 'control-label required' %>
     <div class="controls">
-      <%= f.select :breed_id, Breed.sorted.all.map {|b| [b.name, b.id] } %>
+      <%= f.select :breed_id, breed_options %>
     </div>
   </div>
   <div class="control-group">

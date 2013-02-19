@@ -183,3 +183,21 @@ form {
   border-radius: 3px;
 }
 
+/* Alerts **********************************************************/
+.alert {
+  &.alert-info {
+    border-color: #3A87AD;
+  }
+
+  &.alert-error {
+    border-color: #B94A48;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .main-navigation {
+    .main-nav-item.secondary {
+      display: none;
+    }
+  }
+}

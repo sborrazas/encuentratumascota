@@ -1,26 +1,25 @@
 <%= title 'Encuentra Tu Mascota', visible: false %>
 
 <section id="main-sidebar">
-  <div class="sidebar-options">
-    <div class="btn-group">
-      <button class="btn" data-publication-type="all">
-        <%= t('main.index.filters.all') %>
-      </button>
-      <button class="btn" data-publication-type="lost">
-        <%= t('main.index.filters.lost') %>
-      </button>
-      <button class="btn" data-publication-type="found">
-        <%= t('main.index.filters.found') %>
-      </button>
-      <button class="btn" data-publication-type="adoption">
-        <%= t('main.index.filters.adoption') %>
-      </button>
-    </div>
-    <a href="#" class="icon toggle-left sidebar-toggle off"></a>
-  </div>
-
   <!-- 1. Publication list -->
   <div id="publication-list" class="sidebar-item">
+    <div class="sidebar-options">
+      <div class="btn-group">
+        <button class="btn" data-publication-type="all">
+          <%= t('main.index.filters.all') %>
+        </button>
+        <button class="btn" data-publication-type="lost">
+          <%= t('main.index.filters.lost') %>
+        </button>
+        <button class="btn" data-publication-type="found">
+          <%= t('main.index.filters.found') %>
+        </button>
+        <button class="btn" data-publication-type="adoption">
+          <%= t('main.index.filters.adoption') %>
+        </button>
+      </div>
+      <a href="#" class="icon toggle-left sidebar-toggle off"></a>
+    </div>
     <ul></ul>
     <div class="empty-state">
       <p>

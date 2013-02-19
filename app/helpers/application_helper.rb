@@ -29,4 +29,8 @@ module ApplicationHelper
       [t("models.publication.publication_types.#{type}"), type]
     end
   end
+
+  def breed_options
+    [[t('models.publication.blank_breed_text'), nil]] + Breed.sorted.all.map {|b| [b.name, b.id] }
+  end
 end

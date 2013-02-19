@@ -36,7 +36,7 @@ define(['jquery'], function ($) {
       $.each(errors, function (field, fieldErrors) {
         var fieldName = namespace + "[" + field + "]";
 
-        form.find('[name="' + fieldName +'"]')
+        form.find('[name^="' + fieldName +'"]')
           .parent()
             .addClass('error') // target <p> tag above
             .before(errorHtml(fieldErrors));

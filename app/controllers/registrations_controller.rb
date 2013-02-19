@@ -19,6 +19,6 @@ class RegistrationsController < ApplicationController
 
   def user_params
     return {} unless params[:user].kind_of?(Hash)
-    params[:user].slice(:email, :password)
+    params[:user].slice(:email, :password, :private_username)
   end
 end

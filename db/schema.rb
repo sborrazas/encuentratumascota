@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130218005222) do
+ActiveRecord::Schema.define(:version => 20130218230539) do
 
   create_table "attachments", :force => true do |t|
     t.integer "publication_id", :null => false
@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20130218005222) do
     t.string   "reward",           :default => "", :null => false
     t.string   "publication_type", :default => "", :null => false
     t.integer  "user_id",                          :null => false
-    t.integer  "breed_id",                         :null => false
+    t.integer  "breed_id"
     t.date     "lost_on",                          :null => false
     t.datetime "created_at",                       :null => false
     t.string   "contact",          :default => "", :null => false
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(:version => 20130218005222) do
     t.boolean  "is_admin",         :default => false, :null => false
     t.string   "provider_username", :default => "",    :null => false
     t.string   "image_url",         :default => "",    :null => false
+    t.string   "private_username",  :default => "",    :null => false
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

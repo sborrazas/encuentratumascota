@@ -82,11 +82,10 @@ body.main-index {
     .sidebar-item {
       margin: 0;
       position: absolute;
-      width: 96%;
-      padding: 0 2%;
+      width: 100%;
       bottom: 0;
+      top: 0;
       overflow: auto;
-      top: 60px;
       display: none;
     }
 
@@ -155,6 +154,7 @@ body.main-index {
               font-size: 0.8em;
             }
             ul.publication-details {
+              margin: 0;
               li {
                 float: left;
                 color: #999;
@@ -399,8 +399,8 @@ body.main-index {
   /* Messages *******************************************************/
   .alert {
     position: absolute;
-    margin: 2%;
-    width: 90%;
+    margin: 2% 9%;
+    width: 72%;
     z-index: 100;
   }
 }

@@ -1,8 +1,8 @@
 Encuentratumascota::Application.routes.draw do
 
-  root to: 'main#how_it_works'
+  root to: 'main#index'
 
-  get 'app', to: 'main#index', as: :app
+  get 'how_it_works', to: 'main#how_it_works', as: :how_it_works
 
   resources :publications, only: %w(create show)
 

@@ -6,7 +6,7 @@ es:
         label: Título
         placeholder: Título o nombre de la mascota
       description:
-        label: Descipción
+        label: Descripción
         placeholder: Descripción general de la mascota
       status: Estado
       sex: Sexo
@@ -33,6 +33,7 @@ es:
         active: Activo
         inactive: Pendiente
         closed: Cerrado
+      blank_breed_text: Otra
       errors:
         blank_pet_name: Debe ingresar un titulo
         blank_coords: Las coordenadas son inválidas
@@ -43,6 +44,7 @@ es:
         invalid_lost_on: Debe ingresar la fecha de cuando lo perdió/encontró
         blank_user_id: Debe seleccionar un usuario
         invalid_status: El estado es inválido
+        minimum_attachments: Debe haber al menos una imagen
 
     user:
       email:
@@ -51,11 +53,18 @@ es:
       password:
         label: Contraseña
         placeholder: Contraseña
+      private_username:
+        label: Nombre de Usuario
+        placeholder: Nombre de Usuario
+      email_or_username:
+        label: Email o Usuario
+        placeholder: Email o Usuario
       provider: Proveedor
       errors:
         invalid_email: es inválido
         invalid_password: es inválido
         already_used_email: ya fue usado
+        blank_private_username: es inválido
 
     newsletter_subscriber:
       email: Email
@@ -95,9 +104,9 @@ es:
         publication_detail:
           deleted: Esta publicación se ha eliminado.
         publication_form:
-          select_location: Debes seleccionar la ubicación donde encontraste/perdiste la mascota primero.
-          click_on_map: Debes clickear la ubicación donde encontraste/perdiste la mascota.
-          publication_created_successfully: Publicación creada correctamente!
+          select_location: Debes seleccionar la ubicación donde encontraste/perdiste/se encuentra la mascota primero.
+          click_on_map: Debes clickear la ubicación donde encontraste/perdiste/se encuentra la mascota.
+          publication_created_successfully: Publicación creada correctamente! Nuestro equipo activará la publicación pronto.
         lost: Perdido
         found: Encontrado
         adoption: En adopción
@@ -146,6 +155,7 @@ es:
         show: Ver
         edit: Modificar
         delete: Eliminar
+        actions: Acciones
       form:
         location: Ubicación
       new:

@@ -24,7 +24,6 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
     });
 
     this.map = settings.map;
-    this.successCallback = settings.successCallback;
 
     this.bindEvents();
     this.attachmentTemplate = $("#attachment-template").template();
@@ -71,7 +70,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
         this.createPublication();
       }
       else {
-        flash.displayMessage("info", t("publication_form.select_location"));
+        flash.displayMessage("error", t("publication_form.select_location"));
       }
     }.bind(this));
 
@@ -92,7 +91,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
     if (this.attachmentCount < config.MAX_ATTACHMENTS) {
       container = this.$form.find("#image-upload-fields ul");
       content = $.tmpl(this.attachmentTemplate, {
-        id: "attachment-" + this.attachmentCount,
+        id: this.attachmentCount,
         name: "publication[attachments][" + this.attachmentCount + "]"
       });
       $content = $(content);
@@ -149,8 +148,6 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
     this.attachmentCount = 0; // Reset attachmentCount
     // Display 'Add Attachment' button (in case it was hidden)
     this.$form.find("#image-upload-fields button").show();
-
-    this.successCallback(publication);
 
     document.location.hash = "";
 

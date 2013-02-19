@@ -85,7 +85,7 @@ define(["jquery", "app/carousel", "app/flash_display", "app/translations", "boot
       , $email = $shareThis.find(".email")
       , options = {
         url: "http://encuentratumascota.org/#publication-" + publication.id, // TODO hardcoded :(
-        title: publication.pet_name + " " + publication.publication_type,
+        title: publication.pet_name,
         type: "hcount"
       };
 

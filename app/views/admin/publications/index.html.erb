@@ -19,22 +19,19 @@
 
 <table class="table table-striped table-bordered table-hover">
   <tr>
-    <th><%= t('models.publication.pet_name.short') %></th>
-    <th><%= t('models.publication.description.short') %></th>
+    <th><%= t('models.publication.pet_name.label') %></th>
+    <th><%= t('models.publication.status') %></th>
+    <th><%= t('models.publication.description.label') %></th>
     <th><%= t('models.publication.publication_type') %></th>
     <th><%= t('models.publication.lost_on') %></th>
     <th><%= t('.actions') %></th>
   </tr>
   <% @publications.each do |publication| %>
     <tr>
-      <td>
-        <%= publication.pet_name %>
-        <span class="status <%= publication.status %>">
-          <%= t("models.publication.statuses.#{publication.status}") %>
-        </span>
-      </td>
+      <td><%= publication.pet_name %></td>
+      <td><%= t("models.publication.statuses.#{publication.status}") %></td>
       <td><%= truncate(publication.description, length: 50, separator: ' ') %></td>
-      <td><%= publication.publication_type %></td>
+      <td><%= t("publication.publication_types.#{publication.publication_type}") %></td>
       <td><%= publication.created_at.strftime('%d/%m/%Y') %></td>
       <td>
         <!-- <%= link_to t('.show'), admin_publication_path(publication) %> -->

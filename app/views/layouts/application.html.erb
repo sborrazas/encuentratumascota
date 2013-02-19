@@ -17,10 +17,13 @@
 
     <nav>
       <div class="info-nav">
-        <%= link_to t('general.nav.how_it_works'), root_path, class: 'main-nav-item' %>
+        <%= link_to t('general.nav.how_it_works'), how_it_works_path, class: 'main-nav-item' %>
         <a href="mailto:encuentratumascotaorg@gmail.com" target="_blank" class="main-nav-item">
           <%= t('general.nav.contact') %>
         </a>
+        <a href="http://www.facebook.com/pages/Encuentra-tu-Mascota/503071009743325" target="_blank" class="main-nav-item secondary">Facebook</a>
+        <a href="http://twitter.com/etmuruguay" target="_blank" class="main-nav-item secondary">Twitter</a>
+
       </div>
       <% unless current_user %>
         <div id="logged-out-nav">
@@ -41,7 +44,7 @@
         </ul>
       </div>
 
-      <%= link_to t('general.nav.new_publication'), app_path(anchor: 'publication-new'), id: 'publication-new', class: 'btn btn-warning' %>
+      <%= link_to t('general.nav.new_publication'), root_path(anchor: 'publication-new'), id: 'publication-new', class: 'btn btn-warning' %>
     </nav>
   </section>
 

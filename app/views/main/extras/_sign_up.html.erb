@@ -7,6 +7,11 @@
       </p>
 
       <p class="field">
+        <%= f.label :private_username, t('models.user.private_username.label') %>
+        <%= f.text_field :private_username, placeholder: t('models.user.private_username.placeholder') %>
+      </p>
+
+      <p class="field">
         <%= f.label :password, t('models.user.password.label') %>
         <%= f.password_field :password, autocomplete: 'off', placeholder: t('models.user.password.placeholder') %>
       </p>

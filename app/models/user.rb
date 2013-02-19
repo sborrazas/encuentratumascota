@@ -5,12 +5,12 @@ class User < ActiveRecord::Base
   has_many :publications, dependent: :destroy
   has_many :contact_info_inquiries, dependent: :destroy
 
-  def self.fetch(email)
-    self.find_by_email(email) unless email.try(:empty?)
+  def self.fetch(email_or_username)
+    where('users.email = ? OR users.private_username = ?', email_or_username, email_or_username).first unless email_or_username.try(:empty?)
   end
 
   def display
-    self.email.blank? ? self.provider_username : self.email
+    self.private_username.blank? ? self.provider_username : self.private_username
   end
 
   def create_inquiry(publication)
