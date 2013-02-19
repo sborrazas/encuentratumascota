@@ -18,7 +18,7 @@ module Forms
       errors[:breed_id] << translations[:missing_breed_id] unless is_empty_string?(params[:breed_id]) || Breed.find_by_id(params[:breed_id])
       errors[:contact] << translations[:blank_contact] if is_empty_string?(params[:contact])
       errors[:sex] << translations[:invalid_sex] unless Publication::SEXES.include?(params[:sex])
-      errors[:attachments] << translations[:minimum_attachments] if valid_attachments(params[:attachments]).empty? && resouce.try(:attachments).try(:empty?)
+      errors[:attachments] << translations[:minimum_attachments] if valid_attachments(params[:attachments]).empty? && resource.try(:attachments).try(:empty?)
       unless params[:lost_on] && (Date.strptime(params[:lost_on], '%d/%m/%Y') rescue false)
         errors[:lost_on] << translations[:invalid_lost_on]
       end
