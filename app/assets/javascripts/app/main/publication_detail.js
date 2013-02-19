@@ -56,6 +56,8 @@ define(["jquery", "app/carousel", "app/flash_display", "app/translations", "boot
     $publicationInfo.empty();
     $publicationInfo.append(content);
 
+    document.title = publication.pet_name + ' [' + t(publication.publication_type) + '] - Encuentra Tu Mascota';
+
     if (publication.attachments.length > 1) {
       new Carousel({
         element: $publicationInfo.find(".image-carousel")
@@ -85,7 +87,7 @@ define(["jquery", "app/carousel", "app/flash_display", "app/translations", "boot
       , $email = $shareThis.find(".email")
       , options = {
         url: "http://encuentratumascota.org/#publication-" + publication.id, // TODO hardcoded :(
-        title: publication.pet_name,
+        title: publication.pet_name + ' [' + t(publication.publication_type).toUpperCase() + ']',
         type: "hcount"
       };
 
