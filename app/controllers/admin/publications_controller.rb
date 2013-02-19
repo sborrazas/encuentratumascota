@@ -30,7 +30,6 @@ class Admin::PublicationsController < ApplicationController
 
   def edit
     @publication = user_publications_scope.find(params[:id])
-    return unauthorized_access unless @publication
   end
 
   def update
@@ -41,11 +40,21 @@ class Admin::PublicationsController < ApplicationController
 
     if publication_form.valid?
       publication_form.get_resource.save
-      redirect_to admin_publications_path, flash: { success: 'Publication updated successfully' }
+      redirect_to admin_publications_path, flash: { success: t('admin.publication.publication_updated_successfully') }
     else
       @publication = publication_form.get_resource
       @errors = publication_form.errors
       render :edit
+    end
+  end
+
+  def close
+    @publication = user_publications_scope.find(params[:id])
+    if @publication.status == 'closed'
+      redirect_to admin_publications_path, flash: { error: t('admin.publications.publication_already_closed') }
+    else
+      @publication.update_attributes(status: 'closed')
+      redirect_to admin_publications_path, flash: { success: t('admin.publications.publication_closed_successfully') }
     end
   end
 

@@ -164,3 +164,6 @@ es:
       edit:
         submit: Modificar
         cancel: Cancelar
+      publication_updated_successfully: Publicación modificada correctamente!
+      publication_already_closed: La publicación ya esta cerrada.
+      publication_closed_successfully: Publicación cerrada correctamente.

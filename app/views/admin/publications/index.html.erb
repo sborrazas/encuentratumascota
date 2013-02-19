@@ -36,7 +36,9 @@
       <td>
         <!-- <%= link_to t('.show'), admin_publication_path(publication) %> -->
         <%= link_to t('.edit'), edit_admin_publication_path(publication) %>
-        <!-- <%= link_to t('.delete'), edit_admin_publication_path(publication) %> -->
+        <% if publication.status != 'closed' %>
+          <%= link_to t('.close'), close_admin_publication_path(publication) %>
+        <% end %>
       </td>
     </tr>
   <% end %>
