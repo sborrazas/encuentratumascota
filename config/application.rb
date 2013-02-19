@@ -53,6 +53,10 @@ module Encuentratumascota
     # parameters by using an attr_accessible or attr_protected declaration.
     config.active_record.whitelist_attributes = false
 
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.delivery_method = :smtp
+    config.action_mailer.perform_deliveries = true
+
     # Enable the asset pipeline
     config.assets.enabled = true
 

@@ -13,7 +13,7 @@ module Forms
       if params[:password].blank? && resource.try(:crypted_password).blank? && resource.try(:uid).blank?
         errors[:password] << error_translations[:invalid_password]
       end
-      if params[:private_username].blank?
+      if params[:private_username].blank? && resource.try(:provider_username).blank?
         errors[:private_username] << error_translations[:blank_private_username]
       end
 
