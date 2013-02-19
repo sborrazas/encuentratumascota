@@ -44,7 +44,7 @@ module Forms
       valid_params = params.slice(*valid_keys)
 
       valid_params[:lost_on] = Date.strptime(params[:lost_on], '%d/%m/%Y')
-      valid_params[:breed_id] = params[:breed_id] unless is_empty_string?(params[:breed_id]) || Breed.find_by_id(params[:breed_id])
+      valid_params[:breed_id] = params[:breed_id] if !is_empty_string?(params[:breed_id]) && Breed.find_by_id(params[:breed_id])
 
       if (attachments = valid_attachments(params[:attachments])).any?
         valid_params[:attachments] = attachments.concat(publication.attachments.last(Publication::MAX_ATTACHMENTS - attachments.count))

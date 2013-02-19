@@ -31,7 +31,7 @@
       <td><%= publication.pet_name %></td>
       <td><%= t("models.publication.statuses.#{publication.status}") %></td>
       <td><%= truncate(publication.description, length: 50, separator: ' ') %></td>
-      <td><%= t("publication.publication_types.#{publication.publication_type}") %></td>
+      <td><%= t("models.publication.publication_types.#{publication.publication_type}") %></td>
       <td><%= publication.created_at.strftime('%d/%m/%Y') %></td>
       <td>
         <!-- <%= link_to t('.show'), admin_publication_path(publication) %> -->
