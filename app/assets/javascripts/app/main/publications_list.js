@@ -1,5 +1,7 @@
 define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, t) {
 
+  var IMG_LIST_SIZE = 90;
+
   /**
    *
    */
@@ -50,9 +52,20 @@ define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, 
    */
   PublicationsList.prototype.displayPublicationOnSidebar = function (publication) {
     var content = $.tmpl(this.publicationListTemplate, { publication: publication })
-      , $content = $(content);
+      , $content = $(content)
+      , $img = $content.find("img");
 
     this.$publicationList.append($content);
+
+    if ($img.width() < $img.height()) {
+      $img.width(IMG_LIST_SIZE);
+    }
+    else {
+      $img.height(IMG_LIST_SIZE);
+    }
+
+    $img.css('top', '-' + (($img.height() - IMG_LIST_SIZE) / 2) + 'px');
+    $img.css('left', '-' + (($img.width() - IMG_LIST_SIZE) / 2) + 'px');
 
     $content.click(this.publicationClicked);
   };

@@ -127,11 +127,19 @@ body.main-index {
             &.found { background-color: $found; }
             &.adoption { background-color: $adoption; }
           }
-          img {
-            width: 22%;
+          .image-container {
+            width: 90px;
+            height: 90px;
             float: left;
             margin: 3% 2% 2% 5%;
             border-radius: 5px;
+            position: relative;
+            overflow: hidden;
+
+            img {
+              position: absolute;
+              max-width: none;
+            }
           }
           .publication-info {
             float: left;
