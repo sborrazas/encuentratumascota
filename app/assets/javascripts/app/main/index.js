@@ -1,6 +1,8 @@
 define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main/publications_list",
-  "app/main/publication_detail", "app/main/publication_form", "app/flash_display", "app/translations", "app/main/email_request"],
-  function ($, AjaxSignUp, PublicationsMap, PublicationsList, PublicationDetail, PublicationForm, flash, translations, EmailRequest) {
+  "app/main/publication_detail", "app/main/publication_form", "app/flash_display", "app/translations",
+  "app/main/email_request", "app/main/router"],
+  function ($, AjaxSignUp, PublicationsMap, PublicationsList, PublicationDetail, PublicationForm,
+    flash, translations, EmailRequest, router) {
 
   var config = {}
     , petFinder, ajaxSignup, publicationsList, publicationsMap, publicationDetail, publicationForm
@@ -40,35 +42,30 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       // Publication detail
       publicationDetail = new PublicationDetail(ajaxSignup);
 
-      publicationsMap.displayPublications(config.publications);
-      $(window).bind("hashchange", this.hashChanged.bind(this));
-
       // Bind click event to refresh publications
       $("#main-sidebar .sidebar-options button").click(function (event) {
-        var clickedElement = $(event.target)
-          , publications;
-
+        var publicationType = $(event.target).data("publication-type");
         event.preventDefault();
-        if (history.replaceState) {
-          history.replaceState(null, null, '#');
-          publicationForm.deactivate();
-        }
-        else {
-          document.location.href = '/';
-        }
-
-        // Marks selected element as "active"
-        $("#main-sidebar .sidebar-options button").removeClass("active");
-        clickedElement.addClass("active");
-
-        publications = this.getFilteredPublications(clickedElement.data("publication-type"));
-
-        publicationsList.displayPublications(publications);
-        publicationsMap.displayPublications(publications);
-        this.displaySidebarElement(publicationsList);
+        router.pushState('filter', publicationType);
       }.bind(this));
 
-      this.hashChanged();
+      router.registerRoute(/\/s\/(\w+)/, function (publicationType) {
+        this.showPublicationList(publicationType);
+        publicationForm.deactivate();
+        $("body").addClass("with-sidebar");
+      }.bind(this));
+
+      router.registerRoute(/\/p\/([\w\-]+)/, function (publicationSlug) {
+        this.showPublicationList("all");
+        this.showPublicationDetail(publicationSlug);
+        publicationForm.deactivate();
+        $("body").addClass("with-sidebar");
+      }.bind(this));
+
+      router.registerRoute(/\/p\/new/, function () {
+        this.showPublicationForm();
+        $("body").addClass("with-sidebar");
+      }.bind(this));
 
       // Bind sidebar toggle event
       $(".sidebar-toggle").click(function (event) {
@@ -76,65 +73,63 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
         $("body").toggleClass("with-sidebar");
         publicationsMap.resize();
       });
-    },
-    getFilteredPublications: function (publicationType) {
-      var publications = [];
 
-      // Filter publications and display valid ones
-      config.publications.forEach(function (publication) {
-        if (publicationType === "all" || publicationType === publication.publication_type) {
-          publications.push(publication);
-        }
+      router.start({
+        blankUrl: "/s/all"
       });
-
-      return publications;
     },
     displaySidebarElement: function (sidebarItem) {
       $("#main-sidebar .sidebar-item").hide();
       sidebarItem.$el.show();
     },
-    hashChanged: function () {
-      var newHash = document.location.hash
-        , hashMatch
-        , publications = config.publications
-        , i, len;
-
-      // Refresh pets filter
-      $("#main-sidebar .sidebar-options button").removeClass("active");
-      publicationsList.displayPublications(publications);
-      // Deactivate form
-      if (publicationForm.active) {
-        publicationForm.deactivate();
-      }
-
-      if (newHash === "#publication-new") {
-        if (config.userSignedIn) {
-          publicationForm.activate();
-          this.displaySidebarElement(publicationForm);
-        }
-        else {
-          ajaxSignup.signIn();
-        }
-      }
-      else if (hashMatch = newHash.match(/publication-(\d+)/)) {
-        for (i = 0, len = publications.length; i < len; i += 1) {
-          if (publications[i].id === hashMatch[1]) {
-            publicationDetail.showPublication(publications[i]);
-            this.displaySidebarElement(publicationDetail);
-            publicationsMap.highlightPublication(publications[i]);
-            break;
-          }
-        }
+    showPublicationForm: function () {
+      if (config.userSignedIn) {
+        publicationForm.activate();
+        this.displaySidebarElement(publicationForm);
       }
       else {
-        // Display 'all'
-        publicationsList.displayPublications(config.publications);
-        publicationsMap.displayPublications(config.publications);
-        this.displaySidebarElement(publicationsList);
+        ajaxSignup.signIn();
+      }
+    },
+    showPublicationDetail: function (publicationSlug) {
+      var publications = config.publications
+        , i = 0
+        , len = publications.length;
+
+      for (; i < len; i += 1) {
+        if (publications[i].slug === publicationSlug) {
+          publicationDetail.showPublication(publications[i]);
+          this.displaySidebarElement(publicationDetail);
+          publicationsMap.highlightPublication(publications[i]);
+          return;
+        }
+      }
+    },
+    showPublicationList: function (publicationType) {
+      var publications = [];
+
+      publicationForm.deactivate();
+
+      // Filter publications and display valid ones
+      if (publicationType === "all") {
+        publications = config.publications;
+      }
+      else {
+        config.publications.forEach(function (publication) {
+          if (publicationType === publication.publication_type) {
+            publications.push(publication);
+          }
+        });
       }
 
-      // TODO Implement toggle sidebar
-      $("body").addClass("with-sidebar");
+      // Marks selected element as "active"
+      $("#main-sidebar .sidebar-options button").removeClass("active");
+      $("#main-sidebar .sidebar-options button[data-publication-type='" + publicationType + "']")
+        .addClass("active");
+
+      publicationsList.displayPublications(publications);
+      publicationsMap.displayPublications(publications);
+      this.displaySidebarElement(publicationsList);
     }
   };
 });

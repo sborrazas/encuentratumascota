@@ -15,4 +15,9 @@ class Publication < ActiveRecord::Base
   scope :has_status, lambda {|*statuses| where(status: statuses) }
   scope :sort_newest, order('publications.created_at DESC')
 
+  def populate_slug
+    self.slug = SlugGeneratorService.generate_slug(pet_name) do |the_slug|
+      self.class.where(slug: the_slug).where('publications.id != ?', self.id).any?
+    end
+  end
 end

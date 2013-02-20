@@ -1,5 +1,6 @@
-define(["jquery", "app/carousel", "app/flash_display", "app/translations", "bootstrap", "jquery_tmpl"],
-  function ($, Carousel, flash, t) {
+define(["jquery", "app/carousel", "app/flash_display", "app/translations",
+  "app/main/router", "bootstrap", "jquery_tmpl"],
+  function ($, Carousel, flash, t, router) {
 
   /**
    *
@@ -36,6 +37,11 @@ define(["jquery", "app/carousel", "app/flash_display", "app/translations", "boot
         }.bind(this)
       });
     }.bind(this));
+
+    this.$el.find(".go-back").click(function (event) {
+      event.preventDefault();
+      router.pushState("filter", "all");
+    });
   };
 
   /**
@@ -86,10 +92,15 @@ define(["jquery", "app/carousel", "app/flash_display", "app/translations", "boot
       , $facebook = $shareThis.find(".facebook")
       , $email = $shareThis.find(".email")
       , options = {
-        url: "http://encuentratumascota.org/#publication-" + publication.id, // TODO hardcoded :(
+        url: "http://encuentratumascota.org/p/" + publication.slug, // TODO hardcoded :(
         title: publication.pet_name + ' [' + t(publication.publication_type).toUpperCase() + ']',
+        text: publication.description,
         type: "hcount"
       };
+
+    if (publication.attachments.length > 0) {
+      options.image = publication.attachments[0];
+    }
 
     // Can't specify it on options ..
     $shareThis.find("span").attr("st_via", "etmuruguay");

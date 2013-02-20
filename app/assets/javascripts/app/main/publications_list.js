@@ -1,4 +1,5 @@
-define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, t) {
+define(["jquery", "app/translations", "app/main/router", "bootstrap", "jquery_tmpl"],
+  function ($, t, router) {
 
   var IMG_LIST_SIZE = 90;
 
@@ -13,8 +14,7 @@ define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, 
 
     this.publicationClicked = function (event) {
       var $li = $(event.target).parents(".publication-item");
-
-      document.location.hash = "#publication-" + $li.data('publication-id');
+      router.pushState("detail", this.publicationsBySlug[$li.data("publication-slug")]);
     }.bind(this);
   };
 
@@ -24,12 +24,14 @@ define(["jquery", "app/translations", "bootstrap", "jquery_tmpl"], function ($, 
   PublicationsList.prototype.displayPublications = function (publications) {
     // Clear publications list
     this.$publicationList.empty();
+    this.publicationsBySlug = {};
 
     if (publications.length > 0) {
       // Filter publications and display valid ones
       publications.forEach(function (publication) {
+        this.publicationsBySlug[publication.slug] = publication;
         this.displayPublicationOnSidebar({
-          id: publication.id,
+          slug: publication.slug,
           publication_type: publication.publication_type,
           publication_type_str: t(publication.publication_type),
           pet_name: publication.pet_name,

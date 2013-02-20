@@ -20,6 +20,7 @@ class Admin::PublicationsController < ApplicationController
     @publication = publication_form.get_resource
 
     if publication_form.valid?
+      @publication.populate_slug
       @publication.save
       redirect_to admin_publications_path, flash: { success: 'Publication created successfully' }
     else

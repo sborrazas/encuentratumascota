@@ -1,4 +1,4 @@
-define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) {
+define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], function ($, GMaps, router) {
 
   /**
    *
@@ -76,7 +76,7 @@ define(["jquery", "lib/gmaps", "bootstrap", "jquery_tmpl"], function ($, GMaps) 
       lng: publication.lng,
       icon: this.images[publication.publication_type],
       click: function (event) {
-        document.location.hash = 'publication-' + publication.id;
+        router.pushState("detail", publication);
       }
     });
   };

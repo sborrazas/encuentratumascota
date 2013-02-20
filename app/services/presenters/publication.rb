@@ -7,7 +7,8 @@ module Presenters
 
     def self.to_json_hash(publication, options = {})
       attributes = {
-        id: publication.id.to_s,
+        id: publication.id,
+        slug: publication.slug,
         publication_type: publication.publication_type,
         pet_name: publication.pet_name,
         attachments: publication.attachments.map {|a| a.image.url },

@@ -72,6 +72,7 @@ es:
   main:
     index:
       empty_publication_list: Actualmente no hay mascotas que coincidan con este filtro.
+      publication_deleted: Esta publicación se ha eliminado.
       contact_info: 'Información de contacto:'
       request_contact_info: Solicitar información de contacto
       log_in_alternative: o ingresá con

@@ -1,5 +1,5 @@
-define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "bootstrap_datepicker"],
-  function ($, formErrors, flash, t) {
+define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "app/main/router", "bootstrap_datepicker"],
+  function ($, formErrors, flash, t, router) {
 
   var config = {
     MAX_ATTACHMENTS: 4
@@ -74,6 +74,11 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
       }
     }.bind(this));
 
+    $("#publication-new").click(function (event) {
+      event.preventDefault();
+      router.pushState("new");
+    });
+
     // When adding a new image
     // this.$form.find("#image-upload-fields button").click(function (event) {
     //   event.preventDefault();
@@ -126,7 +131,7 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
     publicationData.append("publication[lng]", currentCoords.lng);
 
     $.ajax({
-      url: "publications",
+      url: "/publications",
       type: "POST",
       data: publicationData,
       processData: false,
@@ -149,9 +154,8 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
     // Display 'Add Attachment' button (in case it was hidden)
     this.$form.find("#image-upload-fields button").show();
 
-    document.location.hash = "";
-
     flash.displayMessage("success", t("publication_form.publication_created_successfully"));
+    router.pushState("filter", "all");
   };
 
   /**

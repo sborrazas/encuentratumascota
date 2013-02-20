@@ -1,6 +1,8 @@
 Encuentratumascota::Application.routes.draw do
 
   root to: 'main#index'
+  get 'p/:slug', to: 'main#index'
+  get 's/:filter', to: 'main#index'
 
   get 'how_it_works', to: 'main#how_it_works', as: :how_it_works
 

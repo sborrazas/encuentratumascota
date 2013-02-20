@@ -1,4 +1,15 @@
 <%= title 'Encuentra Tu Mascota', visible: false %>
+<% if @current_publication %>
+  <% content_for(:extra_headers) do %>
+    <meta property="og:title" content="<%= @current_publication.pet_name %>">
+    <% unless @current_publication.description.blank? %>
+      <meta property="og:description" content="<%= @current_publication.description %>">
+    <% end %>
+    <% unless @current_publication.attachments.empty? %>
+      <meta property="og:image" content="<%= @current_publication.attachments.first.image.url %>">
+    <% end %>
+  <% end %>
+<% end %>
 
 <section id="main-sidebar">
   <!-- 1. Publication list -->

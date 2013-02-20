@@ -1,3 +1,5 @@
+require 'rails/all'
+
 module Encuentratumascota
   module Config
     filename = File.join(File.dirname(__FILE__), 'settings.json')

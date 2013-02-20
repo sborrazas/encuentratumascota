@@ -8,6 +8,7 @@ class PublicationsController < ApplicationController
 
     if publication_form.valid?
       publication = publication_form.get_resource
+      publication.populate_slug
       publication.assign_attributes(user: current_user, status: 'inactive')
       publication.save
 
