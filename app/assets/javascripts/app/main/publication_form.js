@@ -79,6 +79,11 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "a
       router.pushState("new");
     });
 
+    this.$form.find(".btn-cancel-publication").click(function (event) {
+      event.preventDefault();
+      router.pushState("filter", "all");
+    });
+
     // When adding a new image
     // this.$form.find("#image-upload-fields button").click(function (event) {
     //   event.preventDefault();

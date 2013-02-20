@@ -17,7 +17,7 @@ define(["app/translations"], function (t) {
    */
   Router.prototype.start = function (settings) {
     this.blankUrl = settings.blankUrl;
-    if (document.location.pathname !== '') {
+    if (document.location.pathname !== '/') {
       this.urlChanged(document.location.pathname);
     }
     else {
@@ -42,7 +42,7 @@ define(["app/translations"], function (t) {
     switch (type) {
       case "filter": // data = publicationType
         stateData = data;
-        title = data; // TODO
+        title = t("filters." + data);
         url = "/s/" + data;
         break;
       case "detail": // data = publication
@@ -51,11 +51,12 @@ define(["app/translations"], function (t) {
         url = "/p/" + data.slug;
         break;
       case "new": // data = null
-        title = t("publication_detail.deleted");
+        title = t("new_publication");
         url = "/p/new";
         break;
     }
 
+    title += " - Encuentra Tu Mascota";
     document.title = title;
     history.pushState(stateData, title, url);
     this.urlChanged(url);

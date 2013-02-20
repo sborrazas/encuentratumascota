@@ -104,6 +104,8 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
           return;
         }
       }
+
+      flash.displayMessage("error", translations("publication_detail.deleted"));
     },
     showPublicationList: function (publicationType) {
       var publications = [];

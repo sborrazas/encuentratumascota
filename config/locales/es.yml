@@ -15,7 +15,7 @@ es:
       reward:
         label: Recompensa
         placeholder: (opcional)
-      lost_on: Perdido el
+      lost_on: Fecha
       contact:
         label: Contacto
         placeholder: Teléfono de contacto
@@ -108,6 +108,12 @@ es:
           select_location: Debes seleccionar la ubicación donde encontraste/perdiste/se encuentra la mascota primero.
           click_on_map: Debes clickear la ubicación donde encontraste/perdiste/se encuentra la mascota.
           publication_created_successfully: Publicación creada correctamente! Nuestro equipo activará la publicación pronto.
+        new_publication: Nueva Publicación
+        filters:
+          all: ''
+          lost: Listado de Perdidos
+          found: Listado de Encontrados
+          adoption: Listado de en Adopción
         lost: Perdido
         found: Encontrado
         adoption: En adopción
