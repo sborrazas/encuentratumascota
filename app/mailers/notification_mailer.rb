@@ -2,7 +2,7 @@ class NotificationMailer < ActionMailer::Base
 
   default from: 'encuentratumascotaorg@gmail.com'
 
-  ADMIN_EMAILS = 'seba.borrazas@gmail.com' #, snt.aln@gmail.com'
+  ADMIN_EMAILS = 'seba.borrazas@gmail.com, snt.aln@gmail.com'
 
   def send_error_email(exception, env)
     content = %Q(
