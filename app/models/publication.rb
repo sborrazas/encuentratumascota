@@ -17,7 +17,9 @@ class Publication < ActiveRecord::Base
 
   def populate_slug
     self.slug = SlugGeneratorService.generate_slug(pet_name) do |the_slug|
-      self.class.where(slug: the_slug).where('publications.id != ?', self.id).any?
+      scope = self.class.where(slug: the_slug)
+      scope = scope.where('publications.id != ?', self.id) if self.id
+      scope.any?
     end
   end
 end
