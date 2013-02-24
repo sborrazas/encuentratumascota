@@ -56,7 +56,12 @@ define(["app/translations"], function (t) {
         break;
     }
 
-    title += " - Encuentra Tu Mascota";
+    if (title.length > 0) {
+      title += " - Encuentra Tu Mascota";
+    }
+    else {
+      title = "Encuentra Tu Mascota";
+    }
     document.title = title;
     history.pushState(stateData, title, url);
     this.urlChanged(url);
