@@ -132,6 +132,12 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "a
     var publicationData = new FormData(this.$form.get(0))
       , currentCoords = this.map.placedCoords();
 
+    if (this.isSubmitting) {
+      return;
+    }
+
+    this.setSubmitting(true);
+
     publicationData.append("publication[lat]", currentCoords.lat);
     publicationData.append("publication[lng]", currentCoords.lng);
 
@@ -154,13 +160,15 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "a
     this.map.displayPublication(publication);
 
     this.$form.find("#image-upload-fields input").remove(); // Clear images
-    this.$form.find("input, textarea").val(""); // Clear fields
+    this.$form.get(0).reset();
     this.attachmentCount = 0; // Reset attachmentCount
     // Display 'Add Attachment' button (in case it was hidden)
     this.$form.find("#image-upload-fields button").show();
 
     flash.displayMessage("success", t("publication_form.publication_created_successfully"));
     router.pushState("filter", "all");
+
+    this.setSubmitting(false);
   };
 
   /**
@@ -173,6 +181,20 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "a
       errors: errors,
       namespace: "publication"
     });
+    this.setSubmitting(false);
+  };
+
+  /**
+   *
+   */
+  PublicationForm.prototype.setSubmitting = function (isSubmitting) {
+    this.isSubmitting = isSubmitting;
+    if (this.isSubmitting) {
+      this.$form.find("#publication-submit").addClass("loading");
+    }
+    else {
+      this.$form.find("#publication-submit").removeClass("loading");
+    }
   };
 
   return PublicationForm;

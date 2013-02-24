@@ -238,6 +238,10 @@ body.main-index {
           width: 54%;
           margin-right: 2%;
           @include linear-gradient(50deg, #1CA901 0%, #21C100 100%);
+
+          &.loading {
+            background: #CCC url(loader.gif) no-repeat 162px center;
+          }
         }
         #cancel-publication {
           width: 30%;
