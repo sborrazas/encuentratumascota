@@ -35,8 +35,17 @@ body {
   background: #000;
   @include linear-gradient(#363636, #171717);
 
-  h1,
-  h2 {
+  header {
+    float: left;
+    width: 24%;
+  }
+
+  nav {
+    float: left;
+    width: 76%;
+  }
+
+  hgroup {
     display: none;
   }
   img.logo {
@@ -47,8 +56,15 @@ body {
     float: left;
   }
 
-  .info-nav {
+  .primary-nav {
+    float: right;
+  }
+
+  .secondary-nav {
     float: left;
+    iframe {
+      margin: 29px 5px;
+    }
   }
 
   .main-nav-item {
@@ -75,20 +91,18 @@ body {
     margin-top: 20px;
   }
 
-  #logged-out-nav {
-    a.btn-sign-in {
-      float: right;
-      line-height: 80px;
-      margin: 0 30px;
+  .btn-sign-in {
+    float: right;
+    line-height: 80px;
+    margin: 0 30px;
 
-      text-decoration: none;
-      color: #FFF;
-      font-weight: bold;
-      font-size: 1.4em;
-    }
+    text-decoration: none;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 1.4em;
   }
 
-  #logged-in-nav {
+  .logged-in-nav {
     float: right;
     position: relative;
     margin-right: 20px;
@@ -196,8 +210,15 @@ form {
 
 @media screen and (max-width: 1200px) {
   .main-navigation {
-    .main-nav-item.secondary {
+    .secondary-nav {
       display: none;
+    }
+    header {
+      width: 40%;
+    }
+
+    nav {
+      width: 60%;
     }
   }
 }

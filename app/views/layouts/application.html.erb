@@ -16,35 +16,45 @@
     </header>
 
     <nav>
-      <div class="info-nav">
-        <%= link_to t('general.nav.how_it_works'), how_it_works_path, class: 'main-nav-item' %>
-        <a href="mailto:encuentratumascotaorg@gmail.com" target="_blank" class="main-nav-item">
-          <%= t('general.nav.contact') %>
-        </a>
-        <a href="https://www.facebook.com/ETMUruguay" target="_blank" class="main-nav-item secondary">Facebook</a>
-        <a href="http://twitter.com/etmuruguay" target="_blank" class="main-nav-item secondary">Twitter</a>
+      <ul>
+        <li class="secondary-nav">
+          <%= link_to t('general.nav.how_it_works'), how_it_works_path, class: 'main-nav-item' %>
+        </li>
+        <li class="secondary-nav">
+          <a href="mailto:encuentratumascotaorg@gmail.com" target="_blank" class="main-nav-item">
+            <%= t('general.nav.contact') %>
+          </a>
+        </li>
+        <li class="secondary-nav">
+          <a href="https://twitter.com/ETMUruguay" class="twitter-follow-button" data-show-count="false" data-lang="es" data-show-screen-name="false">Seguir a @ETMUruguay</a>
+          <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        </li>
+        <li class="secondary-nav">
+          <div class="fb-like" data-href="http://facebook.com/ETMUruguay" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+        </li>
+        <% unless current_user %>
+          <li class="logged-out-nav">
+            <a href="#" class="btn-sign-in"><%= t('general.nav.sign_in') %></a>
+          </li>
+        <% end %>
 
-      </div>
-      <% unless current_user %>
-        <div id="logged-out-nav">
-          <a href="#" class="btn-sign-in"><%= t('general.nav.sign_in') %></a>
-        </div>
-      <% end %>
+        <li class="logged-in-nav primary-nav">
+          <a class="dropdown-toggle main-nav-item" href="#">
+            <span id="user-image"><%= current_user_image if current_user %></span>
+            <span id="username"><%= current_user.display if current_user %></span>
+            <span class="icon dropdown-caret"></span>
+          </a>
+          <ul class="nav-dropdown-menu">
+            <li><%= link_to t('admin.general.my_publications'), admin_publications_path %></li>
+            <!-- <li><a href="/admin/publications">Configuraci&oacute;n</a></li> -->
+            <li><%= link_to t('general.nav.sign_out'), logout_sessions_path %></li>
+          </ul>
+        </li>
 
-      <div id="logged-in-nav">
-        <a class="dropdown-toggle main-nav-item" href="#">
-          <span id="user-image"><%= current_user_image if current_user %></span>
-          <span id="username"><%= current_user.display if current_user %></span>
-          <span class="icon dropdown-caret"></span>
-        </a>
-        <ul class="nav-dropdown-menu">
-          <li><%= link_to t('admin.general.my_publications'), admin_publications_path %></li>
-          <!-- <li><a href="/admin/publications">Configuraci&oacute;n</a></li> -->
-          <li><%= link_to t('general.nav.sign_out'), logout_sessions_path %></li>
-        </ul>
-      </div>
-
-      <%= link_to t('general.nav.new_publication'), '/p/new', id: 'publication-new', class: 'btn btn-warning' %>
+        <li class="primary-nav">
+          <%= link_to t('general.nav.new_publication'), '/p/new', id: 'publication-new', class: 'btn btn-warning' %>
+        </li>
+      </ul>
     </nav>
   </section>
 
@@ -60,6 +70,15 @@
     });
     <%= yield :javascript %>
   </script>
+
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/es_ES/all.js#xfbml=1&appId=429668690427736";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 
 </body>
 </html>
