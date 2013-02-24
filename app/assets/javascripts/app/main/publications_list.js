@@ -59,15 +59,26 @@ define(["jquery", "app/translations", "app/main/router", "bootstrap", "jquery_tm
 
     this.$publicationList.append($content);
 
-    if ($img.width() < $img.height()) {
-      $img.width(IMG_LIST_SIZE);
-    }
-    else {
-      $img.height(IMG_LIST_SIZE);
-    }
+    $img.load(function (event) {
+      var spaceLeft, spaceTop;
 
-    $img.css('top', '-' + (($img.height() - IMG_LIST_SIZE) / 2) + 'px');
-    $img.css('left', '-' + (($img.width() - IMG_LIST_SIZE) / 2) + 'px');
+      if ($img.width() < $img.height()) {
+        $img.width(IMG_LIST_SIZE);
+      }
+      else {
+        $img.height(IMG_LIST_SIZE);
+      }
+
+      spaceLeft = (-1) * ($img.width() - IMG_LIST_SIZE) / 2;
+      spaceTop = (-1) * ($img.height() - IMG_LIST_SIZE) / 2;
+
+      $img.css("top", spaceTop + "px");
+      $img.css("left", spaceLeft + "px");
+    });
+
+    if ($img.get(0).complete && $img.get(0).naturalHeight > 0) {
+      $img.trigger("load");
+    }
 
     $content.click(this.publicationClicked);
   };
