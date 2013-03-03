@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 module ApplicationHelper
   def title(text, options = {})
     content_for(:title, text)
@@ -20,8 +22,18 @@ module ApplicationHelper
   end
 
   def current_user_image
-    url = current_user.image_url.empty? ? '/assets/default_user.png' : current_user.image_url
-    image_tag url, alt: current_user.display
+    url = if current_user.image_url.empty?
+      if current_user.email.empty?
+        '/assets/default_user.png'
+      else
+        hash = Digest::MD5.hexdigest(current_user.email.downcase)
+        default_img = "#{request.protocol}#{request.host_with_port}/assets/default_user.png"
+        "http://www.gravatar.com/avatar/#{hash}?d=#{u(default_img)}"
+      end
+    else
+      current_user.image_url
+    end
+    image_tag(url, alt: current_user.display)
   end
 
   def publication_type_options
