@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   def self.fetch(email_or_username)
     unless email_or_username.try(:empty?)
       user = where('users.email = ? OR users.private_username = ?', email_or_username, email_or_username).first
-      return user unless user.crypted_password.empty?
+      return user if user && !user.crypted_password.empty?
     end
   end
 
