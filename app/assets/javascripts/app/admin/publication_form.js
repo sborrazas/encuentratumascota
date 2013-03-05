@@ -19,8 +19,8 @@ define(["jquery", "lib/gmaps", "bootstrap_datepicker"], function ($, GMaps) {
     this.$form.submit(function (event) {
       var currentPosition = this.currentMarker.getPosition();
 
-      $("#publication_lat").val(currentPosition.hb);
-      $("#publication_lng").val(currentPosition.ib);
+      $("#publication_lat").val(currentPosition.ib);
+      $("#publication_lng").val(currentPosition.jb);
     }.bind(this));
 
     // Map
@@ -32,7 +32,7 @@ define(["jquery", "lib/gmaps", "bootstrap_datepicker"], function ($, GMaps) {
       click: function (event) {
         var position = event.latLng;
 
-        this.map.setCenter(position.hb, position.ib);
+        this.map.setCenter(position.ib, position.jb);
         this.currentMarker.setPosition(position);
       }.bind(this)
     });
