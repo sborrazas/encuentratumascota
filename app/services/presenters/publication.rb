@@ -16,6 +16,7 @@ module Presenters
         short_description: truncate(publication.description, length: 100, separator: ' '),
         breed: publication.breed ? publication.breed.name : I18n.t('models.publication.blank_breed_text'),
         lost_on: publication.lost_on.strftime('%d/%m/%Y'),
+        sex: I18n.t("models.publication.sexes.#{publication.sex}"),
         lat: publication.lat,
         lng: publication.lng
       }

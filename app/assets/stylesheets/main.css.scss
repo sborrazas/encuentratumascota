@@ -315,9 +315,9 @@ body.main-index {
             text-transform: uppercase;
             color: #777777;
             font-weight: normal;
-            padding-left: 10px;
+            padding-left: 5px;
             border-left: 1px solid #BBB;
-            margin-left: 10px;
+            margin-left: 5px;
 
             &:first-child {
               padding: 0;
@@ -329,6 +329,7 @@ body.main-index {
             text-transform: uppercase;
             font-weight: bold;
             color: $lighter_font_color;
+            margin-left: 3px;
           }
         }
         .sharethis-nav {
