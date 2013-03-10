@@ -5,11 +5,11 @@
   "facebook_key": "...",
   "facebook_secret": "...",
   "twitter_key": "...",
-  "twitter_secret": "..."
-
+  "twitter_secret": "...",
   "mail_username": "...",
   "mail_password": "...",
   "mail_domain": "...",
   "mail_host": "...",
-  "mail_port": 0
+  "mail_port": 0,
+  "session_secret": "..."
 }

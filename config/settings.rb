@@ -3,11 +3,10 @@ require 'rails/all'
 module Encuentratumascota
   module Config
     filename = File.join(File.dirname(__FILE__), 'settings.json')
-    config = if File.exists?(filename)
-      config = ActiveSupport::JSON.decode(File.open(filename).read)
-    else
-      {}
-    end
+
+    raise "`#{filename}` does not exist." unless File.exists?(filename)
+
+    config = ActiveSupport::JSON.decode(File.open(filename).read)
 
     S3_KEY = config['s3_key']
     S3_SECRET = config['s3_secret']
@@ -24,5 +23,7 @@ module Encuentratumascota
     MAIL_HOST = config['mail_host']
     MAIL_DOMAIN = config['mail_domain']
     MAIL_PORT = config['mail_port']
+
+    SESSION_SECRET = config['session_secret']
   end
 end
