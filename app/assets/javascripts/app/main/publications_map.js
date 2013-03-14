@@ -12,8 +12,8 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
       click: function (event) {
         if (this.active) {
           this.addMarkerNewPublication({
-            lat: event.latLng.ib,
-            lng: event.latLng.jb
+            lat: event.latLng.lat(),
+            lng: event.latLng.lng()
           });
         }
       }.bind(this)
@@ -104,8 +104,8 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
   PublicationsMap.prototype.placedCoords = function () {
     if (this.isCoordsPlaced()) {
       return {
-        lat: this.currentMarker.position.ib,
-        lng: this.currentMarker.position.jb
+        lat: this.currentMarker.position.lat(),
+        lng: this.currentMarker.position.lng()
       };
     }
   };
@@ -146,7 +146,7 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
     };
 
     marker.setIcon(this.images[publication.publication_type + '_big']);
-    this.map.setCenter(position.ib, position.jb);
+    this.map.setCenter(position.lat(), position.lng());
   };
 
   /**
