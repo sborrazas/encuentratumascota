@@ -32,7 +32,7 @@ define(["jquery", "lib/gmaps", "bootstrap_datepicker"], function ($, GMaps) {
       click: function (event) {
         var position = event.latLng;
 
-        this.map.setCenter(position.ib, position.jb);
+        this.map.setCenter(position.lat(), position.lng());
         this.currentMarker.setPosition(position);
       }.bind(this)
     });
