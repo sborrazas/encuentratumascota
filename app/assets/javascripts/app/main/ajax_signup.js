@@ -8,12 +8,12 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "b
     this.userSignedIn = settings.userSignedIn;
 
     if (this.userSignedIn) {
-      $('#logged-out-nav').hide();
-      $('#logged-in-nav').show();
+      $('.logged-out-nav').hide();
+      $('.logged-in-nav').show();
     }
     else {
-      $('#logged-out-nav').show();
-      $('#logged-in-nav').hide();
+      $('.logged-out-nav').show();
+      $('.logged-in-nav').hide();
     }
 
     // Sign in/up links event binding

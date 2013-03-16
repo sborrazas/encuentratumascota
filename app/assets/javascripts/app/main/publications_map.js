@@ -37,12 +37,14 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
    *
    */
   PublicationsMap.prototype.geoLocate = function () {
-    GMaps.geolocate({
-      success: function (position) {
-        this.home = position.coords;
-        this.displayHome();
-      }.bind(this)
-    });
+    if (window.navigator && window.navigator.geolocate) { // IE 8 Fix
+      GMaps.geolocate({
+        success: function (position) {
+          this.home = position.coords;
+          this.displayHome();
+        }.bind(this)
+      });
+    }
   };
 
   /**

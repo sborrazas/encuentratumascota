@@ -62,9 +62,14 @@ define(["app/translations"], function (t) {
     else {
       title = "Encuentra Tu Mascota";
     }
-    document.title = title;
-    history.pushState(stateData, title, url);
-    this.urlChanged(url);
+    if (history && history.pushState) {
+      history.pushState(stateData, title, url);
+      document.title = title;
+      this.urlChanged(url);
+    }
+    else {
+      document.location.href = url;
+    }
   };
 
   /**
