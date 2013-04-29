@@ -30,7 +30,7 @@ class SessionsController < ApplicationController
         redirect_to root_path, flash: { error: t('sessions.create_with_omniauth.email_taken') }
         return
       else
-        update_user_with_omniauth(user)
+        update_user_with_omniauth(user, auth)
       end
     else
       user = create_user_with_omniauth(auth)
