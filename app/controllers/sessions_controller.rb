@@ -26,7 +26,7 @@ class SessionsController < ApplicationController
     if user = User.where(provider: auth.provider, uid: auth.uid).first
       update_user_with_omniauth(user, auth)
     elsif email && !email.empty? && (user = User.where(email: email).first)
-      if user.provider
+      if !user.provider.blank?
         redirect_to root_path, flash: { error: t('sessions.create_with_omniauth.email_taken') }
         return
       else
