@@ -31,7 +31,7 @@ es:
         unknown: No sé
       statuses:
         active: Activo
-        inactive: Pendiente
+        approved: Aprobada
         closed: Cerrado
       blank_breed_text: Otra
       errors:

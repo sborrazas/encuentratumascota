@@ -6,7 +6,7 @@ class Publication < ActiveRecord::Base
   has_many :contact_info_inquiries, dependent: :destroy
 
   PUBLICATION_TYPES = %w(adoption lost found)
-  STATUSES = %w(active inactive closed)
+  STATUSES = %w(active approved closed)
   SEXES = %w(male female unknown)
 
   MAX_ATTACHMENTS = 4

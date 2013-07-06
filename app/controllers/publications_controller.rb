@@ -17,7 +17,7 @@ class PublicationsController < ApplicationController
     if publication_form.valid?
       publication = publication_form.get_resource
       publication.populate_slug
-      publication.assign_attributes(user: current_user, status: 'inactive')
+      publication.assign_attributes(user: current_user, status: 'active')
       publication.save
 
       render json: Presenters::Publication.to_json_hash(publication), status: :created
@@ -27,7 +27,7 @@ class PublicationsController < ApplicationController
   end
 
   def show
-    publication = Publication.has_status(:active).includes(:breed, :attachments).find(params[:id])
+    publication = public_publications.find(params[:id])
 
     if publication
       current_user.create_inquiry(publication)
