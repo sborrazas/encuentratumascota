@@ -6,7 +6,7 @@ Encuentratumascota::Application.routes.draw do
 
   get 'how_it_works', to: 'main#how_it_works', as: :how_it_works
 
-  resources :publications, only: %w(create show)
+  resources :publications, only: %w(index create show)
 
   # Authentication
   resource :sessions, only: %w(create) do

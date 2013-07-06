@@ -1,7 +1,15 @@
 class PublicationsController < ApplicationController
 
-  before_filter :require_current_user
-  respond_to :json
+  before_filter :require_current_user, only: %w(create show)
+  respond_to :json, only: %w(create show)
+  respond_to :rss, only: %w(index)
+
+  def index
+    @publications = public_publications
+    respond_to do |format|
+      format.rss { render layout: false }
+    end
+  end
 
   def create
     publication_form = Forms::PublicationForm.new(params[:publication])
@@ -28,5 +36,9 @@ class PublicationsController < ApplicationController
     else
       render blank: true, status: :not_found
     end
+  end
+
+  def public_publications
+    Publication.has_status(:active, :approved).includes(:breed, :attachments)
   end
 end
