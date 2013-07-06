@@ -20,9 +20,12 @@ class PublicationsController < ApplicationController
       publication.assign_attributes(user: current_user, status: 'active')
       publication.save
 
-      render json: Presenters::Publication.to_json_hash(publication), status: :created
+      publication_json = Presenters::Publication.to_json_hash(publication)
+
+      render json: publication_json, status: :created
     else
-      render json: { errors: publication_form.errors }, status: :unprocessable_entity
+      errors = publication_form.errors
+      render json: { errors: errors }, status: :unprocessable_entity
     end
   end
 
@@ -31,7 +34,9 @@ class PublicationsController < ApplicationController
 
     if publication
       current_user.create_inquiry(publication)
-      publication_json = Presenters::Publication.to_json_hash(publication, { extra_attributes: %w(contact) })
+      publication_json = Presenters::Publication.to_json_hash(publication, {
+        extra_attributes: %w(contact)
+      })
       render json: publication_json, status: :ok
     else
       render blank: true, status: :not_found

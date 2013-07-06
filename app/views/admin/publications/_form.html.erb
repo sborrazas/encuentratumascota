@@ -25,10 +25,6 @@
         <% end %>
         <%= form.label :"attachment_#{index}", class: 'hide' %>
         <input id="publication_attachment_<%= index %>" type="file" name="publication[attachments][<%= index %>]" />
-        <% if false %>
-          <input id="publication_attachment_<%= index %>_checked" type="checkbox" name="publication[attachments][<%= index %>][checked]" <% if @publication.attachments[index] %>checked="checked"<% end %> />
-          <%= form.label :"attachment_#{index}_checked", 'Delete' %>
-        <% end %>
       </li>
     <% end %>
   </ul>
@@ -101,8 +97,6 @@
     </div>
   </div>
 <% end %>
-
-<!-- TODO Images -->
 
 <% content_for :javascript do %>
   require(['require', 'app/admin/publication_form'], function (require) {
