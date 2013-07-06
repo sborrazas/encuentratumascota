@@ -4,7 +4,8 @@ class MainController < ApplicationController
 
   def index
     @new_publication = Publication.new
-    publications_scope = Publication.has_status(:active).includes(:breed, :attachments).sort_newest
+    publications_scope = Publication.has_status(:active, :approved)
+      .includes(:breed, :attachments).sort_newest
     @publications = publications_scope.all
 
     @flash_messages = {}.tap do |h|
