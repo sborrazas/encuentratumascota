@@ -5,29 +5,32 @@ module Forms
       context = options.fetch(:context, :default)
       resource = options.fetch(:resource, nil)
 
-      translations = I18n.t('models.publication.errors')
-
-      errors[:pet_name] << translations[:blank_pet_name] if is_empty_string?(params[:pet_name])
+      errors[:pet_name] << :blank_pet_name if is_empty_string?(params[:pet_name])
       if is_empty_string?(params[:lat]) || is_empty_string?(params[:lng])
-        errors[:lat] << translations[:blank_coords]
-        errors[:lng] << translations[:blank_coords]
+        errors[:lat] << :blank_coords
+        errors[:lng] << :blank_coords
       end
       unless Publication::PUBLICATION_TYPES.include?(params[:publication_type])
-        errors[:publication_type] << translations[:invalid_publication_type]
+        errors[:publication_type] << :invalid_publication_type
       end
-      errors[:breed_id] << translations[:missing_breed_id] unless is_empty_string?(params[:breed_id]) || Breed.find_by_id(params[:breed_id])
-      errors[:contact] << translations[:blank_contact] if is_empty_string?(params[:contact])
-      errors[:sex] << translations[:invalid_sex] unless Publication::SEXES.include?(params[:sex])
+      errors[:contact] << :blank_contact if is_empty_string?(params[:contact])
+      errors[:sex] << :invalid_sex unless Publication::SEXES.include?(params[:sex])
       if valid_attachments(params[:attachments]).empty? && (!resource || resource.attachments.empty?)
-        errors[:attachments] << translations[:minimum_attachments]
+        errors[:attachments] << :minimum_attachments
       end
       unless params[:lost_on] && (Date.strptime(params[:lost_on], '%d/%m/%Y') rescue false)
-        errors[:lost_on] << translations[:invalid_lost_on]
+        errors[:lost_on] << :invalid_lost_on
+      end
+      if !is_empty_string?(params[:breed_id].to_s) && !Breed.find_by_id(params[:breed_id])
+        errors[:breed_id] << :missing_breed_id
+      end
+      if is_empty_string?(params[:country_id].to_s) || !Country.find_by_id(params[:country_id])
+        errors[:country_id] << :missing_country_id
       end
 
       if context == :admin
-        errors[:user_id] << translations[:blank_user_id] if is_empty_string?(params[:user_id])
-        errors[:status] << translations[:invalid_status] unless Publication::STATUSES.include?(params[:status])
+        errors[:user_id] << :blank_user_id if is_empty_string?(params[:user_id])
+        errors[:status] << :invalid_status unless Publication::STATUSES.include?(params[:status])
       end
 
       errors
@@ -58,6 +61,7 @@ module Forms
     end
 
     private
+
     def valid_attachments(attachment_params)
       attachments = []
       if attachment_params.kind_of?(Hash)
@@ -73,11 +77,21 @@ module Forms
     end
 
     def param_keys
-      [:pet_name, :sex, :contact, :description, :lat, :lng, :reward, :publication_type]
+      [
+        :pet_name,
+        :sex,
+        :contact,
+        :description,
+        :lat,
+        :lng,
+        :reward,
+        :publication_type,
+        :country_id
+      ]
     end
 
     def is_empty_string?(str)
-      !str || !str.kind_of?(String) || str.chomp.empty?
+      !str || !str.kind_of?(String) || str.strip.empty?
     end
   end
 end

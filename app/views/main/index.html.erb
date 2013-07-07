@@ -70,11 +70,12 @@
   require(['require', 'app/main/index'], function (require) {
     require(['app/main/index'], function (view) {
       view.init(<%= {
+        country: {
+          lat: current_country.lat,
+          lng: current_country.lng
+        },
         userSignedIn: !! current_user,
         userHasEmail: ! current_user.try(:email).blank?,
-        publications: @publications.map do |publication|
-          Presenters::Publication.to_json_hash(publication)
-        end,
         flash: @flash_messages,
         translations: t('.js')
       }.to_json.html_safe %>);

@@ -2,6 +2,7 @@ class Publication < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :breed
+  belongs_to :country
   has_many :attachments, dependent: :destroy
   has_many :contact_info_inquiries, dependent: :destroy
 

@@ -30,7 +30,27 @@ class ApplicationController < ActionController::Base
     rescue_from Exception, with: :handle_exception
   end
 
+  def current_country
+    return @current_country if @current_country
+
+    if session[:country_id]
+      if (country = Country.where(id: session[:country_id]).first)
+        @current_country = country
+        return @current_country
+      end
+    end
+
+    country = Country.where(code: request.location.country_code).first || \
+      Country.where(code: Country::DEFAULT_COUNTRY_CODE).first
+
+    session[:country_id] = country.id
+
+    @current_country = country
+  end
+  helper_method :current_country
+
   private
+
   def handle_exception(exception)
     NotificationMailer.send_error_email(exception, env).deliver!
     render file: 'public/500.html', status: 500, layout: false

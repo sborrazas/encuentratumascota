@@ -24,7 +24,7 @@ class Admin::PublicationsController < ApplicationController
       @publication.save
       redirect_to admin_publications_path, flash: { success: 'Publication created successfully' }
     else
-      @errors = publication_form.errors
+      @errors = translated_errors(publication_form.errors)
       render :new
     end
   end
@@ -44,7 +44,7 @@ class Admin::PublicationsController < ApplicationController
       redirect_to admin_publications_path, flash: { success: t('admin.publication.publication_updated_successfully') }
     else
       @publication = publication_form.get_resource
-      @errors = publication_form.errors
+      @errors = translated_errors(publication_form.errors)
       render :edit
     end
   end
@@ -66,6 +66,26 @@ class Admin::PublicationsController < ApplicationController
   end
 
   def user_publications_scope
-    current_user.is_admin? ? Publication.scoped : current_user.publications
+    publications_scope = if current_user.is_admin?
+      Publication.scoped
+    else
+      current_user.publications
+    end
+    publications_scope = publications_scope.includes(:country).sort_newest
+  end
+
+  def translated_errors(errors)
+    translated_errors = {}
+    errors.each do |field, field_errors|
+      translated_field = I18n.t("models.publication.#{field}")
+      if translated_field.kind_of?(Hash)
+        translated_field = translated_field[:label]
+      end
+      translated_field_errors = field_errors.map do |field_error|
+        I18n.t("models.publication.errors.#{field_error}")
+      end
+      translated_errors[translated_field] = translated_field_errors
+    end
+    translated_errors
   end
 end

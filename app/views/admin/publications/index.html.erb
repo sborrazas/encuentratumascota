@@ -21,20 +21,19 @@
   <tr>
     <th><%= t('models.publication.pet_name.label') %></th>
     <th><%= t('models.publication.status') %></th>
-    <th><%= t('models.publication.description.label') %></th>
     <th><%= t('models.publication.publication_type') %></th>
     <th><%= t('models.publication.lost_on') %></th>
+    <th><%= t('models.publication.country') %></th>
     <th><%= t('.actions') %></th>
   </tr>
   <% @publications.each do |publication| %>
     <tr>
       <td><%= publication.pet_name %></td>
       <td><%= t("models.publication.statuses.#{publication.status}") %></td>
-      <td><%= truncate(publication.description, length: 50, separator: ' ') %></td>
       <td><%= t("models.publication.publication_types.#{publication.publication_type}") %></td>
       <td><%= publication.created_at.strftime('%d/%m/%Y') %></td>
+      <td><%= publication.country.name %></td>
       <td>
-        <!-- <%= link_to t('.show'), admin_publication_path(publication) %> -->
         <%= link_to t('.edit'), edit_admin_publication_path(publication) %>
         <% if publication.status != 'closed' %>
           <%= link_to t('.close'), close_admin_publication_path(publication) %>
