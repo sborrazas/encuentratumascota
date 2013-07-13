@@ -55,6 +55,7 @@ class PublicationsController < ApplicationController
     current_country.publications
       .has_status(:active, :approved)
       .includes(:breed, :attachments, :country)
+      .sort_newest
   end
 
 end
