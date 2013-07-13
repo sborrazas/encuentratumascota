@@ -144,7 +144,9 @@ es:
     failure:
       omniauth_error: 'Ha ocurrido un error al intentar loguearse, por favor, intente nuevamente'
     logout:
-      success: 'Sesion terminada correctamete..'
+      success: 'Sesión terminada correctamete..'
+    change_country:
+      success: 'Ha cambiado el pais correctamente'
 
   general:
     tagline: La manera más fácil y rápida de conectar mascotas con sus dueños.
