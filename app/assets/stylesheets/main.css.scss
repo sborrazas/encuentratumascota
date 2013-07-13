@@ -11,10 +11,8 @@ body.main-index {
       display: none;
     }
     .sidebar-toggle.off {
-      position: relative;
-      top: inherit;
-      right: inherit;
-      margin: 5px 0 0 10px;
+      float: right;
+      margin: 5px 0;
     }
     #main-sidebar {
       display: block;
@@ -72,8 +70,13 @@ body.main-index {
       overflow: auto;
       @include box-shadow(0 0 4px 0 rgba(00, 00, 00, 0.5));
 
+      .btn-group {
+        width: 95%;
+        float: left;
+      }
+
       button {
-        width: 23%;
+        width: 25%;
         font-weight: normal;
         float: left;
       }
@@ -362,7 +365,7 @@ body.main-index {
   .modal {
     width: 370px;
     margin-left: -185px; /* - width / 2 */
-    top: 60%;
+    top: 20%;
 
     .modal-body {
       padding-top: 28px;

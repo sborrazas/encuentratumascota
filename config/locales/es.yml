@@ -20,6 +20,7 @@ es:
         label: Contacto
         placeholder: Teléfono de contacto
       breed: Raza
+      breed_id: Raza
       attachments: Imágenes
       publication_types:
         lost: Perdido
@@ -33,9 +34,11 @@ es:
         active: Activo
         approved: Aprobada
         closed: Cerrado
+      country: País
+      country_id: País
       blank_breed_text: Otra
       errors:
-        blank_pet_name: Debe ingresar un titulo
+        blank_pet_name: Debe ingresar un título
         blank_coords: Las coordenadas son inválidas
         invalid_publication_type: El tipo de publicación es inválido
         missing_breed_id: La raza seleccionada no existe
@@ -45,6 +48,7 @@ es:
         blank_user_id: Debe seleccionar un usuario
         invalid_status: El estado es inválido
         minimum_attachments: Debe haber al menos una imagen
+        missing_country_id: El país no existe
 
     user:
       email:
@@ -107,7 +111,7 @@ es:
         publication_form:
           select_location: Debes seleccionar la ubicación donde encontraste/perdiste/se encuentra la mascota primero.
           click_on_map: Debes clickear la ubicación donde encontraste/perdiste/se encuentra la mascota.
-          publication_created_successfully: Publicación creada correctamente! Nuestro equipo activará la publicación pronto.
+          publication_created_successfully: La publicación se ha creado correctamente!
         new_publication: Nueva Publicación
         filters:
           all: ''
@@ -140,7 +144,9 @@ es:
     failure:
       omniauth_error: 'Ha ocurrido un error al intentar loguearse, por favor, intente nuevamente'
     logout:
-      success: 'Sesion terminada correctamete..'
+      success: 'Sesión terminada correctamete..'
+    change_country:
+      success: 'Ha cambiado el pais correctamente'
 
   general:
     tagline: La manera más fácil y rápida de conectar mascotas con sus dueños.

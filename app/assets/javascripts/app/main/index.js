@@ -29,14 +29,21 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       });
 
       // Publications & GMaps handler
-      publicationsMap = new PublicationsMap();
+      publicationsMap = new PublicationsMap({
+        initial: config.country
+      });
 
       // Publications sidebar list
       publicationsList = new PublicationsList();
 
       // Publications form handler
       publicationForm = new PublicationForm({
-        map: publicationsMap
+        map: publicationsMap,
+        successfulPublication: function (publication) {
+          config.publications.push(publication);
+          router.pushState("filter", "all");
+          flash.displayMessage("success", translations("publication_form.publication_created_successfully"));
+        }
       });
 
       // Publication detail
@@ -92,46 +99,60 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
       }
     },
     showPublicationDetail: function (publicationSlug) {
-      var publications = config.publications
-        , i = 0
-        , len = publications.length;
+      this.fetchPublications(function (publications) {
+        var i = 0
+          , len = publications.length;
 
-      for (; i < len; i += 1) {
-        if (publications[i].slug === publicationSlug) {
-          publicationDetail.showPublication(publications[i]);
-          this.displaySidebarElement(publicationDetail);
-          publicationsMap.highlightPublication(publications[i]);
-          return;
+        for (; i < len; i += 1) {
+          if (publications[i].slug === publicationSlug) {
+            publicationDetail.showPublication(publications[i]);
+            this.displaySidebarElement(publicationDetail);
+            publicationsMap.highlightPublication(publications[i]);
+            return;
+          }
         }
-      }
 
-      flash.displayMessage("error", translations("publication_detail.deleted"));
+        flash.displayMessage("error", translations("publication_detail.deleted"));
+      }.bind(this));
     },
     showPublicationList: function (publicationType) {
-      var publications = [];
+      this.fetchPublications(function (allPublications) {
+        var publications = [];
 
-      publicationForm.deactivate();
+        publicationForm.deactivate();
 
-      // Filter publications and display valid ones
-      if (publicationType === "all") {
-        publications = config.publications;
+        // Filter publications and display valid ones
+        if (publicationType === "all") {
+          publications = allPublications;
+        }
+        else {
+          allPublications.forEach(function (publication) {
+            if (publicationType === publication.publication_type) {
+              publications.push(publication);
+            }
+          });
+        }
+
+        // Marks selected element as "active"
+        $("#main-sidebar .sidebar-options button").removeClass("active");
+        $("#main-sidebar .sidebar-options button[data-publication-type='" + publicationType + "']")
+          .addClass("active");
+
+        publicationsList.displayPublications(publications);
+        publicationsMap.displayPublications(publications);
+        this.displaySidebarElement(publicationsList);
+      }.bind(this));
+    },
+    fetchPublications: function (callback) {
+      if (config.publications) {
+        callback(config.publications);
       }
       else {
-        config.publications.forEach(function (publication) {
-          if (publicationType === publication.publication_type) {
-            publications.push(publication);
-          }
+        $.get("/publications", function (publications) {
+          config.publications = publications;
+          callback(publications);
         });
       }
-
-      // Marks selected element as "active"
-      $("#main-sidebar .sidebar-options button").removeClass("active");
-      $("#main-sidebar .sidebar-options button[data-publication-type='" + publicationType + "']")
-        .addClass("active");
-
-      publicationsList.displayPublications(publications);
-      publicationsMap.displayPublications(publications);
-      this.displaySidebarElement(publicationsList);
     }
   };
 });

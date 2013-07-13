@@ -7,7 +7,7 @@
   <section class="main-navigation">
     <header>
       <%= link_to root_path, title: 'Encuentra tu Mascota' do %>
-        <%= image_tag 'logo1.png', class: 'logo' %>
+        <%= image_tag 'logo.png', class: 'logo' %>
         <hgroup>
           <h1>Encuentra tu Mascota</h1>
           <h2><%= t('general.tagline') %></h2>
@@ -17,6 +17,24 @@
 
     <nav>
       <ul>
+        <li id="countries" class="secondary-nav dropdown-nav">
+          <a href="#" class="dropdown-toggle main-nav-item country-item">
+            <span class="country-icon <%= current_country.code.downcase %>"></span>
+            <%= current_country.name %>
+            <span class="icon dropdown-caret"></span>
+          </a>
+          <ul class="dropdown-list">
+            <% Country.all.select {|c| c != current_country }.each do |country| %>
+              <li>
+                <%= link_to(change_country_sessions_path(country.code), class: 'country-item') do %>
+                  <span class="country-icon <%= country.code.downcase %>"></span>
+                  <%= country.name %>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+
         <li class="secondary-nav">
           <%= link_to t('general.nav.how_it_works'), how_it_works_path, class: 'main-nav-item' %>
         </li>
@@ -38,15 +56,14 @@
           </li>
         <% end %>
 
-        <li class="logged-in-nav primary-nav">
-          <a class="dropdown-toggle main-nav-item" href="#">
+        <li class="dropdown-nav logged-in-nav primary-nav">
+          <a href="#" class="dropdown-toggle main-nav-item hover-activation">
             <span id="user-image"><%= current_user_image if current_user %></span>
             <span id="username"><%= current_user.display if current_user %></span>
             <span class="icon dropdown-caret"></span>
           </a>
-          <ul class="nav-dropdown-menu">
+          <ul class="dropdown-list">
             <li><%= link_to t('admin.general.my_publications'), admin_publications_path %></li>
-            <!-- <li><a href="/admin/publications">Configuraci&oacute;n</a></li> -->
             <li><%= link_to t('general.nav.sign_out'), logout_sessions_path %></li>
           </ul>
         </li>

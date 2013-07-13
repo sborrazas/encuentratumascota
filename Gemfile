@@ -17,6 +17,8 @@ gem 'rmagick'
 
 gem 'rb-readline'
 
+gem 'geocoder'
+
 group :development do
   gem 'pry'
 end

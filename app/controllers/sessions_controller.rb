@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
 
-  before_filter :require_guest, except: [:logout]
+  before_filter :require_guest, only: [:create, :create_with_omniauth, :failure]
   before_filter :require_current_user, only: [:logout]
   respond_to :json
 
@@ -49,6 +49,13 @@ class SessionsController < ApplicationController
   def logout
     session.delete(:user)
     redirect_to root_path, flash: { error: t('sessions.logout.success') }
+  end
+
+  def change_country
+    if (country = Country.where(code: params[:code]).first)
+      session[:country_id] = country.id
+    end
+    redirect_to root_path, flash: { success: t('sessions.change_country.success') }
   end
 
   private

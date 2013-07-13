@@ -11,6 +11,7 @@ Encuentratumascota::Application.routes.draw do
   # Authentication
   resource :sessions, only: %w(create) do
     collection do
+      get 'change_country/:code', action: :change_country, as: :change_country
       get :logout
     end
   end

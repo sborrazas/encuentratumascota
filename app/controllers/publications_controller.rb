@@ -7,12 +7,20 @@ class PublicationsController < ApplicationController
   def index
     @publications = public_publications
     respond_to do |format|
+      format.json do
+        publications_json = @publications.map do |publication|
+          Presenters::Publication.to_json_hash(publication)
+        end
+        render json: publications_json
+      end
       format.rss { render layout: false }
     end
   end
 
   def create
-    publication_form = Forms::PublicationForm.new(params[:publication])
+    publication_form = Forms::PublicationForm.new(params[:publication].merge({
+      country_id: current_country.id
+    }))
 
     if publication_form.valid?
       publication = publication_form.get_resource
@@ -44,6 +52,9 @@ class PublicationsController < ApplicationController
   end
 
   def public_publications
-    Publication.has_status(:active, :approved).includes(:breed, :attachments)
+    current_country.publications
+      .has_status(:active, :approved)
+      .includes(:breed, :attachments, :country)
   end
+
 end

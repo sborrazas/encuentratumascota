@@ -18,6 +18,10 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "a
       this.createPublication();
     }.bind(this));
 
+    this._events = {
+      successfulPublication: settings.successfulPublication
+    };
+
     // Datepicker
     this.$form.find(".datepicker input").datepicker({
       format: "dd/mm/yyyy"
@@ -52,10 +56,12 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "a
    *
    */
   PublicationForm.prototype.deactivate = function () {
-    this.map.clearPlacedMarker();
-    flash.clearMessages();
-    this.active = false;
-    this.map.active = false;
+    if (this.active) {
+      this.map.clearPlacedMarker();
+      flash.clearMessages();
+      this.active = false;
+      this.map.active = false;
+    }
   }
 
   /**
@@ -83,12 +89,6 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "a
       event.preventDefault();
       router.pushState("filter", "all");
     });
-
-    // When adding a new image
-    // this.$form.find("#image-upload-fields button").click(function (event) {
-    //   event.preventDefault();
-    //   this.addAttachmentField();
-    // }.bind(this));
   };
 
   /**
@@ -156,17 +156,15 @@ define(["jquery", "app/form_errors", "app/flash_display", "app/translations", "a
    *
    */
   PublicationForm.prototype.successfulPublication = function (publication) {
-    this.map.clearPlacedMarker();
-    this.map.displayPublication(publication);
+    if (this._events.successfulPublication) {
+      this._events.successfulPublication(publication);
+    }
 
     this.$form.find("#image-upload-fields input").remove(); // Clear images
     this.$form.get(0).reset();
     this.attachmentCount = 0; // Reset attachmentCount
     // Display 'Add Attachment' button (in case it was hidden)
     this.$form.find("#image-upload-fields button").show();
-
-    flash.displayMessage("success", t("publication_form.publication_created_successfully"));
-    router.pushState("filter", "all");
 
     this.setSubmitting(false);
   };

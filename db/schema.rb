@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130219234607) do
+ActiveRecord::Schema.define(:version => 20130707023729) do
 
   create_table "attachments", :force => true do |t|
     t.integer "publication_id", :null => false
@@ -26,6 +26,13 @@ ActiveRecord::Schema.define(:version => 20130219234607) do
     t.integer  "user_id"
     t.integer  "publication_id"
     t.datetime "created_at"
+  end
+
+  create_table "countries", :force => true do |t|
+    t.string "code", :limit => 2, :null => false
+    t.string "name",              :null => false
+    t.string "lat",               :null => false
+    t.string "lng",               :null => false
   end
 
   create_table "newsletter_subscribers", :force => true do |t|
@@ -50,6 +57,7 @@ ActiveRecord::Schema.define(:version => 20130219234607) do
     t.string   "contact",          :default => "", :null => false
     t.string   "sex",              :default => "unknown", :null => false
     t.string   "slug"
+    t.integer  "country_id",                              :null => false
   end
 
   add_index "publications", ["slug"], :name => "slug_index_on_publications", :unique => true

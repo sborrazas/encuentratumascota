@@ -4,6 +4,12 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
    *
    */
   var PublicationsMap = function (settings) {
+    this.settings = settings;
+    this.home = {
+      latitude: this.settings.initial.lat,
+      longitude: this.settings.initial.lng
+    };
+
     this.map = new GMaps({
       div: "#main-panel",
       lat: -34.90649,
@@ -37,13 +43,23 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
    *
    */
   PublicationsMap.prototype.geoLocate = function () {
-    if (window.navigator && window.navigator.geolocate) { // IE 8 Fix
+    window.sarasa = GMaps;
+    if (window.navigator && window.navigator.geolocation) { // IE 8 Fix
       GMaps.geolocate({
         success: function (position) {
           this.home = position.coords;
           this.displayHome();
+          this.map.setCenter(this.home.latitude, this.home.longitude);
+        }.bind(this),
+        error: function () {
+          this.displayHome();
+          this.map.setCenter(this.home.latitude, this.home.longitude);
         }.bind(this)
       });
+    }
+    else {
+      this.displayHome();
+      this.map.setCenter(this.home.latitude, this.home.longitude);
     }
   };
 
@@ -66,7 +82,7 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
     this.highlightedPublication = null;
     this.markers = {};
     publications.forEach(this.displayPublication.bind(this));
-    this.geoLocate();
+    this.displayHome();
   };
 
   /**

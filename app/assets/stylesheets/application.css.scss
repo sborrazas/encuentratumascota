@@ -29,11 +29,15 @@ body {
   margin: 0;
 }
 
+.hide {
+  display: none;
+}
+
 /* Header *********************************************************/
 .main-navigation {
   height: 80px;
   background: #000;
-  @include linear-gradient(#363636, #171717);
+  @include linear-gradient(#4F4F4F, #171717);
 
   header {
     float: left;
@@ -43,15 +47,21 @@ body {
   nav {
     float: left;
     width: 76%;
+    ul {
+      margin: 0;
+    }
   }
 
   hgroup {
     display: none;
   }
-  img.logo {
+
+  .logo {
     float: left;
-    margin: 22px 20px 0 40px;
+    margin: 22px 10%;
+    width: 80%;
   }
+
   hgroup {
     float: left;
   }
@@ -64,7 +74,6 @@ body {
     float: left;
     iframe {
       margin: 29px 5px;
-      z-index: 10000;
       display: block;
     }
   }
@@ -73,14 +82,47 @@ body {
     line-height: 80px;
     color: #FFF;
     float: left;
-    padding: 0 20px;
+    padding: 0 15px;
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1em;
     text-decoration: none;
 
     &:hover,
     &.active {
       background: #111;
+    }
+  }
+
+  .dropdown-nav {
+    position: relative;
+    margin-right: 20px;
+    height: 80px;
+
+    .dropdown-list {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      z-index: 1000;
+      display: none;
+      float: left;
+      padding: 5px 0;
+      margin: 0;
+      background: rgba(17, 17, 17, 0.9);
+
+      li a {
+        padding: 6px 6%;
+        color: #FFF;
+        width: 88%;
+        float: left;
+        text-decoration: none;
+
+        &:hover {
+          background-color: #333;
+        }
+      }
+    }
+    .dropdown-caret {
+      margin: 25% 0;
     }
   }
 
@@ -105,11 +147,6 @@ body {
   }
 
   .logged-in-nav {
-    float: right;
-    position: relative;
-    margin-right: 20px;
-    height: 80px;
-
     #username {
       float: left;
       margin-right: 10px;
@@ -124,30 +161,6 @@ body {
       margin-right: 10px;
       img {
         float: left;
-      }
-    }
-
-    .nav-dropdown-menu {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      z-index: 1000;
-      display: none;
-      float: left;
-      padding: 5px 0;
-      margin: 0;
-      background: rgba(17, 17, 17, 0.9);
-
-      li a {
-        padding: 6px 6%;
-        color: #FFF;
-        width: 88%;
-        float: left;
-        text-decoration: none;
-
-        &:hover {
-          background-color: #333;
-        }
       }
     }
   }
@@ -210,17 +223,65 @@ form {
   }
 }
 
+/* Countries dropdown **********************************************/
+#countries {
+  height: 30px;
+  margin: 25px 5px;
+
+  .country-item {
+    background: #222;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 3px;
+    font-weight: normal;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    padding: 0 0 0 10px;
+    width: 130px;
+    margin: 1px 0;
+    border: 1px solid #2E2E2E;
+
+    &:hover {
+      background: #242424;
+    }
+  }
+
+  .country-icon {
+    display: inline-block;
+    float: left;
+    width: 23px;
+    height: 16px;
+    margin: 7px 5px 7px 0;
+    background: transparent url(/assets/flags.png) no-repeat;
+    &.uy {
+      background-position: -27px 0;
+    }
+    &.pe {
+      background-position: 0 0;
+    }
+    &.ar {
+      background-position: -27px -21px;
+    }
+    &.cl {
+      background-position: 0 -21px;
+    }
+  }
+
+  .dropdown-caret {
+    margin: 4px 5px;
+    float: right;
+  }
+
+  .dropdown-list {
+    background: none;
+  }
+}
+
+/* Media queries **************************************************/
 @media screen and (max-width: 1200px) {
   .main-navigation {
     .secondary-nav {
       display: none;
-    }
-    header {
-      width: 40%;
-    }
-
-    nav {
-      width: 60%;
     }
   }
 }
