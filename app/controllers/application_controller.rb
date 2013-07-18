@@ -40,7 +40,9 @@ class ApplicationController < ActionController::Base
       end
     end
 
-    country = Country.where(code: request.location.country_code).first || \
+    current_country_code = request.location && request.location.country_code
+    country = \
+      (current_country_code && Country.where(code: current_country_code).first) ||
       Country.where(code: Country::DEFAULT_COUNTRY_CODE).first
 
     session[:country_id] = country.id
