@@ -32,46 +32,10 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
       lost_big: '/assets/lost-big.png',
       found_big: '/assets/found-big.png',
       adoption_big: '/assets/adoption-big.png',
-      myPet: '/assets/my-pet-big.png',
-      home: '/assets/home.png'
+      myPet: '/assets/my-pet-big.png'
     };
 
-    this.geoLocate();
-  };
-
-  /**
-   *
-   */
-  PublicationsMap.prototype.geoLocate = function () {
-    window.sarasa = GMaps;
-    if (window.navigator && window.navigator.geolocation) { // IE 8 Fix
-      GMaps.geolocate({
-        success: function (position) {
-          this.home = position.coords;
-          this.displayHome();
-          this.map.setCenter(this.home.latitude, this.home.longitude);
-        }.bind(this),
-        error: function () {
-          this.displayHome();
-          this.map.setCenter(this.home.latitude, this.home.longitude);
-        }.bind(this)
-      });
-    }
-    else {
-      this.displayHome();
-      this.map.setCenter(this.home.latitude, this.home.longitude);
-    }
-  };
-
-  /**
-   *
-   */
-  PublicationsMap.prototype.displayHome = function () {
-    this.map.addMarker({
-      lat: this.home.latitude,
-      lng: this.home.longitude,
-      icon: this.images.home
-    });
+    this.map.setCenter(this.home.latitude, this.home.longitude);
   };
 
   /**
@@ -82,7 +46,6 @@ define(["jquery", "lib/gmaps", "app/main/router", "bootstrap", "jquery_tmpl"], f
     this.highlightedPublication = null;
     this.markers = {};
     publications.forEach(this.displayPublication.bind(this));
-    this.displayHome();
   };
 
   /**
