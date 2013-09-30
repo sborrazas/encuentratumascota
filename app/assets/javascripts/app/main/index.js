@@ -62,15 +62,15 @@ define(["jquery", "app/main/ajax_signup", "app/main/publications_map", "app/main
         $("body").addClass("with-sidebar");
       }.bind(this));
 
+      router.registerRoute(/\/p\/new/, function () {
+        this.showPublicationForm();
+        $("body").addClass("with-sidebar");
+      }.bind(this));
+
       router.registerRoute(/\/p\/([\w\-]+)/, function (publicationSlug) {
         this.showPublicationList("all");
         this.showPublicationDetail(publicationSlug);
         publicationForm.deactivate();
-        $("body").addClass("with-sidebar");
-      }.bind(this));
-
-      router.registerRoute(/\/p\/new/, function () {
-        this.showPublicationForm();
         $("body").addClass("with-sidebar");
       }.bind(this));
 

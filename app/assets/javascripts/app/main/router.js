@@ -76,11 +76,16 @@ define(["app/translations"], function (t) {
    *
    */
   Router.prototype.urlChanged = function (url) {
-    var regexMatch;
+    var regexMatch
+      , stopped = false;
+
     this.callbacks.forEach(function (callbackData) {
+      if (stopped) {
+        return;
+      }
       if (regexMatch = url.match(callbackData.regex)) {
         callbackData.callback.apply(null, regexMatch.slice(1));
-        return;
+        stopped = true;
       }
     });
   };
