@@ -109,20 +109,22 @@ define(["jquery", "app/carousel", "app/flash_display", "app/translations",
       options.image = publication.attachments[0];
     }
 
-    stWidget.addEntry($.extend({
-      service: "twitter",
-      element: $twitter.get(0)
-    }, options), { button: true });
+    if (window.stWidget) {
+      window.stWidget.addEntry($.extend({
+        service: "twitter",
+        element: $twitter.get(0)
+      }, options), { button: true });
 
-    stWidget.addEntry($.extend({
-      service: "facebook",
-      element: $facebook.get(0)
-    }, options));
+      window.stWidget.addEntry($.extend({
+        service: "facebook",
+        element: $facebook.get(0)
+      }, options));
 
-    stWidget.addEntry($.extend({
-      service: "email",
-      element: $email.get(0)
-    }, options));
+      window.stWidget.addEntry($.extend({
+        service: "email",
+        element: $email.get(0)
+      }, options));
+    }
   };
 
   return PublicationDetail;
