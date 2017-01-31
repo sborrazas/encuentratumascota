@@ -4,52 +4,39 @@ module ErrorNotifiers
   class Default
 
     attr_reader :exception
+    attr_reader :environment
 
-    # Initialize the ErrorsNotifiers::Default.
-    #
-    # @param exception [Exception]
-    # @option options [String] :templates_path
-    #   The path of the templates directory.
-    # @option options [String] :logs_path (Dir.pwd)
-    #   The path to which to place the logs directories.
     def initialize(exception, options = {})
       @exception = exception
-      @templates_path = options.fetch(:templates_path)
-      @logs_path = options.fetch(:logs_path, Dir.pwd)
+      @environment = options.fetch(:environment)
+      @templates_dir = options.fetch(:templates_dir)
+      @logs_dir = options.fetch(:logs_dir)
     end
 
-    # Log the log_content into the logs folder.
     def log
       dirname, filename = Time.now.utc.strftime("%Y%m%d_%H%M%S%L").split("_")
-      dirname = File.join(@logs_path, dirname)
-      filename = "#{self.class.name.gsub(/^.*\:/, "").underscore}_#{filename}"
+      dirname = File.join(@logs_dir, dirname)
+      filename = "#{self.class.name.gsub(/^.*\:/, "").downcase}_#{filename}"
       unless File.directory?(dirname)
         FileUtils.mkdir(dirname)
       end
       File.open(File.join(dirname, filename), "w") { |f| f.puts(content) }
     end
 
-    # Get the content to log.
-    #
-    # @return [String]
     def content
       @content ||= Armadillo.render(template_name, { :notifier => self }, {
-        :base_path => @templates_path
+        :base_path => @templates_dir,
       })
     end
 
-    # Get the exception class name.
-    #
-    # @return [String]
     def exception_class_name
       exception.class.name
     end
 
-    # The current work environment.
-    #
-    # @return [String]
-    def environment
-      ENVIRONMENT
+    def template_name
+      raise NotImplementedError.new(
+        "`#{self.class.name}`#template_name is an abstract method."
+      )
     end
 
   end

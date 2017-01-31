@@ -43,8 +43,9 @@ Cuba.define do
   rescue Exception => ex
     if environment != "development"
       ErrorNotifiers::RackError.new(ex, env, {
-        :templates_path => File.join(APP_DIR, "notifiers"),
-        :logs_path => Encuentratumascota::Settings::LOGS_DIR
+        :templates_dir => File.join(APP_DIR, "notifiers"),
+        :environment => environment,
+        :logs_dir => Encuentratumascota::Settings::LOGS_DIR,
       }).log
       render_file("public/500.html", 500)
     else
