@@ -23,13 +23,13 @@ module Encuentratumascota
         user = client.user_by_provider_and_uid(auth.provider, auth.uid)
 
         if user
-          update_user_with_omniauth(user, auth)
+          user = update_user_with_omniauth(user, auth)
         elsif email && !email.empty? && (user = client.user_by_email(email))
           if !user[:provider].blank?
             append_error(:base, :email_taken)
             check_errors!
           else
-            update_user_with_omniauth(user, auth)
+            user = update_user_with_omniauth(user, auth)
           end
         else
           user_id = client.create_user({
@@ -42,7 +42,11 @@ module Encuentratumascota
           user = client.user_by_id(user_id)
         end
 
-        user
+        set_current_user({
+          :id => user[:id],
+          :username => user[:provider_username] || user[:private_username],
+          :image_url => user[:image_url],
+        })
       end
 
       private
@@ -55,6 +59,8 @@ module Encuentratumascota
           :email => auth_field(auth, :email, user[:email]),
           :image_url => auth_field(auth, :image, user[:image_url])
         })
+
+        client.user_by_id(user[:id])
       end
 
       def auth_field(auth, field_name, default)
