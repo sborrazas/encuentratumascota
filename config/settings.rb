@@ -13,6 +13,7 @@ module Encuentratumascota
     APP_URL = settings.fetch("app_url")
     SESSION_SECRET = settings.fetch("session_secret")
 
+    DATABASE_HOST = settings.fetch("database_host")
     DATABASE_NAME = settings.fetch("database_name")
     DATABASE_USER = settings.fetch("database_user")
     DATABASE_PASSWORD = settings.fetch("database_password")
@@ -27,12 +28,6 @@ module Encuentratumascota
 
     TWITTER_KEY = settings.fetch("twitter_key")
     TWITTER_SECRET = settings.fetch("twitter_secret")
-
-    MAIL_USERNAME = settings.fetch("mail_username")
-    MAIL_PASSWORD = settings.fetch("mail_password")
-    MAIL_HOST = settings.fetch("mail_host")
-    MAIL_DOMAIN = settings.fetch("mail_domain")
-    MAIL_PORT = settings.fetch("mail_port")
 
   end
 end

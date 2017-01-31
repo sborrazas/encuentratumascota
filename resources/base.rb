@@ -19,7 +19,12 @@ module Encuentratumascota
       private
 
       def client
-        settings.fetch(:client)
+        @client ||= Encuentratumascota::Client.new({
+          :host => settings.fetch(:database_host),
+          :name => settings.fetch(:database_name),
+          :user => settings.fetch(:database_user),
+          :password => settings.fetch(:database_password),
+        })
       end
 
       def s3_client

@@ -6,7 +6,6 @@ require "lib/encuentratumascota/client/users"
 module Encuentratumascota
   class Client
 
-    attr_reader :user_id
     attr_reader :db
 
     include Encuentratumascota::Client::Breeds
@@ -14,9 +13,32 @@ module Encuentratumascota
     include Encuentratumascota::Client::Publications
     include Encuentratumascota::Client::Users
 
-    def initialize(_db, _user_id)
-      @db = _db
-      @user_id = _user_id
+    def self.connections
+      (@connections ||= {})
+    end
+
+    def self.disconnect_all
+      connections.each { |_, db| db.disconnect }
+      connections.clear
+    end
+
+    def initialize(settings)
+      host = settings.fetch(:host)
+      user = settings.fetch(:user)
+      database = settings.fetch(:database)
+
+      connection_id = "#{user}@#{host}/#{database}"
+
+      unless self.class.connections.has_key?(connection_id)
+        self.class.connections[connection_id] = Sequel.postgres({
+          :host => host,
+          :database => database,
+          :user => user,
+          :password => settings.fetch(:password)
+        })
+      end
+
+      @db = self.class.connections[connection_id]
     end
 
     private

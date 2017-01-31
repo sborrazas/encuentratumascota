@@ -156,16 +156,6 @@ module Webapp
       env["encuentratumascota.traversal-context"] ||= begin
         slices = env["PATH_INFO"].gsub(%r{^/}, "").split("/")
 
-        db = Sequel.postgres({
-          :database => Encuentratumascota::Settings::DATABASE_NAME,
-          :user => Encuentratumascota::Settings::DATABASE_USER,
-          :password => Encuentratumascota::Settings::DATABASE_PASSWORD
-        })
-
-        client = Encuentratumascota::Client.new(
-          db,
-          session[:user] && session[:user]["id"]
-        )
         s3_client = Utils::S3Client.new(
           Encuentratumascota::Settings::S3_KEY,
           Encuentratumascota::Settings::S3_SECRET,
@@ -174,7 +164,10 @@ module Webapp
         )
         root = Encuentratumascota::Resources::Root.new(
           {
-            :client => client,
+            :database_host => Encuentratumascota::Settings::DATABASE_HOST,
+            :database_name => Encuentratumascota::Settings::DATABASE_NAME,
+            :database_user => Encuentratumascota::Settings::DATABASE_USER,
+            :database_password => Encuentratumascota::Settings::DATABASE_PASSWORD,
             :s3_client => s3_client,
           },
           { :session => session },
