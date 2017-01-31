@@ -1,0 +1,44 @@
+{
+  "name": "encuentratumascota",
+  "version": "1.0.0",
+  "description": "Encuentra tu mascota es la forma más simple y rápida de publicar y encontrar mascotas perdidas, encontradas o en adopción en tu ciudad.",
+  "main": "webapp/webpack.config.js",
+  "dependencies": {
+    "es6-promise": "^3.1.2",
+    "immutable": "^3.8.1",
+    "isomorphic-fetch": "^2.2.1",
+    "lodash": "^4.16.4",
+    "lodash-es": "^4.16.4",
+    "react": "^15.3.2",
+    "react-addons-css-transition-group": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-gmaps": "^1.5.0",
+    "react-redux": "^4.4.5",
+    "react-router": "^3.0.0",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "autoprefixer-loader": "^3.2.0",
+    "babel-core": "^6.4.5",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-lodash": "^3.2.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.3.13",
+    "babel-preset-stage-0": "^6.5.0",
+    "css-loader": "^0.25.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "jss-nested": "^1.0.2",
+    "less": "^2.7.1",
+    "less-loader": "^2.2.3",
+    "style-loader": "^0.13.1",
+    "webpack": "^1.12.14",
+    "webpack-isomorphic-tools": "^2.6.3"
+  },
+  "scripts": {
+    "start": "webpack --config webapp/dev.webpack.config.js --watch",
+    "dist": "NODE_ENV=production webpack -p --progress --config webapp/prod.webpack.config.js"
+  },
+  "author": "Sebastian Borrazas",
+  "license": "ISC"
+}

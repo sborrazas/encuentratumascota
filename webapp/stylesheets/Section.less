@@ -1,0 +1,35 @@
+@import "./variables.less";
+@import "./mixins.less";
+
+.section {
+  color: inherit; /* TODO: default class hack */
+}
+
+.section-header {
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.5);
+  background: @color-grayscale-8;
+  margin: 0 auto;
+  padding: 15px 0;
+}
+
+.section-headerTitle {
+  .m-fontSize(18px);
+  .m-lineHeight(31px, 18px);
+  color: @color-grayscale-4;
+  margin-left: 23px;
+  margin-bottom: 0;
+}
+
+.section-content {
+  bottom: 0;
+  position: absolute;
+  left: 0;
+  overflow-y: auto;
+  padding: 15px;
+  right: 0;
+  top: 62px;
+}
+
+.section-content--ignoreHeader {
+  top: 0;
+}

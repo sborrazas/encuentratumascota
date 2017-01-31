@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title><% vlock(:title) %>Encuentra Tu Mascota</title>
+    <meta charset="UTF-8" />
+    <meta content="<%= authenticity_token %>" name="csrf-token" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Flatten" />
+    <meta name="description" content="Encuentra tu mascota es la forma más simple y rápida de publicar y encontrar mascotas perdidas, encontradas o en adopción en tu ciudad." />
+    <meta name="keywords" content="animales,animales perdidos,mascotas,perros perdidos,encontrados,adopcion,adoptar,perros,mascota perdida,uruguay" />
+
+    <% unless development? %>
+      <link href="/stylesheets/application.css" media="screen" rel="stylesheet" />
+    <% end %>
+    <link href="/images/favicon.png" rel="shortcut icon" type="image/png" />
+    <%== render("shared/share_this.html") %>
+  </head>
+  <body class="<% vlock(:body_class) %>">
+    <% vlock(:body) %>
+
+    <script src="/javascripts/modernizr.js"></script>
+    <%== render("shared/analytics.html") %>
+    <script>
+      window._TRANSLATIONS = <%== json(locale_translations) %>;
+    </script>
+    <% vlock(:js) %>
+    <script src="/javascripts/index.js"></script>
+  </body>
+</html>

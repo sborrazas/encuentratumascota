@@ -1,0 +1,58 @@
+.m-truncateText() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.m-clearfix() {
+  *zoom: 1; /* For IE6+ */
+
+  &:before, &:after {
+    content: " "; /* 1 */
+    display: table; /* 2 */
+  }
+  &:after { clear: both; }
+}
+
+.m-fontSize(@amount, @contextPx: @base--fontSize) {
+  font-size: unit((@amount / @contextPx), em);
+}
+
+.m-lineHeight(@amount, @contextPx: @base--fontSize) {
+  line-height: unit(@amount / @contextPx);
+}
+
+.m-maxMedia(@maxWidth, @rules) {
+  @media screen and (max-width: @maxWidth) {
+    @rules();
+  }
+}
+
+.m-minMedia(@minWidth, @rules) {
+  @media screen and (min-width: @maxWidth) {
+    @rules();
+  }
+}
+
+.m-placeholder(@rules) {
+  &::-webkit-input-placeholder {
+    @rules();
+  }
+  &:-moz-placeholder { /* Firefox 18- */
+    @rules();
+  }
+  &::-moz-placeholder {  /* Firefox 19+ */
+    @rules();
+  }
+  &:-ms-input-placeholder {
+    @rules();
+  }
+}
+
+.m-screenReader() {
+  position: absolute;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px); /* IE6, IE7 */
+  clip: rect(1px, 1px, 1px, 1px);
+}

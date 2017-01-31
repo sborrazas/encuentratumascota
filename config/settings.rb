@@ -1,29 +1,38 @@
-require 'rails/all'
+require "json"
 
 module Encuentratumascota
-  module Config
-    filename = File.join(File.dirname(__FILE__), 'settings.json')
+  module Settings
 
-    raise "`#{filename}` does not exist." unless File.exists?(filename)
+    settings = JSON.load(
+      File.open(File.join(File.dirname(__FILE__), "settings.json"))
+    )
 
-    config = ActiveSupport::JSON.decode(File.open(filename).read)
+    LOGS_DIR = settings.fetch("logs_dir")
+    ENVIRONMENT = settings.fetch("environment")
 
-    S3_KEY = config['s3_key']
-    S3_SECRET = config['s3_secret']
-    S3_BUCKET = config['s3_bucket']
+    APP_URL = settings.fetch("app_url")
+    SESSION_SECRET = settings.fetch("session_secret")
 
-    FACEBOOK_KEY = config['facebook_key']
-    FACEBOOK_SECRET = config['facebook_secret']
+    DATABASE_NAME = settings.fetch("database_name")
+    DATABASE_USER = settings.fetch("database_user")
+    DATABASE_PASSWORD = settings.fetch("database_password")
 
-    TWITTER_KEY = config['twitter_key']
-    TWITTER_SECRET = config['twitter_secret']
+    S3_KEY = settings.fetch("s3_key")
+    S3_SECRET = settings.fetch("s3_secret")
+    S3_REGION = settings.fetch("s3_region")
+    S3_BUCKET = settings.fetch("s3_bucket")
 
-    MAIL_USERNAME = config['mail_username']
-    MAIL_PASSWORD = config['mail_password']
-    MAIL_HOST = config['mail_host']
-    MAIL_DOMAIN = config['mail_domain']
-    MAIL_PORT = config['mail_port']
+    FACEBOOK_KEY = settings.fetch("facebook_key")
+    FACEBOOK_SECRET = settings.fetch("facebook_secret")
 
-    SESSION_SECRET = config['session_secret']
+    TWITTER_KEY = settings.fetch("twitter_key")
+    TWITTER_SECRET = settings.fetch("twitter_secret")
+
+    MAIL_USERNAME = settings.fetch("mail_username")
+    MAIL_PASSWORD = settings.fetch("mail_password")
+    MAIL_HOST = settings.fetch("mail_host")
+    MAIL_DOMAIN = settings.fetch("mail_domain")
+    MAIL_PORT = settings.fetch("mail_port")
+
   end
 end

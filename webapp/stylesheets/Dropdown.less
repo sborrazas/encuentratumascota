@@ -1,0 +1,47 @@
+@import "./variables.less";
+@import "./mixins.less";
+
+.dropdown {
+  height: 30px;
+  position: relative;
+  width: 130px;
+}
+
+.dropdown-options {
+  display: none;
+  position: absolute;
+  top: 100%;
+  width: 100%;
+  z-index: 1000;
+}
+
+.dropdown--expanded .dropdown-options {
+  display: block;
+}
+
+.dropdown-option {
+  .m-fontSize(12px);
+  .m-lineHeight(30px, 12px);
+  background: @color-grayscale-2;
+  border: 1px solid @color-grayscale-3;
+  border-radius: 3px;
+  cursor: pointer;
+  display: block;
+  height: 30px;
+  margin-top: 4px;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.dropdown-option:hover {
+  background: #242424;
+}
+
+.dropdown-icon {
+  margin: 2px 8px 0;
+}
+
+.dropdown-caret {
+  margin: 4px 5px;
+  float: right;
+}

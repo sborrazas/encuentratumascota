@@ -1,0 +1,64 @@
+@import "./mixins.less";
+@import "./variables.less";
+
+.details {
+  color: inherit; /* TODO: remove classname hack */
+}
+
+.details-title {
+  .m-fontSize(20px);
+  .m-lineHeight(20px, 20px);
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.details-description {
+  color: inherit;
+}
+
+.details-meta {
+  .m-clearfix();
+  .m-fontSize(14px);
+  color: @color-grayscale-3;
+  margin: 20px 0;
+  text-transform: uppercase;
+}
+
+.details-metaItem {
+  border-left: 1px solid @color-grayscale-5;
+  display: inline-block;
+  margin-left: 10px;
+  padding-left: 10px;
+}
+
+.details-metaItem:first-child {
+  padding-left: 0;
+  margin-left: 0;
+  border-left: 0;
+}
+
+.details-metaLabel {
+  margin-right: 5px;
+}
+
+.details-metaValue {
+  color: @color-grayscale-4;
+  font-weight: @fontWeight-2;
+}
+
+.details-social {
+  margin: 15px 0;
+  text-align: center;
+}
+
+.details-socialItem * { /* Fix for sharethis */
+  box-sizing: content-box;
+}
+
+.details-nav {
+  margin-bottom: 7px;
+}
+
+.details-navItem {
+  color: inherit;
+}

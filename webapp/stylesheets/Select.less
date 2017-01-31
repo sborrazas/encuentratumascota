@@ -1,0 +1,70 @@
+@import "./mixins.less";
+@import "./variables.less";
+
+.select {
+  user-select: none;
+  cursor: pointer;
+  position: relative;
+}
+
+.select:hover .select-toggler {
+  border: 1px solid @color-grayscale-6;
+}
+
+.select-toggler {
+  background: @color-grayscale-8;
+  border: 1px solid @color-grayscale-8;
+  border-radius: 3px;
+  font-weight: @fontWeight-1;
+  overflow: auto;
+  padding: 7px 10px;
+  transition: border-color 0.3s;
+}
+
+.select--expanded .select-toggler,
+.select--expanded:hover .select-toggler {
+  border: 1px solid @color-6;
+}
+
+.select-toggler--invalid {
+  border-color: red;
+}
+
+.select-caret {
+  float: right;
+}
+
+.select-options {
+  background-color: #FFF;
+  border: 1px solid @color-grayscale-6;
+  border-radius: 3px;
+  display: none;
+  max-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: absolute;
+  width: 100%;
+  top: 40px;
+  z-index: @zIndex-1;
+}
+
+.select--expanded .select-options {
+  display: block;
+}
+
+.select-option {
+  cursor: pointer;
+  padding: 7px 10px;
+}
+
+.select-option:hover {
+  background-color: @color-grayscale-8;
+}
+
+.select-option--selected {
+  font-weight: @fontWeight-2;
+}
+
+.select-raw {
+  display: none;
+}
