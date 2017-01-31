@@ -25,7 +25,7 @@ module Encuentratumascota
     def initialize(settings)
       host = settings.fetch(:host)
       user = settings.fetch(:user)
-      database = settings.fetch(:database)
+      database = settings.fetch(:name)
 
       connection_id = "#{user}@#{host}/#{database}"
 
