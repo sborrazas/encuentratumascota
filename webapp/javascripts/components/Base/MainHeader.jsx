@@ -56,8 +56,9 @@ Nav = connectStyles(Nav, styles);
 
 class NavItem extends Component {
   render() {
-    const { blank, children, classes, external, to } = this.props;
+    const { blank, block, children, classes, external, to } = this.props;
     const className = classes.navItem({
+      block,
       link: !! to,
     });
 
@@ -89,6 +90,7 @@ class NavItem extends Component {
 
 NavItem.propTypes = {
   blank: React.PropTypes.bool,
+  block: React.PropTypes.bool, // TODO: Hack
   external: React.PropTypes.bool,
   to: React.PropTypes.string,
 };

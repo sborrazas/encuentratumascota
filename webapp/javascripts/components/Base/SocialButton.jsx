@@ -1,16 +1,20 @@
 import React from "react";
 import { Component } from "utils/react-extras.js";
 import { connect as connectStyles } from "utils/styles.js";
+import document from "utils/dom/document.js";
 import styles from "styles/SocialButton.less";
 
 class SocialButton extends Component {
   render() {
     const { children, classes, external, to, type, } = this.props;
+    const externalClassName = external && type === "twitter" ?
+          "twitter-share-button" :
+          "";
     const className = classes.socialButton({
       external,
       internal: ! external,
       [type]: true,
-    });
+    }, externalClassName);
 
     if (external) {
       if (type === "facebook") {

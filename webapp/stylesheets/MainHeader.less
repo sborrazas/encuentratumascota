@@ -30,6 +30,7 @@
 .mainHeader-navItem {
   .m-lineHeight(80px);
   display: inline-block;
+  float: left;
   margin: 0 15px;
 }
 
@@ -38,17 +39,29 @@
   .m-lineHeight(80px, 16px);
   color: @color-grayscale-8;
   cursor: pointer;
-  display: inline-block;
   margin: 0;
   font-weight: @fontWeight-2;
   padding: 0 15px;
   position: relative;
   text-decoration: none;
-
-  &:hover {
-    background: @color-grayscale-1;
-  }
 }
+
+.mainHeader-navItem--link:hover {
+  background: @color-grayscale-1;
+}
+
+.mainHeader-navItem--block {
+  margin-top: 20px;
+}
+
+/* HACK: Hacks for main navigation social buttons */
+.mainHeader-navItem iframe {
+  display: block;
+  margin: 30px 5px;
+  top: 0;
+}
+/* END HACK */
+
 
 /* Dropdown */
 .mainHeader-navItem--link:hover .mainHeader-dropdownOptions {

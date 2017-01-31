@@ -145,7 +145,7 @@ class Root extends Component {
             {
               country &&
                 (
-                  <MainHeaderNavItem>
+                  <MainHeaderNavItem block={true}>
                     <Dropdown
                       icon={countryCode}
                       label={country.name}>
