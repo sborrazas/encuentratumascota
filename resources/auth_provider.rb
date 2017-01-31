@@ -12,7 +12,9 @@ module Encuentratumascota
         ]
       end
 
-      def initialize(_provider)
+      def initialize(_provider, _settings, _request)
+        super(_settings, _request)
+
         @provider = _provider
       end
 

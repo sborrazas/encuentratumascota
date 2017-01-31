@@ -29,9 +29,9 @@ module Encuentratumascota
       def [](key)
         case key
         when "twitter"
-          Resources::AuthProvider.new("twitter")
+          Resources::AuthProvider.new("twitter", settings, request)
         when "facebook"
-          Resources::AuthProvider.new("facebook")
+          Resources::AuthProvider.new("facebook", settings, request)
         else
           super(key)
         end
