@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+vagrant ssh -c "cd /srv/apps/encuentratumascota/current; GEM_PATH=/srv/apps/encuentratumascota/gems rake console"

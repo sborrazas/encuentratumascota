@@ -1,0 +1,14 @@
+@import "./variables.less";
+
+.link {
+  color: @color-grayscale-5;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.link:hover,
+.link:focus,
+.link:active {
+  color: fadeout(@color-grayscale-5, 20%);
+}

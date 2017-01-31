@@ -1,0 +1,72 @@
+@import url(//fonts.googleapis.com/css?family=PT+Sans);
+
+/* fonts */
+@font-1: "PT Sans", sans-serif;
+
+/* fonts application */
+@base--fontSize: 13px;
+@base--lineHeight: 1.4;
+@base--fontFamily: @font-1;
+
+/* z-index definition */
+@zIndex-1: 100;
+@zIndex-2: 200;
+@zIndex-3: 300;
+@zIndex-4: 400;
+@zIndex-5: 500;
+@zIndex-6: 600;
+@zIndex-7: 700;
+@zIndex-8: 800;
+@zIndex-9: 900;
+@zIndex-10: 1000;
+
+/* font-weight definition */
+@fontWeight-1: 400;
+@fontWeight-2: 700;
+
+/* font-weight application */
+@button--fontWeight: @fontWeight-2;
+
+/* letter-spacing definition */
+@letterSpacing-tighter: -0.1em;
+@letterSpacing-tight: -0.04em;
+@letterSpacing-normal: -0.02em;
+@letterSpacing-loose: 0;
+@letterSpacing-looser: 0.04em;
+
+/* letter-spacing application */
+
+
+/* colors definition */
+@color-grayscale-1: rgb(0, 0, 0);
+@color-grayscale-2: rgb(51, 51, 51);
+@color-grayscale-3: rgb(119, 119, 119);
+@color-grayscale-4: rgb(153, 153, 153);
+@color-grayscale-5: rgb(187, 187, 187);
+@color-grayscale-6: rgb(200, 200, 200);
+@color-grayscale-7: rgb(239, 239, 239);
+@color-grayscale-8: rgb(250, 250, 250);
+
+@color-5: rgb(247, 65, 42); /* Red */
+@color-6: rgb(17, 176, 0); /* Green */
+@color-7: rgb(250, 166, 26); /* Yellow */
+@color-9: rgb(250, 166, 26); /* Orange SHOULD BE 3 */
+
+/* colors application */
+@base--color: @color-grayscale-3;
+@base--backgroundColor: @color-grayscale-1;
+@button--backgroundColor: @color-grayscale-8;
+@button--color: @color-grayscale-3;
+@button-primary--backgroundColor: @color-9;
+@button-primary--color: @color-grayscale-8;
+@button-focus--shadowColor: fade(@color-9, 50%);
+@emptyState--color: @color-grayscale-4;
+@list-item--backgroundColor: @color-grayscale-8;
+@list-item-hover--borderColor: @color-grayscale-7;
+@typeTag-lost--color: @color-5;
+@typeTag-found--color: @color-6;
+@typeTag-adoption--color: @color-7;
+
+/* misc */
+@icons-path: "/images/icons.png";
+@flags-path: "/images/flags.png";

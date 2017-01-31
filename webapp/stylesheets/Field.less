@@ -1,0 +1,56 @@
+@import "./variables.less";
+@import "./mixins.less";
+
+.field {
+  .m-clearfix();
+  margin-bottom: 20px;
+}
+
+.field--invalid {
+  margin-bottom: 0;
+}
+
+.field-label {
+  .m-fontSize(12px);
+  .m-lineHeight(28px);
+  cursor: pointer;
+  color: @color-grayscale-4;
+  display: inline-block;
+  font-weight: bold;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.field-input {
+  .m-placeholder({
+    color: @color-grayscale-6;
+  });
+  border: 1px solid @color-grayscale-8;
+  border-radius: 3px;
+  margin: 0;
+  outline: 0;
+  padding: 10px;
+  transition: border-color 0.3s;
+  width: 100%;
+}
+
+.field-input:focus {
+  border: 1px solid @color-6;
+}
+
+.field--invalid .field-input {
+  border-color: red;
+}
+
+.field-errors {
+  .m-fontSize(12px);
+  .m-lineHeight(20px);
+  color: red;
+  height: 20px;
+}
+
+.field-error {
+  display: inline-block;
+  margin-right: 3px;
+}

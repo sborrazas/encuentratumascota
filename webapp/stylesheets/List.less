@@ -1,0 +1,80 @@
+@import "./mixins.less";
+@import "./variables.less";
+
+.list {
+  color: inherit;
+}
+
+.list--empty {
+  .m-fontSize(16px);
+  color: @emptyState--color;
+  margin: 100px auto 0;
+  text-align: center;
+  width: 50%;
+}
+
+.list-emptyStateIcon { /* TODO */
+  display: block;
+  margin: 10px auto;
+
+  width: 75px;
+  height: 75px;
+  background-image: url(/assets/icons.png);
+  background-repeat: no-repeat;
+  background-position: 6px -20px;
+
+}
+
+.list-item {
+  .m-clearfix();
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: block;
+  background-color: @list-item--backgroundColor;
+  margin-bottom: 3%;
+  padding: 13px;
+}
+
+.list-item:hover {
+  border: 1px solid #DDD;
+}
+
+.list-itemTitle {
+  .m-fontSize(16px);
+  .m-lineHeight(24px, 16px);
+  font-weight: bold;
+}
+
+.list-itemFigure {
+  border-radius: 5px;
+  background: #000;
+  float: left;
+  height: 80px;
+  margin-right: 13px;
+  overflow: hidden;
+  position: relative;
+  width: 80px;
+}
+
+.list-itemImg {
+  position: absolute;
+  max-width: none;
+}
+
+.list-itemDescription {
+  .m-truncateText();
+}
+
+.list-itemDetails {
+  margin-top: 10px;
+}
+
+.list-itemDetail {
+  color: #999; // TODO: COlor
+  float: left;
+  margin-right: 10px;
+}
+
+.list-itemDetailIcon {
+  margin: -3px 3px 0 0;
+}

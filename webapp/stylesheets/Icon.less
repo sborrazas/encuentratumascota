@@ -1,0 +1,33 @@
+@import "./variables.less";
+@import "./mixins.less";
+
+.icon {
+  background: transparent url(@icons-path) no-repeat;
+  display: inline-block;
+  height: 20px;
+  line-height: 1;
+  vertical-align: middle;
+  width: 20px;
+}
+
+.icon-label {
+  .m-screenReader();
+}
+
+.icon--flag {
+  background: transparent url(@flags-path) no-repeat;
+}
+
+.icon--caret { background-position: -48px 3px; }
+.icon--tag { background-position: 3px 3px; }
+.icon--time { background-position: -24px 2px; }
+.icon--arrowLeft { background-position: -68px 2px; }
+.icon--arrowRight { background-position: -85px 2px; }
+.icon--uy { background-position: -27px 0; }
+.icon--pe { background-position: 0 0; }
+.icon--ar { background-position: -27px -21px; }
+.icon--cl { background-position: 0 -21px; }
+
+// TODO: add these icons to sprite
+.icon--plus { background-position: 3px 3px; }
+.icon--minus { background-position: 3px 3px; }

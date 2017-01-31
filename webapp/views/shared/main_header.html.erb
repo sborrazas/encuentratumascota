@@ -1,0 +1,35 @@
+<header class="mainHeader">
+  <a href="/" title="Encuentra tu Mascota">
+    <img src="/images/logo.png" class="mainHeader-logo" />
+    <hgroup class="mainHeader-titles">
+      <h1>Encuentra tu Mascota</h1>
+      <h2><%= t("general.tagline") %></h2>
+    </hgroup>
+  </a>
+
+  <nav class="mainHeader-primaryNav">
+    <div class="mainHeader-navItem">
+      <%== component("dropdown", :data => { :items => countries, :selected => current_country }) %>
+    </div>
+    <a class="mainHeader-navItem" href="/how_it_works">
+      <%= t("general.nav.how_it_works") %>
+    </a>
+    <a class="mainHeader-navItem" href="mailto:encuentratumascotaorg@gmail.com" target="_blank">
+      <%= t("general.nav.contact") %>
+    </a>
+    <span class="mainHeader-socialItem">
+      <a href="https://twitter.com/ETMUruguay" class="twitter-follow-button" data-show-count="false" data-lang="es" data-show-screen-name="false">Seguir a @ETMUruguay</a>
+    </span>
+    <span class="mainHeader-socialItem">
+      <div class="fb-like" data-href="http://facebook.com/ETMUruguay" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false"></div>
+    </span>
+  </nav>
+  <nav class="mainHeader-secondaryNav">
+    <span class="mainHeader-actionItem">
+      <a href="/p/new" class="button button--cta">
+        <%= t("general.nav.new_publication") %>
+      </a>
+    </span>
+    <%== component("sessionNav", :inline => true) %>
+  </nav>
+</header>

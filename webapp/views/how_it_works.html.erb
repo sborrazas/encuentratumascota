@@ -1,0 +1,53 @@
+<% extends("layouts/base.html") %>
+
+<% vlock(:body_class) do %>hiw<% end %>
+
+<% vlock(:body) do %>
+  <header class="hiw_header">
+    <a href="/" title="Encuentra tu Mascota">
+      <img src="/images/landing/logo-etm.png" alt="Encuentra tu Mascota" />
+    </a>
+    <hgroup>
+      <h1>Encuentra tu Mascota</h1>
+      <h2><%= t('general.tagline') %></h2>
+      <h3><%= t('general.tagline_2') %></h3>
+    </hgroup>
+    <a href="/" class="hiw_btn">
+      <%= t('main.how_it_works.call_to_action') %>
+    </a>
+  </header>
+
+  <section>
+    <div class="hiw_preview"></div>
+
+    <div class="hiw_features">
+      <ul>
+        <li class="hiw_publish">
+          <h4><%= t('main.how_it_works.features.publish.title') %></h4>
+          <p><%= t('main.how_it_works.features.publish.desc') %></p>
+        </li>
+        <li class="hiw_search">
+          <h4><%= t('main.how_it_works.features.search.title') %></h4>
+          <p><%= t('main.how_it_works.features.search.desc') %></p>
+        </li>
+        <li class="hiw_spread">
+          <h4><%= t('main.how_it_works.features.spread.title') %></h4>
+          <p><%= t('main.how_it_works.features.spread.desc') %></p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <footer class="hiw_footer">
+    <p>
+      2016 &copy; Encuentra Tu Mascota -
+      <a href="http://twitter.com/sntaln" target="_blank">@sntaln</a> &amp;
+      <a href="http://twitter.com/sborrazas" target="_blank">@sborrazas</a>
+    </p>
+    <ul class="hiw_contact">
+      <li><a href="http://twitter.com/etmuruguay" target="_blank" class="hiw_twitter"><span>Twitter</span></a></li>
+      <li><a href="https://www.facebook.com/ETMUruguay" target="_blank" class="hiw_facebook"><span>Facebook</span></a></li>
+      <li><a href="mailto:encuentratumascotaorg@gmail.com" target="_blank" class="hiw_email"><span>Email</span></a></li>
+    </ul>
+  </footer>
+<% end %>

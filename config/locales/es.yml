@@ -1,7 +1,8 @@
 es:
   models:
     publication:
-      publication_type: Tipo
+      publication_type:
+        label: Tipo
       pet_name:
         label: Título
         placeholder: Título o nombre de la mascota
@@ -9,17 +10,20 @@ es:
         label: Descripción
         placeholder: Descripción general de la mascota
       status: Estado
-      sex: Sexo
+      sex:
+        label: Sexo
       lat: Latitud
       lng: Longitud
       reward:
         label: Recompensa
         placeholder: (opcional)
-      lost_on: Fecha
+      lost_on:
+        label: Fecha
       contact:
         label: Contacto
         placeholder: Teléfono de contacto
-      breed: Raza
+      breed:
+        label: Raza
       breed_id: Raza
       attachments: Imágenes
       publication_types:
@@ -78,6 +82,7 @@ es:
       empty_publication_list: Actualmente no hay mascotas que coincidan con este filtro.
       publication_deleted: Esta publicación se ha eliminado.
       contact_info: 'Información de contacto:'
+      contact_info: Información de contacto
       request_contact_info: Solicitar información de contacto
       log_in_alternative: o ingresá con
       go_back: Regresar
@@ -103,24 +108,26 @@ es:
         lost: Perdidos
         found: Encontrados
         adoption: En adopción
-      js:
-        ajax_signup:
-          logged_in_successfully: Logueado correctamente!
-        publication_detail:
-          deleted: Esta publicación se ha eliminado.
-        publication_form:
-          select_location: Debes seleccionar la ubicación donde encontraste/perdiste/se encuentra la mascota primero.
-          click_on_map: Debes clickear la ubicación donde encontraste/perdiste/se encuentra la mascota.
-          publication_created_successfully: La publicación se ha creado correctamente!
-        new_publication: Nueva Publicación
-        filters:
-          all: ''
-          lost: Listado de Perdidos
-          found: Listado de Encontrados
-          adoption: Listado de en Adopción
-        lost: Perdido
-        found: Encontrado
-        adoption: En adopción
+      # ajax_signup:
+      #   logged_in_successfully: Logueado correctamente!
+      # publication_detail:
+      #   deleted: Esta publicación se ha eliminado.
+      publication_form:
+        select_location: debes seleccionar la ubicación donde encontraste, perdiste o se encuentra la mascota en el mapa primero.
+        select_location_title: Error,
+        click_on_map: la ubicación donde encontraste, perdiste o se encuentra la mascota en el mapa.
+        click_on_map_title: Debes seleccionar
+        add_image: Agregar imágen
+        # publication_created_successfully: La publicación se ha creado correctamente!
+      # new_publication: Nueva Publicación
+      # filters:
+      #   all: ''
+      #   lost: Listado de Perdidos
+      #   found: Listado de Encontrados
+      #   adoption: Listado de en Adopción
+      # lost: Perdido
+      # found: Encontrado
+      # adoption: En adopción
     how_it_works:
       call_to_action: Ir a la aplicación
       features:
@@ -149,6 +156,7 @@ es:
       success: 'Ha cambiado el pais correctamente'
 
   general:
+    name: Encuentra Tu Mascota
     tagline: La manera más fácil y rápida de conectar mascotas con sus dueños.
     tagline_2: Mascotas perdidas, encontradas y en adopción en un solo lugar.
     nav:
@@ -157,6 +165,8 @@ es:
       sign_in: Iniciar sesión
       sign_out: Cerrar sesión
       new_publication: Publicar mascota
+      twitter: "Seguir a @ETMUruguay"
+      facebook: "@ETMUruguay"
 
   admin:
     general:
@@ -180,3 +190,12 @@ es:
       publication_updated_successfully: Publicación modificada correctamente!
       publication_already_closed: La publicación ya esta cerrada.
       publication_closed_successfully: Publicación cerrada correctamente.
+
+  shared:
+    back: Volver
+
+  errors:
+    invalid: Es inválido.
+    blank: Es requerido.
+    too_short: Es muy corto.
+    invalid_credentials: Credenciales inválidas.
