@@ -9,6 +9,8 @@ class SocialButton extends Component {
     const { children, classes, external, to, type, } = this.props;
     const externalClassName = external && type === "twitter" ?
           "twitter-share-button" :
+          external && type === "facebook" ?
+          "fb-like" :
           "";
     const className = classes.socialButton({
       external,
@@ -22,7 +24,7 @@ class SocialButton extends Component {
           <div
             className={className}
             data-href={to}
-            data-send="false"
+            data-share="false"
             data-layout="button_count"
             data-width="450"
             data-show-faces="false" />
