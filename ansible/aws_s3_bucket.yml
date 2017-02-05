@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_files:
+    - vars/aws.yml
+  tasks:
+    - name: S3 bucket created
+      s3:
+        bucket: "{{ s3_bucket }}"
+        mode: create

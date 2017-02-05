@@ -1,0 +1,54 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars:
+    policy_name: "Custom_S3_EC2_FullAccess"
+  vars_files:
+    - vars/aws.yml
+  tasks:
+    - name: AWS IAM group present
+      iam:
+        iam_type: group
+        name: "{{ iam_group }}"
+        state: present
+    - name: EC2 and S3 policy created and attached to group
+      iam_policy:
+        policy_name: "{{ policy_name }}"
+        iam_type: group
+        iam_name: "{{ iam_group }}"
+        state: present
+        policy_json: |
+          {
+            "Version": "2012-10-17",
+            "Statement": [
+              {
+                "Action": "ec2:*",
+                "Effect": "Allow",
+                "Resource": "*"
+              },
+              {
+                "Action": "s3:*",
+                "Effect": "Allow",
+                "Resource": "*"
+              }
+            ]
+          }
+      register: group_output
+    - name: AWS IAM user created
+      iam:
+        iam_type: user
+        name: "{{ iam_user }}"
+        access_key_state: create
+        state: present
+        groups:
+          - "{{ iam_group }}"
+      register: user_output
+    - name: New credentials written to file
+      copy:
+        content: |
+          AWS_ACCESS_KEY_ID={{ user_output.user_meta.access_keys[0].access_key_id }}
+          AWS_SECRET_ACCESS_KEY={{ user_output.user_meta.access_keys[0].secret_access_key }}
+          AWS_REGION={{ lookup("env", "AWS_REGION") }}
+        dest: "{{ output_dir }}//credentials"
+      when: user_output.user_meta is defined

@@ -1,0 +1,12 @@
+---
+  app_name: "encuentratumascota"
+  base_dir: "/srv/apps/{{ app_name }}"
+  app_dir: "{{ base_dir }}/current"
+  logs_dir: "{{ base_dir }}/logs"
+  gems_dir: "{{ base_dir }}/gems"
+  unicorn_socket_file: "/tmp/unicorn.{{ app_name }}.sock"
+  unicorn_pid_file: "/tmp/unicorn.{{ app_name }}.pid"
+  private_key_path: "/home/{{ user }}/.ssh/{{ app_name }}_rsa"
+  public_key_path: "{{ private_key_path }}.pub"
+  before_fork_rb: |
+    Encuentratumascota::Client.disconnect_all

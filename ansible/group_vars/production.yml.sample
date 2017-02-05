@@ -1,0 +1,35 @@
+---
+app_environment: "production"
+hostname: "serverhost"
+user: "remoteuser"
+root_user: "remoteroot"
+app_debug_mode: False
+ssl_enabled: False
+app_domain: "encuentratumascota.fandf.io"
+app_url: "http://encuentratumascota.fandf.io"
+repo: "git@github.com:sborrazas/encuentratumascota.git"
+session_secret: "..."
+private_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+  -----END RSA PRIVATE KEY-----
+public_key: "ssh-rsa ..."
+workers_number: 3
+database_host: "localhost"
+database_name: "..."
+database_user: "..."
+database_password: "..."
+s3_key: "..."
+s3_secret: "..."
+s3_region: "us-east-1"
+s3_bucket: "encuentratumascota"
+facebook_key: "..."
+facebook_secret: "..."
+twitter_key: "..."
+twitter_secret: "..."

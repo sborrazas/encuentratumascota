@@ -1,0 +1,17 @@
+---
+- hosts: all
+  remote_user: "{{ user }}"
+  vars_prompt:
+    name: "dump_file"
+    prompt: "The PostgreSQL data dump file"
+    private: False
+  vars:
+    tmp_file: "/tmp/{{ ansible_date_time.epoch }}"
+  tasks:
+    - name: PostgreSQL dump uploaded
+      copy:
+        src: "{{ dump_file }}"
+        dest: "{{ tmp_file }}"
+    - name: PostgreSQL database restored
+      command:
+        psql -d "{{ database_name }}" -U "{{ database_user }}" -1 -f "{{ tmp_file }}"

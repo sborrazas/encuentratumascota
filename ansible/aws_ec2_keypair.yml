@@ -1,0 +1,18 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: False
+  vars_files:
+    - vars/aws.yml
+  tasks:
+    - name: EC2 keypair created
+      ec2_key:
+        name: "{{ ec2_keypair }}"
+        state: present
+      register: keypair_output
+    - name: New private key written to file
+      copy:
+        content: "{{ keypair_output.key.private_key }}"
+        dest: "{{ output_dir }}/{{ ec2_keypair }}.pem"
+        mode: 0400
+      when: keypair_output.changed

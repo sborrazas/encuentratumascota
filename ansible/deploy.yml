@@ -1,0 +1,94 @@
+---
+- hosts: all
+  remote_user: "{{ user }}"
+  vars:
+    repo_version: "master"
+  tasks:
+    - set_fact:
+        release_version: "{{ lookup('pipe', 'date +%Y%m%d%H%M%S') }}"
+
+    - set_fact:
+        release_dir: "{{ base_dir }}/current"
+
+    - set_fact:
+        release_dir: "{{ base_dir }}/releases/{{ release_version }}"
+      tags:
+        - remote
+
+    - name: project directories exist
+      file:
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        path: "{{ item.path }}"
+        recurse: True
+      with_items:
+        - { path: "{{ base_dir }}", sudo: True }
+        - { path: "{{ base_dir }}/releases", sudo: False }
+        - { path: "{{ base_dir }}/logs", sudo: False }
+        - { path: "/tmp/unicorn", sudo: False }
+        - { path: "{{ gems_dir }}", sudo: False }
+      become: "{{ item.sudo }}"
+
+    - name: repo present with specified version
+      git:
+        repo: "{{ repo }}"
+        dest: "{{ release_dir }}"
+        version: "{{ repo_version }}"
+        key_file: "{{ private_key_path }}"
+      tags:
+        - remote
+
+    - name: project settings built
+      template:
+        src: "settings.json.j2"
+        dest: "{{ release_dir }}/config/settings.json"
+
+    - include_role:
+        name: deploy.unicorn
+
+    - include_role:
+        name: deploy.gems
+      vars:
+        gems:
+          - { name: "cuba", version: "3.1.1" }
+          - { name: "rack-contrib", version: "1.1.0" }
+          - { name: "rack-protection", version: "1.5.2" }
+          - { name: "armadillo", version: "0.0.5" }
+          - { name: "sequel", version: "4.9.0" } # Needs to be installed before sequel_pg
+          - { name: "pg", version: "0.17.1" }
+          - { name: "sequel_pg", version: "1.6.9" }
+          - { name: "aws-sdk", version: "2.7.0" }
+          - { name: "omniauth-facebook", version: "1.4.1" }
+          - { name: "omniauth-twitter", version: "0.0.14" }
+          - { name: "armor", version: "0.0.3" }
+        directory: "{{ gems_dir }}"
+
+    - include_role:
+        name: deploy.assets
+      vars:
+        source_dir: "{{ playbook_dir | dirname }}/public"
+        dest_dir: "{{ release_dir }}/public"
+        files:
+          - javascripts/index.js
+          - stylesheets/application.css
+
+    - name:  database migrated to last version
+      command: "rake db:migrate"
+      args:
+        chdir: "{{ release_dir }}"
+      environment:
+        GEM_HOME: "{{ gems_dir }}"
+      run_once: True
+
+    - name: symlink to app directoy exists
+      file:
+        state: link
+        src: "{{ release_dir }}"
+        dest: "{{ app_dir }}"
+
+    - name: unicorn started if not running
+      service:
+        name: "{{ app_name }}-unicorn"
+        state: "restarted"
+      become: True
