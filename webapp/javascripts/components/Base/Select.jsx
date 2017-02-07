@@ -4,6 +4,7 @@ import { Component } from "utils/react-extras.js";
 import { connect as connectStyles } from "utils/styles.js";
 import date from "utils/date.js";
 import styles from "styles/Select.less";
+import Icon from "./Icon.jsx";
 
 class SelectOption extends Component {
   render() {
@@ -102,7 +103,7 @@ class Select extends Component {
       <div className={className}>
         <div className={togglerClassName} onClick={this._toggleExpand}>
           {selectedOption.label}
-          <span className="select-caret"></span>
+          <Icon className={classes.caret()} name="caret" />
         </div>
         <div className={classes.options()}>{optionsEls}</div>
         <select
@@ -110,7 +111,7 @@ class Select extends Component {
           name={name}
           onChange={this._selectRawOption}
           value={value}
-          className="select-raw">
+          className={classes.raw()}>
 
           {rawOptionsEls}
         </select>
