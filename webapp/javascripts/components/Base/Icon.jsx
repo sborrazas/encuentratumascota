@@ -11,11 +11,16 @@ const FLAG_ICONS = [
   "uy",
 ];
 
+const BIG_ICONS = [
+  "paw",
+];
+
 class Icon extends Component {
   render() {
     const { className, classes, name } = this.props;
     const iconClassName = classes.icon({
       [name]: true,
+      big: _.includes(BIG_ICONS, name),
       flag: _.includes(FLAG_ICONS, name),
     }, className);
 
@@ -40,6 +45,7 @@ Icon.propTypes = {
     "arrowLeft",
     "caret",
     "minus",
+    "paw",
     "plus",
     "tag",
     "time",

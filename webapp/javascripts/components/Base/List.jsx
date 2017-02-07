@@ -20,7 +20,7 @@ class List extends Component {
     if (empty) {
       return (
         <div className={className}>
-          <span className={classes.emptyStateIcon({}, "icon icon--empty")} />
+          <Icon className={classes.emptyStateIcon()} name="paw" />
           {emptyText}
         </div>
       );
