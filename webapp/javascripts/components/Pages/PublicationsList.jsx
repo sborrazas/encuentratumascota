@@ -48,7 +48,7 @@ class PublicationItem extends Component {
       <ListItem
         imgSrc={imgSrc}
         imgAlt={petName}
-        to={`/p/${publication.slug}`}>
+        to={{ name: "publication", p: { slug: publication.slug } }}>
 
         <ListItemTitle>
           {petName}
@@ -89,7 +89,7 @@ class PublicationList extends Component {
             <ButtonGroup>
               <ButtonGroupItem
                 active={!publicationType}
-                to="/">
+                to={{ name: "home" }}>
 
                 {t("main.index.filters.all")}
               </ButtonGroupItem>

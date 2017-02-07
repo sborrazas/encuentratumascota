@@ -82,7 +82,7 @@ class Root extends Component {
     const { sidebarHidden } = this.state;
     const user = auth.state === "fetched" && auth.data.user;
     const newPublicationTo = user ?
-          { pathname: "/p/new" } :
+          { name: "publicationsNew" } :
           { q: { sign_in: "1", ...query } };
     const countryCode = auth.state === "fetched" && auth.data.country_code;
     const country = countryCode && COUNTRIES[countryCode];

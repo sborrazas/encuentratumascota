@@ -173,7 +173,7 @@ class PublicationNew extends Component {
                   </Button>
                 </NavBarItem>
                 <NavBarItem importance={1}>
-                  <Button important={true} to="/">
+                  <Button important={true} to={{ name: "home" }}>
                     {t("main.index.publication_cancel")}
                   </Button>
                 </NavBarItem>

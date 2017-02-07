@@ -3,6 +3,7 @@ import _ from "lodash";
 import { Component } from "utils/react-extras.js";
 import { Link as RouterLink, browserHistory } from "react-router";
 import { connect as reduxConnect } from "react-redux";
+import { routes } from "components/routes/AppRouter.jsx";
 
 const mapStateToProps = (state) => {
   return state.routing;
@@ -32,34 +33,31 @@ const reducer = (state = { pathname: "", params: {}, query: {} }, action) => {
 class Link extends Component {
   render() {
     const { children, className, pathname, to } = this.props;
-    let routerTo;
+    let linkPathname = pathname;
 
-    if (_.isString(to)) {
-      routerTo = to;
-    }
-    else {
-      routerTo = {
-        pathname: to.pathname || pathname,
-        params: to.p,
-        query: to.q,
-      };
+    if (to.name) {
+      linkPathname = routes[to.name].replace(/:(\w+)/g, (_, paramName) => {
+        return to.p[paramName];
+      });
     }
 
     return (
-      <RouterLink to={routerTo} className={className}>{children}</RouterLink>
+      <RouterLink
+        className={className}
+        to={{ pathname: linkPathname, query: to.q }}>
+
+        {children}
+      </RouterLink>
     );
   }
 }
 
 Link.propTypes = {
-  to: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.shape({
-      pathname: React.PropTypes.string,
-      p: React.PropTypes.object,
-      q: React.PropTypes.object,
-    }),
-  ]).isRequired,
+  to: React.PropTypes.shape({
+    name: React.PropTypes.string,
+    p: React.PropTypes.object,
+    q: React.PropTypes.object,
+  }).isRequired,
 };
 
 Link = connect(Link);

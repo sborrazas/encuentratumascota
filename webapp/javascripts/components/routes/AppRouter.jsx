@@ -4,10 +4,7 @@ import PublicationsList from "components/Pages/PublicationsList";
 import PublicationDetail from "components/Pages/PublicationDetail";
 import PublicationNew from "components/Pages/PublicationNew";
 
-    // <Route name="publication-new" path="/p/new" component={PublicationNew} />
-    // <Route name="how-it-works" path="how_it_works" />
-
-module.exports = (
+export default (
   <Route path="/">
     <Route path="p">
       <Route path="new" component={PublicationNew} />
@@ -18,3 +15,12 @@ module.exports = (
     <IndexRoute component={PublicationsList} />
   </Route>
 );
+
+const routes = {
+  "home": "/",
+  "publications": "/p",
+  "publicationsNew": "/p/new",
+  "publication": "/p/:slug",
+};
+
+export { routes };

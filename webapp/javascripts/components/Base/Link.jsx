@@ -1,9 +1,6 @@
 import React from "react";
 import { Component } from "utils/react-extras.js";
-import {
-  connect as connectRouter,
-  Link as RouterLink,
-} from "utils/react-router-extras.js";
+import { Link as RouterLink } from "utils/react-router-extras.js";
 import { connect as connectStyles } from "utils/styles.js";
 import styles from "styles/Link.less";
 
@@ -21,7 +18,11 @@ class Link extends Component {
 
     if (onClick) {
       return (
-        <span className={linkClassName} onClick={this._handleClick}>
+        <span
+          className={linkClassName}
+          onClick={this._handleClick}
+          tabIndex={tabIndex}>
+
           {children}
         </span>
       );
@@ -50,11 +51,9 @@ class Link extends Component {
 Link.propTypes = {
   className: React.PropTypes.string,
   onClick: React.PropTypes.func,
-  params: React.PropTypes.object,
   tabIndex: React.PropTypes.number,
 };
 
 Link = connectStyles(Link, styles);
-Link = connectRouter(Link);
 
 export default Link;
