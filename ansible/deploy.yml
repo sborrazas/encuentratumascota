@@ -15,6 +15,17 @@
       tags:
         - remote
 
+    - name: remote project directories exist
+      file:
+        state: directory
+        owner: "{{ user }}"
+        group: "{{ user }}"
+        path: "{{ base_dir }}"
+        recurse: True
+      become: True
+      tags:
+        - remote
+
     - name: project directories exist
       file:
         state: directory
@@ -23,7 +34,6 @@
         path: "{{ item.path }}"
         recurse: True
       with_items:
-        - { path: "{{ base_dir }}", sudo: True }
         - { path: "{{ base_dir }}/releases", sudo: False }
         - { path: "{{ base_dir }}/logs", sudo: False }
         - { path: "/tmp/unicorn", sudo: False }
@@ -54,7 +64,7 @@
           - { name: "cuba", version: "3.1.1" }
           - { name: "rack-contrib", version: "1.1.0" }
           - { name: "rack-protection", version: "1.5.2" }
-          - { name: "armadillo", version: "0.0.5" }
+          - { name: "armadillo", version: "0.0.6" }
           - { name: "sequel", version: "4.9.0" } # Needs to be installed before sequel_pg
           - { name: "pg", version: "0.17.1" }
           - { name: "sequel_pg", version: "1.6.9" }
@@ -72,8 +82,10 @@
         files:
           - javascripts/index.js
           - stylesheets/application.css
+      tags:
+        - remote
 
-    - name:  database migrated to last version
+    - name: database migrated to last version
       command: "rake db:migrate"
       args:
         chdir: "{{ release_dir }}"
@@ -86,9 +98,13 @@
         state: link
         src: "{{ release_dir }}"
         dest: "{{ app_dir }}"
+      tags:
+        - remote
 
     - name: unicorn started if not running
       service:
         name: "{{ app_name }}-unicorn"
         state: "restarted"
       become: True
+      tags:
+        - remote
