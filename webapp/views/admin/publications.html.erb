@@ -1,0 +1,60 @@
+<% extends("layouts/admin.html") %>
+
+<% vlock(:page_title) do %><%= t("admin.my_publications") %><% end %>
+
+<% vlock(:breadcrumb) do %>
+  <li class="breadcrumbs-item">
+    <span class="breadcrumbs-separator"></span><%= t("admin.my_publications") %>
+  </li>
+<% end %>
+
+<% vlock(:body) do %>
+  <table class="table">
+    <tr>
+      <th><%= t("models.publication.pet_name.label") %></th>
+      <th><%= t("models.publication.status") %></th>
+      <th><%= t("models.publication.type.label") %></th>
+      <th><%= t("models.publication.lost_on.label") %></th>
+      <th><%= t("models.publication.country") %></th>
+      <th><%= t("admin.publications.index.actions") %></th>
+    </tr>
+    <% iterate_collection(publications) do |publication| %>
+      <tr>
+        <td class="table-cell--title">
+            <%= publication[:pet_name] %>
+          </a>
+        </td>
+        <td><%= t("models.publication.statuses.#{publication[:status]}") %></td>
+        <td>
+          <%= t("models.publication.types.#{publication[:type]}") %>
+        </td>
+        <td data-date="<%= publication[:lost_on] %>">
+          <%= publication[:lost_on] %>
+        </td>
+        <td><%= country_name(publication[:country_code]) %></td>
+        <td>
+          <a class="link" href="/p/<%= publication[:slug] %>">
+            <%= t("admin.publications.index.view") %></a>
+          <a class="link" href="/admin/publications/<%= publication[:id] %>/edit">
+            <%= t("admin.publications.index.edit") %></a>
+          <% if publication[:status] != "closed" %>
+            <form
+              action="/admin/publications/<%= publication[:id] %>/close"
+              class="form form--inline"
+              method="POST">
+              <button type="submit" class="btn btn--inline">
+                <%= t("admin.publications.index.close") %>
+              </button>
+            </form>
+          <% end %>
+      </tr>
+    <% end %>
+    <% if collection_empty?(publications) %>
+      <tr class="table-emptyRow"><td colspan="6">Empty!</td></tr>
+    <% end %>
+  </table>
+  <%== render("shared/pagination.html", :collection => publications) %>
+<% end %>
+
+<% vlock(:js) do %>
+<% end %>

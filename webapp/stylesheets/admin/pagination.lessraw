@@ -1,0 +1,37 @@
+@import "../mixins.less";
+
+.pagination {
+  .m-clearfix();
+  font-size: 16px;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.pagination-page {
+  display: inline-block;
+}
+
+.pagination-separator {
+  display: inline-block;
+}
+
+.pagination-page a,
+.pagination-page span {
+  padding: 3px 8px;
+}
+
+.pagination-page a,
+.pagination-separator {
+  color: #A6A6A6;
+}
+
+.pagination-page a {
+  cursor: pointer;
+  marign-right: 10px;
+}
+
+.pagination-page span {
+  background: #FAA61A;
+  color: #FFF;
+  border-radius: 2px;
+}

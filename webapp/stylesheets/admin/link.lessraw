@@ -1,0 +1,9 @@
+.link {
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.link:hover,
+.link:active {
+  border-color: #FAA61A;
+}

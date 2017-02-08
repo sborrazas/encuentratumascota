@@ -169,15 +169,16 @@ es:
       facebook: "@ETMUruguay"
 
   admin:
-    general:
-      publications: Publicaciones
-      my_publications: Mis Publicaciones
+    publications: Publicaciones
+    my_publications: Mis Publicaciones
     publications:
       index:
         new: Nueva Publicación
         show: Ver
         edit: Modificar
         delete: Eliminar
+        close: Cerrar
+        view: Ver
         actions: Acciones
       form:
         location: Ubicación
@@ -193,6 +194,8 @@ es:
 
   shared:
     back: Volver
+    previous: Atrás
+    next: Siguiente
 
   errors:
     invalid: Es inválido.

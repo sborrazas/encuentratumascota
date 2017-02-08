@@ -18,6 +18,15 @@ module Encuentratumascota
         publications(dataset, page, per_page)
       end
 
+      def user_publications(user_id, page, per_page, filters = {})
+        dataset = db[:publications]
+          .where({
+            :user_id => user_id,
+          })
+
+        publications(dataset, page, per_page)
+      end
+
       def active_publication(country_code, publication_slug)
         dataset = db[:publications]
           .where({

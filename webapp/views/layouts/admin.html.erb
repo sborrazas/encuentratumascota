@@ -1,0 +1,34 @@
+<% extends("layouts/base.html") %>
+
+<% vlock(:body_class) do %>admin<% end %>
+
+<% vlock(:title) do %>
+  <% vlock(:page_title) %> · Admin ·
+<% end %>
+
+<% vlock(:body) do %>
+  <header class="mainHeader">
+    <div class="contentWrapper">
+      <h1 class="mainHeader-title"><% vlock(:page_title) %></h1>
+      <a href="/">
+        <img class="mainHeader-logo" src="/images/logo.png" />
+      </a>
+    </div>
+  </header>
+  <nav class="breadcrumbs">
+    <div class="contentWrapper">
+      <ul class="breadcrumbs-list">
+        <li class="breadcrumbs-item">
+          <a href="/admin">Encuentra tu Mascota Admin</a>
+        </li>
+        <% vlock(:breadcrumb) %>
+      </ul>
+    </div>
+  </nav>
+  <div class="contentWrapper">
+    <% vlock(:body) %>
+  </div>
+<% end %>
+
+<% vlock(:js) do %>
+<% end %>

@@ -1,0 +1,47 @@
+<% if collection.any? %>
+  <% total_pages = collection.fetch("total_pages") %>
+  <% page = collection.fetch("page") %>
+  <nav class="pagination">
+    <% if total_pages > 1 %>
+      <ul>
+        <% if page > 1 %>
+          <li class="pagination-page">
+            <a href="?page=<%= page - 1 %>"><%= t("shared.previous") %></a>
+          </li>
+          <% if page > 2 %>
+            <li class="pagination-page"><a href="?page=<%= 1 %>">1</a></li>
+            <% if page > 3 %><li class="pagination-separator">...</li><% end %>
+          <% end %>
+          <li class="pagination-page">
+            <a href="?page=<%= page - 1 %>">
+              <%= page - 1 %>
+            </a>
+          </li>
+        <% end %>
+        <li class="pagination-page"><span><%= page %></span></li>
+        <% if page < total_pages %>
+          <% (page..total_pages).to_a[1, 2].each do |page_num| %>
+            <li class="pagination-page">
+              <a href="?page=<%= page_num %>">
+                <%= page_num %>
+              </a>
+            </li>
+          <% end %>
+          <% if (page + 2) < total_pages %>
+            <li class="pagination-page">
+              <a href="?page=<%= total_pages %>">
+                <%= total_pages %>
+              </a>
+            </li>
+            <% if (page + 3) < total_pages %>
+              <li class="pagination-separator">...</li>
+            <% end %>
+          <% end %>
+          <li class="pagination-page">
+            <a href="?page=<%= page + 1 %>"><%= t("shared.next") %></a>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </nav>
+<% end %>

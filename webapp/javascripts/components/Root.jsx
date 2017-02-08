@@ -112,8 +112,8 @@ class Root extends Component {
 
       sessionNavEl = (
         <MainHeaderDropdown imgSrc={userImgSrc} title={user.username}>
-          <MainHeaderDropdownOption to="/">
-            {t("admin.general.my_publications")}
+          <MainHeaderDropdownOption to="/admin">
+            {t("admin.my_publications")}
           </MainHeaderDropdownOption>
           <MainHeaderDropdownOption onClick={this._signOut}>
             {t("general.nav.sign_out")}
@@ -139,6 +139,7 @@ class Root extends Component {
           logo="/images/logo.png"
           tagline={t("general.tagline")}
           title={t("general.name")}
+          toHome={{ pathname: "home" }}
           user={user}>
 
           <MainHeaderNav>
@@ -171,7 +172,7 @@ class Root extends Component {
                   </MainHeaderNavItem>
                 )
             }
-            <MainHeaderNavItem to="/how-it-works" external={true}>
+            <MainHeaderNavItem to="how-it-works">
               {t("general.nav.how_it_works")}
             </MainHeaderNavItem>
             <MainHeaderNavItem

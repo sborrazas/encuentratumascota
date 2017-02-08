@@ -1,0 +1,29 @@
+@include "../mixins.less";
+
+.table {
+  background: #FFF;
+  border-radius: 5px;
+  box-shadow: 6px 6px 6px 0px rgba(0, 0, 0, 0.02);
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.table tr {
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.table th,
+.table td {
+  padding: 20px;
+  text-align: left;
+}
+
+.table th {
+  color: #DADADA;
+  font-weight: bold;
+}
+
+.table-cell--title {
+  .m-truncateText();
+  max-width: 200px;
+}

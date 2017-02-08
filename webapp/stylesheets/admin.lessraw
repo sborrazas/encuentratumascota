@@ -1,0 +1,12 @@
+@import "./admin/breadcrumbs.lessraw";
+@import "./admin/btn.lessraw";
+@import "./admin/contentWrapper.lessraw";
+@import "./admin/form.lessraw";
+@import "./admin/link.lessraw";
+@import "./admin/mainHeader.lessraw";
+@import "./admin/pagination.lessraw";
+@import "./admin/table.lessraw";
+
+body.admin {
+  background: #F9F9F9;
+}

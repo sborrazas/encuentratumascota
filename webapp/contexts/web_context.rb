@@ -24,5 +24,13 @@ module Contexts
       JSON.generate(object)
     end
 
+    def iterate_collection(collection, &block)
+      collection.fetch("items").each(&block)
+    end
+
+    def collection_empty?(collection)
+      collection.fetch("items").empty?
+    end
+
   end
 end

@@ -1,5 +1,6 @@
 import React from "react";
-import { Link } from "react-router";
+import _ from "lodash";
+import { Link } from "utils/react-router-extras.js";
 import { Component } from "utils/react-extras.js";
 import { connect as connectStyles } from "utils/styles.js";
 import styles from "styles/MainHeader.less";
@@ -13,11 +14,12 @@ class MainHeader extends Component {
       logo,
       tagline,
       title,
+      toHome,
     } = this.props;
 
     return (
       <header className={classes.mainHeader()}>
-        <Link to="/" title={title}>
+        <Link to={toHome} title={title}>
         <img src={logo} className={classes.logo()} />
           <hgroup className={classes.titles()}>
             <h1>{title}</h1>
@@ -56,14 +58,15 @@ Nav = connectStyles(Nav, styles);
 
 class NavItem extends Component {
   render() {
-    const { blank, block, children, classes, external, to } = this.props;
+    const { blank, block, children, classes, to } = this.props;
+    const external = _.isString(to) || blank;
     const className = classes.navItem({
       block,
       link: !! to,
     });
 
     if (to) {
-      if (external || blank) {
+      if (external) {
         return (
           <a href={to} className={className} target={blank && "_blank"}>
             {children}
@@ -127,12 +130,20 @@ Dropdown = connectStyles(Dropdown, styles);
 class DropdownOption extends Component {
   render() {
     const { children, classes, onClick, to } = this.props;
+    const external = _.isString(to);
 
     if (onClick) {
       return (
         <div className={classes.dropdownOption()} onClick={this._click}>
           {children}
         </div>
+      );
+    }
+    else if (external) {
+      return (
+        <a className={classes.dropdownOption()} href={to}>
+          {children}
+        </a>
       );
     }
     else {

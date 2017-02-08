@@ -1,0 +1,32 @@
+.breadcrumbs {
+  .m-clearfix();
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.breadcrumbs-list {
+}
+
+.breadcrumbs-item {
+  float: left;
+  font-weight: bold;
+}
+
+.breadcrumbs-item a {
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.breadcrumbs-item a:hover {
+  border-color: #FAA61A;
+}
+
+.breadcrumbs-separator {
+  display: inline-block;
+  margin: 0 8px;
+}
+
+.breadcrumbs-separator:after {
+  content: "·";
+}

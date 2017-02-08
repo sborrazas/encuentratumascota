@@ -1,0 +1,16 @@
+@import "../mixins.less";
+
+.mainHeader {
+  background: #313131;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.mainHeader-title {
+  .m-screenReader();
+}
+
+.mainHeader-logo {
+  display: inline-block;
+  max-height: 50px;
+}

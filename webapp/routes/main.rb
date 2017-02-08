@@ -4,6 +4,8 @@ require "resources/root"
 require "resources/publications"
 require "resources/breeds"
 require "resources/auth_provider"
+require "resources/admin/main"
+require "webapp/routes/admin"
 require "webapp/routes/publications"
 
 module Webapp
@@ -27,6 +29,10 @@ module Webapp
           run(Webapp::Routes::Publications)
         end
 
+        on nested_resource(Resources::Admin::Main) do
+          run(Webapp::Routes::Admin)
+        end
+
         on get, resource(Resources::Breeds), permission("list") do |breeds|
           render_json(
             breeds.list(
@@ -46,6 +52,7 @@ module Webapp
             redirect!("/")
           rescue Validator::ValidationError => ex
             redirect!("/", ex.errors[:base])
+            # TODO
             # redirect_to root_path, flash: { error: t('sessions.create_with_omniauth.email_taken') }
           end
         end
