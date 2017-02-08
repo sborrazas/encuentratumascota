@@ -2,41 +2,20 @@ module Encuentratumascota
   class Client
     module Publications
 
-      def active_publications(page, per_page, filters = {})
-        country_code = filters.fetch(:country_code)
-
+      def active_country_publications(country_code, page, per_page, filters = {})
         dataset = db[:publications]
           .where({
             :status => ["active", "approved"],
             :country_code => country_code,
           })
-          .join(:breeds, :publications__breed_id => :breeds__id)
-          .select_all(:publications)
-          .select_append(:breeds__name___breed)
-          .order(:created_at)
-          .reverse
 
-        if filters[:country_code]
-          dataset = dataset.where(:country_code => filters[:country_code])
-        end
-        if filters[:publication_type]
+        if filters[:type]
           dataset = dataset.where({
-            :publication_type => filters[:publication_type]
+            :type => filters[:type]
           })
         end
 
-        collection(dataset, page, per_page) do |items|
-          ids = items.map { |i| i[:id] }
-          attachments = Hash.new { |h, k| h[k] = [] }
-
-          db[:attachments].where(:publication_id => ids).each do |attachment|
-            attachments[attachment[:publication_id]] << attachment[:image]
-          end
-
-          items.each do |item|
-            item[:attachments] = attachments[item[:id]]
-          end
-        end
+        publications(dataset, page, per_page)
       end
 
       def active_publication(country_code, publication_slug)
@@ -81,6 +60,30 @@ module Encuentratumascota
 
       def slug_exists?(slug)
         !db[:publications].where(:slug => slug).empty?
+      end
+
+      private
+
+      def publications(dataset, page, per_page)
+        dataset
+          .join(:breeds, :publications__breed_id => :breeds__id)
+          .select_all(:publications)
+          .select_append(:breeds__name___breed)
+          .order(:created_at)
+          .reverse
+
+        collection(dataset, page, per_page) do |items|
+          ids = items.map { |i| i[:id] }
+          attachments = Hash.new { |h, k| h[k] = [] }
+
+          db[:attachments].where(:publication_id => ids).each do |attachment|
+            attachments[attachment[:publication_id]] << attachment[:image]
+          end
+
+          items.each do |item|
+            item[:attachments] = attachments[item[:id]]
+          end
+        end
       end
 
     end

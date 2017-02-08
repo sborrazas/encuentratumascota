@@ -1,7 +1,7 @@
 es:
   models:
     publication:
-      publication_type:
+      type:
         label: Tipo
       pet_name:
         label: Título
@@ -26,7 +26,7 @@ es:
         label: Raza
       breed_id: Raza
       attachments: Imágenes
-      publication_types:
+      types:
         lost: Perdido
         found: Encontrado
         adoption: En adopción
@@ -44,7 +44,7 @@ es:
       errors:
         blank_pet_name: Debe ingresar un título
         blank_coords: Las coordenadas son inválidas
-        invalid_publication_type: El tipo de publicación es inválido
+        invalid_type: El tipo de publicación es inválido
         missing_breed_id: La raza seleccionada no existe
         blank_contact: Debe ingresar un contacto
         invalid_sex: El sexo es inválido

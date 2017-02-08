@@ -29,8 +29,8 @@ class PublicationsMap extends Component {
         {
           publications.state === "fetched" &&
             _.map(publications.data.items, (publication) => {
-              const { lat, lng, publication_type, slug } = publication;
-              let imageKey = publication_type;
+              const { lat, lng, type, slug } = publication;
+              let imageKey = type;
 
               if (selectedSlug === slug) {
                 imageKey += "_big";

@@ -38,9 +38,8 @@ module Encuentratumascota
 
       def list(params)
         collection = paginate(params) do |page, per_page|
-          client.active_publications(page, per_page, {
-            :country_code => country_code,
-            :publication_type => params["type"], # TODO: validate inclusion or nil if none
+          client.active_country_publications(country_code, page, per_page, {
+            :type => params["type"], # TODO: validate inclusion or nil if none
           })
         end
 
@@ -57,7 +56,7 @@ module Encuentratumascota
       def create(params)
         attrs = coerce_params(params) do |coercer|
           coercer.coerce_attr(:pet_name, :string)
-          coercer.coerce_attr(:publication_type, :string)
+          coercer.coerce_attr(:type, :string)
           coercer.coerce_attr(:attachments, :array, {
             :element_type => :file,
           })
@@ -73,8 +72,8 @@ module Encuentratumascota
 
         validate_block(attrs) do |validator|
           validator.validate_attr(:pet_name, :presence)
-          validator.validate_attr(:publication_type, :presence)
-          validator.validate_attr(:publication_type, :inclusion, {
+          validator.validate_attr(:type, :presence)
+          validator.validate_attr(:type, :inclusion, {
             :items => PUBLICATION_TYPES,
           })
           validator.validate_attr(:attachments, :presence)

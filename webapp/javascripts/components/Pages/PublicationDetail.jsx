@@ -58,12 +58,12 @@ class PublicationDetail extends Component {
     const attachments = publicationData.attachments.length > 0 ?
           publicationData.attachments :
           DEFAULT_ATTACHMENTS;
-    const type = publicationData.publication_type;
+    const type = publicationData.type;
     // TODO hardcoded :(
     const url = `http://encuentratumascota.org/p/${publicationData.slug}`;
     const title = _.join([
       publicationData.pet_name,
-      `[${t(`models.publication.publication_types.${type}`).toUpperCase()}]`
+      `[${t(`models.publication.types.${type}`).toUpperCase()}]`
     ], " ");
 
     return (
@@ -84,7 +84,7 @@ class PublicationDetail extends Component {
               <DetailsTitle>
                 {publicationData.pet_name}
                 {" "}<TypeTag type={type}>
-                  {t(`models.publication.publication_types.${type}`)}
+                  {t(`models.publication.types.${type}`)}
                 </TypeTag>
               </DetailsTitle>
               <DetailsDescription>

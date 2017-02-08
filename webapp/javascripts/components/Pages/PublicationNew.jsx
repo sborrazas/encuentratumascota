@@ -39,9 +39,9 @@ class PublicationNew extends Component {
     } = this.props;
     const { data: formData } = createPublication;
     const typeOptions = [
-      { value: "adoption", label: t("models.publication.publication_types.adoption") },
-      { value: "lost", label: t("models.publication.publication_types.lost") },
-      { value: "found", label: t("models.publication.publication_types.found") }
+      { value: "adoption", label: t("models.publication.types.adoption") },
+      { value: "lost", label: t("models.publication.types.lost") },
+      { value: "found", label: t("models.publication.types.found") }
     ];
     const sexOptions = [
       { value: "male", label: t("models.publication.sexes.male") },
@@ -106,9 +106,9 @@ class PublicationNew extends Component {
 
               <Field
                 form={createPublication}
-                name="publication_type"
+                name="type"
                 type="select"
-                label={t("models.publication.publication_type.label")}
+                label={t("models.publication.type.label")}
                 required={true}
                 options={typeOptions} />
 
@@ -214,7 +214,7 @@ PublicationNew = formConnect(PublicationNew, {
       lng: null,
       lost_on: "",
       pet_name: "",
-      publication_type: "lost",
+      type: "lost",
       reward: "",
       sex: "male",
     },

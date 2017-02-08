@@ -38,7 +38,7 @@ class PublicationItem extends Component {
     const {
       attachments,
       pet_name: petName,
-      publication_type: publicationType,
+      type: publicationType,
     } = publication;
     const imgSrc = attachments.length > 0 ?
       attachments[0] :
@@ -53,7 +53,7 @@ class PublicationItem extends Component {
         <ListItemTitle>
           {petName}
           {" "}<TypeTag type={publicationType}>
-            {t(`models.publication.publication_types.${publicationType}`)}
+            {t(`models.publication.types.${publicationType}`)}
           </TypeTag>
         </ListItemTitle>
         <ListItemDescription>
