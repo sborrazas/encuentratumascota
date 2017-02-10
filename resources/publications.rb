@@ -86,7 +86,6 @@ module Encuentratumascota
           validator.validate_attr(:sex, :inclusion, {
             :items => SEXES,
           })
-          validator.validate_attr(:breed_id, :presence)
           validator.validate_attr(:description, :presence)
           validator.validate_attr(:contact, :presence)
           validator.validate_attr(:lat, :presence)

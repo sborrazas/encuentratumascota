@@ -11,7 +11,7 @@ module Encuentratumascota
 
         if filters[:type]
           dataset = dataset.where({
-            :type => filters[:type]
+            :type => filters[:type],
           })
         end
 
@@ -27,14 +27,14 @@ module Encuentratumascota
         publications(dataset, page, per_page)
       end
 
-      def active_publication(country_code, publication_slug)
+      def active_publication(country_code, slug)
         dataset = db[:publications]
           .where({
             :country_code => country_code,
-            :slug => publication_slug,
+            :slug => slug,
             :status => ["active", "approved"],
           })
-          .join(:breeds, :publications__breed_id => :breeds__id)
+          .left_join(:breeds, :publications__breed_id => :breeds__id)
           .select_all(:publications)
           .select_append(:breeds__name___breed)
 
@@ -74,8 +74,8 @@ module Encuentratumascota
       private
 
       def publications(dataset, page, per_page)
-        dataset
-          .join(:breeds, :publications__breed_id => :breeds__id)
+        dataset = dataset
+          .left_join(:breeds, :publications__breed_id => :breeds__id)
           .select_all(:publications)
           .select_append(:breeds__name___breed)
           .order(:created_at)
