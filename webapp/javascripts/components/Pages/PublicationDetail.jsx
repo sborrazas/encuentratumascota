@@ -73,7 +73,7 @@ class PublicationDetail extends Component {
             <Details>
               <NavBar>
                 <NavBarItem>
-                  <Link to="/">
+                  <Link to={{ name: "home" }}>
                     <Icon name="arrowLeft" /> {t("shared.back")}
                   </Link>
                 </NavBarItem>
