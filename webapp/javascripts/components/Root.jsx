@@ -172,7 +172,7 @@ class Root extends Component {
                   </MainHeaderNavItem>
                 )
             }
-            <MainHeaderNavItem to="how-it-works">
+            <MainHeaderNavItem to="/how-it-works">
               {t("general.nav.how_it_works")}
             </MainHeaderNavItem>
             <MainHeaderNavItem
