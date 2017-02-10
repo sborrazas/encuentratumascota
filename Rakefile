@@ -29,6 +29,14 @@ end
 task :console => :environment do
   require "irb"
   require "irb/completion"
+  require "sequel"
+
+  DB = Sequel.postgres({
+    :database => Encuentratumascota::Settings::DATABASE_NAME,
+    :user => Encuentratumascota::Settings::DATABASE_USER,
+    :password => Encuentratumascota::Settings::DATABASE_PASSWORD
+  })
+
   ARGV.clear
   IRB.start
 end
