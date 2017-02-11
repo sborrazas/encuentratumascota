@@ -2,10 +2,20 @@
 
 .btn {
   &:extend(.button);
+  width: 100%;
+}
+
+.btn--primary {
   &:extend(.button--primary);
+}
+
+.btn--secondary {
+  padding: 10px 18px;
+  text-transform: uppercase;
 }
 
 .btn--inline {
   font-size: 10px;
   padding: 3px 9px;
+  width: initial;
 }

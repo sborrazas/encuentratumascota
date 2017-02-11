@@ -12,7 +12,7 @@
   <table class="table">
     <tr>
       <th><%= t("models.publication.pet_name.label") %></th>
-      <th><%= t("models.publication.status") %></th>
+      <th><%= t("models.publication.status.label") %></th>
       <th><%= t("models.publication.type.label") %></th>
       <th><%= t("models.publication.lost_on.label") %></th>
       <th><%= t("models.publication.country") %></th>
@@ -42,7 +42,7 @@
               action="/admin/publications/<%= publication[:id] %>/close"
               class="form form--inline"
               method="POST">
-              <button type="submit" class="btn btn--inline">
+              <button type="submit" class="btn btn--inline btn--primary">
                 <%= t("admin.publications.index.close") %>
               </button>
             </form>

@@ -9,7 +9,8 @@ es:
       description:
         label: Descripción
         placeholder: Descripción general de la mascota
-      status: Estado
+      status:
+        label: Estado
       sex:
         label: Sexo
       lat: Latitud
@@ -25,7 +26,9 @@ es:
       breed:
         label: Raza
       breed_id: Raza
-      attachments: Imágenes
+      attachments:
+        label: Imágenes
+        item_label: "Imágen %{num}"
       types:
         lost: Perdido
         found: Encontrado
@@ -171,6 +174,7 @@ es:
   admin:
     publications: Publicaciones
     my_publications: Mis Publicaciones
+    back_to_app: Volver a la app
     publications:
       index:
         new: Nueva Publicación
@@ -182,6 +186,7 @@ es:
         actions: Acciones
       form:
         location: Ubicación
+        date_placeholder: "dd/mm/YYYY"
       new:
         submit: Crear
         cancel: Cancelar

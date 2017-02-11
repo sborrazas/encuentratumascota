@@ -1,0 +1,17 @@
+.nav {
+  margin-bottom: 20px;
+}
+
+.nav ul {
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.nav-item {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.nav-item:last-child {
+  margin-right: 0;
+}

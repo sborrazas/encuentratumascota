@@ -1,0 +1,12 @@
+<div class="field">
+  <label class="field-label" for="<%= id %>" class="field-label">
+    <%= label %>
+  </label>
+  <div
+    class="js-adminMap"
+    data-lat="<%= value.fetch(:lat) %>"
+    data-lng="<%= value.fetch(:lng) %>"
+    data-name="<%= name %>"></div>
+
+  <%== render("shared/fields/errors.html", :errors => errors[:lat]) %>
+</div>

@@ -1,0 +1,90 @@
+<% extends("layouts/admin.html") %>
+
+<% vlock(:page_title) do %><%= t("admin.my_publications") %><% end %>
+
+<% vlock(:breadcrumb) do %>
+  <li class="breadcrumbs-item">
+    <span class="breadcrumbs-separator"></span>
+    <a href="/admin"><%= t("admin.my_publications") %></a>
+  </li>
+  <li class="breadcrumbs-item">
+    <span class="breadcrumbs-separator"></span><%= publication.fetch(:pet_name) %>
+  </li>
+<% end %>
+
+<% vlock(:body) do %>
+  <form
+    action="/admin/publications/<%= publication.fetch(:id) %>/edit"
+    class="form"
+    enctype="multipart/form-data"
+    method="POST">
+
+    <input
+      name="authenticity_token"
+      type="hidden"
+      value="<%= authenticity_token %>" />
+
+    <%== form_field(fields, errors, :pet_name, :text, {
+      :label => t("models.publication.pet_name.label"),
+      :placeholder => t("models.publication.pet_name.placeholder"),
+    }) %>
+    <%== form_field(fields, errors, :sex, :radio, {
+      :label => t("models.publication.sex.label"),
+      :options => ["male", "female", "unknown"],
+      :label_prefix => "models.publication.sexes",
+    }) %>
+    <%== form_field(fields, errors, :attachments, :attachments_list, {
+      :label => t("models.publication.attachments.label"),
+      :item_label => "models.publication.attachments.item_label",
+    }) %>
+    <%== form_field(fields, errors, :description, :textarea, {
+      :label => t("models.publication.description.label"),
+      :placeholder => t("models.publication.description.placeholder"),
+    }) %>
+    <%== form_field(fields, errors, [:lat, :lng], :map, {
+      :label => t("admin.publications.form.location"),
+    }) %>
+    <%== form_field(fields, errors, :reward, :text, {
+      :label => t("models.publication.reward.label"),
+      :placeholder => t("models.publication.reward.placeholder"),
+    }) %>
+    <%== form_field(fields, errors, :type, :select, {
+      :label => t("models.publication.type.label"),
+      :options => ["adoption", "lost", "found"],
+      :label_prefix => "models.publication.types",
+    }) %>
+    <%== form_field(fields, errors, :breed_id, :select, {
+      :label => t("models.publication.breed.label"),
+      :options => breeds_options,
+    }) %>
+    <%== form_field(fields, errors, :lost_on, :datepicker, {
+      :label => t("models.publication.lost_on.label"),
+    }) %>
+    <%== form_field(fields, errors, :contact, :text, {
+      :label => t("models.publication.contact.label"),
+      :placeholder => t("models.publication.contact.placeholder"),
+    }) %>
+    <% if is_admin? %>
+      <%== form_field(fields, errors, :status, :select, {
+        :label => t("models.publication.status.label"),
+        :options => ["active", "approved", "closed"],
+      }) %>
+    <% end %>
+
+    <nav class="nav">
+      <ul>
+        <li class="nav-item">
+          <button class="btn btn--primary">
+            <%= t("admin.publications.edit.submit") %>
+          </button>
+        </li>
+        <li class="nav-item">
+          <a
+            class="btn btn--secondary"
+            href="/admin">
+            <%= t("admin.publications.edit.cancel") %>
+          </a>
+        </li>
+    </nav>
+  </form>
+<% end %>

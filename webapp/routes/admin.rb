@@ -24,8 +24,13 @@ module Webapp
            resource(Resources::Publication, "edit"),
            permission("update") do |publication|
 
+          fields = publication.detail
+
           render_view("admin/publication.html", {
-            :publication => publication.detail,
+            :publication => fields,
+            :errors => {},
+            :fields => fields,
+            :breeds_options => publication.breeds_options,
           })
         end
 
@@ -38,8 +43,12 @@ module Webapp
 
             redirect!("/admin")
           rescue Validator::ValidationError => ex
-            # TODO
-            render_json({ "errors" => ex.errors }, 422)
+            render_view("admin/publication.html", {
+              :breeds_options => publication.breeds_options,
+              :errors => ex.errors,
+              :fields => ex.attrs,
+              :publication => publication.detail,
+            })
           end
         end
 

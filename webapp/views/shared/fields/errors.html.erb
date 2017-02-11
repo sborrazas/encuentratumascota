@@ -1,0 +1,7 @@
+<% if errors.any? %>
+  <ul class="field-errors">
+    <% errors.each do |error| %>
+      <li class="field-error"><%= t("errors.#{error}") %></li>
+    <% end %>
+  </ul>
+<% end %>

@@ -123,9 +123,10 @@ module Webapp
     # @return [Contexts::WebContext]
     def template_context
       @template_context ||= Contexts::WebContext.new({
-        :locales_dir => File.join(WEBAPP_DIR, "locales"),
         :authenticity_token => session[:csrf],
+        :current_user => context_resource.current_user,
         :environment => Encuentratumascota::Settings::ENVIRONMENT,
+        :templates_dir => File.join(WEBAPP_DIR, "views"),
       })
     end
 

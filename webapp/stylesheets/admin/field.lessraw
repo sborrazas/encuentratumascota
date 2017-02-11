@@ -1,0 +1,73 @@
+@import "../mixins.less";
+@import "../variables.less";
+
+.field {
+  margin-bottom: 20px;
+}
+
+.field-label {
+  color: #b3b3b3;
+  display: block;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  margin-bottom: 5px;
+}
+
+.field-input {
+  width: 100%;
+}
+
+.field-input--text,
+.field-input--textarea,
+.field-input--datepicker,
+.field-input--select {
+  background: #FFFFFF;
+  border: 1px solid #BFBFBF;
+  border-radius: 3px;
+  margin: 0;
+  outline: 0;
+  padding: 10px;
+}
+
+.field-input--text:focus ,
+.field-input--textarea:focus ,
+.field-input--datepicker:focus,
+.field-input--select:focus {
+  border-color: @color-6;
+}
+
+.field-input--select {
+  height: 35px;
+}
+
+.field-input--radio {
+  width: initial;
+}
+
+.field-input--map {
+  height: 400px;
+  position: relative;
+}
+
+.field-attachmentLabel {
+  display: block;
+  margin: 10px 0 5px 0;
+}
+
+.field-attachmentImg {
+  display: block;
+  margin-bottom: 12px;
+  max-height: 80px;
+  max-width: 80px;
+}
+
+.field-errors {
+  .m-clearfix();
+  color: red;
+  margin-top: 5px;
+}
+
+.field-error {
+  float: left;
+  margin-right: 10px;
+}

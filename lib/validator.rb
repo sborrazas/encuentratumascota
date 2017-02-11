@@ -3,9 +3,11 @@ class Validator
   class ValidationError < StandardError
 
     attr_reader :errors
+    attr_reader :attrs
 
-    def initialize(errors)
+    def initialize(errors, attrs)
       @errors = errors
+      @attrs = attrs
     end
 
   end
@@ -59,7 +61,7 @@ class Validator
 
   def check_errors!
     if @errors.any?
-      raise ValidationError.new(@errors)
+      raise ValidationError.new(@errors, @attributes)
     end
   end
 

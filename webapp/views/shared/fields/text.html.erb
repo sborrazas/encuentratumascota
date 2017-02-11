@@ -1,0 +1,12 @@
+<div class="field">
+  <label class="field-label" for="<%= id %>" class="field-label">
+    <%= label %>
+  </label>
+  <input
+    class="field-input field-input--text"
+    id="<%= id %>"
+    name="<%= name %>"
+    value="<%= value %>"
+    type="text" />
+  <%== render("shared/fields/errors.html", :errors => errors) %>
+</div>

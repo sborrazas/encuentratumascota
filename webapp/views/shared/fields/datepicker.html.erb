@@ -1,0 +1,13 @@
+<div class="field">
+  <label class="field-label" for="<%= id %>" class="field-label">
+    <%= label %>
+  </label>
+  <input
+    class="field-input field-input--datepicker"
+    id="<%= id %>"
+    name="<%= name %>"
+    value="<%= value && value.strftime("%d/%m/%Y") %>"
+    placeholder="<%= t("admin.publications.form.date_placeholder") %>"
+    type="text" />
+  <%== render("shared/fields/errors.html", :errors => errors) %>
+</div>

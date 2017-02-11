@@ -1,0 +1,19 @@
+<div class="field">
+  <label class="field-label" for="<%= id %>" class="field-label">
+    <%= label %>
+  </label>
+  <select
+    class="field-input field-input--select"
+    id="<%= id %>"
+    name="<%= name %>">
+
+    <% options.each do |(op_value, op_label)| %>
+      <option
+        <% if value == op_value %>selected="selected"<% end %>
+        value="<%= op_value %>">
+        <%= op_label || t("#{label_prefix}.#{op_value}") %>
+      </option>
+    <% end %>
+  </select>
+  <%== render("shared/fields/errors.html", :errors => errors) %>
+</div>

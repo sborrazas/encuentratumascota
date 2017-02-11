@@ -14,3 +14,22 @@
   display: inline-block;
   max-height: 50px;
 }
+
+.mainHeader-nav {
+  float: right;
+}
+
+.mainHeader-nav li {
+  line-height: 50px;
+  float: left;
+}
+
+.mainHeader-navItem {
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+}
+
+.mainHeader-navItem:hover,
+.mainHeader-navItem:active {
+  border-color: #FAA61A;
+}

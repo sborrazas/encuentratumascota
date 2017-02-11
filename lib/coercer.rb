@@ -133,9 +133,10 @@ class Coercer
 
   def coerce_date(value, options = {})
     value = coerce_string(value)
+    format = options.fetch(:format, "%Y-%m-%d")
 
     begin
-      Date.strptime(value, options.fetch(:format, "%Y-%m-%d"))
+      Date.strptime(value, options.fetch(:format, format))
     rescue ArgumentError
       nil
     end

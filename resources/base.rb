@@ -16,6 +16,10 @@ module Encuentratumascota
         session[:country_code] ||= "UY" # TODO: remove hardcoded constant
       end
 
+      def current_user
+        session[:user]
+      end
+
       private
 
       def client
@@ -35,12 +39,13 @@ module Encuentratumascota
         request.fetch(:session)
       end
 
-      def current_user
-        session[:user]
-      end
-
       def set_current_user(user)
-        session[:user] = user
+        session[:user] = {
+          :id => user.fetch(:id),
+          :username => user.fetch(:username),
+          :image_url => user[:image_url],
+          :is_admin => user.fetch(:is_admin),
+        }
       end
 
       def set_country_code(country_code)

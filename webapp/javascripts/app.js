@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import _ from "lodash";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import App from "components/App.jsx";
+import AdminMap from "components/Admin/Map.jsx";
 import { reducer as routingReducer } from "utils/react-router-extras.js";
 import { reducer as authReducer } from "resources/auth.js";
 import { reducer as publicationsReducer } from "resources/publications.js";
@@ -34,6 +35,7 @@ const store = createStore(
 
 const COMPONENTS_MAP = {
   "app": App,
+  "adminMap": AdminMap,
 };
 
 export default () => {

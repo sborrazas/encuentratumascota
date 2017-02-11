@@ -1,0 +1,17 @@
+<div class="field">
+  <span for="<%= id %>" class="field-label"><%= label %></span>
+  <% 5.times do |index| # TODO: Remove magic number %>
+    <label class="field-attachmentLabel" for="<%= name %>_<%= index %>">
+      <%= t(item_label, :num => (index + 1)) %>
+    </label>
+    <% if value[index] %>
+      <img alt="<%= label %>" class="field-attachmentImg" src="<%= value[index] %>" />
+    <% end %>
+    <input
+      class="field-input"
+      id="<%= id %>_<%= index %>"
+      name="<%= name %>[<%= index %>]"
+      type="file" />
+  <% end %>
+  <%== render("shared/fields/errors.html", :errors => errors) %>
+</div>

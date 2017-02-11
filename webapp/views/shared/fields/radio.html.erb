@@ -1,0 +1,18 @@
+<div class="field">
+  <span class="field-label" for="<%= id %>" class="field-label">
+    <%= label %>
+  </span>
+  <% options.each do |option| %>
+    <input
+      class="field-input field-input--radio"
+      id="<%= id %>_<%= option %>"
+      name="<%= name %>"
+      value="<%= option %>"
+      <% if value == option %>checked="checked"<% end %>
+      type="radio" />
+    <label for="<%= id %>_<%= option %>" class="field-radioLabel">
+      <%= t("#{label_prefix}.#{option}") %>
+    </label>
+  <% end %>
+  <%== render("shared/fields/errors.html", :errors => errors) %>
+</div>

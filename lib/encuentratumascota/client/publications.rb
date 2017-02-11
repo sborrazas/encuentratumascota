@@ -34,21 +34,18 @@ module Encuentratumascota
             :slug => slug,
             :status => ["active", "approved"],
           })
-          .left_join(:breeds, :publications__breed_id => :breeds__id)
-          .select_all(:publications)
-          .select_append(:breeds__name___breed)
 
-        publication = dataset.first
+        publication(dataset)
+      end
 
-        if publication
-          attachments = db[:attachments].where({
-            :publication_id => publication[:id]
+      def user_publication(user_id, id)
+        dataset = db[:publications]
+          .where({
+            :publications__id => id,
+            :user_id => user_id,
           })
 
-          publication[:attachments] = attachments.map { |a| a[:image] }
-        end
-
-        publication
+        publication(dataset)
       end
 
       def create_publication(attrs)
@@ -64,6 +61,20 @@ module Encuentratumascota
           end
 
           id
+        end
+      end
+
+      def update_publication(id, attrs)
+        attachments = attrs.delete(:attachments)
+        db.transaction do
+          db[:publications].where(:id => id).update(attrs)
+
+          attachments.map do |attachment_name|
+            db[:attachments].insert({
+              :image => attachment_name,
+              :publication_id => id,
+            })
+          end
         end
       end
 
@@ -93,6 +104,24 @@ module Encuentratumascota
             item[:attachments] = attachments[item[:id]]
           end
         end
+      end
+
+      def publication(dataset)
+        _publication = dataset
+          .join(:breeds, :publications__breed_id => :breeds__id)
+          .select_all(:publications)
+          .select_append(:breeds__name___breed)
+          .first
+
+        if _publication
+          attachments = db[:attachments].where({
+            :publication_id => _publication[:id]
+          })
+
+          _publication[:attachments] = attachments.map { |a| a[:image] }
+        end
+
+        _publication
       end
 
     end

@@ -1,0 +1,10 @@
+<div class="field">
+  <label class="field-label" for="<%= id %>" class="field-label">
+    <%= label %>
+  </label>
+  <textarea
+    class="field-input field-input--textarea"
+    id="<%= id %>"
+    name="<%= name %>"><%= value %></textarea>
+  <%== render("shared/fields/errors.html", :errors => errors) %>
+</div>

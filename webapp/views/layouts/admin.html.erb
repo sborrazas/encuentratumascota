@@ -13,6 +13,14 @@
       <a href="/">
         <img class="mainHeader-logo" src="/images/logo.png" />
       </a>
+      <nav class="mainHeader-nav">
+        <ul>
+          <li><a class="mainHeader-navItem" href="/"><%= t("admin.back_to_app") %></a></li>
+          <% if is_admin? %>
+            <li><a class="mainHeader-navItem" href="/admin/users"><%= t("admin.users") %></a></li>
+          <% end %>
+        </ul>
+      </nav>
     </div>
   </header>
   <nav class="breadcrumbs">

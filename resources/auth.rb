@@ -102,6 +102,7 @@ module Encuentratumascota
         set_current_user({
           :id => id,
           :username => attrs[:private_username],
+          :is_admin => false,
         })
 
         detail
@@ -138,7 +139,8 @@ module Encuentratumascota
 
         set_current_user({
           :id => user[:id],
-          :username => attrs[:private_username] || attrs[:email],
+          :username => user[:private_username] || user[:email],
+          :is_admin => user.fetch(:is_admin),
         })
 
         detail

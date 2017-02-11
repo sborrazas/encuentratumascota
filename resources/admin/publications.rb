@@ -1,5 +1,6 @@
 require "resources/base"
 require "resources/extensions/collection"
+require "resources/admin/publication"
 
 module Encuentratumascota
   module Resources
@@ -12,6 +13,18 @@ module Encuentratumascota
           [
             [ACL::AUTHENTICATED, "list"],
           ]
+        end
+
+        def [](key)
+          publication = client.user_publication(current_user.fetch(:id), key)
+
+          super(key) unless publication
+
+          Resources::Admin::Publication.new(
+            publication,
+            settings,
+            request
+          )
         end
 
         def list(params)
