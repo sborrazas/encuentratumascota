@@ -1,0 +1,9 @@
+<% extends("dashboard.html") %>
+
+<% vlock(:extra_headers) do %>
+  <meta property="og:title" content="<%= publication[:pet_name] %>" />
+  <% unless publication[:description].empty? %>
+    <meta property="og:description" content="<%= publication[:description] %>" />
+  <% end %>
+  <meta property="og:image" content="<%= publication[:attachments].first %>" />
+<% end %>

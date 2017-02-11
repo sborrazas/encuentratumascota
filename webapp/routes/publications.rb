@@ -49,9 +49,13 @@ module Webapp
           render_json(publication.inquiry(form_params))
         end
 
-        on get, resource(Resources::Publication), permission("view") do
-          # TODO: Render title & description
-          render_view("dashboard.html")
+        on get,
+           resource(Resources::Publication),
+           permission("view") do |publication|
+
+          render_view("publication_dashboard.html", {
+            :publication => publication.detail,
+          })
         end
 
         not_found!
