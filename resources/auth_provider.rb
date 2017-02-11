@@ -44,7 +44,8 @@ module Encuentratumascota
 
         set_current_user({
           :id => user[:id],
-          :username => user[:provider_username] || user[:private_username],
+          :username => user[:provider_username],
+          :email => user[:email],
           :image_url => user[:image_url],
         })
       end

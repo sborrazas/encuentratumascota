@@ -1,4 +1,3 @@
-import object from "./object.js";
 import global from "./global.js";
 
 var serializer = null

@@ -43,6 +43,7 @@ module Encuentratumascota
         session[:user] = {
           :id => user.fetch(:id),
           :username => user.fetch(:username),
+          :email => user.fetch(:email),
           :image_url => user[:image_url],
           :is_admin => user.fetch(:is_admin),
         }

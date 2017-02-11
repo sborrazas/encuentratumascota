@@ -1,7 +1,10 @@
 import React from "react";
 import _ from "lodash";
+import md5 from "md5";
 import { connect as routerConnect } from "utils/react-router-extras.js";
 import { Component } from "utils/react-extras.js";
+import document from "utils/dom/document.js";
+import serializer from "utils/serializer.js";
 import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 import global from "utils/global.js";
@@ -60,6 +63,8 @@ const COUNTRIES = { // TODO: move to config
   },
 };
 
+const DEFAULT_USER_IMG = "/assets/default_user.png";
+
 class Root extends Component {
   constructor(props) {
     super(props);
@@ -89,6 +94,7 @@ class Root extends Component {
 
     let modal;
     let sessionNavEl;
+    let userImgSrc;
 
     if (query.sign_in) {
       modal = (<SignIn />);
@@ -98,16 +104,17 @@ class Root extends Component {
     }
 
     if (user) {
-      let userImgSrc = "/assets/default_user.png";
-
       if (user.img) {
         userImgSrc = user.img;
       }
       else {
-        // TODO
-        // hash = Digest::MD5.hexdigest(current_user.email.downcase)
-        // default_img = "#{request.protocol}#{request.host_with_port}/assets/default_user.png"
-        userImgSrc = "http://www.gravatar.com/avatar/#{hash}?d=#{u(default_img)}";
+        const hash = md5(user.email);
+        const location = document.location;
+        const defaultImg = serializer.encodeURI(
+          `${location.protocol}//${location.hostname}/${DEFAULT_USER_IMG}`
+        );
+
+        userImgSrc = `//www.gravatar.com/avatar/${hash}?d=${defaultImg}`;
       }
 
       sessionNavEl = (
