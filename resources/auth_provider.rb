@@ -47,6 +47,7 @@ module Encuentratumascota
           :username => user[:provider_username],
           :email => user[:email],
           :image_url => user[:image_url],
+          :is_admin => false,
         })
       end
 
