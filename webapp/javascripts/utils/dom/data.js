@@ -1,5 +1,5 @@
-module.exports = {
-  get: function (node, prop) {
-    return node.dataset[prop];
-  }
+const getAll = (node) => {
+  return node.dataset;
 };
+
+export { getAll };

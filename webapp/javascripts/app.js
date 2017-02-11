@@ -8,7 +8,7 @@ import { reducer as authReducer } from "resources/auth.js";
 import { reducer as publicationsReducer } from "resources/publications.js";
 import { reducer as breedsReducer } from "resources/breeds.js";
 import { reducer as publicationReducer } from "resources/publication.js";
-import console from "utils/console.js";
+import { getAll } from "utils/dom/data.js";
 
 const reducersList = [
   authReducer,
@@ -32,19 +32,21 @@ const store = createStore(
   {}
 );
 
-export default () => {
-  const appEl = document.getElementById("app");
+const COMPONENTS_MAP = {
+  "app": App,
+};
 
-  if (appEl) {
-    ReactDOM.render(
-      React.createElement(App, {
-        store: store,
-        translations: global._TRANSLATIONS,
-      }),
-      document.getElementById("app")
-    );
-  }
-  else {
-    console.warn("Element with ID `app` not found.");
-  }
+export default () => {
+  _.forEach(COMPONENTS_MAP, (Component, name) => {
+    _.forEach(document.getElementsByClassName(`js-${name}`), (el) => {
+      ReactDOM.render(
+        React.createElement(Component, {
+          store: store,
+          translations: global._TRANSLATIONS,
+          data: getAll(el),
+        }),
+        el
+      );
+    });
+  });
 };
