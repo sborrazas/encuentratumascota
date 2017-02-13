@@ -22,7 +22,7 @@ class Field extends Component {
     } = this.props;
     const errorMessages = errors[name] &&
       errors[name].length > 0 &&
-      _.map(errors, (error) => t(`errors.${error}`));
+      _.map(errors[name], (error) => t(`errors.${error}`));
 
     return (
       <BaseField

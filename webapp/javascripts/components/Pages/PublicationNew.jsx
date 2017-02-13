@@ -118,7 +118,7 @@ class PublicationNew extends Component {
                 name="attachments"
                 type="uploader"
                 maxFiles={MAX_ATTACHMENTS}
-                label={t("models.publication.attachments")} />
+                label={t("models.publication.attachments.label")} />
 
               <Field
                 form={createPublication}

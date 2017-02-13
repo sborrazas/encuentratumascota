@@ -146,7 +146,7 @@ class Root extends Component {
           logo="/images/logo.png"
           tagline={t("general.tagline")}
           title={t("general.name")}
-          toHome={{ pathname: "home" }}
+          toHome={{ name: "home" }}
           user={user}>
 
           <MainHeaderNav>
