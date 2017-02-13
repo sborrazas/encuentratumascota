@@ -23,7 +23,7 @@ import List, {
 import ButtonGroup, {
   Item as ButtonGroupItem,
 } from "components/Base/ButtonGroup.jsx";
-import Icon from "components/Base/Icon.jsx";
+import Loader from "components/Base/Loader.jsx";
 import Section, {
   Header as SectionHeader,
   Content as SectionContent,
@@ -81,6 +81,26 @@ class PublicationList extends Component {
       query: { type: publicationType },
       t,
     } = this.props;
+    let content;
+
+    if (publications.state === "fetched") {
+      content = (
+        <List emptyText={t("main.index.empty_publication_list")}>
+          {
+            _.map(publications.data.items, (publication) => {
+              return (
+                <PublicationItem
+                  publication={publication}
+                  key={publication.slug} />
+              );
+            })
+          }
+        </List>
+      );
+    }
+    else {
+      content = (<Loader message={t("shared.loading")} />);
+    }
 
     return (
       <Root displayToggler={true}>
@@ -109,21 +129,7 @@ class PublicationList extends Component {
             </ButtonGroup>
           </SectionHeader>
           <SectionContent>
-            <List
-              emptyText={t("main.index.empty_publication_list")}
-              loading={publications.state === "loading"}>
-
-              {
-                publications.state === "fetched" &&
-                  _.map(publications.data.items, (publication) => {
-                    return (
-                      <PublicationItem
-                        publication={publication}
-                        key={publication.slug} />
-                    );
-                  })
-              }
-            </List>
+            {content}
           </SectionContent>
         </Section>
       </Root>

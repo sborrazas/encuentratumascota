@@ -201,6 +201,7 @@ es:
     back: Volver
     previous: Atrás
     next: Siguiente
+    loading: Cargando
 
   errors:
     invalid: Es inválido.

@@ -15,6 +15,7 @@ import auth, {
 // Components
 import Root from "../Root.jsx";
 import TypeTag from "components/Base/TypeTag.jsx";
+import Loader from "components/Base/Loader.jsx";
 import Carousel from "components/Base/Carousel.jsx";
 import Details, {
   Title as DetailsTitle,
@@ -37,6 +38,121 @@ import { DEFAULT_PUBLICATION_IMAGE, ST_USERNAME } from "config/settings.js";
 
 const DEFAULT_ATTACHMENTS = [DEFAULT_PUBLICATION_IMAGE];
 
+class RawDetail extends Component {
+  render() {
+    const {
+      inquiry,
+      onRequestContactInfo,
+      publication,
+      t,
+    } = this.props;
+    const attachments = publication.attachments.length > 0 ?
+      publication.attachments :
+      DEFAULT_ATTACHMENTS;
+    const type = publication.type;
+    // TODO hardcoded :(
+    const url = `http://encuentratumascota.org/p/${publication.slug}`;
+    const title = _.join([
+      publication.pet_name,
+      `[${t(`models.publication.types.${type}`).toUpperCase()}]`
+    ], " ");
+
+    return (
+      <Details>
+        <NavBar>
+          <NavBarItem>
+            <Link to={{ name: "home" }}>
+              <Icon name="arrowLeft" /> {t("shared.back")}
+            </Link>
+          </NavBarItem>
+        </NavBar>
+
+        <Carousel images={attachments} title={publication.pet_name} />
+
+        <DetailsTitle>
+          {publication.pet_name}
+          {" "}<TypeTag type={type}>
+            {t(`models.publication.types.${type}`)}
+          </TypeTag>
+        </DetailsTitle>
+        <DetailsDescription>
+          {publication.description}
+        </DetailsDescription>
+        <DetailsMeta>
+          <DetailsMetaItem
+            label={t("models.publication.breed.label")}
+            value={publication.breed} />
+          <DetailsMetaItem
+            label={t("models.publication.lost_on.label")}
+            value={publication.lost_on} />
+          <DetailsMetaItem
+            label={t("models.publication.sex.label")}
+            value={t(`models.publication.sexes.${publication.sex}`)} />
+          <DetailsMetaItem
+            label={t("models.publication.reward.label")}
+            value={publication.reward} />
+        </DetailsMeta>
+        <DetailsSocial>
+          {
+            _.map(["twitter", "facebook", "email"], (service) => {
+              return (
+                <DetailsSocialItem
+                  description={publication.description}
+                  imgSrc={attachments[0]}
+                  key={service}
+                  service={service}
+                  stUsername={ST_USERNAME}
+                  title={title}
+                  url={url} t />
+              );
+            })
+          }
+        </DetailsSocial>
+        {
+          inquiry.state === "fetched" &&
+            (
+              <DetailsTitle>
+                {t("main.index.contact_info")}
+              </DetailsTitle>
+            )
+        }
+        {
+          inquiry.state === "fetched" &&
+            (
+              <DetailsDescription>
+                {inquiry.text}
+              </DetailsDescription>
+            )
+        }
+        {
+          inquiry.state === "uninitialized" &&
+            (
+              <NavBar>
+                <NavBarItem single={true}>
+                  <Button
+                    important={true}
+                    onClick={onRequestContactInfo}
+                    secondary={true}>
+
+                   {t("main.index.request_contact_info")}
+                  </Button>
+                </NavBarItem>
+              </NavBar>
+            )
+        }
+      </Details>
+    );
+  }
+}
+
+RawDetail.propTypes = {
+  inquiry: React.PropTypes.object.isRequired,
+  onRequestContactInfo: React.PropTypes.func.isRequired,
+  publication: React.PropTypes.object.isRequired,
+};
+
+RawDetail = translationsConnect(RawDetail);
+
 class PublicationDetail extends Component {
   constructor(props) {
     super(props);
@@ -46,113 +162,30 @@ class PublicationDetail extends Component {
   render() {
     const {
       publication,
+      params: { publicationSlug },
       t,
     } = this.props;
     const { inquiry } = this.state;
 
+    let content;
+
     if (publication.state !== "fetched") {
-      return (<div>Loading</div>);
+      content = (<Loader message={t("shared.loading")} />);
+    }
+    else {
+      content = (
+        <RawDetail
+          inquiry={inquiry}
+          onRequestContactInfo={this._displayContactInfo}
+          publication={publication.data} />
+      );
     }
 
-    const publicationData = publication.data;
-    const attachments = publicationData.attachments.length > 0 ?
-          publicationData.attachments :
-          DEFAULT_ATTACHMENTS;
-    const type = publicationData.type;
-    // TODO hardcoded :(
-    const url = `http://encuentratumascota.org/p/${publicationData.slug}`;
-    const title = _.join([
-      publicationData.pet_name,
-      `[${t(`models.publication.types.${type}`).toUpperCase()}]`
-    ], " ");
-
     return (
-      <Root selectedSlug={publicationData.slug}>
+      <Root selectedSlug={publicationSlug}>
         <Section>
           <SectionContent ignoreHeader={true}>
-            <Details>
-              <NavBar>
-                <NavBarItem>
-                  <Link to={{ name: "home" }}>
-                    <Icon name="arrowLeft" /> {t("shared.back")}
-                  </Link>
-                </NavBarItem>
-              </NavBar>
-
-              <Carousel images={attachments} title={publicationData.pet_name} />
-
-              <DetailsTitle>
-                {publicationData.pet_name}
-                {" "}<TypeTag type={type}>
-                  {t(`models.publication.types.${type}`)}
-                </TypeTag>
-              </DetailsTitle>
-              <DetailsDescription>
-                {publicationData.description}
-              </DetailsDescription>
-              <DetailsMeta>
-                <DetailsMetaItem
-                  label={t("models.publication.breed.label")}
-                  value={publicationData.breed} />
-                <DetailsMetaItem
-                  label={t("models.publication.lost_on.label")}
-                  value={publicationData.lost_on} />
-                <DetailsMetaItem
-                  label={t("models.publication.sex.label")}
-                  value={t(`models.publication.sexes.${publicationData.sex}`)} />
-                <DetailsMetaItem
-                  label={t("models.publication.reward.label")}
-                  value={publicationData.reward} />
-              </DetailsMeta>
-              <DetailsSocial>
-                {
-                  _.map(["twitter", "facebook", "email"], (service) => {
-                    return (
-                      <DetailsSocialItem
-                        description={publicationData.description}
-                        imgSrc={attachments[0]}
-                        key={service}
-                        service={service}
-                        stUsername={ST_USERNAME}
-                        title={title}
-                        url={url} t />
-                    );
-                  })
-                }
-              </DetailsSocial>
-              {
-                inquiry.state === "fetched" &&
-                  (
-                    <DetailsTitle>
-                      {t("main.index.contact_info")}
-                    </DetailsTitle>
-                  )
-              }
-              {
-                inquiry.state === "fetched" &&
-                  (
-                    <DetailsDescription>
-                      {inquiry.text}
-                    </DetailsDescription>
-                  )
-              }
-              {
-                inquiry.state === "uninitialized" &&
-                  (
-                    <NavBar>
-                      <NavBarItem single={true}>
-                        <Button
-                          important={true}
-                          onClick={this._displayContactInfo}
-                          secondary={true}>
-
-                         {t("main.index.request_contact_info")}
-                        </Button>
-                      </NavBarItem>
-                    </NavBar>
-                  )
-              }
-            </Details>
+            {content}
           </SectionContent>
         </Section>
       </Root>
@@ -163,14 +196,14 @@ class PublicationDetail extends Component {
     const { inquiry: { state } } = this.state;
 
     if (auth.data.signed_in) {
-      if (state !== "loading") {
+      if (state !== "fetching") {
         publication.inquiry.submit({}).then((inquiry) => {
           this.setState({
             inquiry: { text: inquiry.contact, state: "fetched" },
           });
         });
       }
-      this.setState({ inquiry: { state: "loading" } });
+      this.setState({ inquiry: { state: "fetching" } });
     }
     else {
       goTo({
