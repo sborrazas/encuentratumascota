@@ -108,7 +108,7 @@ module Encuentratumascota
 
       def publication(dataset)
         _publication = dataset
-          .join(:breeds, :publications__breed_id => :breeds__id)
+          .left_join(:breeds, :publications__breed_id => :breeds__id)
           .select_all(:publications)
           .select_append(:breeds__name___breed)
           .first
