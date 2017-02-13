@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         url,
         method,
         submit: (params) => {
-          dispatch((dispatch, getState) => {
+          return dispatch((dispatch, getState) => {
             const resource = getState().api[uri];
 
             if (resource && resource.state === "fetching") {
