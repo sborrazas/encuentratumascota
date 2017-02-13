@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import _ from "lodash";
+import thunk from "redux-thunk";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import App from "components/App.jsx";
 import AdminMap from "components/Admin/Map.jsx";
@@ -30,7 +31,8 @@ const reducers = combineReducers({
 });
 const store = createStore(
   reducers,
-  {}
+  {},
+  applyMiddleware(thunk)
 );
 
 const COMPONENTS_MAP = {

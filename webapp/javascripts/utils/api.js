@@ -49,42 +49,50 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         url,
         method,
         submit: (params) => {
-          const promise = client[methodLowerCase](url, params, {
-            headers: DEFAULT_HEADERS,
-            multipart,
-          })
-          .then((data) => {
+          dispatch((dispatch, getState) => {
+            const resource = getState().api[uri];
+
+            if (resource && resource.state === "fetching") {
+              return;
+            }
+
+            const promise = client[methodLowerCase](url, params, {
+              headers: DEFAULT_HEADERS,
+              multipart,
+            })
+            .then((data) => {
+              dispatch({
+                type: SUCCESS_TYPE,
+                payload: {
+                  data,
+                  uri,
+                },
+              });
+              return data;
+            })
+            .catch((data) => {
+              const errors = data.errors;
+
+              dispatch({
+                type: FAIL_TYPE,
+                payload: {
+                  uri,
+                  errors,
+                },
+              });
+
+              throw errors;
+            });
             dispatch({
-              type: SUCCESS_TYPE,
+              type: REQUEST_TYPE,
               payload: {
-                data,
                 uri,
+                params,
               },
             });
-            return data;
-          })
-          .catch((data) => {
-            const errors = data.errors;
 
-            dispatch({
-              type: FAIL_TYPE,
-              payload: {
-                uri,
-                errors,
-              },
-            });
-
-            throw errors;
+            return promise;
           });
-          dispatch({
-            type: REQUEST_TYPE,
-            payload: {
-              uri,
-              params,
-            },
-          });
-
-          return promise;
         },
       };
     });
@@ -109,7 +117,7 @@ const mergeProps = (stateProps, dispatchProps, ownProps) => {
 
 const connect = (WrappedComponent, config) => {
   class ApiInnerWrapper extends Component {
-    componentWillMount() {
+    componentDidMount() {
       this._checkFetched();
     }
     componentDidUpdate() {

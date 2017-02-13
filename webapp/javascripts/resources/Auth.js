@@ -73,7 +73,7 @@ const reducer = (state = {}, action) => {
     console.log("AUTH FETCH", action);
     return _.assign({}, state, {
       [payload.uri]: {
-        state: "loading",
+        state: "fetching",
       },
     });
   case AUTH_FETCH_FAILURE:
