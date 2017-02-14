@@ -5,17 +5,11 @@ import {
 } from "react-gmaps";
 import { Component } from "utils/react-extras.js";
 import { connect as connectStyles } from "utils/styles.js";
+import { GMAPS_API_KEY } from "config/settings.js";
 import styles from "styles/Map.less";
 
-// TODO: Move these configs
-const API_KEY = "AIzaSyDb-hE0hwptuM7bzQpZtXhwwYkdQwyAEww";
-// TODO: Make country-based default location
-const DEFAULT_LOCATION = {
-  lat: -34.910926,
-  lng: -56.163123
-};
 const GMAPS_PARAMS = {
-  key: API_KEY,
+  key: GMAPS_API_KEY,
   v: "3.exp",
 };
 
@@ -26,6 +20,7 @@ class Map extends Component {
     const {
       children,
       classes,
+      initialCoords,
       onMapCreated,
     } = this.props;
 
@@ -33,8 +28,8 @@ class Map extends Component {
       <div className={classes.map()}>
         <Gmaps
           height="100%"
-          lat={DEFAULT_LOCATION.lat}
-          lng={DEFAULT_LOCATION.lng}
+          lat={initialCoords.lat}
+          lng={initialCoords.lng}
           onClick={this._click}
           params={GMAPS_PARAMS}
           onMapCreated={onMapCreated}
@@ -60,6 +55,10 @@ class Map extends Component {
 }
 
 Map.propTypes = {
+  initialCoords: React.PropTypes.shape({
+    lat: React.PropTypes.number.isRequired,
+    lng: React.PropTypes.number.isRequired,
+  }).isRequired,
   onClick: React.PropTypes.func,
   onMapCreated: React.PropTypes.func,
 };

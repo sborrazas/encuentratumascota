@@ -3,21 +3,13 @@ import _ from "lodash";
 import { Component } from "utils/react-extras.js";
 import { connect as routerConnect } from "utils/react-router-extras.js";
 import Map, { Marker } from "components/Base/Map.jsx";
-
-const PIN_IMAGES_MAP = {
-  lost: "/images/lost-small.png",
-  found: "/images/found-small.png",
-  adoption: "/images/adoption-small.png",
-  lost_big: "/images/lost-big.png",
-  found_big: "/images/found-big.png",
-  adoption_big: "/images/adoption-big.png",
-  my_pet: "/images/my-pet-big.png"
-};
+import { COUNTRIES, PIN_IMAGES_MAP } from "config/constants.js";
 
 class PublicationsMap extends Component {
   render() {
     const {
       currentMarker,
+      countryCode,
       onCurrentMarkerSet,
       onMapCreated,
       publications,
@@ -25,7 +17,10 @@ class PublicationsMap extends Component {
     } = this.props;
 
     return (
-      <Map onClick={onCurrentMarkerSet} onMapCreated={onMapCreated}>
+      <Map
+        initialCoords={COUNTRIES[countryCode]}
+        onClick={onCurrentMarkerSet}
+        onMapCreated={onMapCreated}>
         {
           publications.state === "fetched" &&
             _.map(publications.data.items, (publication) => {
@@ -70,6 +65,7 @@ class PublicationsMap extends Component {
 }
 
 PublicationsMap.propTypes = {
+  countryCode: React.PropTypes.oneOf(_.keys(COUNTRIES)).isRequired,
   currentMarker: React.PropTypes.shape({
     lat: React.PropTypes.number.isRequired,
     lng: React.PropTypes.number.isRequired,

@@ -34,9 +34,13 @@ import Section, {
   Content as SectionContent,
 } from "components/Base/Section.jsx";
 import Link from "components/Base/Link.jsx";
-import { DEFAULT_PUBLICATION_IMAGE, ST_USERNAME } from "config/settings.js";
+import { ST_USERNAME } from "config/settings.js";
+import {
+  DEFAULT_PUBLICATION_IMG,
+  PUBLICATION_URL,
+} from "config/constants.js";
 
-const DEFAULT_ATTACHMENTS = [DEFAULT_PUBLICATION_IMAGE];
+const DEFAULT_ATTACHMENTS = [DEFAULT_PUBLICATION_IMG];
 
 class RawDetail extends Component {
   render() {
@@ -50,8 +54,7 @@ class RawDetail extends Component {
       publication.attachments :
       DEFAULT_ATTACHMENTS;
     const type = publication.type;
-    // TODO hardcoded :(
-    const url = `http://encuentratumascota.org/p/${publication.slug}`;
+    const url = `${PUBLICATION_URL}/${publication.slug}`;
     const title = _.join([
       publication.pet_name,
       `[${t(`models.publication.types.${type}`).toUpperCase()}]`

@@ -37,33 +37,9 @@ import SocialButton from "components/Base/SocialButton.jsx";
 import SignIn from "components/Pages/modals/SignIn.jsx";
 import SignUp from "components/Pages/modals/SignUp.jsx";
 import PublicationsMap from "components/shared/PublicationsMap.jsx";
+import { COUNTRIES, DEFAULT_USER_IMG } from "config/constants.js";
 
 const MAP_RESIZE_ANIMATION_DURATION = 400;
-
-const COUNTRIES = { // TODO: move to config
-  "UY": {
-    "name": "Uruguay",
-    "lat": -34.894802,
-    "lng": -56.165034,
-  },
-  "PE": {
-    "name": "Perú",
-    "lat": -12.047620,
-    "lng": -77.061620,
-  },
-  "AR": {
-    "name": "Argentina",
-    "lat": -34.622958,
-    "lng": -58.38077,
-  },
-  "CL": {
-    "name": "Chile",
-    "lat": -33.46912,
-    "lng": -70.641997,
-  },
-};
-
-const DEFAULT_USER_IMG = "/assets/default_user.png";
 
 class Root extends Component {
   constructor(props) {
@@ -217,13 +193,19 @@ class Root extends Component {
             {children}
           </LayoutSidebar>
           <LayoutContent flash={flash}>
-            <PublicationsMap
-              onMapCreated={this._setMap}
-              currentMarker={currentMarker}
-              editing={!! onCurrentMarkerSet}
-              onCurrentMarkerSet={onCurrentMarkerSet}
-              publications={publications}
-              selectedSlug={selectedSlug} />
+            {
+              country &&
+                (
+                  <PublicationsMap
+                    onMapCreated={this._setMap}
+                    countryCode={countryCode}
+                    currentMarker={currentMarker}
+                    editing={!! onCurrentMarkerSet}
+                    onCurrentMarkerSet={onCurrentMarkerSet}
+                    publications={publications}
+                    selectedSlug={selectedSlug} />
+                )
+            }
           </LayoutContent>
         </LayoutBody>
       </Layout>
