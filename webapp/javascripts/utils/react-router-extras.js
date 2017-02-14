@@ -1,9 +1,16 @@
 import React from "react";
 import _ from "lodash";
 import { Component } from "utils/react-extras.js";
-import { Link as RouterLink, browserHistory } from "react-router";
+import {
+  Link as RouterLink,
+  Router,
+  browserHistory,
+  createRoutes,
+} from "react-router";
 import { connect as reduxConnect } from "react-redux";
-import { routes } from "components/routes/AppRouter.jsx";
+import matchRoutes from "react-router/lib/matchRoutes";
+
+const UPDATE_ACTION = "ROUTE_UPDATE";
 
 const mapStateToProps = (state) => {
   return state.routing;
@@ -23,7 +30,7 @@ const connect = (ContainerComponent) => {
 
 const reducer = (state = { pathname: "", params: {}, query: {} }, action) => {
   switch (action.type) {
-  case "ROUTER_THINGY":
+  case UPDATE_ACTION:
     return action.data;
   default:
     return state;
@@ -33,10 +40,11 @@ const reducer = (state = { pathname: "", params: {}, query: {} }, action) => {
 class Link extends Component {
   render() {
     const { children, className, pathname, to } = this.props;
+    const { routesMap } = this.context;
     let linkPathname = pathname;
 
     if (to.name) {
-      linkPathname = routes[to.name].replace(/:(\w+)/g, (_, paramName) => {
+      linkPathname = routesMap[to.name].replace(/:(\w+)/g, (_, paramName) => {
         return to.p[paramName];
       });
     }
@@ -60,6 +68,59 @@ Link.propTypes = {
   }).isRequired,
 };
 
+Link.contextTypes = {
+  routesMap: React.PropTypes.object.isRequired,
+};
+
 Link = connect(Link);
 
-export { connect, reducer, Link };
+const dispatchUpdate = (routes, store) => (location) => {
+  matchRoutes(routes, location, (error, state) => {
+    store.dispatch({
+      type: UPDATE_ACTION,
+      data: {
+        pathname: location.pathname,
+        params: state.params || {},
+        query: location.query,
+      },
+    });
+  });
+};
+
+class Provider extends Component {
+  getChildContext() {
+    const { routesMap } = this.props;
+
+    return {
+      routesMap,
+    };
+  }
+  render() {
+    const { routes } = this.props;
+
+    return (
+      <Router history={browserHistory} routes={routes} />
+    );
+  }
+  componentWillMount() {
+    const { routes, store } = this.props;
+    const dispatchLocationChange = dispatchUpdate(
+      createRoutes(routes),
+      store
+    );
+
+    browserHistory.listen(dispatchLocationChange);
+    dispatchLocationChange(browserHistory.getCurrentLocation());
+  }
+}
+
+Provider.childContextTypes = {
+  routesMap: React.PropTypes.object,
+};
+
+Provider.propTypes = {
+  routes: React.PropTypes.object.isRequired,
+  store: React.PropTypes.object.isRequired,
+};
+
+export { connect, reducer, Link, Provider };

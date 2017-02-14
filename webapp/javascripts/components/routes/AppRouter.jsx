@@ -16,11 +16,11 @@ export default (
   </Route>
 );
 
-const routes = {
+const routesMap = {
   "home": "/",
   "publications": "/p",
   "publicationsNew": "/p/new",
   "publication": "/p/:slug",
 };
 
-export { routes };
+export { routesMap };
