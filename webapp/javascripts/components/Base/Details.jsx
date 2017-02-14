@@ -142,6 +142,7 @@ class SocialItem extends Component {
       service,
       text: description,
       title,
+      type: "hcount",
       url,
     }, { button: true });
   }
