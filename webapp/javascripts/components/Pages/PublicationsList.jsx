@@ -9,7 +9,7 @@ import { DEFAULT_PUBLICATION_IMAGE } from "config/settings.js";
 // Resources
 import publications, {
   fetch as publicationsFetch,
-} from "resources/publications.js";
+} from "resources/publications/actions.js";
 // Components
 import Root from "../Root.jsx";
 import TypeTag from "components/Base/TypeTag.jsx";

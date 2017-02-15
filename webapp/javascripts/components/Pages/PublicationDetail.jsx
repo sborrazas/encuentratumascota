@@ -8,10 +8,10 @@ import { connect as translationsConnect } from "utils/translations.js";
 import publication, {
   fetch as publicationFetch,
   inquiry as publicationInquiry,
-} from "resources/publication.js";
+} from "resources/publication/actions.js";
 import auth, {
   fetch as authFetch,
-} from "resources/auth.js";
+} from "resources/auth/actions.js";
 // Components
 import Root from "../Root.jsx";
 import TypeTag from "components/Base/TypeTag.jsx";

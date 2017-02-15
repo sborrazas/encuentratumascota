@@ -8,7 +8,7 @@ import { Component } from "utils/react-extras.js";
 import auth, {
   fetch as authFetch,
   login as authLogin,
-} from "resources/auth.js";
+} from "resources/auth/actions.js";
 // Components
 import Form from "components/shared/Form.jsx";
 import Field from "components/shared/Field.jsx";

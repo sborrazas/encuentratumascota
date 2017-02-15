@@ -13,10 +13,10 @@ import auth, {
   fetch as authFetch,
   country as authCountry,
   signout as authSignout,
-} from "resources/auth.js";
+} from "resources/auth/actions.js";
 import publications, {
   fetch as publicationsFetch,
-} from "resources/publications.js";
+} from "resources/publications/actions.js";
 // Components
 import MainHeader, {
   Dropdown as MainHeaderDropdown,

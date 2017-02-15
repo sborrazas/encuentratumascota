@@ -2,35 +2,29 @@ import React from "react";
 import ReactDOM from "react-dom";
 import _ from "lodash";
 import thunk from "redux-thunk";
+import reduceReducers from "reduce-reducers";
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import App from "components/App.jsx";
 import AdminMap from "components/Admin/Map.jsx";
 import { reducer as routingReducer } from "utils/react-router-extras.js";
-import { reducer as authReducer } from "resources/auth.js";
-import { reducer as publicationsReducer } from "resources/publications.js";
-import { reducer as breedsReducer } from "resources/breeds.js";
-import { reducer as publicationReducer } from "resources/publication.js";
+import authReducer from "resources/auth/reducer.js";
+import publicationsReducer from "resources/publications/reducer.js";
+import breedsReducer from "resources/breeds/reducer.js";
+import publicationReducer from "resources/publication/reducer.js";
 import { getAll } from "utils/dom/data.js";
 
-const reducersList = [
-  authReducer,
-  breedsReducer,
-  publicationsReducer,
-  publicationReducer,
-];
-
-const apiReducer = (initState = {}, action) => {
-  return _.reduce(reducersList, (state, reducer) => {
-    return reducer(state, action);
-  }, initState);
-};
-
-const reducers = combineReducers({
+const reducer = combineReducers({
+  api: reduceReducers(
+    authReducer,
+    breedsReducer,
+    publicationReducer,
+    publicationsReducer,
+  ),
   routing: routingReducer,
-  api: apiReducer,
 });
+
 const store = createStore(
-  reducers,
+  reducer,
   {},
   applyMiddleware(thunk)
 );

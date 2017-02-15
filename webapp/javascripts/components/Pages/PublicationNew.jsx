@@ -7,10 +7,10 @@ import { connect as formConnect } from "utils/form.js";
 // Resources
 import publications, {
   create as publicationsCreate,
-} from "resources/publications.js";
+} from "resources/publications/actions.js";
 import breeds, {
   fetch as breedsFetch,
-} from "resources/breeds.js";
+} from "resources/breeds/actions.js";
 // Components
 import Root from "../Root.jsx";
 import Form, {
