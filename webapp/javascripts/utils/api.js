@@ -1,9 +1,8 @@
-import React from "react";
+import React, { Children } from "react";
 import shallowEqual from "fbjs/lib/shallowEqual";
 import { Component } from "utils/react-extras.js";
 import { connect as reduxConnect } from "react-redux";
 import _ from "lodash";
-import client from "./client.js";
 import document from "./dom/document.js";
 
 const RESOURCES_SPEC_PROP_NAME = "_resources";
@@ -31,6 +30,7 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const props = {};
+  const client = ownProps.client;
 
   _.forEach(ownProps[RESOURCES_SPEC_PROP_NAME], (resourceConfig, propName) => {
     const uri = resourceConfig.uri;
@@ -194,6 +194,7 @@ const connect = (WrappedComponent, config) => {
       this.setState(stateUpdate);
     }
     render() {
+      const { client } = this.context;
       const containerProps = {
         [RESOURCES_SPEC_PROP_NAME]: this.state,
       };
@@ -202,6 +203,7 @@ const connect = (WrappedComponent, config) => {
         <Container
           {...this.props}
           {...containerProps}
+          client={client}
           setVariables={this._setVariables} />
       );
     }
@@ -212,7 +214,30 @@ const connect = (WrappedComponent, config) => {
     }
   }
 
+  ApiOuterWrapper.contextTypes = {
+    client: React.PropTypes.object.isRequired,
+  };
+
   return ApiOuterWrapper;
 };
 
-export { connect };
+class Provider extends Component {
+  getChildContext() {
+    const { client } = this.props;
+
+    return { client };
+  }
+  render() {
+    return Children.only(this.props.children);
+  }
+}
+
+Provider.childContextTypes = {
+  client: React.PropTypes.object.isRequired,
+};
+
+Provider.propTypes = {
+  client: React.PropTypes.object.isRequired,
+};
+
+export { connect, Provider };

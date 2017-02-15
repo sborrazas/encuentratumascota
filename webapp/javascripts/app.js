@@ -12,6 +12,7 @@ import publicationsReducer from "resources/publications/reducer.js";
 import breedsReducer from "resources/breeds/reducer.js";
 import publicationReducer from "resources/publication/reducer.js";
 import { getAll } from "utils/dom/data.js";
+import client from "utils/client.js";
 
 const reducer = combineReducers({
   api: reduceReducers(
@@ -39,7 +40,8 @@ export default () => {
     _.forEach(document.getElementsByClassName(`js-${name}`), (el) => {
       ReactDOM.render(
         React.createElement(Component, {
-          store: store,
+          client,
+          store,
           translations: global._TRANSLATIONS,
           data: getAll(el),
         }),
