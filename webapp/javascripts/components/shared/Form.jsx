@@ -4,13 +4,13 @@ import BaseForm from "components/Base/Form.jsx";
 
 class Form extends Component {
   render() {
-    const { action, children } = this.props;
+    const { url, method, multipart, children } = this.props;
 
     return (
       <BaseForm
-        action={action.url}
-        method={action.method}
-        multipart={action.multipart}
+        action={url}
+        method={method}
+        multipart={multipart}
         onSubmit={this._handleSubmit}>
 
         {children}
@@ -20,34 +20,22 @@ class Form extends Component {
   _handleSubmit() {
     const { form, action, onSubmit, onSuccess, onFailure } = this.props;
 
-    if (!form.submitting) {
-      if (onSubmit) {
-        onSubmit();
-      }
-      else {
-        const { data } = form;
-
-        action.submit(data).then(onSuccess).catch((errors) => {
-          form.setErrors(errors);
-          if (onFailure) {
-            onFailure(errors);
-          }
-        });
-      }
+    if (!form.isSubmitting) {
+      form.submit(onSubmit).then(onSuccess).catch(onFailure);
     }
   }
 }
 
 Form.propTypes = {
   form: React.PropTypes.shape({
-    onSubmit: React.PropTypes.func,
+    data: React.PropTypes.object.isRequired,
+    isSubmitting: React.PropTypes.bool.isRequired,
+    submit: React.PropTypes.func.isRequired,
   }),
-  action: React.PropTypes.shape({
-    url: React.PropTypes.string.isRequired,
-    method: React.PropTypes.string.isRequired,
-    multipart: React.PropTypes.bool,
-  }).isRequired,
-  onSubmit: React.PropTypes.func,
+  url: React.PropTypes.string.isRequired,
+  method: React.PropTypes.string.isRequired,
+  multipart: React.PropTypes.bool,
+  onSubmit: React.PropTypes.func.isRequired,
   onSuccess: React.PropTypes.func,
   onFailure: React.PropTypes.func,
 };

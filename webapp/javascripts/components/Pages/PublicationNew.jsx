@@ -5,12 +5,7 @@ import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 import { connect as formConnect } from "utils/form.js";
 // Resources
-import publications, {
-  create as publicationsCreate,
-} from "resources/publications/actions.js";
-import breeds, {
-  fetch as breedsFetch,
-} from "resources/breeds/actions.js";
+import { selectBreeds } from "resources/breeds/index.js";
 // Components
 import Root from "../Root.jsx";
 import Form, {
@@ -30,6 +25,13 @@ import NavBar, {
 const MAX_ATTACHMENTS = 5;
 
 class PublicationNew extends Component {
+  constructor(props) {
+    super(props);
+
+    const { api } = props;
+
+    this.action = api.publications.create.info();
+  }
   render() {
     const {
       breeds,
@@ -55,7 +57,7 @@ class PublicationNew extends Component {
     let breedsOptions = [];
     let flash;
 
-    if (breeds.state === "fetched") {
+    if (breeds.loaded) {
       breedsOptions = breeds.data.items.map((breed) => {
         return { value: breed.id, label: breed.name };
       });
@@ -81,6 +83,7 @@ class PublicationNew extends Component {
       <Root
         currentMarker={currentMarker}
         displayToggler={true}
+        flash={flash}
         onCurrentMarkerSet={this._setCurrentMarker}>
 
         <Section>
@@ -93,7 +96,8 @@ class PublicationNew extends Component {
           <SectionContent>
             <Form
               form={createPublication}
-              action={publications.create}
+              {...this.action}
+              onSubmit={this._createPublication}
               onSuccess={this._goToPublication}>
 
               <Field
@@ -188,6 +192,16 @@ class PublicationNew extends Component {
       </Root>
     );
   }
+  componentWillMount() {
+    const { api } = this.props;
+
+    api.breeds.fetch();
+  }
+  _createPublication(params) {
+    const { api } = this.props;
+
+    return api.publications.create(params);
+  }
   _goToPublication(publication) {
     const { goTo } = this.props;
 
@@ -222,19 +236,7 @@ PublicationNew = formConnect(PublicationNew, {
 });
 
 PublicationNew = apiConnect(PublicationNew, {
-  breeds: {
-    uri: breeds,
-    actions: {
-      fetch: breedsFetch,
-    },
-    autoFetch: true,
-  },
-  publications: {
-    uri: publications,
-    actions: {
-      create: publicationsCreate,
-    },
-  },
+  breeds: selectBreeds,
 });
 
 PublicationNew = routerConnect(PublicationNew);

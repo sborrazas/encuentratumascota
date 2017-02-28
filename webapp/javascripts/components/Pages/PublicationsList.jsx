@@ -7,9 +7,7 @@ import { connect as translationsConnect } from "utils/translations.js";
 import { PUBLICATION_TYPES } from "config/constants.js";
 import { DEFAULT_PUBLICATION_IMAGE } from "config/settings.js";
 // Resources
-import publications, {
-  fetch as publicationsFetch,
-} from "resources/publications/actions.js";
+import { selectPublicationsByType } from "resources/publications/index.js";
 // Components
 import Root from "../Root.jsx";
 import TypeTag from "components/Base/TypeTag.jsx";
@@ -83,7 +81,7 @@ class PublicationList extends Component {
     } = this.props;
     let content;
 
-    if (publications.state === "fetched") {
+    if (publications.loaded) {
       content = (
         <List emptyText={t("main.index.empty_publication_list")}>
           {
@@ -140,17 +138,8 @@ class PublicationList extends Component {
 PublicationList = translationsConnect(PublicationList);
 
 PublicationList = apiConnect(PublicationList, {
-  publications: {
-    uri: publications,
-    actions: {
-      fetch: publicationsFetch,
-    },
-    autoFetch: true,
-    variables: (props) => {
-      return {
-        type: props.query.type,
-      };
-    },
+  publications: (state, props) => {
+    return selectPublicationsByType(state, props.query.type);
   },
 });
 

@@ -10,27 +10,20 @@ const connect = (WrappedComponent, specs) => {
       this.state = _.mapValues(specs, (formSpec, formName) => {
         return {
           name: formName,
-          state: "initialized",
+          isSubmitting: false,
           data: formSpec.initial || {},
           errors: {},
+          update: this._update(formName),
+          updateAll: this._updateAll(formName),
+          submit: this._submit(formName),
         };
       });
     }
     render() {
-      const formProps = _.mapValues(this.state, (formState, formName) => {
-        return {
-          update: this._update(formName),
-          updateAll: this._updateAll(formName),
-          setErrors: this._setErrors(formName),
-          ...formState
-        };
-      });
-
       return (
         <WrappedComponent
           {...this.props}
-          {...formProps}
-          />
+          {...this.state} />
       );
     }
     _update(formName) {
@@ -57,12 +50,43 @@ const connect = (WrappedComponent, specs) => {
         this.setState({ [formName]: newForm });
       };
     }
-    _setErrors(formName) {
-      return (errors) => {
-        const newForm = _.assign({}, this.state[formName], { errors });
+    _submit(formName) {
+      return (onSubmit) => {
+        const oldForm = this.state[formName];
+        const newForm = _.assign({}, oldForm, {
+          errors: {},
+          isSubmitting: true,
+        });
+
+        return onSubmit(oldForm.data)
+          .then((data) => {
+            this._endSubmit(formName);
+
+            return data;
+          })
+          .catch(({ errors }) => {
+            this._setErrors(formName, errors);
+
+            throw errors;
+          });
 
         this.setState({ [formName]: newForm });
       };
+    }
+    _endSubmit(formName) {
+      const newForm = _.assign({}, this.state[formName], {
+        isSubmitting: false,
+      });
+
+      this.setState({ [formName]: newForm });
+    }
+    _setErrors(formName, errors) {
+      const newForm = _.assign({}, this.state[formName], {
+        errors,
+        isSubmitting: false,
+      });
+
+      this.setState({ [formName]: newForm });
     }
   }
 

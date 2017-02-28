@@ -7,37 +7,18 @@ import {
   PUBLICATIONS_CREATE_SUCCESS,
   PUBLICATIONS_CREATE_FAILURE,
 } from "./actionTypes.js";
+import { fetchReducer, fetchSuccessReducer } from "../reducers.js";
+
+const ALL_TYPE = "all";
 
 export default (state = {}, action) => {
   const { type, payload } = action;
 
   switch (type) {
   case PUBLICATIONS_FETCH:
-    return _.assign({}, state, {
-      [payload.uri]: {
-        state: "fetching",
-      },
-    });
+    return fetchReducer(state, payload.params.type || ALL_TYPE);
   case PUBLICATIONS_FETCH_SUCCESS:
-    return _.assign({}, state, {
-      [payload.uri]: {
-        data: payload.data,
-        state: "fetched",
-      },
-    });
-  case PUBLICATIONS_FETCH_FAILURE:
-    return state;
-  case PUBLICATIONS_CREATE:
-    return state;
-  case PUBLICATIONS_CREATE_SUCCESS:
-    return _.assign({}, state, {
-      [payload.uri]: {
-        data: payload.data,
-        state: "fetched",
-      },
-    });
-  case PUBLICATIONS_CREATE_FAILURE:
-    return state;
+    return fetchSuccessReducer(state, payload, payload.params.type || ALL_TYPE);
   default:
     return state;
   }

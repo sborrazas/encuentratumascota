@@ -11,11 +11,11 @@ class App extends Component {
     };
   }
   render() {
-    const { client, store } = this.props;
+    const { api, store } = this.props;
 
     return (
       <ReduxProvider store={store}>
-        <ApiProvider client={client}>
+        <ApiProvider api={api}>
           <RouterProvider
             routes={AppRouter}
             routesMap={routesMap}
@@ -27,7 +27,7 @@ class App extends Component {
 }
 
 App.propTypes = {
-  client: React.PropTypes.object.isRequired,
+  api: React.PropTypes.func.isRequired,
   store: React.PropTypes.object.isRequired,
   translations: React.PropTypes.object.isRequired,
 };

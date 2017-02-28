@@ -4,19 +4,13 @@ import md5 from "md5";
 import { connect as routerConnect } from "utils/react-router-extras.js";
 import { Component } from "utils/react-extras.js";
 import document from "utils/dom/document.js";
-import serializer from "utils/serializer.js";
+import { encodeURI } from "utils/serializer.js";
 import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 import global from "utils/global.js";
 // Resources
-import auth, {
-  fetch as authFetch,
-  country as authCountry,
-  signout as authSignout,
-} from "resources/auth/actions.js";
-import publications, {
-  fetch as publicationsFetch,
-} from "resources/publications/actions.js";
+import { selectAuth } from "resources/auth/index.js";
+import { selectPublicationsByType } from "resources/publications/index.js";
 // Components
 import MainHeader, {
   Dropdown as MainHeaderDropdown,
@@ -61,11 +55,11 @@ class Root extends Component {
       t,
     } = this.props;
     const { sidebarHidden } = this.state;
-    const user = auth.state === "fetched" && auth.data.user;
+    const user = auth.loaded && auth.data.user;
     const newPublicationTo = user ?
           { name: "publicationsNew" } :
           { q: { sign_in: "1", ...query } };
-    const countryCode = auth.state === "fetched" && auth.data.country_code;
+    const countryCode = auth.loaded && auth.data.country_code;
     const country = countryCode && COUNTRIES[countryCode];
 
     let modal;
@@ -86,7 +80,7 @@ class Root extends Component {
       else {
         const hash = md5(user.email);
         const location = document.location;
-        const defaultImg = serializer.encodeURI(
+        const defaultImg = encodeURI(
           `${location.protocol}//${location.hostname}/${DEFAULT_USER_IMG}`
         );
 
@@ -211,10 +205,25 @@ class Root extends Component {
       </Layout>
     );
   }
+  componentWillMount() {
+    const { api, query: { type } } = this.props;
+
+    api.auth.fetch();
+    api.publications.fetch({ type });
+  }
+  componentWillUpdate(nextProps) {
+    const { api, query: { type } } = this.props;
+
+    if (nextProps.query.type !== type) {
+      api.publications.fetch({
+        type: nextProps.query.type,
+      });
+    }
+  }
   componentDidUpdate() {
     const { auth, goTo, query, pathname } = this.props;
 
-    if (auth.state === "fetched" &&
+    if (auth.loaded &&
         auth.data.signed_in &&
         (query.sign_up || query.sign_in)) {
 
@@ -225,14 +234,18 @@ class Root extends Component {
     this.map = map;
   }
   _selectCountry(code) {
-    const { auth } = this.props;
+    const { api } = this.props;
 
-    auth.country.submit({ country_code: code });
+    api.auth.country({ country_code: code }).then(() => {
+      const { query: { type } } = this.props;
+
+      api.publications.fetch({ type, });
+    });
   }
   _signOut() {
-    const { auth } = this.props;
+    const { api } = this.props;
 
-    auth.signout.submit();
+    api.auth.signout();
   }
   _closeModal() {
     const { goTo, query } = this.props;
@@ -259,26 +272,9 @@ Root.propTypes = {
 };
 
 Root = apiConnect(Root, {
-  auth: {
-    uri: auth,
-    actions: {
-      fetch: authFetch,
-      country: authCountry,
-      signout: authSignout,
-    },
-    autoFetch: true,
-  },
-  publications: {
-    uri: publications,
-    actions: {
-      fetch: publicationsFetch,
-    },
-    autoFetch: true,
-    variables: (props) => {
-      return {
-        type: props.query.type,
-      };
-    },
+  auth: selectAuth,
+  publications: (state, props) => {
+    return selectPublicationsByType(state, props.query.type);
   },
 });
 

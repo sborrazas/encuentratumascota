@@ -1,6 +1,7 @@
 import _ from "lodash";
 import fetch, { FormData } from "./fetch.js";
 import json from "./json.js";
+import { generateURL } from "./serializer.js";
 
 const fillMultipartForm = (namespace, params, form = new FormData()) => {
   const namespaceStr = _.reduce(_.tail(namespace), (nsStr, nsSlice) => {
@@ -23,7 +24,7 @@ const fillMultipartForm = (namespace, params, form = new FormData()) => {
   return form;
 };
 
-const doRequest = (method, path, params, options = {}) => {
+export default (method, path, params, options = {}) => {
   const fetchHeaders = {
     "Accept": "application/json",
     ...options.headers,
@@ -34,21 +35,24 @@ const doRequest = (method, path, params, options = {}) => {
     headers: fetchHeaders,
   };
 
-  if (method !== "GET") {
-    if (options.multipart) {
-      _.extend(fetchOptions, {
-        body: fillMultipartForm(["payload"], params),
-      });
+  if (method === "GET") {
+    if (!_.isEmpty(params)) {
+      path = generateURL(path, params);
     }
-    else {
-      _.extend(fetchOptions, {
-        body: json.stringify({ payload: params }),
-        multipart: options.multipart,
-      });
-      _.extend(fetchHeaders, {
-        "Content-Type": "application/json",
-      });
-    }
+  }
+  else if (options.multipart) {
+    _.extend(fetchOptions, {
+      body: fillMultipartForm(["payload"], params),
+    });
+  }
+  else {
+    _.extend(fetchOptions, {
+      body: json.stringify({ payload: params }),
+      multipart: options.multipart,
+    });
+    _.extend(fetchHeaders, {
+      "Content-Type": "application/json",
+    });
   }
 
   return fetch(path, fetchOptions)
@@ -73,14 +77,3 @@ const doRequest = (method, path, params, options = {}) => {
       }
     });
 };
-
-const client = {
-  get: (path, params, options) => {
-    return doRequest("GET", path, params, options);
-  },
-  post: (path, params, options = {}) => {
-    return doRequest("POST", path, params, options);
-  }
-};
-
-export default client;

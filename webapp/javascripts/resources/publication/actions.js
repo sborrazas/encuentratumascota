@@ -8,23 +8,18 @@ import {
   PUBLICATION_INQUIRY_FAILURE,
 } from "./actionTypes.js";
 
-export default (variables) => {
-  return `/p/${variables.slug}`;
-};
-
-const fetch = (uri) => {
+export const fetch = (params) => {
   return {
-    url: uri,
+    params,
     types: [PUBLICATION_FETCH, PUBLICATION_FETCH_SUCCESS, PUBLICATION_FETCH_FAILURE],
   };
 };
 
-const inquiry = (uri) => {
-  const url = `${uri}/inquiry`;
-
+export const inquiry = (params) => {
   return {
-    url,
+    path: "/inquiry",
     method: "POST",
+    params,
     types: [PUBLICATION_INQUIRY, PUBLICATION_INQUIRY_SUCCESS, PUBLICATION_INQUIRY_FAILURE],
   };
 };

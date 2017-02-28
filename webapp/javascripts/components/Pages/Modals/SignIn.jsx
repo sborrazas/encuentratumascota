@@ -5,10 +5,7 @@ import { connect as translationsConnect } from "utils/translations.js";
 import { connect as formConnect } from "utils/form.js";
 import { Component } from "utils/react-extras.js";
 // Resources
-import auth, {
-  fetch as authFetch,
-  login as authLogin,
-} from "resources/auth/actions.js";
+import { selectAuth } from "resources/auth/index.js";
 // Components
 import Form from "components/shared/Form.jsx";
 import Field from "components/shared/Field.jsx";
@@ -24,6 +21,13 @@ import Link from "components/Base/Link.jsx";
 import Button from "components/Base/Button.jsx";
 
 class SignIn extends Component {
+  constructor(props) {
+    super(props);
+
+    const { api } = props;
+
+    this.action = api.auth.login.info();
+  }
   render() {
     const {
       t,
@@ -34,7 +38,7 @@ class SignIn extends Component {
     return (
       <Modal>
         <ModalBody>
-          <Form form={signIn} action={auth.login}>
+          <Form form={signIn} {...this.action} onSubmit={this._login}>
             <Field
               form={signIn}
               name="email"
@@ -85,6 +89,11 @@ class SignIn extends Component {
       </Modal>
     );
   }
+  _login(params) {
+    const { api } = this.props;
+
+    return api.auth.login(params);
+  }
 }
 
 SignIn = translationsConnect(SignIn);
@@ -100,13 +109,7 @@ SignIn = formConnect(SignIn, {
 });
 
 SignIn = apiConnect(SignIn, {
-  auth: {
-    uri: auth,
-    actions: {
-      fetch: authFetch,
-      login: authLogin,
-    },
-  },
+  auth: selectAuth,
 });
 
 SignIn = routerConnect(SignIn);

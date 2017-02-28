@@ -22,7 +22,7 @@ class PublicationsMap extends Component {
         onClick={onCurrentMarkerSet}
         onMapCreated={onMapCreated}>
         {
-          publications.state === "fetched" &&
+          publications.loaded &&
             _.map(publications.data.items, (publication) => {
               const { lat, lng, type, slug } = publication;
               let imageKey = type;

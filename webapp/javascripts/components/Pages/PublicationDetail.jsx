@@ -5,13 +5,8 @@ import { connect as routerConnect } from "utils/react-router-extras.js";
 import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 // Resources
-import publication, {
-  fetch as publicationFetch,
-  inquiry as publicationInquiry,
-} from "resources/publication/actions.js";
-import auth, {
-  fetch as authFetch,
-} from "resources/auth/actions.js";
+import { selectAuth } from "resources/auth/index.js";
+import { selectPublication } from "resources/publication/index.js";
 // Components
 import Root from "../Root.jsx";
 import TypeTag from "components/Base/TypeTag.jsx";
@@ -162,6 +157,12 @@ class PublicationDetail extends Component {
 
     this.state = { inquiry: { state: "uninitialized" } };
   }
+  componentWillMount() {
+    const { api, params } = this.props;
+
+    api.auth.fetch();
+    api.publication.fetch({ slug: params.publicationSlug });
+  }
   render() {
     const {
       publication,
@@ -172,16 +173,16 @@ class PublicationDetail extends Component {
 
     let content;
 
-    if (publication.state !== "fetched") {
-      content = (<Loader message={t("shared.loading")} />);
-    }
-    else {
+    if (publication.loaded) {
       content = (
         <RawDetail
           inquiry={inquiry}
           onRequestContactInfo={this._displayContactInfo}
           publication={publication.data} />
       );
+    }
+    else {
+      content = (<Loader message={t("shared.loading")} />);
     }
 
     return (
@@ -195,12 +196,13 @@ class PublicationDetail extends Component {
     );
   }
   _displayContactInfo() {
-    const { auth, goTo, publication } = this.props;
+    const { api, auth, goTo, params } = this.props;
     const { inquiry: { state } } = this.state;
+    const slug = params.publicationSlug;
 
-    if (auth.data.signed_in) {
+    if (auth.loaded && auth.data.signed_in) {
       if (state !== "fetching") {
-        publication.inquiry.submit({}).then((inquiry) => {
+        api.publication.inquiry({ slug, }).then((inquiry) => {
           this.setState({
             inquiry: { text: inquiry.contact, state: "fetched" },
           });
@@ -210,7 +212,7 @@ class PublicationDetail extends Component {
     }
     else {
       goTo({
-        pathname: "/p/${params.publicationSlug}",
+        pathname: "/p/${slug}",
         query: { sign_in: "1" },
       })
     }
@@ -220,25 +222,9 @@ class PublicationDetail extends Component {
 PublicationDetail = translationsConnect(PublicationDetail);
 
 PublicationDetail = apiConnect(PublicationDetail, {
-  publication: {
-    uri: publication,
-    actions: {
-      fetch: publicationFetch,
-      inquiry: publicationInquiry,
-    },
-    variables: (props) => {
-      return {
-        slug: props.params.publicationSlug,
-      };
-    },
-    autoFetch: true,
-  },
-  auth: {
-    uri: auth,
-    actions: {
-      fetch: authFetch,
-    },
-    autoFetch: true,
+  auth: selectAuth,
+  publication: (state, props) => {
+    return selectPublication(state, props.params.publicationSlug);
   },
 });
 

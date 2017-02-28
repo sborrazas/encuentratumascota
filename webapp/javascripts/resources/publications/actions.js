@@ -7,24 +7,19 @@ import {
   PUBLICATIONS_CREATE_FAILURE,
 } from "./actionTypes.js";
 
-export default (variables) => {
-  return variables.type ? `/p?type=${variables.type}` : "/p";
-};
-
-export const fetch = (uri) => {
+export const fetch = (params) => {
   return {
-    url: uri,
+    params,
     types: [PUBLICATIONS_FETCH, PUBLICATIONS_FETCH_SUCCESS, PUBLICATIONS_FETCH_FAILURE],
   };
 };
 
-export const create = (uri) => {
-  const url = `${uri}/new`;
-
+export const create = (params) => {
   return {
-    url,
+    path: "/new",
     method: "POST",
     multipart: true,
+    params,
     types: [PUBLICATIONS_CREATE, PUBLICATIONS_CREATE_SUCCESS, PUBLICATIONS_CREATE_FAILURE],
   };
 };

@@ -5,10 +5,7 @@ import { connect as translationsConnect } from "utils/translations.js";
 import { connect as formConnect } from "utils/form.js";
 import { Component } from "utils/react-extras.js";
 // Resources
-import auth, {
-  fetch as authFetch,
-  create as authCreate,
-} from "resources/auth/actions.js";
+import { selectAuth } from "resources/auth/index.js";
 // Components
 import Form from "components/shared/Form.jsx";
 import Field from "components/shared/Field.jsx";
@@ -24,6 +21,13 @@ import Link from "components/Base/Link.jsx";
 import Button from "components/Base/Button.jsx";
 
 class SignUp extends Component {
+  constructor(props) {
+    super(props);
+
+    const { api } = props;
+
+    this.action = api.auth.login.info();
+  }
   render() {
     const {
       t,
@@ -34,7 +38,7 @@ class SignUp extends Component {
     return (
       <Modal>
         <ModalBody>
-          <Form form={signUp} action={auth.create}>
+          <Form form={signUp} {...this.action} onSubmit={this._login}>
             <Field
               form={signUp}
               name="email"
@@ -93,18 +97,17 @@ class SignUp extends Component {
       </Modal>
     );
   }
+  _create(params) {
+    const { api } = this.props;
+
+    return api.auth.create(params);
+  }
 }
 
 SignUp = translationsConnect(SignUp);
 
 SignUp = apiConnect(SignUp, {
-  auth: {
-    uri: auth,
-    actions: {
-      fetch: authFetch,
-      create: authCreate,
-    },
-  },
+  auth: selectAuth,
 });
 
 SignUp = formConnect(SignUp, {

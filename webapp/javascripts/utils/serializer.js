@@ -1,11 +1,12 @@
 import global from "./global.js";
+import _ from "lodash";
 
-var serializer = null
-  , reduceParams = null;
-
-reduceParams = function (params, namespace, acc, callback) {
-  object.each(params, function (key, val) {
-    var queryKey = serializer.encodeURI(key);
+export const encodeURI = (value) => {
+  return global.encodeURIComponent(value);
+};
+const reduceParams = function (params, namespace, acc, callback) {
+  _.forEach(params, (val, key) => {
+    var queryKey = encodeURI(key);
 
     if (namespace) {
       queryKey = namespace + "[" + queryKey + "]";
@@ -21,36 +22,22 @@ reduceParams = function (params, namespace, acc, callback) {
 
   return acc;
 };
-
-serializer = {
-  reduceParams: function (params, initial, callback) {
-    return reduceParams(params, "", initial, callback);
-  },
-  generateQuery: function (params) {
-    return reduceParams(params, "", [], function (key, val, acc) {
-      if (typeof val !== "undefined") {
-        acc.push(key + "=" + val);
-      }
-
-      return acc;
-    }).sort().join("&");
-  },
-  generateURL: function (url, params) {
-    var query = this.generateQuery(params);
-
-    if (query.length > 0) {
-      return url + "?" + query;
+const generateQuery = (params) => {
+  return reduceParams(params, "", [], function (key, val, acc) {
+    if (typeof val !== "undefined") {
+      acc.push(key + "=" + val);
     }
-    else {
-      return url;
-    }
-  },
-  encodeURI: function (value) {
-    return global.encodeURIComponent(value);
-  },
-  parseURI: function (url) {
-    return (new global.URL(url));
+
+    return acc;
+  }).sort().join("&");
+};
+export const generateURL = (url, params) => {
+  const query = generateQuery(params);
+
+  if (query.length > 0) {
+    return url + "?" + query;
+  }
+  else {
+    return url;
   }
 };
-
-module.exports = serializer;
