@@ -30,6 +30,7 @@ module Encuentratumascota
             coercer.coerce_attr(:attachments, :hash, {
               :key_type => :integer,
               :value_type => :file,
+              :default => {}
             })
             coercer.coerce_attr(:sex, :string)
             coercer.coerce_attr(:breed_id, :integer)
