@@ -79,9 +79,10 @@ class Root extends Component {
       }
       else {
         const hash = md5(user.email);
-        const location = document.location;
+        const { protocol, hostname, port } = document.location;
+        const formattedPort = port ? `:${port}` : "";
         const defaultImg = encodeURI(
-          `${location.protocol}//${location.hostname}/${DEFAULT_USER_IMG}`
+          `${protocol}//${hostname}${formattedPort}${DEFAULT_USER_IMG}`
         );
 
         userImgSrc = `//www.gravatar.com/avatar/${hash}?d=${defaultImg}`;
