@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import { Component } from "utils/react-extras.js";
+import global from "utils/global.js";
 import Map, { Marker } from "components/Base/Map.jsx";
 
 const MY_PET_PIN = "/images/my-pet-big.png";
@@ -11,8 +12,8 @@ class PublicationsMap extends Component {
 
     this.state = {
       currentMarker: {
-        lat: props.data.lat,
-        lng: props.data.lng,
+        lat: global.parseFloat(props.data.lat),
+        lng: global.parseFloat(props.data.lng),
       },
     };
   }
@@ -20,12 +21,10 @@ class PublicationsMap extends Component {
     const { currentMarker } = this.state;
     const { data: { name } } = this.props;
 
-    console.log(this.props);
-
     return (
       <div>
         <div className="field-input field-input--map">
-          <Map onClick={this._setCurrentMarker}>
+          <Map onClick={this._setCurrentMarker} initialCoords={currentMarker}>
             {
               currentMarker &&
                 (
