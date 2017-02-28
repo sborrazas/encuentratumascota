@@ -50,22 +50,26 @@ const translatedT = (translations) => {
   };
 };
 
-const connect = (ChildComponent) => {
-  class TranslationsWrapper extends Component {
+const connect = (WrappedComponent) => {
+  class TranslationsWrapped extends Component {
     render() {
       return (
-        <ChildComponent
+        <WrappedComponent
           t={translatedT(this.context.translations)}
           {...this.props} />
       );
     }
   }
 
-  TranslationsWrapper.contextTypes = {
+  TranslationsWrapped.contextTypes = {
     translations: React.PropTypes.object.isRequired,
   };
 
-  return TranslationsWrapper;
+  TranslationsWrapped.displayName = `ConnectTranslations(${
+    WrappedComponent.displayName || WrappedComponent.name || "Component"
+  })`;
+
+  return TranslationsWrapped;
 };
 
 export { connect };
