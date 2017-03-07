@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "description": "Encuentra tu mascota es la forma más simple y rápida de publicar y encontrar mascotas perdidas, encontradas o en adopción en tu ciudad.",
   "main": "webapp/webpack.config.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sborrazas/encuentratumascota.git"
+  },
   "dependencies": {
-    "es6-promise": "^3.1.2",
-    "immutable": "^3.8.1",
-    "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.16.4",
     "lodash-es": "^4.16.4",
     "md5": "^2.2.1",
@@ -16,10 +17,8 @@
     "react-gmaps": "^1.5.0",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
-    "reduce-reducers": "^0.1.2",
     "redux": "^3.6.0",
-    "redux-apimap": "^0.1.0",
-    "redux-thunk": "^2.1.0"
+    "redux-apimap": "^0.1.0"
   },
   "devDependencies": {
     "autoprefixer-loader": "^3.2.0",
