@@ -1,6 +1,6 @@
 import React from "react";
+import { connectApi } from "redux-apimap";
 import { connect as routerConnect } from "utils/react-router-extras.js";
-import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 import { connect as formConnect } from "utils/form.js";
 import { Component } from "utils/react-extras.js";
@@ -21,13 +21,6 @@ import Link from "components/Base/Link.jsx";
 import Button from "components/Base/Button.jsx";
 
 class SignIn extends Component {
-  constructor(props) {
-    super(props);
-
-    const { api } = props;
-
-    this.action = api.auth.login.info();
-  }
   render() {
     const {
       t,
@@ -38,7 +31,7 @@ class SignIn extends Component {
     return (
       <Modal>
         <ModalBody>
-          <Form form={signIn} {...this.action} onSubmit={this._login}>
+          <Form form={signIn} onSubmit={this._login}>
             <Field
               form={signIn}
               name="email"
@@ -108,9 +101,7 @@ SignIn = formConnect(SignIn, {
   },
 });
 
-SignIn = apiConnect(SignIn, {
-  auth: selectAuth,
-});
+SignIn = connectApi(SignIn);
 
 SignIn = routerConnect(SignIn);
 

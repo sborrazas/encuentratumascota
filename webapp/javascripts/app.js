@@ -1,14 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import _ from "lodash";
-import thunk from "redux-thunk";
-import reduceReducers from "reduce-reducers";
-import { createStore, applyMiddleware, combineReducers } from "redux";
+import { createApi } from "redux-apimap";
+import { createStore, combineReducers } from "redux";
 import App from "components/App.jsx";
 import AdminMap from "components/Admin/Map.jsx";
 import { reducer as routingReducer } from "utils/react-router-extras.js";
 import { getAll } from "utils/dom/data.js";
-import { createApi } from "utils/api.js";
 import document from "utils/dom/document.js";
 // Resources
 import {
@@ -42,8 +40,7 @@ const reducer = combineReducers({
 
 const store = createStore(
   reducer,
-  {},
-  applyMiddleware(thunk)
+  {}
 );
 
 const endpoints = {
@@ -53,11 +50,12 @@ const endpoints = {
   "publication": publicationEndpoint,
 };
 
-const api = createApi(endpoints, {
-  headers: {
-    "X-Csrf-Token": document.getElementsByName("csrf-token")[0].content,
-  },
+const api = createApi(store, endpoints, {
   json: true,
+  headers: {
+    'X-CSRF-Token': document.getElementsByName("csrf-token")[0].content,
+  },
+  credentials: 'same-origin',
 });
 
 const COMPONENTS_MAP = {

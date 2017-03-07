@@ -1,8 +1,9 @@
 import React from "react";
 import _ from "lodash";
+import { connect } from "react-redux";
+import { connectApi } from "redux-apimap";
 import { Component } from "utils/react-extras.js";
 import { connect as routerConnect } from "utils/react-router-extras.js";
-import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 // Resources
 import { selectAuth } from "resources/auth/index.js";
@@ -157,12 +158,6 @@ class PublicationDetail extends Component {
 
     this.state = { inquiry: { state: "uninitialized" } };
   }
-  componentWillMount() {
-    const { api, params } = this.props;
-
-    api.auth.fetch();
-    api.publication.fetch({ slug: params.publicationSlug });
-  }
   render() {
     const {
       publication,
@@ -195,6 +190,12 @@ class PublicationDetail extends Component {
       </Root>
     );
   }
+  componentWillMount() {
+    const { api, params } = this.props;
+
+    api.auth.fetch();
+    api.publication.fetch({ slug: params.publicationSlug });
+  }
   _displayContactInfo() {
     const { api, auth, goTo, params } = this.props;
     const { inquiry: { state } } = this.state;
@@ -221,12 +222,12 @@ class PublicationDetail extends Component {
 
 PublicationDetail = translationsConnect(PublicationDetail);
 
-PublicationDetail = apiConnect(PublicationDetail, {
-  auth: selectAuth,
-  publication: (state, props) => {
-    return selectPublication(state, props.params.publicationSlug);
-  },
-});
+PublicationDetail = connect((state, props) => {
+  return {
+    auth: selectAuth,
+    publication: selectPublication(state, props.params.publicationSlug),
+  };
+})(connectApi(PublicationDetail));
 
 PublicationDetail = routerConnect(PublicationDetail);
 

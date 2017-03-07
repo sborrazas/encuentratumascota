@@ -1,8 +1,9 @@
 import React from "react";
 import _ from "lodash";
+import { connect } from "react-redux";
+import { connectApi } from "redux-apimap";
 import { Component } from "utils/react-extras.js";
 import { connect as routerConnect } from "utils/react-router-extras.js";
-import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 import { PUBLICATION_TYPES } from "config/constants.js";
 import { DEFAULT_PUBLICATION_IMAGE } from "config/settings.js";
@@ -133,15 +134,21 @@ class PublicationList extends Component {
       </Root>
     );
   }
+  componentWillMount() {
+    const { api, query: { type } } = this.props;
+
+    api.auth.fetch();
+    api.publications.fetch({ type });
+  }
 }
 
 PublicationList = translationsConnect(PublicationList);
 
-PublicationList = apiConnect(PublicationList, {
-  publications: (state, props) => {
-    return selectPublicationsByType(state, props.query.type);
-  },
-});
+PublicationList = connect((state, props) => {
+  return {
+    publications: selectPublicationsByType(state, props.query.type),
+  };
+})(connectApi(PublicationList));
 
 PublicationList = routerConnect(PublicationList);
 

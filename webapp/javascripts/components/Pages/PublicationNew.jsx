@@ -1,7 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { connectApi } from "redux-apimap";
 import { Component } from "utils/react-extras.js";
 import { connect as routerConnect } from "utils/react-router-extras.js";
-import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 import { connect as formConnect } from "utils/form.js";
 // Resources
@@ -25,13 +26,6 @@ import NavBar, {
 const MAX_ATTACHMENTS = 5;
 
 class PublicationNew extends Component {
-  constructor(props) {
-    super(props);
-
-    const { api } = props;
-
-    this.action = api.publications.create.info();
-  }
   render() {
     const {
       breeds,
@@ -96,7 +90,6 @@ class PublicationNew extends Component {
           <SectionContent>
             <Form
               form={createPublication}
-              {...this.action}
               onSubmit={this._createPublication}
               onSuccess={this._goToPublication}>
 
@@ -235,9 +228,11 @@ PublicationNew = formConnect(PublicationNew, {
   },
 });
 
-PublicationNew = apiConnect(PublicationNew, {
-  breeds: selectBreeds,
-});
+PublicationNew = connect((state) => {
+  return {
+    breeds: selectBreeds(state),
+  };
+})(connectApi(PublicationNew));
 
 PublicationNew = routerConnect(PublicationNew);
 

@@ -75,9 +75,9 @@ module Webapp
     # @return [Hash]
     def form_params
       params = if req.form_data?
-        req.params["payload"]
+        req.params
       else
-        JSON.parse(req.env["rack.input"].read)["payload"]
+        JSON.parse(req.env["rack.input"].read)
       end
 
       params.kind_of?(Hash) ? params : {}

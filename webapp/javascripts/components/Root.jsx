@@ -1,11 +1,12 @@
 import React from "react";
 import _ from "lodash";
 import md5 from "md5";
+import { connect } from "react-redux";
+import { connectApi } from "redux-apimap";
 import { connect as routerConnect } from "utils/react-router-extras.js";
 import { Component } from "utils/react-extras.js";
 import document from "utils/dom/document.js";
 import { encodeURI } from "utils/serializer.js";
-import { connect as apiConnect } from "utils/api.js";
 import { connect as translationsConnect } from "utils/translations.js";
 import global from "utils/global.js";
 // Resources
@@ -213,12 +214,11 @@ class Root extends Component {
     api.publications.fetch({ type });
   }
   componentWillUpdate(nextProps) {
-    const { api, query: { type } } = this.props;
+    const { api, query: { type: oldType } } = this.props;
+    const { query: { type: nextType } } = nextProps;
 
-    if (nextProps.query.type !== type) {
-      api.publications.fetch({
-        type: nextProps.query.type,
-      });
+    if (nextType !== oldType) {
+      api.publications.fetch({ type: nextType });
     }
   }
   componentDidUpdate() {
@@ -272,12 +272,12 @@ Root.propTypes = {
   displayToggler: React.PropTypes.bool,
 };
 
-Root = apiConnect(Root, {
-  auth: selectAuth,
-  publications: (state, props) => {
-    return selectPublicationsByType(state, props.query.type);
-  },
-});
+Root = connect((state, props) => {
+  return {
+    auth: selectAuth(state),
+    publications: selectPublicationsByType(state, props.query.type),
+  };
+})(connectApi(Root));
 
 Root = translationsConnect(Root);
 

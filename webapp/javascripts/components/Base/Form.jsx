@@ -6,24 +6,14 @@ import styles from "styles/Form.less";
 class Form extends Component {
   render() {
     const {
-      action,
       children,
       classes,
-      method,
-      multipart,
     } = this.props;
     let encType;
 
-    if (multipart) {
-      encType = "multipart/form-data";
-    }
-
     return (
       <form
-        action={action}
         className={classes.form()}
-        encType={encType}
-        method={method}
         onSubmit={this._submit}>
 
         {children}
@@ -41,9 +31,6 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-  action: React.PropTypes.string.isRequired,
-  method: React.PropTypes.string.isRequired,
-  multipart: React.PropTypes.bool,
   onSubmit: React.PropTypes.func,
 };
 

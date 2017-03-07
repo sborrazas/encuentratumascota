@@ -1,4 +1,3 @@
-import { createEndpoint } from "utils/api.js";
 import * as actions from "./actions.js";
 import { DEFAULT_RESOURCE } from "../constants.js";
 
@@ -10,7 +9,7 @@ export const selectPublication = (state, slug) => {
   return state[NAMESPACE][slug] || DEFAULT_RESOURCE;
 };
 
-export const endpoint = createEndpoint({
+export const endpoint = {
   url: "/p/:slug",
   actions,
-});
+};
