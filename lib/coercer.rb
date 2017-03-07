@@ -43,6 +43,7 @@ class Coercer
     when :date then coerce_date(value, options)
     when :hash then coerce_hash(value, options)
     when :float then coerce_float(value, options)
+    when :enum then coerce_enum(value, options)
     else
       raise "Invalid type to coerce: `#{type}`."
     end
@@ -146,6 +147,14 @@ class Coercer
     value = value.to_s
     if value.match(/\A-?0|[1-9]\d*(-?\d+)?\z/)
       value.to_f
+    end
+  end
+
+  def coerce_enum(value, options = {})
+    items = options.fetch(:items)
+
+    if value && items.include?(value)
+      value
     end
   end
 

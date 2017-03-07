@@ -37,10 +37,17 @@ module Encuentratumascota
       end
 
       def list(params)
+        attrs = coerce_params(params) do |coercer|
+          coercer.coerce_attr(:type, :enum, :items => PUBLICATION_TYPES)
+        end
+
         collection = paginate(params) do |page, per_page|
-          client.active_country_publications(country_code, page, per_page, {
-            :type => params["type"], # TODO: validate inclusion or nil if none
-          })
+          client.active_country_publications(
+            country_code,
+            page,
+            per_page,
+            attrs
+          )
         end
 
         collection["items"].each do |publication|
