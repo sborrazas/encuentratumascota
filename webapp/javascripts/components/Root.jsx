@@ -1,6 +1,7 @@
 import React from "react";
 import _ from "lodash";
 import md5 from "md5";
+import connectWatcher from "react-watcher";
 import { connect } from "react-redux";
 import { connectApi } from "redux-apimap";
 import { connect as routerConnect } from "utils/react-router-extras.js";
@@ -208,18 +209,14 @@ class Root extends Component {
     );
   }
   componentWillMount() {
-    const { api, query: { type } } = this.props;
+    const { api, query: { type }, watch } = this.props;
 
     api.auth.fetch();
     api.publications.fetch({ type });
-  }
-  componentWillUpdate(nextProps) {
-    const { api, query: { type: oldType } } = this.props;
-    const { query: { type: nextType } } = nextProps;
 
-    if (nextType !== oldType) {
-      api.publications.fetch({ type: nextType });
-    }
+    watch("query.type", (type) => {
+      api.publications.fetch({ type });
+    });
   }
   componentDidUpdate() {
     const { auth, goTo, query, pathname } = this.props;
@@ -271,6 +268,8 @@ class Root extends Component {
 Root.propTypes = {
   displayToggler: React.PropTypes.bool,
 };
+
+Root = connectWatcher(Root);
 
 Root = connect((state, props) => {
   return {

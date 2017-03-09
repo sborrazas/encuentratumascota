@@ -17,6 +17,7 @@
     "react-gmaps": "^1.5.0",
     "react-redux": "^4.4.5",
     "react-router": "^3.0.0",
+    "react-watcher": "0.0.1",
     "redux": "^3.6.0",
     "redux-apimap": "^0.1.0"
   },

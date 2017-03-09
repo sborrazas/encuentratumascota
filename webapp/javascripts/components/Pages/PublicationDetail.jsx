@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { connectApi } from "redux-apimap";
+import connectWatcher from "react-watcher";
 import { Component } from "utils/react-extras.js";
 import { connect as routerConnect } from "utils/react-router-extras.js";
 import { connect as translationsConnect } from "utils/translations.js";
@@ -191,10 +192,14 @@ class PublicationDetail extends Component {
     );
   }
   componentWillMount() {
-    const { api, params } = this.props;
+    const { api, params, watch } = this.props;
 
     api.auth.fetch();
     api.publication.fetch({ slug: params.publicationSlug });
+
+    watch("params.publicationSlug", (slug) => {
+      api.publication.fetch({ slug });
+    });
   }
   _displayContactInfo() {
     const { api, auth, goTo, params } = this.props;
@@ -219,6 +224,8 @@ class PublicationDetail extends Component {
     }
   }
 }
+
+PublicationDetail = connectWatcher(PublicationDetail);
 
 PublicationDetail = translationsConnect(PublicationDetail);
 

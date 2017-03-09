@@ -2,6 +2,7 @@ import React from "react";
 import _ from "lodash";
 import { connect } from "react-redux";
 import { connectApi } from "redux-apimap";
+import connectWatcher from "react-watcher";
 import { Component } from "utils/react-extras.js";
 import { connect as routerConnect } from "utils/react-router-extras.js";
 import { connect as translationsConnect } from "utils/translations.js";
@@ -135,12 +136,18 @@ class PublicationList extends Component {
     );
   }
   componentWillMount() {
-    const { api, query: { type } } = this.props;
+    const { api, query: { type }, watch } = this.props;
 
     api.auth.fetch();
     api.publications.fetch({ type });
+
+    watch("query.type", (type) => {
+      api.publications.fetch({ type });
+    });
   }
 }
+
+PublicationList = connectWatcher(PublicationList);
 
 PublicationList = translationsConnect(PublicationList);
 
