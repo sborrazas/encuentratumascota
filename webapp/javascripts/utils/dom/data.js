@@ -1,5 +1,3 @@
-const getAll = (node) => {
+export const getAll = (node) => {
   return node.dataset;
 };
-
-export { getAll };
