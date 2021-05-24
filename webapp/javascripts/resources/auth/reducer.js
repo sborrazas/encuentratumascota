@@ -28,6 +28,8 @@ export default (state = {}, action) => {
     return fetchSuccessReducer(state, payload);
   case AUTH_LOGIN_SUCCESS:
     return fetchSuccessReducer(state, payload);
+  case AUTH_CREATE_SUCCESS:
+    return fetchSuccessReducer(state, payload);
   case AUTH_COUNTRY_SUCCESS:
     return fetchSuccessReducer(state, payload);
   case AUTH_SIGNOUT_SUCCESS:

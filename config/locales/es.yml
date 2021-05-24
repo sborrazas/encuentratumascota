@@ -208,3 +208,4 @@ es:
     blank: Es requerido.
     too_short: Es muy corto.
     invalid_credentials: Credenciales inválidas.
+    already_exists: Ya existe.
