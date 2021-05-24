@@ -1,4 +1,6 @@
+require "sequel"
 require "lib/encuentratumascota/client/breeds"
+require "lib/encuentratumascota/client/countries"
 require "lib/encuentratumascota/client/inquiries"
 require "lib/encuentratumascota/client/publications"
 require "lib/encuentratumascota/client/users"
@@ -9,6 +11,7 @@ module Encuentratumascota
     attr_reader :db
 
     include Encuentratumascota::Client::Breeds
+    include Encuentratumascota::Client::Countries
     include Encuentratumascota::Client::Inquiries
     include Encuentratumascota::Client::Publications
     include Encuentratumascota::Client::Users
