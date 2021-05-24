@@ -2,11 +2,30 @@
 
 ## Dev setup
 
-Clone the repo and start the Vagrant VM:
+Clone the repo and start the Docker container:
 ```
 $ git clone git@github.com:sborrazas/encuentratumascota.git
 $ cd encuentratumascota
-$ vagrant up
+$ docker-compose up -d etm_app
+```
+
+Run the ansible provisioning scripts on the new instance:
+```
+$ make ansible-shell
+$ ansible-playbook --skip-tags remote -i inventory/development provision.yml
+```
+
+Then, start up a new shell and run the Cuba app:
+```
+$ make shell
+$ shotgun -p 9393
+```
+
+Then, on a separate shell, install all npm packages and start webpack:
+```
+$ make shell
+$ npm install
+$ npm run start
 ```
 
 ## Production setup

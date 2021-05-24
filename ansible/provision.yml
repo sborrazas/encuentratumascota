@@ -23,6 +23,5 @@
     - role: ruby
     - role: webserver
       static: False
-    - role: dbserver
 
 - include: deploy.yml

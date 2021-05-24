@@ -1,0 +1,45 @@
+version: "3.7"
+services:
+  etm_app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    working_dir: /srv/apps/encuentratumascota/current
+    environment:
+      - GEM_PATH=/root/.gem/ruby/2.2.0:/usr/local/lib/ruby/gems/2.2.0:/usr/local/bundle:/srv/apps/encuentratumascota/gems
+    depends_on:
+      - etm_postgresql
+    ports:
+      - "9393:80"
+    volumes:
+      - .:/srv/apps/encuentratumascota/current:delegated
+      - ~/.ssh:/root/.ssh:cached
+    networks:
+      - etm_net
+    command: "/usr/sbin/sshd -D"
+  etm_postgresql:
+    image: postgres:11.7
+    restart: always
+    environment:
+      - POSTGRES_DB=etm_dev
+      - POSTGRES_USER=etm_dev
+      - POSTGRES_PASSWORD=etm_dev
+    networks:
+      etm_net:
+        aliases:
+          - postgres.localhost
+  etm_ansible:
+    build:
+      context: .
+      dockerfile: Dockerfile.ansible
+    working_dir: /app/ansible
+    volumes:
+      - .:/app
+      - ~/.ssh:/root/.ssh:cached
+    networks:
+      - etm_net
+    entrypoint:
+      ["/bin/bash", "-c", "eval `ssh-agent -s` && ssh-add ~/.ssh/id_rsa && /bin/bash"]
+networks:
+  etm_net:
+    name: etm_net

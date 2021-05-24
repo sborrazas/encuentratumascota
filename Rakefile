@@ -10,6 +10,7 @@ namespace :db do
     puts "DATABASE: #{Encuentratumascota::Settings::DATABASE_NAME}"
     Sequel.extension(:migration)
     db = Sequel.postgres({
+      :host => Encuentratumascota::Settings::DATABASE_HOST,
       :database => Encuentratumascota::Settings::DATABASE_NAME,
       :user => Encuentratumascota::Settings::DATABASE_USER,
       :password => Encuentratumascota::Settings::DATABASE_PASSWORD
@@ -32,6 +33,7 @@ task :console => :environment do
   require "sequel"
 
   DB = Sequel.postgres({
+    :host => Encuentratumascota::Settings::DATABASE_HOST,
     :database => Encuentratumascota::Settings::DATABASE_NAME,
     :user => Encuentratumascota::Settings::DATABASE_USER,
     :password => Encuentratumascota::Settings::DATABASE_PASSWORD
