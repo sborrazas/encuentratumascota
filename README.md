@@ -15,10 +15,11 @@ $ make ansible-shell
 $ ansible-playbook --skip-tags remote -i inventory/development provision.yml
 ```
 
-Then, start up a new shell, add the seeds and then run the Cuba app:
+Then, bash into the running instance, add the seeds, start nginx and then run the Cuba app:
 ```
-$ make shell
+$ make live-shell
 $ ruby ./db/seeds.rb
+$ nginx
 $ shotgun -p 9393
 ```
 

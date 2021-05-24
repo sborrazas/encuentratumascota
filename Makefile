@@ -14,6 +14,10 @@ start:
 shell:
 	$(call execute_with_keys, /bin/bash)
 
+.PHONY: live-shell
+live-shell:
+	docker-compose exec $(DOCKER_OPTS) etm_ansible /bin/bash
+
 .PHONY: deps
 deps:
 	$(call execute_with_keys, bundle install)
