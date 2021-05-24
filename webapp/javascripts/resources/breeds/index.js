@@ -9,6 +9,6 @@ export const selectBreeds = (state) => {
 };
 
 export const endpoint = {
-  url: "/breeds",
+  path: "/breeds",
   actions,
 };

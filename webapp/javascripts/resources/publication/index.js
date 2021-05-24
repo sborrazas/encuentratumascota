@@ -10,6 +10,6 @@ export const selectPublication = (state, slug) => {
 };
 
 export const endpoint = {
-  url: "/p/:slug",
+  path: "/p/:slug",
   actions,
 };

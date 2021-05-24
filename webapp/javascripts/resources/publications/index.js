@@ -15,6 +15,6 @@ export const selectPublicationsByType = (state, type) => {
 };
 
 export const endpoint = {
-  url: "/p",
+  path: "/p",
   actions,
 };

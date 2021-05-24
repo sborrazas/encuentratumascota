@@ -10,6 +10,6 @@ export const selectAuth = (state) => {
 };
 
 export const endpoint = {
-  url: "/auth",
+  path: "/auth",
   actions,
 };
