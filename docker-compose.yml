@@ -19,7 +19,6 @@ services:
     command: "/usr/sbin/sshd -D"
   etm_postgresql:
     image: postgres:11.7
-    restart: always
     environment:
       - POSTGRES_DB=etm_dev
       - POSTGRES_USER=etm_dev
