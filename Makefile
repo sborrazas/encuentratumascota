@@ -16,7 +16,7 @@ shell:
 
 .PHONY: live-shell
 live-shell:
-	docker-compose exec $(DOCKER_OPTS) etm_ansible /bin/bash
+	docker-compose exec $(DOCKER_OPTS) etm_app /bin/bash
 
 .PHONY: deps
 deps:
