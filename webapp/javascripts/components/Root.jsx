@@ -161,14 +161,14 @@ class Root extends Component {
 
               {t("general.nav.contact")}
             </MainHeaderNavItem>
-            <MainHeaderNavItem social={true}>
+            <MainHeaderNavItem socialType="twitter">
               <SocialButton
                 external={true}
                 label="general.nav.twitter"
                 to="https://twitter.com/ETMUruguay"
                 type="twitter" />
             </MainHeaderNavItem>
-            <MainHeaderNavItem social={true}>
+            <MainHeaderNavItem socialType="facebook">
               <SocialButton
                 external={true}
                 label="general.nav.facebook"

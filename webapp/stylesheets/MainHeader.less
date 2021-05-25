@@ -50,10 +50,6 @@
   background: @color-grayscale-1;
 }
 
-.mainHeader-navItem--block {
-  margin-top: 20px;
-}
-
 /* HACK: Hacks for main navigation social buttons */
 .mainHeader-navItem iframe[id^="twitter"] {
   display: block;
@@ -109,4 +105,46 @@
   height: 20px;
   margin: 30px 10px 0 0;
   width: 20px;
+}
+
+@media screen and (max-width: 1000px) {
+  .mainHeader {
+    height: initial;
+    padding: 10px;
+  }
+  .mainHeader-logo {
+    display: block;
+    float: none;
+    margin: 10px auto;
+  }
+  .mainHeader-nav {
+    float: none;
+    margin: 0 0 15px 0;
+    text-align: center;
+  }
+  .mainHeader-navItem {
+    line-height: 1.2em;
+    float: none;
+    margin: 0 10px;
+    padding: 0;
+  }
+  /* HACK: Hacks for main navigation social buttons */
+  .mainHeader-navItem iframe[id^="twitter"] {
+    display: inline-block;
+    margin: 0 5px;
+  }
+  /* END HACK */
+
+  .mainHeader-navItem--twitter {
+    position: relative;
+    top: 3px;
+  }
+  .mainHeader-navItem--facebook {
+    position: relative;
+    top: -3px;
+  }
+  .mainHeader-navItem--block {
+    display: block;
+    margin-bottom: 15px;
+  }
 }

@@ -58,11 +58,13 @@ Nav = connectStyles(Nav, styles);
 
 class NavItem extends Component {
   render() {
-    const { blank, block, children, classes, to } = this.props;
+    const { blank, block, children, classes, to, socialType } = this.props;
     const external = _.isString(to) || blank;
     const className = classes.navItem({
       block,
       link: !! to,
+      facebook: socialType === "facebook",
+      twitter: socialType === "twitter"
     });
 
     if (to) {
@@ -96,6 +98,7 @@ NavItem.propTypes = {
   block: React.PropTypes.bool, // TODO: Hack
   external: React.PropTypes.bool,
   to: React.PropTypes.string,
+  socialType: React.PropTypes.string
 };
 
 NavItem = connectStyles(NavItem, styles);
