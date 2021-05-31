@@ -23,11 +23,5 @@ module Encuentratumascota
     S3_REGION = settings.fetch("s3_region")
     S3_BUCKET = settings.fetch("s3_bucket")
 
-    FACEBOOK_KEY = settings.fetch("facebook_key")
-    FACEBOOK_SECRET = settings.fetch("facebook_secret")
-
-    TWITTER_KEY = settings.fetch("twitter_key")
-    TWITTER_SECRET = settings.fetch("twitter_secret")
-
   end
 end

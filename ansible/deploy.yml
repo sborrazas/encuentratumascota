@@ -69,8 +69,6 @@
           - { name: "pg", version: "0.17.1" }
           - { name: "sequel_pg", version: "1.6.9" }
           - { name: "aws-sdk", version: "2.7.0" }
-          - { name: "omniauth-facebook", version: "1.4.1" }
-          - { name: "omniauth-twitter", version: "0.0.14" }
           - { name: "armor", version: "0.0.3" }
         directory: "{{ gems_dir }}"
 

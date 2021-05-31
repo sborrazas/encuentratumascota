@@ -16,7 +16,6 @@ import Modal, {
 import NavBar, {
   Item as NavBarItem
 } from "components/Base/NavBar.jsx";
-import SocialButton from "components/Base/SocialButton.jsx";
 import Link from "components/Base/Link.jsx";
 import Button from "components/Base/Button.jsx";
 
@@ -61,25 +60,7 @@ class SignUp extends Component {
             </Button>
           </Form>
         </ModalBody>
-        <ModalFooter separator={t("main.index.log_in_alternative")}>
-          <NavBar center={true}>
-            <NavBarItem>
-              <SocialButton
-                to="/auth/facebook"
-                type="facebook">
-
-                Facebook
-              </SocialButton>
-            </NavBarItem>
-            <NavBarItem>
-              <SocialButton
-                to="/auth/twitter"
-                type="twitter">
-
-                Twitter
-              </SocialButton>
-            </NavBarItem>
-          </NavBar>
+        <ModalFooter>
           <NavBar center={true}>
             {t("main.index.registration_form.sign_in_alternative")}
             {" "}<Link to={{ q: { sign_in: "t" } }}>

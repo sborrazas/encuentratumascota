@@ -1,7 +1,5 @@
 require "cuba"
 require "rack/protection"
-require "omniauth-twitter"
-require "omniauth-facebook"
 
 require "config/settings"
 require "webapp/routes/main"
@@ -21,19 +19,6 @@ Cuba.use(Rack::Protection, {
   :use => [:remote_referrer, :authenticity_token],
   :except => [:remote_token],
 })
-Cuba.use(OmniAuth::Builder) do
-  provider(
-    :twitter,
-    Encuentratumascota::Settings::TWITTER_KEY,
-    Encuentratumascota::Settings::TWITTER_SECRET,
-    :use_authorize => true
-  )
-  provider(
-    :facebook,
-    Encuentratumascota::Settings::FACEBOOK_KEY,
-    Encuentratumascota::Settings::FACEBOOK_SECRET
-  )
-end
 Cuba.plugin(Webapp::Helpers)
 
 Cuba.define do

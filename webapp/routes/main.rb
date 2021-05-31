@@ -3,7 +3,7 @@ require "lib/validator"
 require "resources/root"
 require "resources/publications"
 require "resources/breeds"
-require "resources/auth_provider"
+require "resources/auth"
 require "resources/admin/main"
 require "webapp/routes/admin"
 require "webapp/routes/publications"
@@ -40,21 +40,6 @@ module Webapp
               "per_page" => req.params["per_page"]
             )
           )
-        end
-
-        on get,
-           resource(Resources::AuthProvider, "callback"),
-           permission("authorize") do |auth_provider|
-
-          begin
-            auth_provider.authorize(env["omniauth.auth"])
-
-            redirect!("/")
-          rescue Validator::ValidationError => ex
-            redirect!("/", ex.errors[:base])
-            # TODO
-            # redirect_to root_path, flash: { error: t('sessions.create_with_omniauth.email_taken') }
-          end
         end
 
         on get, resource(Resources::Auth), permission("view") do |auth|

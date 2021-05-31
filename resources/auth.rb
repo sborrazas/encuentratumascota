@@ -1,5 +1,4 @@
 require "resources/base"
-require "resources/auth_provider"
 require "lib/utils/password"
 
 module Encuentratumascota
@@ -24,17 +23,6 @@ module Encuentratumascota
           [Resource::ACL::EVERYONE, "login"],
           [Resource::ACL::EVERYONE, "signout"],
         ]
-      end
-
-      def [](key)
-        case key
-        when "twitter"
-          Resources::AuthProvider.new("twitter", settings, request)
-        when "facebook"
-          Resources::AuthProvider.new("facebook", settings, request)
-        else
-          super(key)
-        end
       end
 
       def validate
