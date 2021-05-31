@@ -89,9 +89,10 @@ class Root extends Component {
 
         userImgSrc = `//www.gravatar.com/avatar/${hash}?d=${defaultImg}`;
       }
+      const username = user.email.replace(/@.*/, "");
 
       sessionNavEl = (
-        <MainHeaderDropdown imgSrc={userImgSrc} title={user.username}>
+        <MainHeaderDropdown imgSrc={userImgSrc} title={username}>
           <MainHeaderDropdownOption to="/admin">
             {t("admin.my_publications")}
           </MainHeaderDropdownOption>
