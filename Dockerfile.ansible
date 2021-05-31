@@ -2,7 +2,7 @@ FROM ubuntu:xenial
 
 # Install ansible and ansible deps
 RUN apt-get -y update && \
-    apt-get install -y apt-utils software-properties-common && \
+    apt-get install -y apt-utils software-properties-common curl && \
     add-apt-repository ppa:deadsnakes/ppa && \
     apt-get -y update && \
     apt-get install -y python3.6 python3-pip openssh-client vim
@@ -11,3 +11,7 @@ RUN apt-get -y update && \
 RUN python3.6 -m pip install --upgrade pip
 
 RUN pip install ansible
+
+# Install npm to build assets
+RUN curl -fsSL https://deb.nodesource.com/setup_12.x | bash -
+RUN apt-get install --force-yes -y nodejs
